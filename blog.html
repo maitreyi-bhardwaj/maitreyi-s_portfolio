@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<script>if(localStorage.getItem("dm")==="1")document.documentElement.classList.add("dark");</script>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Writing — Maitreyi Bhardwaj</title>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500&family=Dancing+Script:wght@500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--bg:#fff;--black:#0a0a0a;--gray:#666;--soft:#999;--light:#f7f7f5;--border:#e8e8e5;--orange:#CD5028;--f:'Geist',-apple-system,sans-serif;--script:'Dancing Script',cursive;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--f);background:var(--bg);color:var(--black);-webkit-font-smoothing:antialiased;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:20px 60px;background:rgba(255,255,255,.97);border-bottom:1px solid var(--border);transition:transform .3s cubic-bezier(.16,1,.3,1);}
+nav.hidden{transform:translateY(-100%);}
+.nl,.nr{display:flex;gap:28px;list-style:none;}
+nav a{font-size:14px;font-weight:400;color:var(--gray);text-decoration:none;}
+nav a:hover,.bold{color:var(--black)!important;font-weight:500!important;}
+.r{opacity:0;transform:translateY(20px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);}
+.r.on{opacity:1;transform:none;}
+.d1{transition-delay:.07s}.d2{transition-delay:.14s}.d3{transition-delay:.21s}
+.sec{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:100px 80px;}
+.sec>*{max-width:1000px;width:100%;margin-left:auto;margin-right:auto;}
+.lbl{font-size:13px;font-weight:400;color:var(--soft);margin-bottom:10px;}
+.lbl-rule{height:1px;background:var(--border);margin-bottom:32px;}
+h1{font-size:clamp(28px,3vw,44px);font-weight:400;letter-spacing:-.025em;line-height:1.1;color:var(--black);margin-bottom:32px;}
+.body{font-size:18px;font-weight:300;color:var(--gray);line-height:1.75;max-width:640px;}
+.mt32{margin-top:32px;}.mt48{margin-top:48px;}
+
+/* BLOG GRID */
+.blog-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:1000px;margin-top:48px;}
+.blog-card{position:relative;border:1px solid var(--border);border-radius:12px;overflow:hidden;text-decoration:none;color:var(--black);background:var(--bg);transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s cubic-bezier(.16,1,.3,1);}
+.blog-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.08);}
+.blog-card-img{width:100%;height:260px;overflow:hidden;position:relative;}
+.blog-card-img img{width:100%;height:100%;object-fit:cover;transition:opacity .4s cubic-bezier(.16,1,.3,1);}
+.blog-card-img .img-hover{position:absolute;inset:0;opacity:0;transition:opacity .4s cubic-bezier(.16,1,.3,1);}
+.blog-card-img .img-hover img{width:100%;height:100%;object-fit:cover;}
+.blog-card:hover .img-hover{opacity:1;}
+.blog-card-body{padding:24px 28px 28px;}
+.blog-tag{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);margin-bottom:10px;}
+.blog-title{font-size:22px;font-weight:400;letter-spacing:-.018em;line-height:1.25;color:var(--black);margin-bottom:10px;}
+.blog-desc{font-size:15px;font-weight:300;color:var(--gray);line-height:1.65;}
+.blog-link{display:inline-flex;align-items:center;gap:6px;margin-top:16px;font-size:13px;font-weight:500;color:var(--orange);text-decoration:none;letter-spacing:.02em;}
+.blog-link:hover{text-decoration:underline;}
+
+/* FOOTER */
+footer{padding:80px 60px;background:#0a0a0a;border-top:1px solid #222;}
+.f-copy{font-size:13px;color:#888;margin-bottom:14px;}
+.f-rule{border:none;border-top:1px solid #222;margin-bottom:28px;}
+.f-cta{font-size:clamp(28px,4vw,52px);font-weight:400;color:#0a0a0a;letter-spacing:-.025em;line-height:1.2;margin-bottom:28px;max-width:700px;}
+.f-cta .script{font-family:var(--script);color:var(--orange);}
+.f-btns{display:flex;gap:8px;}
+.fbtn{display:inline-flex;align-items:center;gap:6px;padding:10px 20px;border:1px solid #333;border-radius:100px;font-size:14px;color:#f0f0ee;text-decoration:none;background:transparent;transition:all .15s;font-family:var(--f);}
+.fbtn:hover{background:#f0f0ee;color:#0a0a0a;}
+
+/* DARK MODE */
+html.dark{--bg:#0a0a0a;--black:#f0f0ee;--gray:#aaa;--soft:#666;--light:#141414;--border:#2a2a2a;}
+html.dark body{background:#0a0a0a;}
+html.dark nav{background:rgba(10,10,10,.97);}
+html.dark .blog-card{background:#141414;border-color:#2a2a2a;}
+html.dark .blog-card:hover{box-shadow:0 16px 40px rgba(0,0,0,.4);}
+html.dark footer{background:#fff!important;border-top-color:#e8e8e5!important;}
+html.dark .f-copy{color:#999!important;}
+html.dark .f-rule{border-top-color:#e8e8e5!important;}
+html.dark .f-cta{color:#0a0a0a!important;}
+html.dark .fbtn{color:#0a0a0a!important;border-color:#e8e8e5!important;background:#fff!important;}
+html.dark .fbtn:hover{background:#0a0a0a!important;color:#fff!important;}
+html.dark #dm-toggle{background:#141414;border-color:#2a2a2a;color:#f0f0ee;}
+@media(max-width:768px){nav{padding:16px 24px;}.sec{padding:100px 24px;}.blog-grid{grid-template-columns:1fr;}footer{padding:60px 24px;}}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <ul class="nl"><li><a href="index.html">Work</a></li><li><a href="https://drive.google.com/file/d/1l92lnpU0Z_aFT9_kO4f2fLXTiDSLKF9Y/view?usp=sharing" target="_blank">Resume</a></li></ul>
+  <ul class="nr"><li><a href="about.html">About</a></li><li><a href="index.html" class="bold">Maitreyi Bhardwaj</a></li></ul>
+</nav>
+<button id="dm-toggle" style="position:fixed;bottom:28px;right:28px;z-index:200;width:42px;height:42px;border-radius:50%;border:1px solid var(--border);background:var(--bg);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;">☾</button>
+
+<!-- HERO -->
+<div class="sec">
+  <div class="lbl r">Writing</div>
+  <div class="lbl-rule r d1"></div>
+  <h1 class="r d1">Notes on design, color, and the things worth paying attention to.</h1>
+  <p class="body r d2">Two articles. One about a design tool built on 500 years of painting. One about the typography hiding in plain sight.</p>
+
+  <!-- BLOG CARDS -->
+  <div class="blog-grid r d3">
+
+    <!-- PASTICHE ARTICLE -->
+    <a href="https://medium.com/@mbhardw9/your-color-palette-has-been-waiting-in-a-museum-since-1665-0f70446fee85" target="_blank" class="blog-card">
+      <div class="blog-card-img">
+        <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1780963087/pastiche_01_hero_st6gjl.png" alt="Pastiche article" />
+        <div class="img-hover">
+          <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1780963086/pastiche_03_library_btqnsn.png" alt="Pastiche library hover" />
+        </div>
+      </div>
+      <div class="blog-card-body">
+        <div class="blog-tag">Color Theory</div>
+        <div class="blog-title">Your color palette has been waiting in a museum since 1665.</div>
+        <div class="blog-desc">How Vermeer, Raphael, and 5,800 open-access paintings became the foundation for a Figma plugin that generates design tokens from art history.</div>
+        <span class="blog-link">Read on Medium ↗</span>
+      </div>
+    </a>
+
+    <!-- NAMES UNCOVERED ARTICLE -->
+    <a href="https://medium.com/@mbhardw9/names-uncovered-e177407a5ad9" target="_blank" class="blog-card">
+      <div class="blog-card-img">
+        <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781054135/Screenshot_2026-06-09_at_6.16.09_PM_pfan6e.png" alt="Names Uncovered article" />
+        <div class="img-hover">
+          <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781054134/Screenshot_2026-06-09_at_6.16.02_PM_u9ee6p.png" alt="Names Uncovered hover" />
+        </div>
+      </div>
+      <div class="blog-card-body">
+        <div class="blog-tag">Typography</div>
+        <div class="blog-title">Names Uncovered.</div>
+        <div class="blog-desc">A closer look at the letterforms, systems, and quiet decisions behind names we interact with every day but rarely stop to read.</div>
+        <span class="blog-link">Read article ↗</span>
+      </div>
+    </a>
+
+  </div>
+</div>
+
+<footer>
+  <p class="f-copy">© 2025 Maitreyi Bhardwaj</p>
+  <hr class="f-rule">
+  <p class="f-cta">Let's build something <span class="script">meaningful</span> together.</p>
+  <div class="f-btns">
+    <a href="mailto:mbhardw9@asu.edu" class="fbtn">mbhardw9@asu.edu</a>
+    <a href="https://linkedin.com/in/maitreyi-bhardwaj" target="_blank" class="fbtn">LinkedIn</a>
+  </div>
+</footer>
+
+<script>
+let lastY=0;
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>{const y=window.scrollY;if(y>lastY&&y>80)nav.classList.add('hidden');else nav.classList.remove('hidden');lastY=y;},{passive:true});
+const els=document.querySelectorAll('.r');
+const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('on');}),{threshold:.04,rootMargin:'0px 0px -20px 0px'});
+els.forEach(el=>io.observe(el));
+window.addEventListener('load',()=>els.forEach(el=>{if(el.getBoundingClientRect().top<window.innerHeight)el.classList.add('on');}));
+const _dmt=document.getElementById('dm-toggle');
+if(localStorage.getItem('dm')==='1'){document.documentElement.classList.add('dark');_dmt.textContent='☀';}
+_dmt.addEventListener('click',()=>{const on=document.documentElement.classList.toggle('dark');localStorage.setItem('dm',on?'1':'0');_dmt.textContent=on?'☀':'☾';});
+</script>
+</body>
+</html>

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<script>if(localStorage.getItem("dm")==="1")document.documentElement.classList.add("dark");</script>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Distill , Maitreyi Bhardwaj</title>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500&family=Dancing+Script:wght@500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root { --bg:#fff; --black:#0a0a0a; --gray:#666; --soft:#999; --light:#f7f7f5; --border:#e8e8e5; --orange:#CD5028; --f:'Geist',-apple-system,sans-serif; --script:'Dancing Script',cursive; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--f); background: var(--bg); color: var(--black); -webkit-font-smoothing: antialiased; }
+nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; justify-content:space-between; align-items:center; padding:20px 60px; background:rgba(255,255,255,.97); border-bottom:1px solid var(--border); transition:transform .3s cubic-bezier(.16,1,.3,1); }
+nav.hidden { transform:translateY(-100%); }
+.nl,.nr { display:flex; gap:28px; list-style:none; }
+nav a { font-size:14px; font-weight:400; color:var(--gray); text-decoration:none; }
+nav a:hover,.bold { color:var(--black) !important; font-weight:500 !important; }
+.r { opacity:0; transform:translateY(20px); transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1); }
+.r.on { opacity:1; transform:none; }
+.d1{transition-delay:.07s}.d2{transition-delay:.14s}.d3{transition-delay:.21s}.d4{transition-delay:.28s}
+.sec { min-height:100vh; display:flex; flex-direction:column; justify-content:center; padding:100px 80px; }
+.sec > * { max-width:1000px; width:100%; margin-left:auto; margin-right:auto; }
+.lbl { font-size:13px; font-weight:400; color:var(--soft); margin-bottom:10px; }
+.lbl-rule { height:1px; background:var(--border); margin-bottom:32px; }
+h1 { font-size:clamp(28px,3vw,44px); font-weight:400; letter-spacing:-.025em; line-height:1.1; color:var(--black); margin-bottom:32px; }
+h2 { font-size:clamp(24px,2.8vw,42px); font-weight:400; letter-spacing:-.022em; line-height:1.1; color:var(--black); margin-bottom:20px; }
+h3 { font-size:clamp(20px,2.6vw,32px); font-weight:400; letter-spacing:-.018em; line-height:1.15; color:var(--black); margin-bottom:16px; }
+.body { font-size:18px; font-weight:300; color:var(--gray); line-height:1.75; max-width:600px; }
+.body.w { max-width:860px; }
+.ora { color:var(--orange); }
+.pills { display:flex; gap:8px; flex-wrap:wrap; }
+.pill { padding:10px 22px; border:1px solid var(--border); border-radius:100px; font-size:14px; font-family:var(--f); color:var(--black); text-decoration:none; transition:all .15s; }
+.pill:hover { background:var(--black); color:#fff; border-color:var(--black); }
+.meta { display:grid; grid-template-columns:repeat(4,1fr); max-width:1000px; margin-top:72px; }
+.mc { padding:20px 24px 20px 0; border-top:1px solid var(--border); }
+.ml { font-size:13px; font-weight:400; color:var(--soft); margin-bottom:6px; }
+.mv { font-size:17px; font-weight:400; color:var(--black); line-height:1.4; }
+.hero-img { width:100%; padding-top:65px; }
+.hero-img img { width:100%; display:block; }
+.mt8{margin-top:8px}.mt16{margin-top:16px}.mt24{margin-top:24px}.mt32{margin-top:32px}.mt40{margin-top:40px}.mt56{margin-top:56px}
+.ins2 { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--border); border:1px solid var(--border); border-radius:10px; overflow:hidden; max-width:900px; margin-top:40px; }
+.ins { background:var(--bg); padding:32px; }
+.ins.t { background:var(--light); }
+.ins-l { font-size:12px; font-weight:500; letter-spacing:.08em; text-transform:uppercase; color:var(--soft); margin-bottom:10px; }
+.ins-t { font-size:17px; font-weight:300; color:var(--gray); line-height:1.7; max-width:none; }
+.ins-t strong { font-weight:400; color:var(--black); }
+.g4 { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:10px; overflow:hidden; max-width:1000px; margin-top:32px; }
+.card { background:var(--bg); padding:28px 24px; }
+.card.t { background:var(--light); }
+.ctag { font-size:11px; font-weight:500; letter-spacing:.08em; text-transform:uppercase; color:var(--soft); margin-bottom:10px; }
+.chead { font-size:16px; font-weight:500; color:var(--black); margin-bottom:8px; }
+.cbody { font-size:14px; font-weight:300; color:var(--gray); line-height:1.65; max-width:none; }
+.tg4 { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; max-width:1000px; }
+.tg { background:var(--light); border-radius:10px; padding:20px; }
+.tg-lbl { font-size:14px; font-weight:400; color:var(--black); text-align:center; margin-bottom:14px; }
+.tg-d { border:1.5px dashed var(--border); border-radius:8px; padding:14px; display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
+.ti { display:flex; flex-direction:column; align-items:center; gap:5px; }
+.ti-i { width:44px; height:44px; border-radius:10px; background:#fff; border:1px solid var(--border); display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:600; color:var(--black); }
+.ti-n { font-size:11px; font-weight:300; color:var(--gray); text-align:center; }
+.sr { display:grid; grid-template-columns:repeat(3,1fr); border:1px solid var(--border); border-radius:10px; overflow:hidden; max-width:900px; }
+.sc { padding:36px 28px; border-right:1px solid var(--border); }
+.sc:last-child { border-right:none; }
+.sn { font-size:48px; font-weight:300; letter-spacing:-.04em; line-height:1; color:var(--black); margin-bottom:8px; }
+.sn span { color:var(--orange); }
+.sd { font-size:16px; font-weight:300; color:var(--gray); line-height:1.5; }
+.num { font-size:11px; font-weight:500; letter-spacing:.08em; text-transform:uppercase; color:var(--soft); margin-bottom:10px; }
+.img-full { width:100%; display:block; border-radius:10px; }
+footer { padding:80px 60px; background:var(--light); border-top:1px solid var(--border); }
+.f-copy { font-size:13px; color:var(--soft); margin-bottom:14px; }
+.f-rule { border:none; border-top:1px solid var(--border); margin-bottom:28px; }
+.f-cta { font-size:clamp(28px,4vw,52px); font-weight:400; color:var(--black); letter-spacing:-.025em; line-height:1.2; margin-bottom:28px; max-width:700px; }
+.f-cta .script { font-family:var(--script); color:var(--orange); }
+.f-btns { display:flex; gap:8px; }
+.fbtn { display:inline-flex; align-items:center; gap:6px; padding:10px 20px; border:1px solid var(--border); border-radius:100px; font-size:14px; color:var(--black); text-decoration:none; background:var(--bg); transition:all .15s; font-family:var(--f); }
+.fbtn:hover { background:var(--black); color:#fff; border-color:var(--black); }
+@media(max-width:768px){ nav{padding:16px 24px;} .sec{padding:100px 24px;} .meta,.ins2,.g4,.tg4,.sr{grid-template-columns:1fr;} footer{padding:60px 24px;} }
+
+/* DARK MODE */
+html.dark { --bg:#0a0a0a; --black:#f0f0ee; --gray:#aaa; --soft:#666; --light:#141414; --border:#2a2a2a; }
+html.dark body { background:#0a0a0a; }
+html.dark nav { background:rgba(10,10,10,.97); }
+html.dark .pill { color:#f0f0ee; border-color:#2a2a2a; }
+html.dark .pill:hover, html.dark .pill.primary { background:#f0f0ee; color:#0a0a0a; border-color:#f0f0ee; }
+html.dark .fbtn { background:#0a0a0a; color:#f0f0ee; border-color:#2a2a2a; }
+html.dark .fbtn:hover { background:#f0f0ee; color:#0a0a0a; }
+html.dark .finding-list, html.dark .finding-list li { border-color:#2a2a2a; }
+html.dark .ins2, html.dark .g4, html.dark .ba, html.dark .arch { background:#2a2a2a; border-color:#2a2a2a; }
+html.dark .sr { border-color:#2a2a2a; }
+html.dark .sc { border-color:#2a2a2a; }
+html.dark .an, html.dark .comp-card { border-color:#2a2a2a; }
+html.dark footer { background:#141414; border-top-color:#2a2a2a; }
+html.dark #dm-toggle { background:#141414; border-color:#2a2a2a; color:#f0f0ee; }
+html.dark footer { background:#fff !important; border-top-color:#e8e8e5 !important; }
+html.dark .f-copy { color:#999 !important; }
+html.dark .f-rule { border-top-color:#e8e8e5 !important; }
+html.dark .f-cta { color:#0a0a0a !important; }
+html.dark .fbtn { color:#0a0a0a !important; border-color:#e8e8e5 !important; background:#fff !important; }
+html.dark .fbtn:hover { background:#0a0a0a !important; color:#fff !important; }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <ul class="nl"><li><a href="index.html">Work</a></li><li><a href="https://drive.google.com/file/d/1l92lnpU0Z_aFT9_kO4f2fLXTiDSLKF9Y/view?usp=sharing" target="_blank">Resume</a></li></ul>
+  <ul class="nr"><li><a href="index.html#about">About</a></li><li><a href="index.html" class="bold">Maitreyi Bhardwaj</a></li></ul>
+</nav>
+<button id="dm-toggle" style="position:fixed;bottom:28px;right:28px;z-index:200;width:42px;height:42px;border-radius:50%;border:1px solid var(--border);background:var(--bg);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;">☾</button>
+
+<!-- HERO -->
+<div class="hero-img">
+  <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781041541/distill_01_hero_m9wn4n.png" alt="Distill hero" />
+</div>
+
+<!-- 01 OVERVIEW -->
+<div class="sec">
+  <div class="lbl r">Project Overview</div>
+  <div class="lbl-rule r d1"></div>
+  <h1 class="r d1">Distill translates active tab audio across 16 languages and streams live ASL visual cards inside a unified Chrome interface.</h1>
+  <div class="pills r d2">
+    <a href="#challenge" class="pill">↓ Design Challenge</a>
+    <a href="#features" class="pill">↓ Key Features</a>
+    <a href="#outcomes" class="pill">↓ Outcomes</a>
+  </div>
+  <div class="meta r d3">
+    <div class="mc"><div class="ml">Project Type</div><div class="mv">36-Hour Hackathon, HackAZona Microsoft Track Winner</div></div>
+    <div class="mc"><div class="ml">Timeline</div><div class="mv">February 2026</div></div>
+    <div class="mc"><div class="ml">Role</div><div class="mv">UI Designer</div></div>
+    <div class="mc"><div class="ml">Team</div><div class="mv">Kevin Doshi, Hemakshi Pandey, Maitreyi Bhardwaj, Basavraj Chinagundi</div></div>
+  </div>
+</div>
+
+<!-- 02 WHAT DOES IT DO -->
+<div class="sec" id="challenge">
+  <div class="lbl r">What It Does</div>
+  <div class="lbl-rule r d1"></div>
+  <h2 class="r d1">Real-time translation. Cross-platform. ASL accessibility. One extension.</h2>
+  <p class="body w r d2 mt16">Distill listens to your active browser tab, translates speech into 16 languages simultaneously, and renders live ASL visual cards alongside the audio. Built for people who are deaf, hard of hearing, or learning a new language in real time.</p>
+  <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781041541/distill_03_what_does_it_do_c7nwsx.png" class="img-full r d3 mt32" alt="Distill features: Realtime Translation, Cross Platform, ASL Accessibility" />
+</div>
+
+<!-- 03 UI DESIGN -->
+<div class="sec" id="features">
+  <div class="lbl r">Interface Design</div>
+  <div class="lbl-rule r d1"></div>
+  <h2 class="r d1">Every component designed for high-speed readability during live speech.</h2>
+  <p class="body w r d2 mt16">Input language as a clear button group. Output as multi-select language tokens with color-coded fills. Speaker Diarization and Float Captions controlled via toggle switches. A single high-visibility blue CTA anchors the panel.</p>
+  <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781041541/distill_02_UI_bnkfsj.png" class="img-full r d3 mt32" alt="Distill extension UI" />
+</div>
+
+<!-- 04 IN USE -->
+<div class="sec">
+  <div class="lbl r">In Use</div>
+  <div class="lbl-rule r d1"></div>
+  <h2 class="r d1">Built to sit on top of any page without breaking it.</h2>
+  <p class="body w r d2 mt16">The extension floats over YouTube, Zoom, Meet, and Teams without masking video controls or disrupting layout. Tested live on a Chinese lecture to validate multilingual output in context.</p>
+  <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781041541/distill_04_mock1_eb3iqp.png" class="img-full r d3 mt32" alt="Distill on YouTube , translation active" />
+  <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781041541/distill_04_mock2_ASL_dpfqnp.png" class="img-full r d3 mt24" alt="Distill on YouTube , ASL cards active" />
+  <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781041541/distill_04_mock3_wrxvm2.png" class="img-full r d4 mt24" alt="Distill on YouTube , translated output" />
+</div>
+
+<!-- 05 TECHNICAL PIPELINE -->
+<div class="sec">
+  <div class="lbl r">Technical Pipeline</div>
+  <div class="lbl-rule r d1"></div>
+  <h2 class="r d1">From audio capture to visual output in real time.</h2>
+  <div class="g4 r d2 mt32">
+    <div class="card">
+      <div class="ctag">01</div>
+      <div class="chead">Audio Tab Feed</div>
+      <p class="cbody">Live audio stream captured from the active browser tab.</p>
+    </div>
+    <div class="card t">
+      <div class="ctag">02</div>
+      <div class="chead">Azure AI Processing</div>
+      <p class="cbody">Azure Speech Translation or Conversation Transcriber routes audio to 16-language output.</p>
+    </div>
+    <div class="card">
+      <div class="ctag">03</div>
+      <div class="chead">Azure Speech Synthesis</div>
+      <p class="cbody">Translated text converted back to synthesized audio in target language.</p>
+    </div>
+    <div class="card t">
+      <div class="ctag">04</div>
+      <div class="chead">Distill UI Update</div>
+      <p class="cbody">Real-time token sync updates the panel. ASL cards populate instantly.</p>
+    </div>
+  </div>
+  <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781041541/distill_05_how_it_works_ygndkk.png" class="img-full r d3 mt32" alt="How it works , technical pipeline diagram" />
+</div>
+
+<!-- 06 TOOLS -->
+<div class="sec">
+  <div class="lbl r">Tools</div>
+  <div class="lbl-rule r d1"></div>
+  <h2 class="r d1">Design & Engineering Stack</h2>
+  <div class="tg4 r d2 mt40">
+    <div class="tg"><div class="tg-lbl">Design</div><div class="tg-d"><div class="ti"><div class="ti-i">Fig</div><div class="ti-n">Figma</div></div><div class="ti"><div class="ti-i">TK</div><div class="ti-n">Tokens</div></div></div></div>
+    <div class="tg"><div class="tg-lbl">AI Services</div><div class="tg-d"><div class="ti"><div class="ti-i">AZ</div><div class="ti-n">Azure AI</div></div><div class="ti"><div class="ti-i">FA</div><div class="ti-n">FastAPI</div></div></div></div>
+    <div class="tg"><div class="tg-lbl">Platform</div><div class="tg-d"><div class="ti"><div class="ti-i">CR</div><div class="ti-n">Chrome Ext</div></div><div class="ti"><div class="ti-i">JS</div><div class="ti-n">JavaScript</div></div></div></div>
+    <div class="tg"><div class="tg-lbl">Accessibility</div><div class="tg-d"><div class="ti"><div class="ti-i">ASL</div><div class="ti-n">ASL Cards</div></div><div class="ti"><div class="ti-i">16L</div><div class="ti-n">Languages</div></div></div></div>
+  </div>
+</div>
+
+
+<!-- PROTOTYPE VIDEO -->
+<div class="sec" style="min-height:auto;padding-bottom:80px;">
+  <div class="lbl r">Prototype</div>
+  <div class="lbl-rule r d1"></div>
+  <h2 class="r d1">Watch it in action.</h2>
+  <div class="r d2 mt32" style="max-width:1000px;margin-left:auto;margin-right:auto;border-radius:12px;overflow:hidden;aspect-ratio:16/9;">
+    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/r8c9J0EY8eQ?autoplay=1&mute=1&loop=1&playlist=r8c9J0EY8eQ" frameborder="0" allow="autoplay; fullscreen" allowfullscreen style="display:block;"></iframe>
+  </div>
+</div>
+<!-- 07 OUTCOMES -->
+<div class="sec" id="outcomes">
+  <div class="lbl r">Outcomes</div>
+  <div class="lbl-rule r d1"></div>
+  <h2 class="r d1">$2,000 Microsoft Track Prize. Built in 36 hours.</h2>
+  <div class="sr r d2 mt40">
+    <div class="sc"><div class="sn">$<span>2,000</span></div><p class="sd">Microsoft Track Prize at HackAZona</p></div>
+    <div class="sc"><div class="sn"><span>36</span>hr</div><p class="sd">full UI system and working backend built in one weekend</p></div>
+    <div class="sc"><div class="sn"><span>16</span></div><p class="sd">languages supported with real-time ASL visual output</p></div>
+  </div>
+  <div style="margin-top:24px;padding:28px 32px;background:var(--light);border:1px solid var(--border);border-radius:10px;max-width:900px;" class="r d3">
+    <p style="font-size:17px;font-weight:300;font-style:italic;color:var(--black);line-height:1.7;">Assistive products don't have to look clinical. They can be sleek, performant, and seamlessly integrated into daily workflow.</p>
+  </div>
+  <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781041542/distill_06_end_ntluo5.png" class="img-full r d4 mt32" alt="Every voice heard. Every language understood." />
+</div>
+
+<!-- 08 TAKEAWAYS -->
+<div class="sec">
+  <div class="lbl r">Takeaways</div>
+  <div class="lbl-rule r d1"></div>
+  <h2 class="r d1">Accessibility and good design are not in conflict.</h2>
+  <p class="body r d2 mt16">The layout constraints of a Chrome extension forced better design decisions , less clutter, tighter hierarchy, cleaner states.</p>
+  <p class="body r d3 mt8">A 36-hour sprint with a clear constraint produces sharper work than an open-ended brief with unlimited time.</p>
+</div>
+
+<footer>
+  <p class="f-copy">© 2025 Maitreyi Bhardwaj</p>
+  <hr class="f-rule">
+  <p class="f-cta">Let's build something <span class="script">meaningful</span> together.</p>
+  <div class="f-btns">
+    <a href="mailto:mbhardw9@asu.edu" class="fbtn">mbhardw9@asu.edu</a>
+    <a href="https://linkedin.com/in/maitreyi-bhardwaj" target="_blank" class="fbtn">LinkedIn</a>
+  </div>
+</footer>
+
+<script>
+let lastY = 0;
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => { const y = window.scrollY; if(y > lastY && y > 80) nav.classList.add('hidden'); else nav.classList.remove('hidden'); lastY = y; }, { passive: true });
+const els = document.querySelectorAll('.r');
+const io = new IntersectionObserver(e => e.forEach(x => { if(x.isIntersecting) x.target.classList.add('on'); }), {threshold:.04, rootMargin:'0px 0px -20px 0px'});
+els.forEach(el => io.observe(el));
+window.addEventListener('load', () => els.forEach(el => { if(el.getBoundingClientRect().top < window.innerHeight) el.classList.add('on'); }));
+
+const _dmt = document.getElementById('dm-toggle');
+const _dms = localStorage.getItem('dm');
+if (_dms === '1') { document.documentElement.classList.add('dark'); _dmt.textContent = '☀'; }
+_dmt.addEventListener('click', () => {
+  const on = document.documentElement.classList.toggle('dark');
+  localStorage.setItem('dm', on ? '1' : '0');
+  _dmt.textContent = on ? '☀' : '☾';
+});
+
+</script>
+</body>
+</html>

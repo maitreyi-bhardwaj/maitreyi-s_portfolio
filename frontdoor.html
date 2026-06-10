@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<script>if(localStorage.getItem("dm")==="1")document.documentElement.classList.add("dark");</script>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home Passport , Maitreyi Bhardwaj</title>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500&family=Dancing+Script:wght@500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #fff; --black: #0a0a0a; --gray: #666; --soft: #999;
+  --light: #f7f7f5; --border: #e8e8e5; --orange: #CD5028;
+  --f: 'Geist', -apple-system, sans-serif; --script: 'Dancing Script', cursive;
+}
+html { scroll-behavior: smooth; }
+body { font-family: var(--f); background: var(--bg); color: var(--black); -webkit-font-smoothing: antialiased; }
+
+/* NAV */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 20px 60px; background: rgba(255,255,255,.97); border-bottom: 1px solid var(--border); transition: transform .3s cubic-bezier(.16,1,.3,1); }
+nav.hidden { transform: translateY(-100%); }
+.nl, .nr { display: flex; gap: 28px; list-style: none; }
+nav a { font-size: 14px; font-weight: 400; color: var(--gray); text-decoration: none; }
+nav a:hover, .bold { color: var(--black) !important; font-weight: 500 !important; }
+
+/* REVEAL */
+.r { opacity: 0; transform: translateY(20px); transition: opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1); }
+.r.on { opacity: 1; transform: none; }
+.d1{transition-delay:.07s} .d2{transition-delay:.14s} .d3{transition-delay:.21s} .d4{transition-delay:.28s}
+
+/* SECTION — full screen, centered column */
+.sec {
+  min-height: 100vh;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 100px 80px;
+}
+.sec > * { max-width: 1000px; width: 100%; margin-left: auto; margin-right: auto; }
+
+/* LABEL */
+.lbl { font-size: 13px; font-weight: 400; color: var(--soft); margin-bottom: 10px; }
+.lbl-rule { height: 1px; background: var(--border); margin-bottom: 32px; }
+
+/* TYPE */
+h1 { font-size: clamp(28px, 3.2vw, 46px); font-weight: 400; letter-spacing: -.025em; line-height: 1.1; color: var(--black); margin-bottom: 32px; }
+h2 { font-size: clamp(24px, 2.8vw, 40px); font-weight: 400; letter-spacing: -.022em; line-height: 1.1; color: var(--black); margin-bottom: 16px; }
+h3 { font-size: clamp(18px, 2.2vw, 28px); font-weight: 400; letter-spacing: -.015em; line-height: 1.15; color: var(--black); margin-bottom: 12px; }
+.body { font-size: 17px; font-weight: 300; color: var(--gray); line-height: 1.75; max-width: 600px; }
+.num { font-size: 11px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--soft); margin-bottom: 8px; }
+.ora { color: var(--orange); }
+
+/* PILLS */
+.pills { display: flex; gap: 8px; flex-wrap: wrap; }
+.pill { padding: 10px 22px; border: 1px solid var(--border); border-radius: 100px; font-size: 14px; font-family: var(--f); color: var(--black); text-decoration: none; transition: all .15s; }
+.pill:hover { background: var(--bg); color: #fff; border-color: var(--black); }
+
+/* META */
+.meta { display: grid; grid-template-columns: repeat(4,1fr); max-width: 1000px; margin-top: 64px; }
+.mc { padding: 18px 20px 18px 0; border-top: 1px solid var(--border); }
+.ml { font-size: 12px; font-weight: 400; color: var(--soft); margin-bottom: 5px; }
+.mv { font-size: 15px; font-weight: 400; color: var(--black); line-height: 1.4; }
+
+/* HERO IMAGE */
+.hero-img { width: 100%; }
+.hero-img img { width: 100%; display: block; }
+
+/* UTILS */
+.mt8{margin-top:8px} .mt12{margin-top:12px} .mt16{margin-top:16px} .mt24{margin-top:24px} .mt32{margin-top:32px} .mt40{margin-top:40px} .mt48{margin-top:48px}
+
+/* STAT ROW */
+.stat-row { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-top: 48px; }
+.stat-n { font-size: clamp(56px, 8vw, 96px); font-weight: 300; letter-spacing: -.05em; line-height: .9; color: var(--black); margin-bottom: 12px; }
+.stat-t { font-size: 16px; font-weight: 300; color: var(--gray); line-height: 1.6; }
+
+/* TWO COL */
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+.two.c { align-items: center; }
+
+/* INSIGHT */
+.ins2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-top: 32px; }
+.ins { background: var(--bg); padding: 28px 30px; }
+.ins.t { background: var(--light); }
+.ins-l { font-size: 11px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--soft); margin-bottom: 8px; }
+.ins-t { font-size: 16px; font-weight: 300; color: var(--gray); line-height: 1.7; max-width: none; }
+.ins-t strong { font-weight: 400; color: var(--black); }
+
+/* FINDING */
+.finding { max-width: 900px; }
+.finding-app { font-size: 11px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--soft); margin-bottom: 10px; }
+.finding-head { font-size: clamp(20px, 2.4vw, 30px); font-weight: 400; letter-spacing: -.018em; color: var(--black); margin-bottom: 20px; line-height: 1.2; }
+.finding-list { list-style: none; border-top: 1px solid var(--border); }
+.finding-list li { font-size: 16px; font-weight: 300; color: var(--gray); padding: 14px 0; border-bottom: 1px solid var(--border); line-height: 1.55; }
+.finding-list li:last-child { border-bottom: none; }
+.finding-badge { display: inline-block; margin-top: 20px; padding: 7px 14px; background: var(--light); border: 1px solid var(--border); border-radius: 7px; font-size: 13px; font-weight: 500; color: var(--soft); }
+
+/* ANA */
+.ana3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+.an { border: 1px solid var(--border); border-radius: 10px; padding: 24px; }
+.an-n { font-size: 15px; font-weight: 500; color: var(--black); margin-bottom: 8px; }
+.an-b { font-size: 14px; font-weight: 300; color: var(--gray); line-height: 1.65; }
+.an-t { margin-top: 10px; font-size: 14px; font-weight: 400; color: var(--black); font-style: italic; }
+
+/* TOOLS */
+.tg4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; }
+.tg { background: var(--light); border-radius: 10px; padding: 18px; }
+.tg-lbl { font-size: 13px; font-weight: 400; color: var(--black); text-align: center; margin-bottom: 12px; }
+.tg-d { border: 1.5px dashed var(--border); border-radius: 8px; padding: 12px; display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+.ti { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.ti-i { width: 40px; height: 40px; border-radius: 9px; background: #fff; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600; color: var(--black); }
+.ti-n { font-size: 10px; font-weight: 300; color: var(--gray); text-align: center; }
+
+/* WORKFLOW */
+.wf { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
+.wf-h { background: var(--bg); color: #fff; text-align: center; padding: 14px; border-radius: 8px; font-size: 15px; font-weight: 400; margin-bottom: 7px; }
+.wf-i { background: var(--light); border: 1px solid var(--border); border-radius: 7px; padding: 11px 13px; text-align: center; font-size: 13px; font-weight: 300; color: var(--gray); margin-bottom: 5px; }
+
+/* BEFORE AFTER */
+.ba { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+.ba-c { background: var(--bg); padding: 28px; }
+.ba-c:last-child { background: var(--light); }
+.ba-l { font-size: 11px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--soft); margin-bottom: 14px; }
+.ba-list { list-style: none; }
+.ba-list li { font-size: 14px; font-weight: 300; color: var(--gray); padding: 6px 0; border-bottom: 1px solid var(--border); display: flex; gap: 8px; }
+.ba-list li:last-child { border-bottom: none; }
+.ba-list li.hi { color: var(--black); font-weight: 400; }
+.ba-n { font-size: 10px; color: var(--border); min-width: 14px; }
+.ba-list li.hi .ba-n { color: var(--black); }
+.ba-big { font-size: 40px; font-weight: 300; letter-spacing: -.04em; color: var(--black); line-height: 1; margin-top: 16px; }
+.ba-big span { color: var(--orange); }
+
+/* IMAGE SLOT */
+.slot { width: 100%; background: var(--light); border: 1px solid var(--border); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: var(--soft); font-size: 11px; position: relative; overflow: hidden; }
+.slot::before { content:''; position:absolute; inset:0; background:repeating-linear-gradient(45deg,transparent,transparent 16px,rgba(0,0,0,.018) 16px,rgba(0,0,0,.019) 17px); }
+.slot span { position:relative; z-index:1; }
+.h600{height:600px} .h500{height:500px} .h420{height:420px} .h360{height:360px} .h300{height:300px}
+
+/* STATS */
+.sr { display: grid; grid-template-columns: repeat(3,1fr); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+.sc { padding: 32px 26px; border-right: 1px solid var(--border); }
+.sc:last-child { border-right: none; }
+.sn { font-size: 44px; font-weight: 300; letter-spacing: -.04em; line-height: 1; color: var(--black); margin-bottom: 7px; }
+.sn span { color: var(--orange); }
+.sd { font-size: 14px; font-weight: 300; color: var(--gray); line-height: 1.5; }
+
+/* LIFECYCLE */
+.lifecycle { display: grid; grid-template-columns: repeat(5,1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+.lc-cell { background: var(--bg); padding: 24px 16px; text-align: center; }
+.lc-cell:nth-child(2n) { background: var(--light); }
+.lc-num { font-size: 10px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--soft); margin-bottom: 8px; }
+.lc-name { font-size: 14px; font-weight: 400; color: var(--black); line-height: 1.3; }
+
+/* VIDEO */
+.vid { width: 100%; height: 380px; background: var(--light); border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; }
+.vid-p { width: 44px; height: 44px; border: 1px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; color: var(--soft); }
+.vid-l { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--soft); }
+
+/* FOOTER */
+footer { padding: 80px 60px; background: var(--light); border-top: 1px solid var(--border); }
+.f-copy { font-size: 13px; color: var(--soft); margin-bottom: 14px; }
+.f-rule { border: none; border-top: 1px solid var(--border); margin-bottom: 26px; }
+.f-cta { font-size: clamp(26px,4vw,48px); font-weight: 400; color: var(--black); letter-spacing: -.025em; line-height: 1.2; margin-bottom: 24px; max-width: 700px; }
+.f-cta .script { font-family: var(--script); color: var(--orange); }
+.f-btns { display: flex; gap: 8px; }
+.fbtn { display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; border: 1px solid var(--border); border-radius: 100px; font-size: 14px; color: var(--black); text-decoration: none; background: var(--bg); transition: all .15s; font-family: var(--f); }
+.fbtn:hover { background: var(--bg); color: #fff; border-color: var(--black); }
+
+@media(max-width:768px){
+  nav{padding:16px 24px;} .sec{padding:100px 24px;}
+  .meta,.two,.stat-row,.ins2,.ana3,.tg4,.wf,.ba,.sr,.lifecycle{grid-template-columns:1fr;}
+  footer{padding:60px 24px;}
+}
+
+/* DARK MODE */
+html.dark { --bg:#0a0a0a; --black:#f0f0ee; --gray:#aaa; --soft:#666; --light:#141414; --border:#2a2a2a; }
+html.dark body { background:#0a0a0a; }
+html.dark nav { background:rgba(10,10,10,.97); }
+html.dark .pill { color:#f0f0ee; border-color:#2a2a2a; }
+html.dark .pill:hover, html.dark .pill.primary { background:#f0f0ee; color:#0a0a0a; border-color:#f0f0ee; }
+html.dark .fbtn { background:#0a0a0a; color:#f0f0ee; border-color:#2a2a2a; }
+html.dark .fbtn:hover { background:#f0f0ee; color:#0a0a0a; }
+html.dark .finding-list, html.dark .finding-list li { border-color:#2a2a2a; }
+html.dark .ins2, html.dark .g4, html.dark .ba, html.dark .arch { background:#2a2a2a; border-color:#2a2a2a; }
+html.dark .sr { border-color:#2a2a2a; }
+html.dark .sc { border-color:#2a2a2a; }
+html.dark .an, html.dark .comp-card { border-color:#2a2a2a; }
+html.dark footer { background:#141414; border-top-color:#2a2a2a; }
+html.dark #dm-toggle { background:#141414; border-color:#2a2a2a; color:#f0f0ee; }
+html.dark footer { background:#fff !important; border-top-color:#e8e8e5 !important; }
+html.dark .f-copy { color:#999 !important; }
+html.dark .f-rule { border-top-color:#e8e8e5 !important; }
+html.dark .f-cta { color:#0a0a0a !important; }
+html.dark .fbtn { color:#0a0a0a !important; border-color:#e8e8e5 !important; background:#fff !important; }
+html.dark .fbtn:hover { background:#0a0a0a !important; color:#fff !important; }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <ul class="nl"><li><a href="index.html">Work</a></li><li><a href="https://drive.google.com/file/d/1l92lnpU0Z_aFT9_kO4f2fLXTiDSLKF9Y/view?usp=sharing">Resume</a></li></ul>
+  <ul class="nr"><li><a href="index.html#about">About</a></li><li><a href="index.html" class="bold">Maitreyi Bhardwaj</a></li></ul>
+</nav>
+<button id="dm-toggle" style="position:fixed;bottom:28px;right:28px;z-index:200;width:42px;height:42px;border-radius:50%;border:1px solid var(--border);background:var(--bg);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;">☾</button>
+
+<!-- HERO IMAGE -->
+<div class="hero-img" style="padding-top:65px;"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024360/fd_01_hero_hlcjsk.png" alt="Home Passport" style="width:100%;display:block;"></div>
+
+
+<!-- 01 OVERVIEW -->
+<div class="sec">
+  <div class="lbl r">Project Overview</div>
+  <div class="lbl-rule r"></div>
+  <h1 class="r d1">Frontdoor partnered with ASU to eliminate onboarding friction and make Frontdoor+ the main appliance app for every household device.</h1>
+  <div class="pills r d2">
+    <a href="#features" class="pill">↓ Key Features</a>
+    <a href="#process" class="pill">↓ Design Process</a>
+  </div>
+  <div class="meta r d3">
+    <div class="mc"><div class="ml">Project Type</div><div class="mv">Industry Sponsored Studio, Frontdoor Inc. × ASU</div></div>
+    <div class="mc"><div class="ml">Timeline</div><div class="mv">Jan 2025 – May 2025</div></div>
+    <div class="mc"><div class="ml">Role</div><div class="mv">Product Designer, UX Researcher, Brand & UI Systems</div></div>
+    <div class="mc"><div class="ml">Team</div><div class="mv">Maitreyi Bhardwaj & Anahi Moreno</div></div>
+  </div>
+</div>
+
+<!-- 02 THE PROBLEM -->
+<div class="sec">
+  <div class="lbl r">The Problem</div>
+  <div class="lbl-rule r"></div>
+  <h2 class="r d1">Every smart appliance comes with an app. Almost no one uses it.</h2>
+  <p class="body r d2 mt16">People do not register products because the setup is confusing and offers no immediate value. Current setup loops are designed around data collection instead of providing real help to the homeowner.</p>
+</div>
+
+<!-- 03 THE STATS -->
+<div class="sec">
+  <div class="lbl r">The Scale</div>
+  <div class="lbl-rule r"></div>
+  <div class="stat-row r d1">
+    <div>
+      <div class="stat-n"><span class="ora">1</span> in <span class="ora">2</span></div>
+      <p class="stat-t">U.S. homes owns a smart appliance today.</p>
+    </div>
+    <div>
+      <div class="stat-n">~<span class="ora">10</span>%</div>
+      <p class="stat-t">ever connect it to the app built to support it.</p>
+    </div>
+  </div>
+  <div class="ins2 r d2">
+    <div class="ins">
+      <div class="ins-l">The pain</div>
+      <p class="ins-t">Users don't register because <strong>the value only appears when something breaks.</strong></p>
+    </div>
+    <div class="ins t">
+      <div class="ins-l">The opportunity</div>
+      <p class="ins-t">Frontdoor learns what is inside a household <strong>only after a warranty claim is filed</strong>, making proactive home maintenance structurally impossible.</p>
+    </div>
+  </div>
+</div>
+
+<!-- 04 LG THINQ -->
+<div class="sec">
+  <div class="lbl r">Competitive Research 01</div>
+  <div class="lbl-rule r"></div>
+  <div class="finding r d1">
+    <div class="finding-app">LG ThinQ</div>
+    <div class="finding-head">Current platforms feature too many steps and long forms.</div>
+    <ul class="finding-list">
+      <li>Onboarding flows frame registration as optional but it becomes mandatory the moment a user submits a service request</li>
+      <li>Every single repair request forces re-selection of brand, category, appliance, and problem details. The app has zero memory of the home</li>
+      <li>Non-smart appliances hit a dead end. Older hardware forces manual entry of model numbers, serial numbers, and appliance categories</li>
+    </ul>
+    <span class="finding-badge">Form burden · Hidden dependency · Legacy exclusion</span>
+  </div>
+  <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024362/LG_App_Experience_yohxgq.png" class="r d2 mt32" style="width:100%;border-radius:10px;display:block;" alt="LG ThinQ experience" />
+  <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024362/LG_App_Experience_2_azmbmw.png" class="r d3 mt24" style="width:100%;border-radius:10px;display:block;" alt="LG ThinQ experience 2" />
+</div>
+
+<!-- 05 SAMSUNG -->
+<div class="sec">
+  <div class="lbl r">Competitive Research 02</div>
+  <div class="lbl-rule r"></div>
+  <div class="finding r d1">
+    <div class="finding-app">Samsung SmartThings &amp; LG ThinQ , Field Testing</div>
+    <div class="finding-head">Used appliances create an instant roadblock for second-hand owners.</div>
+    <ul class="finding-list">
+      <li>We tested a pre-owned smart washer. The setup QR code was inside the machine and completely smudged</li>
+      <li>The app required original retail dates and purchase details that second-hand owners simply do not have</li>
+      <li>Users were forced to input random placeholder data just to complete the form</li>
+    </ul>
+    <span class="finding-badge">Used market gap · Physical access failure · Ownership complexity</span>
+  </div>
+  <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024362/Samsung_SmartThings_2_cinrtk.png" class="r d2 mt32" style="width:100%;border-radius:10px;display:block;" alt="Samsung SmartThings" />
+  <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024362/fd_06_case_study_xhkczh.png" class="r d3 mt24" style="width:100%;border-radius:10px;display:block;" alt="Samsung SmartThings case study" />
+</div>
+
+<!-- 06 CURRENT AHS -->
+<div class="sec">
+  <div class="lbl r">Competitive Research 03</div>
+  <div class="lbl-rule r"></div>
+  <div class="finding r d1">
+    <div class="finding-app">Current AHS App</div>
+    <div class="finding-head">Device records belong to accounts, not homes. Ownership transfer erases all history.</div>
+    <ul class="finding-list">
+      <li>When properties change hands, resetting a connected device completely wipes historical data</li>
+      <li>New owners lose access to service logs, no context on appliance age, repair history, or maintenance needs</li>
+      <li>AHS learns what is in a household only after a warranty claim is filed. Proactive maintenance is structurally impossible</li>
+    </ul>
+    <span class="finding-badge">Home transfer flaw · Zero persistent model · Reactive only</span>
+  </div>
+  <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024360/AHS_App_sghnzs.png" class="r d2 mt32" style="width:100%;border-radius:10px;display:block;" alt="Current AHS app" />
+</div>
+
+<!-- 07 WHAT WE FOUND -->
+<div class="sec">
+  <div class="lbl r">What We Found</div>
+  <div class="lbl-rule r"></div>
+  <h2 class="r d1">None of the apps give users a reason to register before something breaks.</h2>
+  <div class="ins2 r d2">
+    <div class="ins">
+      <div class="ins-l">The shared failure</div>
+      <p class="ins-t">All three treat registration as a form-filling task. <strong>The interface is not the problem. The missing felt benefit is.</strong></p>
+    </div>
+    <div class="ins t">
+      <div class="ins-l">The direction</div>
+      <p class="ins-t">Reduce activation energy to near zero. Deliver value before any appliance fails. <strong>Stop asking. Make it a tap.</strong></p>
+    </div>
+  </div>
+</div>
+
+<!-- 08 SECONDARY RESEARCH -->
+<div class="sec">
+  <div class="lbl r">Secondary Research</div>
+  <div class="lbl-rule r"></div>
+  <h2 class="r d1">Who already makes registration feel effortless?</h2>
+  <div class="ana3 r d2 mt32">
+    <div class="an">
+      <div class="an-n">Apple Wallet</div>
+      <p class="an-b">Scan. Haptic tap. Card ready. One motion, immediate value.</p>
+      <div class="an-t">Onboarding that doesn't feel like onboarding.</div>
+    </div>
+    <div class="an">
+      <div class="an-n">CARFAX</div>
+      <p class="an-b">Service history as a resale asset. People keep records because they're worth having.</p>
+      <div class="an-t">Value people want, not just have to have.</div>
+    </div>
+    <div class="an">
+      <div class="an-n">Peloton</div>
+      <p class="an-b">Setup happens during unboxing, peak motivation, day one, not day broken.</p>
+      <div class="an-t">Timing matters as much as the flow.</div>
+    </div>
+  </div>
+  <div style="margin-top:32px;padding:28px 32px;background:var(--light);border:1px solid var(--border);border-radius:10px;" class="r d3">
+    <p style="font-size:12px;font-weight:400;color:var(--soft);margin-bottom:8px;letter-spacing:.04em;">Design Principle</p>
+    <p style="font-size:clamp(17px,2.2vw,24px);font-weight:400;color:var(--black);line-height:1.5;">The value has to come before the breakdown, not after.</p>
+  </div>
+</div>
+
+<!-- 09 TOOLS -->
+<div class="sec">
+  <div class="lbl r">Tools</div>
+  <div class="lbl-rule r"></div>
+  <h2 class="r d1">Research & Design Stack</h2>
+  <div class="tg4 r d2 mt32">
+    <div class="tg"><div class="tg-lbl">Research</div><div class="tg-d"><div class="ti"><div class="ti-i">LG</div><div class="ti-n">LG ThinQ</div></div><div class="ti"><div class="ti-i">ST</div><div class="ti-n">SmartThings</div></div><div class="ti"><div class="ti-i">AHS</div><div class="ti-n">AHS App</div></div></div></div>
+    <div class="tg"><div class="tg-lbl">Design</div><div class="tg-d"><div class="ti"><div class="ti-i">Fig</div><div class="ti-n">Figma</div></div><div class="ti"><div class="ti-i">TK</div><div class="ti-n">Tokens</div></div><div class="ti"><div class="ti-i">PR</div><div class="ti-n">Prototyping</div></div></div></div>
+    <div class="tg"><div class="tg-lbl">Build</div><div class="tg-d"><div class="ti"><div class="ti-i">NFC</div><div class="ti-n">NFC Tag</div></div><div class="ti"><div class="ti-i">3D</div><div class="ti-n">Physical Model</div></div></div></div>
+    <div class="tg"><div class="tg-lbl">Strategy</div><div class="tg-d"><div class="ti"><div class="ti-i">GR</div><div class="ti-n">Gartner</div></div><div class="ti"><div class="ti-i">SB</div><div class="ti-n">Storyboard</div></div><div class="ti"><div class="ti-i">MI</div><div class="ti-n">Miro</div></div></div></div>
+  </div>
+</div>
+
+<!-- 10 LIFECYCLE -->
+<div class="sec">
+  <div class="lbl r">Task Lifecycle</div>
+  <div class="lbl-rule r"></div>
+  <h2 class="r d1">We mapped every onboarding scenario across the full appliance lifecycle.</h2>
+  <div class="lifecycle r d2 mt32">
+    <div class="lc-cell"><div class="lc-num">01</div><div class="lc-name">Connect New Devices</div></div>
+    <div class="lc-cell"><div class="lc-num">02</div><div class="lc-name">Inherit Used Devices</div></div>
+    <div class="lc-cell"><div class="lc-num">03</div><div class="lc-name">Official Registration</div></div>
+    <div class="lc-cell"><div class="lc-num">04</div><div class="lc-name">Request Tech Repairs</div></div>
+    <div class="lc-cell"><div class="lc-num">05</div><div class="lc-name">Transfer Ownership</div></div>
+  </div>
+</div>
+
+<!-- 11 CURRENT WORKFLOW -->
+<div class="sec">
+  <div class="lbl r">Current Workflow</div>
+  <div class="lbl-rule r"></div>
+  <h2 class="r d1">12 steps. Every single time. No memory.</h2>
+  <div class="wf r d2 mt32">
+    <div><div class="wf-h">Find Help</div><div class="wf-i">Open the AHS app</div><div class="wf-i">Tap Request Service</div><div class="wf-i">Search for your brand</div></div>
+    <div><div class="wf-h">Describe Problem</div><div class="wf-i">Select appliance category</div><div class="wf-i">Pick the appliance</div><div class="wf-i">Describe issue manually</div><div class="wf-i">Enter serial number</div></div>
+    <div><div class="wf-h">Book Repair</div><div class="wf-i">Confirm address</div><div class="wf-i">Choose time slot</div><div class="wf-i">Enter payment</div><div class="wf-i">Wait</div></div>
+  </div>
+</div>
+
+<!-- 12 NFC TAP -->
+<div class="sec" id="features">
+  <div class="lbl r">01 NFC Tap Onboarding</div>
+  <div class="lbl-rule r"></div>
+  <h2 class="r d1">Tap your phone. Passport updated.</h2>
+  <p class="body r d2 mt8">No form. No account. No serial number. Three screens.</p>
+</div>
+
+<!-- 13 BEFORE AFTER -->
+<div class="sec">
+  <div class="lbl r">Before / After</div>
+  <div class="lbl-rule r"></div>
+  <h2 class="r d1">12 steps <span class="ora">→</span> 3 taps.</h2>
+  <div class="ba r d2 mt32">
+    <div class="ba-c">
+      <div class="ba-l">Before: Current AHS</div>
+      <ol class="ba-list">
+        <li><span class="ba-n">01</span>Open app</li><li><span class="ba-n">02</span>Request Service</li><li><span class="ba-n">03</span>Select brand</li><li><span class="ba-n">04</span>Pick appliance type</li><li><span class="ba-n">05</span>Select appliance</li><li><span class="ba-n">06</span>Describe issue</li><li><span class="ba-n">07</span>Serial number</li><li><span class="ba-n">08</span>Confirm address</li><li><span class="ba-n">09</span>Time slot</li><li><span class="ba-n">10</span>Payment</li><li><span class="ba-n">11</span>Confirm</li><li><span class="ba-n">12</span>Wait</li>
+      </ol>
+      <div class="ba-big">12<span> steps</span></div>
+    </div>
+    <div class="ba-c">
+      <div class="ba-l">After: Home Passport</div>
+      <ol class="ba-list">
+        <li class="hi"><span class="ba-n">01</span>Tap phone to appliance</li>
+        <li class="hi"><span class="ba-n">02</span>Confirm device</li>
+        <li class="hi"><span class="ba-n">03</span>Done</li>
+      </ol>
+      <div class="ba-big">3<span> taps</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- 14 DASHBOARD -->
+<div class="sec">
+  <div class="lbl r">02 Home Passport Dashboard</div>
+  <div class="lbl-rule r"></div>
+  <h2 class="r d1">Every appliance. One view.</h2>
+  <p class="body r d2 mt8">Health, age, last service, efficiency, all visible before anything breaks.</p>
+  <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024360/fd_08_dashboard_yockx3.png" class="r d3 mt32" style="width:100%;border-radius:10px;display:block;" alt="Home Passport dashboard" />
+</div>
+
+<!-- 15 PROACTIVE + PAPERLESS -->
+<div class="sec">
+  <div class="lbl r">03 & 04</div>
+  <div class="lbl-rule r"></div>
+  <div class="r d1 mt32">
+    <p class="num">Proactive Alerts</p>
+    <h3>"Your fridge coils are dusty. Save $15/month."</h3>
+    <p class="body mt8" style="font-size:15px">Predictive nudges before anything fails.</p>
+    <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024361/fd_10_proactive_alerts_jf7kcb.png" class="mt32" style="width:100%;border-radius:10px;display:block;" alt="Proactive alerts" />
+  </div>
+  <div class="r d2 mt48">
+    <p class="num">Paperless Drawer</p>
+    <h3>Every manual and receipt, stored on tap.</h3>
+    <p class="body mt8" style="font-size:15px">Export Verified Home History when you sell.</p>
+    <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024360/fd_11_paperless_drawer_qocfov.png" class="mt32" style="width:100%;border-radius:10px;display:block;" alt="Paperless drawer" />
+  </div>
+</div>
+
+<!-- 16 BRAND -->
+<div class="sec" id="process">
+  <div class="lbl r">Brand System</div>
+  <div class="lbl-rule r"></div>
+  <h2 class="r d1">AHS is orange. We moved to blue.</h2>
+  <p class="body r d2 mt8">Orange signals energy, not trust. Blue is the language of safety and reliability. Full token system, one variable updates everything.</p>
+  <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024361/fd_12_brand_system_x2ul7z.png" class="r d3 mt32" style="width:100%;border-radius:10px;display:block;" alt="Brand system" />
+  <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024361/fd_13_brand_spread_aurpvr.png" class="r d4 mt24" style="width:100%;border-radius:10px;display:block;" alt="Brand spread" />
+  <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024361/fd_11.2_Branding_iqbphp.png" class="r d2 mt24" style="width:100%;border-radius:10px;display:block;" alt="Branding detail 2" />
+</div>
+
+<!-- 17 PROTOTYPE -->
+<div class="sec">
+  <div class="lbl r">Physical Prototype</div>
+  <div class="lbl-rule r"></div>
+  <h2 class="r d1">The NFC tag. Any appliance.</h2>
+  <p class="body r d2 mt16">Attaches to new or existing appliances. Tap once on arrival, registered.</p>
+  <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024362/fd_14_nfc_prototype_zrf2n3.png" class="r d3 mt32" style="width:100%;border-radius:10px;display:block;" alt="NFC prototype" />
+</div>
+
+<!-- 18 10 YEAR -->
+<div class="sec">
+  <div class="lbl r">10-Year Vision</div>
+  <div class="lbl-rule r"></div>
+  <h2 class="r d1">Making Frontdoor+ the trusted system for home care.</h2>
+  <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024362/fd_roadmap_svjipz.png" class="r d2 mt32" style="width:100%;border-radius:10px;display:block;" alt="10-year roadmap" />
+</div>
+
+<!-- 19 OUTCOMES -->
+<div class="sec">
+  <div class="lbl r">Outcomes</div>
+  <div class="lbl-rule r"></div>
+  <h2 class="r d1">Selected as a recognized proposal at the final review.</h2>
+  <div class="sr r d2 mt32">
+    <div class="sc"><div class="sn">3<span> screens</span></div><p class="sd">to onboard any appliance</p></div>
+    <div class="sc"><div class="sn">12<span>→</span>3</div><p class="sd">steps reduced to taps</p></div>
+    <div class="sc"><div class="sn">1<span> system</span></div><p class="sd">blue token library delivered to Frontdoor</p></div>
+  </div>
+  <div style="margin-top:20px;padding:24px 28px;background:#fdf0eb;border:1px solid #f0c4af;border-radius:10px;" class="r d3">
+    <p style="font-size:17px;font-weight:300;font-style:italic;color:var(--black);line-height:1.65;">Home services won't be won by who fixes things fastest, but by who knows your home best before anything breaks.</p>
+  </div>
+</div>
+
+<!-- 20 TAKEAWAYS -->
+<div class="sec">
+  <div class="lbl r">Takeaways</div>
+  <div class="lbl-rule r"></div>
+  <h2 class="r d1">This was an incentive problem, not a UI problem.</h2>
+  <p class="body r d2 mt16">A good interface at the wrong moment still fails.</p>
+  <p class="body r d3 mt12">Working across physical design, UI systems, brand, and strategy simultaneously. That's where I do my best work.</p>
+</div>
+
+<footer>
+  <p class="f-copy">© 2025 Maitreyi Bhardwaj</p>
+  <hr class="f-rule">
+  <p class="f-cta">Let's build something <span class="script">meaningful</span> together.</p>
+  <div class="f-btns">
+    <a href="mailto:mbhardw9@asu.edu" class="fbtn">mbhardw9@asu.edu</a>
+    <a href="https://linkedin.com/in/maitreyi-bhardwaj" target="_blank" class="fbtn">LinkedIn</a>
+  </div>
+</footer>
+
+<script>
+let lastY = 0;
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  if (y > lastY && y > 80) nav.classList.add('hidden');
+  else nav.classList.remove('hidden');
+  lastY = y;
+}, { passive: true });
+const els = document.querySelectorAll('.r');
+const io = new IntersectionObserver(e => e.forEach(x => { if(x.isIntersecting) x.target.classList.add('on'); }), {threshold:.04, rootMargin:'0px 0px -20px 0px'});
+els.forEach(el => io.observe(el));
+window.addEventListener('load', () => els.forEach(el => { if(el.getBoundingClientRect().top < window.innerHeight) el.classList.add('on'); }));
+
+const _dmt = document.getElementById('dm-toggle');
+const _dms = localStorage.getItem('dm');
+if (_dms === '1') { document.documentElement.classList.add('dark'); _dmt.textContent = '☀'; }
+_dmt.addEventListener('click', () => {
+  const on = document.documentElement.classList.toggle('dark');
+  localStorage.setItem('dm', on ? '1' : '0');
+  _dmt.textContent = on ? '☀' : '☾';
+});
+
+</script>
+</body>
+</html>
