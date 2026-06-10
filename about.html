@@ -49,12 +49,12 @@ html.dark body { background:#0a0a0a; }
 html.dark nav { background:rgba(10,10,10,.97); }
 html.dark .pill { color:#f0f0ee; border-color:#2a2a2a; }
 html.dark .pill:hover { background:#f0f0ee; color:#0a0a0a; border-color:#f0f0ee; }
-html.dark footer { background:#fff !important; border-top-color:#e8e8e5 !important; }
-html.dark .f-copy { color:#999 !important; }
-html.dark .f-rule { border-top-color:#e8e8e5 !important; }
-html.dark .f-cta { color:#0a0a0a !important; }
-html.dark .fbtn { color:#0a0a0a !important; border-color:#e8e8e5 !important; background:#fff !important; }
-html.dark .fbtn:hover { background:#0a0a0a !important; color:#fff !important; }
+html.dark footer { background:#111 !important; border-top-color:#222 !important; }
+html.dark .f-copy { color:#666 !important; }
+html.dark .f-rule { border-top-color:#333 !important; }
+html.dark .f-cta { color:#e0e0e0 !important; }
+html.dark .fbtn { color:#e0e0e0 !important; border-color:#444 !important; background:transparent !important; }
+html.dark .fbtn:hover { background:#e0e0e0 !important; color:#111 !important; }
 html.dark #dm-toggle { background:#141414; border-color:#2a2a2a; color:#f0f0ee; }
 @media(max-width:768px){ nav{padding:16px 24px;} .sec{padding:100px 24px;} .row{grid-template-columns:1fr;gap:8px;} footer{padding:60px 24px;} }
 </style>
@@ -62,8 +62,8 @@ html.dark #dm-toggle { background:#141414; border-color:#2a2a2a; color:#f0f0ee; 
 <body>
 
 <nav id="nav">
-  <ul class="nl"><li><a href="index.html">Work</a></li><li><a href="https://drive.google.com/file/d/1l92lnpU0Z_aFT9_kO4f2fLXTiDSLKF9Y/view?usp=sharing" target="_blank">Resume</a></li></ul>
-  <ul class="nr"><li><a href="https://linkedin.com/in/maitreyi-bhardwaj" target="_blank">LinkedIn</a></li><li><a href="index.html" class="bold">Maitreyi Bhardwaj</a></li></ul>
+  <ul class="nl"><li><a href="https://drive.google.com/file/d/1l92lnpU0Z_aFT9_kO4f2fLXTiDSLKF9Y/view?usp=sharing" target="_blank">Resume</a></li></ul>
+  <ul class="nr"><li><a href="https://www.linkedin.com/in/maitreyi-bhardwaj-3a6358220/" target="_blank">LinkedIn</a></li><li><a href="index.html" class="bold">Maitreyi Bhardwaj</a></li></ul>
 </nav>
 <button id="dm-toggle" style="position:fixed;bottom:28px;right:28px;z-index:200;width:42px;height:42px;border-radius:50%;border:1px solid var(--border);background:var(--bg);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;">☾</button>
 
@@ -71,14 +71,14 @@ html.dark #dm-toggle { background:#141414; border-color:#2a2a2a; color:#f0f0ee; 
 <div class="sec">
   <div class="lbl r">About</div>
   <div class="lbl-rule r d1"></div>
-  <div style="display:flex;align-items:center;gap:32px;flex-wrap:wrap;margin-bottom:32px;" class="r d1">
-    <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781054141/1766100016762-2_zjbmz9.jpg" alt="Maitreyi Bhardwaj" style="width:100px;height:100px;border-radius:50%;object-fit:cover;border:2px solid var(--border);" />
-    <h1 style="margin-bottom:0;">Maitreyi Bhardwaj <span style="color:var(--orange);font-size:.55em;font-weight:300;">(my·TRAY·ee)</span></h1>
+  <div style="display:flex;align-items:flex-start;gap:32px;flex-wrap:wrap;margin-bottom:32px;" class="r d1">
+    <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781054141/1766100016762-2_zjbmz9.jpg" alt="Maitreyi Bhardwaj" style="width:96px;height:96px;border-radius:8px;object-fit:cover;flex-shrink:0;" />
+    <h1 style="margin-bottom:0;padding-top:6px;">Maitreyi Bhardwaj <span style="color:var(--orange);font-size:.55em;font-weight:300;">(my·TRAY·ee)</span></h1>
   </div>
   <p class="body r d2">Product designer working across physical products, digital interfaces, and the systems that connect them. BS Industrial Design, ASU Herberger. Foundation at National Institute of Design, India. GPA 3.98/4.00.</p>
   <div class="pills r d3">
-    <a href="mailto:mbhardw9@asu.edu" class="pill">mbhardw9@asu.edu</a>
-    <a href="https://linkedin.com/in/maitreyi-bhardwaj" target="_blank" class="pill">LinkedIn</a>
+    <a href="mailto:bhardwajmaitreyi6@gmail.com" class="pill">bhardwajmaitreyi6@gmail.com</a>
+    <a href="https://www.linkedin.com/in/maitreyi-bhardwaj-3a6358220/" target="_blank" class="pill">LinkedIn</a>
     <a href="https://drive.google.com/file/d/1l92lnpU0Z_aFT9_kO4f2fLXTiDSLKF9Y/view?usp=sharing" target="_blank" class="pill">Resume</a>
   </div>
 </div>
@@ -155,13 +155,44 @@ html.dark #dm-toggle { background:#141414; border-color:#2a2a2a; color:#f0f0ee; 
   <div class="row r d2"><div class="row-lbl">Transferred</div><div class="row-val">National Institute of Design, India<div class="row-sub">Foundation: geometric construction, form studies, color theory, typography, material exploration</div></div></div>
 </div>
 
+<!-- CONTACT -->
+<div style="background:var(--light);border-top:1px solid var(--border);padding:80px 80px;">
+  <div style="max-width:600px;margin:0 auto;">
+    <p style="font-size:13px;font-weight:400;color:var(--soft);margin-bottom:10px;letter-spacing:.04em;">Get in touch</p>
+    <div style="height:1px;background:var(--border);margin-bottom:32px;"></div>
+    <h2 style="font-size:clamp(24px,2.8vw,36px);font-weight:400;letter-spacing:-.022em;color:var(--black);margin-bottom:8px;">Send a message.</h2>
+    <p style="font-size:16px;font-weight:300;color:var(--gray);margin-bottom:32px;">Reach out directly. Usually responds within a day.</p>
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <input id="contact-name" type="text" placeholder="Your name" style="width:100%;padding:14px 18px;border:1px solid var(--border);border-radius:8px;font-size:15px;font-family:var(--f);background:var(--bg);color:var(--black);outline:none;transition:border-color .15s;" onfocus="this.style.borderColor='var(--black)'" onblur="this.style.borderColor='var(--border)'" />
+      <input id="contact-email" type="email" placeholder="Your email" style="width:100%;padding:14px 18px;border:1px solid var(--border);border-radius:8px;font-size:15px;font-family:var(--f);background:var(--bg);color:var(--black);outline:none;transition:border-color .15s;" onfocus="this.style.borderColor='var(--black)'" onblur="this.style.borderColor='var(--border)'" />
+      <textarea id="contact-msg" placeholder="What's on your mind?" rows="4" style="width:100%;padding:14px 18px;border:1px solid var(--border);border-radius:8px;font-size:15px;font-family:var(--f);background:var(--bg);color:var(--black);outline:none;resize:vertical;transition:border-color .15s;" onfocus="this.style.borderColor='var(--black)'" onblur="this.style.borderColor='var(--border)'"></textarea>
+      <button onclick="sendContact()" style="align-self:flex-start;padding:12px 28px;background:var(--black);color:#fff;border:none;border-radius:100px;font-size:14px;font-family:var(--f);font-weight:500;cursor:pointer;transition:all .15s;" onmouseover="this.style.background='#CD5028'" onmouseout="this.style.background='var(--black)'">Send message</button>
+      <p id="contact-status" style="font-size:13px;color:var(--soft);min-height:18px;"></p>
+    </div>
+  </div>
+</div>
+<script>
+function sendContact(){
+  const name=document.getElementById('contact-name').value.trim();
+  const email=document.getElementById('contact-email').value.trim();
+  const msg=document.getElementById('contact-msg').value.trim();
+  const status=document.getElementById('contact-status');
+  if(!name||!email||!msg){status.textContent='Please fill in all fields.';return;}
+  const mailto=`mailto:bhardwajmaitreyi6@gmail.com?subject=Portfolio inquiry from ${encodeURIComponent(name)}&body=${encodeURIComponent('From: '+name+'
+Email: '+email+'
+
+'+msg)}`;
+  window.location.href=mailto;
+  status.textContent='Opening your email client...';
+}
+</script>
 <footer>
   <p class="f-copy">© 2025 Maitreyi Bhardwaj</p>
   <hr class="f-rule">
   <p class="f-cta">Let's build something <span class="script">meaningful</span> together.</p>
   <div class="f-btns">
-    <a href="mailto:mbhardw9@asu.edu" class="fbtn">mbhardw9@asu.edu</a>
-    <a href="https://linkedin.com/in/maitreyi-bhardwaj" target="_blank" class="fbtn">LinkedIn</a>
+    <a href="mailto:bhardwajmaitreyi6@gmail.com" class="fbtn">bhardwajmaitreyi6@gmail.com</a>
+    <a href="https://www.linkedin.com/in/maitreyi-bhardwaj-3a6358220/" target="_blank" class="fbtn">LinkedIn</a>
     <a href="https://drive.google.com/file/d/1l92lnpU0Z_aFT9_kO4f2fLXTiDSLKF9Y/view?usp=sharing" target="_blank" class="fbtn">Resume</a>
   </div>
 </footer>
