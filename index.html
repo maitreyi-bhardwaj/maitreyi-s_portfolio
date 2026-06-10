@@ -418,21 +418,48 @@ Email: '+email+'
 <footer>
   <p class="f-copy">© 2025 Maitreyi Bhardwaj</p>
   <hr class="f-rule">
-  <div style="margin-bottom:48px;margin-left:-60px;margin-right:-60px;">
-    <div style="display:flex;justify-content:space-between;align-items:center;padding:0 60px;margin-bottom:12px;">
-      <p style="font-size:12px;color:#555;letter-spacing:.06em;text-transform:uppercase;">while you're here</p>
-      <span style="font-size:12px;color:#555;">score: <span id="fc-pts" style="color:#CD5028;font-weight:500;">0</span> &nbsp; misses: <span id="fc-miss">0</span></span>
+
+  <!-- FISH GAME -->
+  <div style="margin-bottom:0;margin-left:-60px;margin-right:-60px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:0 60px;margin-bottom:8px;">
+      <p style="font-size:11px;color:#555;letter-spacing:.06em;text-transform:uppercase;">tap the fish</p>
+      <span style="font-size:11px;color:#555;">score: <span id="fc-pts" style="color:#CD5028;font-weight:500;">0</span></span>
     </div>
-    <canvas id="fc-canvas" width="1200" height="260" style="display:block;width:100%;height:260px;background:#141414;cursor:crosshair;touch-action:none;image-rendering:pixelated;"></canvas>
-    <p style="font-size:11px;color:#555;padding:8px 60px 0;letter-spacing:.04em;">tap the fish when it jumps</p>
+    <canvas id="fc-canvas" width="1600" height="320" style="display:block;width:100%;height:320px;cursor:crosshair;touch-action:none;image-rendering:pixelated;background:#0a0a0a;"></canvas>
   </div>
-  <p class="f-cta">Let's build something <span class="script">meaningful</span> together.</p>
-  <div class="f-btns">
-    <a href="mailto:bhardwajmaitreyi6@gmail.com" class="fbtn">bhardwajmaitreyi6@gmail.com</a>
-    <a href="https://www.linkedin.com/in/maitreyi-bhardwaj-3a6358220/" target="_blank" class="fbtn">LinkedIn</a>
-    <a href="https://drive.google.com/file/d/1l92lnpU0Z_aFT9_kO4f2fLXTiDSLKF9Y/view?usp=sharing" target="_blank" class="fbtn">Resume</a>
+
+  <!-- MEANINGFUL + CONTACT -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;max-width:1100px;padding-top:64px;align-items:start;">
+    <div>
+      <p class="f-cta">Let's build something <span class="script">meaningful</span> together.</p>
+      <div class="f-btns" style="margin-top:24px;">
+        <a href="https://www.linkedin.com/in/maitreyi-bhardwaj-3a6358220/" target="_blank" class="fbtn">LinkedIn</a>
+        <a href="https://drive.google.com/file/d/1l92lnpU0Z_aFT9_kO4f2fLXTiDSLKF9Y/view?usp=sharing" target="_blank" class="fbtn">Resume</a>
+      </div>
+    </div>
+    <div>
+      <p style="font-size:13px;color:#666;margin-bottom:20px;letter-spacing:.04em;text-transform:uppercase;">Send a message</p>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <input id="contact-name" type="text" placeholder="Your name" style="width:100%;padding:12px 16px;border:1px solid #333;border-radius:8px;font-size:14px;font-family:'Geist',-apple-system,sans-serif;background:#141414;color:#f0f0ee;outline:none;" />
+        <input id="contact-email" type="email" placeholder="Your email" style="width:100%;padding:12px 16px;border:1px solid #333;border-radius:8px;font-size:14px;font-family:'Geist',-apple-system,sans-serif;background:#141414;color:#f0f0ee;outline:none;" />
+        <textarea id="contact-msg" placeholder="What's on your mind?" rows="3" style="width:100%;padding:12px 16px;border:1px solid #333;border-radius:8px;font-size:14px;font-family:'Geist',-apple-system,sans-serif;background:#141414;color:#f0f0ee;outline:none;resize:vertical;"></textarea>
+        <button onclick="sendContact()" style="align-self:flex-start;padding:10px 24px;background:#f0f0ee;color:#0a0a0a;border:none;border-radius:100px;font-size:13px;font-family:'Geist',-apple-system,sans-serif;font-weight:500;cursor:pointer;transition:all .15s;" onmouseover="this.style.background='#CD5028';this.style.color='#fff'" onmouseout="this.style.background='#f0f0ee';this.style.color='#0a0a0a'">Send</button>
+        <p id="contact-status" style="font-size:12px;color:#666;min-height:16px;"></p>
+      </div>
+    </div>
   </div>
 </footer>
+<script>
+function sendContact(){
+  const name=document.getElementById('contact-name').value.trim();
+  const email=document.getElementById('contact-email').value.trim();
+  const msg=document.getElementById('contact-msg').value.trim();
+  const status=document.getElementById('contact-status');
+  if(!name||!email||!msg){status.textContent='Please fill in all fields.';return;}
+  window.location.href=`mailto:bhardwajmaitreyi6@gmail.com?subject=Portfolio inquiry from ${encodeURIComponent(name)}&body=${encodeURIComponent('From: '+name+'\nEmail: '+email+'\n\n'+msg)}`;
+  status.textContent='Opening your email client...';
+}
+</script>
 
 <script>
 // LOADER , cycles all 6 bg/logo combos then exits
@@ -512,7 +539,7 @@ const canvas = document.getElementById('fc-canvas');
 if(!canvas) return;
 const ctx = canvas.getContext('2d');
 ctx.imageSmoothingEnabled = false;
-const W=1200,H=260,WATER_Y=168,PX=5;
+const W=1600,H=320,WATER_Y=210,PX=5;
 canvas.width=W; canvas.height=H;
 let score=0,misses=0,fish=[],ripples=[],splashes=[],msgs=[],frame=0,spawnTimer=0,spawnInterval=110;
 const ptsEl=document.getElementById('fc-pts');
@@ -546,7 +573,7 @@ const FISH_EYE=[4,-1];
 
 function spawnFish(){
   const x=rnd(80,W-80);
-  fish.push({x,y:WATER_Y,vx:rnd(-1.4,1.4),vy:rnd(-11,-7),phase:'jump',hit:false,alpha:1});
+  _factIdx=(_factIdx||0)+1;fish.push({x,y:WATER_Y,vx:rnd(-1.4,1.4),vy:rnd(-14,-10),phase:'jump',hit:false,alpha:1,showLabel:true,_factIdx:_factIdx});
   ripples.push({x,y:WATER_Y,r:0,alpha:0.6});
 }
 function addSplash(x,y,caught){
@@ -565,6 +592,24 @@ function drawPixel(x,y,color){
 }
 
 function drawFishPixel(f){
+  // show label while fish is above water
+  if(f.phase==='jump' && !f.hit && f.y < WATER_Y-20 && f.showLabel){
+    ctx.save();
+    ctx.globalAlpha=Math.min(1,(WATER_Y-f.y)/60)*f.alpha;
+    ctx.font='500 12px Geist,-apple-system,sans-serif';
+    ctx.textAlign='center';
+    ctx.fillStyle='#f0f0ee';
+    const lbl=FACTS[f._factIdx%FACTS.length]||'';
+    const tw=ctx.measureText(lbl).width;
+    ctx.fillStyle='rgba(10,10,10,0.85)';
+    ctx.beginPath();
+    if(ctx.roundRect) ctx.roundRect(f.x-tw/2-8,f.y-28,tw+16,22,4);
+    else ctx.rect(f.x-tw/2-8,f.y-28,tw+16,22);
+    ctx.fill();
+    ctx.fillStyle='#CD5028';
+    ctx.fillText(lbl,f.x,f.y-12);
+    ctx.restore();
+  }
   ctx.save(); ctx.globalAlpha=f.alpha;
   const dir=f.vx>=0?1:-1;
   const cx=Math.round(f.x/PX)*PX;
