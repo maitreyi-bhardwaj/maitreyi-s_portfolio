@@ -5,207 +5,260 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Home Passport , Maitreyi Bhardwaj</title>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500&family=Dancing+Script:wght@500&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
   --bg: #fff; --black: #0a0a0a; --gray: #666; --soft: #999;
-  --light: #f7f7f5; --border: #e8e8e5; --orange: #CD5028;
-  --f: 'Geist', -apple-system, sans-serif; --script: 'Dancing Script', cursive;
+  --light: #F8F8F8; --border: #e8e8e5;
+  --f: 'Inter', -apple-system, sans-serif;
 }
-html { scroll-behavior: smooth; }
-body { font-family: var(--f); background: var(--bg); color: var(--black); -webkit-font-smoothing: antialiased; }
+body { font-family: var(--f); background: var(--bg); color: var(--black); -webkit-font-smoothing: antialiased; overflow-x: clip; }
 
-/* NAV */
-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 20px 60px; background: rgba(255,255,255,.97); border-bottom: 1px solid var(--border); transition: transform .3s cubic-bezier(.16,1,.3,1); }
-nav.hidden { transform: translateY(-100%); }
-.nl, .nr { display: flex; gap: 28px; list-style: none; }
-nav a { font-size: 14px; font-weight: 400; color: var(--gray); text-decoration: none; }
-nav a:hover, .bold { color: var(--black) !important; font-weight: 500 !important; }
+/* REVEAL (disabled on this page, homepage only) */
+.r { opacity: 1; transform: none; transition: none; }
 
-/* REVEAL */
-.r { opacity: 0; transform: translateY(20px); transition: opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1); }
-.r.on { opacity: 1; transform: none; }
-.d1{transition-delay:.07s} .d2{transition-delay:.14s} .d3{transition-delay:.21s} .d4{transition-delay:.28s}
-
-/* SECTION — full screen, centered column */
+/* SECTION */
 .sec {
-  min-height: 100vh;
-  display: flex; flex-direction: column; justify-content: center;
-  padding: 100px 80px;
+  display: flex; flex-direction: column;
+  padding: clamp(88px, 9vw, 150px) clamp(16px, 2vw, 32px);
+  opacity: 0; transform: translateY(16px);
+  transition: opacity .55s ease, transform .55s ease;
 }
+.sec.live { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { .sec { opacity: 1; transform: none; transition: none; } }
 .sec > * { max-width: 1000px; width: 100%; margin-left: auto; margin-right: auto; }
+.sec > img { width: 100vw; max-width: 100vw; margin-left: calc(50% - 50vw); height: auto; max-height: none; border-radius: 0; margin-top: 48px; }
+img { max-width: 100%; height: auto; }
+
+/* IMAGE PAIR GRID */
+.imgrow { display: grid; grid-template-columns: 1fr; gap: 24px; width: 100vw; max-width: 100vw; margin-left: calc(50% - 50vw); align-items: start; }
+.imgrow > img { width: 100%; height: auto; border-radius: 0; display: block; }
+
+/* WIDE ROW (text + image) */
+.wide { max-width: min(1560px, 96vw); }
 
 /* LABEL */
-.lbl { font-size: 13px; font-weight: 400; color: var(--soft); margin-bottom: 10px; }
-.lbl-rule { height: 1px; background: var(--border); margin-bottom: 32px; }
+.lbl { font-size:12px; font-weight:500; letter-spacing:.07em; text-transform:uppercase; color:var(--soft); margin-bottom:8px; }
+.lbl-rule { height: 1px; background: var(--border); margin-bottom: 18px; }
 
 /* TYPE */
-h1 { font-size: clamp(28px, 3.2vw, 46px); font-weight: 400; letter-spacing: -.025em; line-height: 1.1; color: var(--black); margin-bottom: 32px; }
-h2 { font-size: clamp(24px, 2.8vw, 40px); font-weight: 400; letter-spacing: -.022em; line-height: 1.1; color: var(--black); margin-bottom: 16px; }
-h3 { font-size: clamp(18px, 2.2vw, 28px); font-weight: 400; letter-spacing: -.015em; line-height: 1.15; color: var(--black); margin-bottom: 12px; }
-.body { font-size: 17px; font-weight: 300; color: var(--gray); line-height: 1.75; max-width: 600px; }
+h1 { font-size:clamp(40px,5.2vw,78px); font-weight:400; letter-spacing:-.03em; line-height:1.05; color:var(--black); margin-bottom:20px; }
+h2 { font-size:clamp(32px,4vw,60px); font-weight:400; letter-spacing:-.028em; line-height:1.06; color:var(--black); margin-bottom:16px; }
+h3 { font-size:clamp(18px,2vw,24px); font-weight:600; letter-spacing:-.01em; line-height:1.25; color:var(--black); margin-bottom:10px; }
+.body { font-size: 17px; font-weight: 400; color:var(--black); line-height: 1.75; max-width: 600px; }
 .num { font-size: 11px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--soft); margin-bottom: 8px; }
-.ora { color: var(--orange); }
+.ora { color: var(--black); }
 
 /* PILLS */
-.pills { display: flex; gap: 8px; flex-wrap: wrap; }
+.pills { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 28px; }
 .pill { padding: 10px 22px; border: 1px solid var(--border); border-radius: 100px; font-size: 14px; font-family: var(--f); color: var(--black); text-decoration: none; transition: all .15s; }
-.pill:hover { background: var(--bg); color: #fff; border-color: var(--black); }
+.pill:hover { background: var(--black); color: var(--bg); border-color: var(--black); }
 
 /* META */
-.meta { display: grid; grid-template-columns: repeat(4,1fr); max-width: 1000px; margin-top: 64px; }
-.mc { padding: 18px 20px 18px 0; border-top: 1px solid var(--border); }
+.meta { display: grid; grid-template-columns: repeat(4,1fr); column-gap: 48px; max-width: 1000px; margin-top: 36px; margin-bottom: 32px; }
+.mc { padding: 22px 20px 22px 0; border-top: 1px solid var(--border); }
 .ml { font-size: 12px; font-weight: 400; color: var(--soft); margin-bottom: 5px; }
 .mv { font-size: 15px; font-weight: 400; color: var(--black); line-height: 1.4; }
 
 /* HERO IMAGE */
-.hero-img { width: 100%; }
-.hero-img img { width: 100%; display: block; }
+.hero-img { width: 100%; max-height: 78vh; overflow: hidden; }
+.hero-img img { width: 100%; max-height: 78vh; object-fit: cover; display: block; }
 
 /* UTILS */
 .mt8{margin-top:8px} .mt12{margin-top:12px} .mt16{margin-top:16px} .mt24{margin-top:24px} .mt32{margin-top:32px} .mt40{margin-top:40px} .mt48{margin-top:48px}
 
 /* STAT ROW */
-.stat-row { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-top: 48px; }
-.stat-n { font-size: clamp(56px, 8vw, 96px); font-weight: 300; letter-spacing: -.05em; line-height: .9; color: var(--black); margin-bottom: 12px; }
-.stat-t { font-size: 16px; font-weight: 300; color: var(--gray); line-height: 1.6; }
+.stat-row { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 24px; text-align: center; }
+.stat-n { font-size: clamp(56px, 8vw, 96px); font-weight: 400; letter-spacing: -.05em; line-height: .9; color: var(--black); margin-bottom: 12px; }
+.stat-t { font-size: 16px; font-weight: 400; color: var(--gray); line-height: 1.6; }
 
 /* TWO COL */
 .two { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
 .two.c { align-items: center; }
 
 /* INSIGHT */
-.ins2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-top: 32px; }
-.ins { background: var(--bg); padding: 28px 30px; }
-.ins.t { background: var(--light); }
+.ins2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-top: 18px; }
+.ins { background: var(--bg); padding: 28px 30px; text-align: center; }
+.ins.t { background: var(--bg); }
 .ins-l { font-size: 11px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--soft); margin-bottom: 8px; }
-.ins-t { font-size: 16px; font-weight: 300; color: var(--gray); line-height: 1.7; max-width: none; }
-.ins-t strong { font-weight: 400; color: var(--black); }
+.ins-t { font-size: 16px; font-weight: 400; color: var(--gray); line-height: 1.7; max-width: none; }
+.ins-t strong { font-weight: 600; color: var(--black); }
 
 /* FINDING */
-.finding { max-width: 900px; }
+.finding { max-width: 1000px; }
+.finding .finding-list, .finding .finding-head { max-width: 700px; }
 .finding-app { font-size: 11px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--soft); margin-bottom: 10px; }
-.finding-head { font-size: clamp(20px, 2.4vw, 30px); font-weight: 400; letter-spacing: -.018em; color: var(--black); margin-bottom: 20px; line-height: 1.2; }
+.finding-head { font-size: clamp(20px, 2.4vw, 30px); font-weight: 600; letter-spacing: -.018em; color: var(--black); margin-bottom: 20px; line-height: 1.2; }
 .finding-list { list-style: none; border-top: 1px solid var(--border); }
-.finding-list li { font-size: 16px; font-weight: 300; color: var(--gray); padding: 14px 0; border-bottom: 1px solid var(--border); line-height: 1.55; }
+.finding-list li { font-size: 16px; font-weight: 400; color: var(--gray); padding: 10px 0; border-bottom: 1px solid var(--border); line-height: 1.55; }
 .finding-list li:last-child { border-bottom: none; }
-.finding-badge { display: inline-block; margin-top: 20px; padding: 7px 14px; background: var(--light); border: 1px solid var(--border); border-radius: 7px; font-size: 13px; font-weight: 500; color: var(--soft); }
+.finding-badge { display: inline-block; margin-top: 20px; padding: 7px 14px; background: var(--bg); border: 1px solid var(--border); border-radius: 7px; font-size: 13px; font-weight: 500; color: var(--soft); }
 
 /* ANA */
 .ana3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
-.an { border: 1px solid var(--border); border-radius: 10px; padding: 24px; }
+.an { border: 1px solid var(--border); border-radius: 10px; padding: 24px; text-align: center; }
 .an-n { font-size: 15px; font-weight: 500; color: var(--black); margin-bottom: 8px; }
-.an-b { font-size: 14px; font-weight: 300; color: var(--gray); line-height: 1.65; }
+.an-b { font-size: 14px; font-weight: 400; color: var(--gray); line-height: 1.65; }
 .an-t { margin-top: 10px; font-size: 14px; font-weight: 400; color: var(--black); font-style: italic; }
 
 /* TOOLS */
 .tg4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; }
-.tg { background: var(--light); border-radius: 10px; padding: 18px; }
+.tg { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 18px; }
 .tg-lbl { font-size: 13px; font-weight: 400; color: var(--black); text-align: center; margin-bottom: 12px; }
 .tg-d { border: 1.5px dashed var(--border); border-radius: 8px; padding: 12px; display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
 .ti { display: flex; flex-direction: column; align-items: center; gap: 4px; }
 .ti-i { width: 40px; height: 40px; border-radius: 9px; background: #fff; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600; color: var(--black); }
-.ti-n { font-size: 10px; font-weight: 300; color: var(--gray); text-align: center; }
+.ti-n { font-size: 10px; font-weight: 400; color: var(--gray); text-align: center; }
 
 /* WORKFLOW */
 .wf { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
-.wf-h { background: var(--bg); color: #fff; text-align: center; padding: 14px; border-radius: 8px; font-size: 15px; font-weight: 400; margin-bottom: 7px; }
-.wf-i { background: var(--light); border: 1px solid var(--border); border-radius: 7px; padding: 11px 13px; text-align: center; font-size: 13px; font-weight: 300; color: var(--gray); margin-bottom: 5px; }
+.wf-h { background: var(--black); color: var(--bg); text-align: center; padding: 14px; border-radius: 8px; font-size: 15px; font-weight: 400; margin-bottom: 7px; }
+.wf-i { background: var(--bg); border: 1px solid var(--border); border-radius: 7px; padding: 11px 13px; text-align: center; font-size: 13px; font-weight: 400; color: var(--gray); margin-bottom: 5px; }
 
 /* BEFORE AFTER */
 .ba { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
 .ba-c { background: var(--bg); padding: 28px; }
-.ba-c:last-child { background: var(--light); }
+.ba-c:last-child { background: var(--bg); }
 .ba-l { font-size: 11px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--soft); margin-bottom: 14px; }
 .ba-list { list-style: none; }
-.ba-list li { font-size: 14px; font-weight: 300; color: var(--gray); padding: 6px 0; border-bottom: 1px solid var(--border); display: flex; gap: 8px; }
+.ba-list li { font-size: 14px; font-weight: 400; color: var(--gray); padding: 6px 0; border-bottom: 1px solid var(--border); display: flex; gap: 8px; }
 .ba-list li:last-child { border-bottom: none; }
 .ba-list li.hi { color: var(--black); font-weight: 400; }
 .ba-n { font-size: 10px; color: var(--border); min-width: 14px; }
 .ba-list li.hi .ba-n { color: var(--black); }
-.ba-big { font-size: 40px; font-weight: 300; letter-spacing: -.04em; color: var(--black); line-height: 1; margin-top: 16px; }
-.ba-big span { color: var(--orange); }
+.ba-big { font-size: 40px; font-weight: 400; letter-spacing: -.04em; color: var(--black); line-height: 1; margin-top: 16px; }
+.ba-big span { color: var(--black); }
 
 /* IMAGE SLOT */
-.slot { width: 100%; background: var(--light); border: 1px solid var(--border); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: var(--soft); font-size: 11px; position: relative; overflow: hidden; }
+.slot { width: 100%; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: var(--soft); font-size: 11px; position: relative; overflow: hidden; }
 .slot::before { content:''; position:absolute; inset:0; background:repeating-linear-gradient(45deg,transparent,transparent 16px,rgba(0,0,0,.018) 16px,rgba(0,0,0,.019) 17px); }
 .slot span { position:relative; z-index:1; }
 .h600{height:600px} .h500{height:500px} .h420{height:420px} .h360{height:360px} .h300{height:300px}
 
 /* STATS */
 .sr { display: grid; grid-template-columns: repeat(3,1fr); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
-.sc { padding: 32px 26px; border-right: 1px solid var(--border); }
+.sc { padding: 32px 26px; border-right: 1px solid var(--border); text-align: center; }
 .sc:last-child { border-right: none; }
-.sn { font-size: 44px; font-weight: 300; letter-spacing: -.04em; line-height: 1; color: var(--black); margin-bottom: 7px; }
-.sn span { color: var(--orange); }
-.sd { font-size: 14px; font-weight: 300; color: var(--gray); line-height: 1.5; }
+.sn { font-size: 44px; font-weight: 400; letter-spacing: -.04em; line-height: 1; color: var(--black); margin-bottom: 7px; }
+.sn span { color: var(--black); }
+.sd { font-size: 14px; font-weight: 400; color: var(--gray); line-height: 1.5; }
 
 /* LIFECYCLE */
 .lifecycle { display: grid; grid-template-columns: repeat(5,1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
 .lc-cell { background: var(--bg); padding: 24px 16px; text-align: center; }
-.lc-cell:nth-child(2n) { background: var(--light); }
+.lc-cell:nth-child(2n) { background: var(--bg); }
 .lc-num { font-size: 10px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--soft); margin-bottom: 8px; }
 .lc-name { font-size: 14px; font-weight: 400; color: var(--black); line-height: 1.3; }
 
 /* VIDEO */
-.vid { width: 100%; height: 380px; background: var(--light); border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; }
+.vid { width: 100%; height: 380px; background: var(--bg); border: 1px solid var(--border); border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; }
 .vid-p { width: 44px; height: 44px; border: 1px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; color: var(--soft); }
 .vid-l { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--soft); }
 
-/* FOOTER */
-footer { padding: 80px 60px; background: var(--light); border-top: 1px solid var(--border); }
-.f-copy { font-size: 13px; color: var(--soft); margin-bottom: 14px; }
-.f-rule { border: none; border-top: 1px solid var(--border); margin-bottom: 26px; }
-.f-cta { font-size: clamp(26px,4vw,48px); font-weight: 400; color: var(--black); letter-spacing: -.025em; line-height: 1.2; margin-bottom: 24px; max-width: 700px; }
-.f-cta .script { font-family: var(--script); color: var(--orange); }
-.f-btns { display: flex; gap: 8px; }
-.fbtn { display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; border: 1px solid var(--border); border-radius: 100px; font-size: 14px; color: var(--black); text-decoration: none; background: var(--bg); transition: all .15s; font-family: var(--f); }
-.fbtn:hover { background: var(--bg); color: #fff; border-color: var(--black); }
-
 @media(max-width:768px){
-  nav{padding:16px 24px;} .sec{padding:100px 24px;}
-  .meta,.two,.stat-row,.ins2,.ana3,.tg4,.wf,.ba,.sr,.lifecycle{grid-template-columns:1fr;}
-  footer{padding:60px 24px;}
+  .sec{padding:clamp(72px,10vw,120px) 16px;}
+  .meta,.two,.stat-row,.ins2,.ana3,.tg4,.wf,.ba,.sr,.lifecycle,.imgrow{grid-template-columns:1fr;}
 }
+
+/* DATA VIZ BARS */
+.viz { max-width: 900px; margin-top: 28px; }
+.viz-row { display: flex; align-items: center; gap: 16px; margin-top: 14px; }
+.viz-lbl { flex: 0 0 clamp(140px, 24vw, 250px); font-size: 14px; font-weight: 400; color: var(--gray); text-align: right; line-height: 1.35; }
+.viz-track { flex: 1; height: 18px; background: var(--light); border-radius: 4px; overflow: hidden; }
+.viz-fill { height: 100%; width: 0; background: var(--black); border-radius: 0 4px 4px 0; transition: width 1s cubic-bezier(.16,1,.3,1) .25s; }
+.sec.live .viz-fill { width: var(--w); }
+.viz-val { flex: 0 0 84px; font-size: 14px; font-weight: 500; color: var(--black); }
+@media (prefers-reduced-motion: reduce) { .viz-fill { transition: none; width: var(--w); } }
+
+.sec > .imgrow { margin-top: 48px; }
+.sec > .body, .sec > .lead { margin-left: max(0px, calc((100% - 1000px)/2)); margin-right: 0; }
+.sec > .viz, .sec > .steps-viz { margin-left: max(0px, calc((100% - 1000px)/2)); margin-right: 0; }
+
+/* CONCEPT DIAGRAMS */
+.diagrid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; max-width: 1000px; margin-top: 48px; }
+.diapanel { background: var(--light); border-radius: 10px; padding: 10px; }
+.diapanel svg { width: 100%; height: auto; display: block; }
+.dia-t { font: 500 13px var(--f); letter-spacing: .08em; fill: var(--soft); }
+.dia-n { font: 400 14px var(--f); fill: var(--black); }
+.dia-nw { font: 500 14px var(--f); fill: var(--bg); }
+.dia-c { fill: var(--bg); }
+.dia-arrow { stroke: var(--soft); stroke-width: 2; fill: none; }
+@media(max-width:768px){ .diagrid { grid-template-columns: 1fr; } }
+
+/* STEP UNITS */
+.steps-viz { max-width: 900px; margin-top: 28px; }
+.steps-cap { display: flex; justify-content: space-between; align-items: baseline; font-size: 14px; color: var(--gray); margin: 22px 0 10px; }
+.steps-cap strong { font-weight: 500; color: var(--black); }
+.steps { display: flex; flex-wrap: wrap; gap: 6px; }
+.step { min-width: 46px; height: 46px; padding: 0 10px; border-radius: 6px; background: var(--light); color: var(--soft); font-size: 11px; display: flex; align-items: center; justify-content: center; white-space: nowrap; }
+.step.hi { background: var(--black); color: var(--bg); font-weight: 500; font-size: 12px; }
+
+/* INTRO GALLERY */
+.lead { font-size: clamp(18px, 2vw, 24px); font-weight: 400; color:var(--black); line-height: 1.7; max-width: 820px; }
+.sec > .gal { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; width: 100vw; max-width: 100vw; margin-left: calc(50% - 50vw); padding: 0 clamp(16px, 2vw, 32px); }
+.gtile { overflow: hidden; background: var(--light); }
+.gtile img { width: 100%; height: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; transition: opacity .35s ease; }
+.case-cta { display: flex; justify-content: center; }
+@media(max-width:768px){ .sec > .gal { grid-template-columns: 1fr 1fr; } }
 
 /* DARK MODE */
 html.dark { --bg:#0a0a0a; --black:#f0f0ee; --gray:#aaa; --soft:#666; --light:#141414; --border:#2a2a2a; }
 html.dark body { background:#0a0a0a; }
-html.dark nav { background:rgba(10,10,10,.97); }
 html.dark .pill { color:#f0f0ee; border-color:#2a2a2a; }
 html.dark .pill:hover, html.dark .pill.primary { background:#f0f0ee; color:#0a0a0a; border-color:#f0f0ee; }
-html.dark .fbtn { background:#0a0a0a; color:#f0f0ee; border-color:#2a2a2a; }
-html.dark .fbtn:hover { background:#f0f0ee; color:#0a0a0a; }
 html.dark .finding-list, html.dark .finding-list li { border-color:#2a2a2a; }
 html.dark .ins2, html.dark .g4, html.dark .ba, html.dark .arch { background:#2a2a2a; border-color:#2a2a2a; }
 html.dark .sr { border-color:#2a2a2a; }
 html.dark .sc { border-color:#2a2a2a; }
 html.dark .an, html.dark .comp-card { border-color:#2a2a2a; }
-html.dark footer { background:#141414; border-top-color:#2a2a2a; }
 html.dark #dm-toggle { background:#141414; border-color:#2a2a2a; color:#f0f0ee; }
-html.dark footer { background:#111 !important; border-top-color:#222 !important; }
-html.dark .f-copy { color:#666 !important; }
-html.dark .f-rule { border-top-color:#333 !important; }
-html.dark .f-cta { color:#e0e0e0 !important; }
-html.dark .fbtn { color:#e0e0e0 !important; border-color:#444 !important; background:transparent !important; }
-html.dark .fbtn:hover { background:#e0e0e0 !important; color:#111 !important; }
+
+h1,h2,h3{text-wrap:balance}
+p,.body,.lead,.sd,.stat-t{text-wrap:pretty}
 </style>
 </head>
 <body>
 
-<nav id="nav">
-  <ul class="nl"><li><a href="https://drive.google.com/file/d/1l92lnpU0Z_aFT9_kO4f2fLXTiDSLKF9Y/view?usp=sharing">Resume</a></li></ul>
-  <ul class="nr"><li><a href="about.html">About</a></li><li><a href="index.html" class="bold">Maitreyi Bhardwaj</a></li></ul>
+<nav style="position:fixed;top:14px;left:clamp(16px,2vw,32px);z-index:300;">
+  <a href="index.html" aria-label="Back to home" style="display:flex;align-items:center;justify-content:center;width:62px;height:62px;padding:11px;border-radius:50%;background:var(--bg);box-shadow:0 2px 12px rgba(0,0,0,.14);color:var(--black,#0a0a0a);">
+    <svg viewBox="0 0 287 205" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;">
+      <path fill="currentColor" d="M224.188 179.482C223.074 181.616 220.794 182.872 218.396 182.665C207.793 181.751 178.607 179.427 165.432 180.305C149.171 181.389 129.659 191.147 129.659 191.147C129.659 191.147 157.302 171.09 164.348 170.548C170.158 170.101 210.232 170.391 224.122 170.507C226.286 170.525 227.661 172.824 226.66 174.743L224.188 179.482Z"/>
+      <path fill="currentColor" d="M257.599 174.168L251.709 184.108C251.596 184.3 251.835 184.504 252.004 184.358C254.256 182.418 260.252 177.568 266.248 175.427C270.647 173.856 274.499 173.377 276.96 173.253C278.826 173.158 280.487 172.039 281.259 170.338C282.159 168.356 283.046 165.946 282.509 165.087C281.986 164.251 280.9 163.527 280.01 163.037C279.34 162.669 278.526 162.859 278.039 163.447C277.645 163.923 276.991 164.505 275.91 165.087C274.273 165.968 267.958 168.004 263.723 169.326C261.152 170.128 258.972 171.851 257.599 174.168Z"/>
+      <path fill="currentColor" d="M230.93 52.0507C236.137 54.4954 242.881 58.3707 249.65 64.4657C252.129 66.698 258.457 72.6908 264.055 81.928C265.789 84.7899 267.103 87.474 269.73 92.8426C273.209 99.9525 275.771 105.902 276.874 108.572C284.264 126.456 286.507 142.973 286.953 142.882C287.336 142.805 285.27 130.727 283.321 121.49C282.755 118.808 281.26 111.939 278.939 103.882C278.863 103.619 278.798 103.397 278.745 103.214C276.892 96.8777 275.775 93.0577 273.7 88.0779C270.66 80.7831 267.581 75.8416 263.721 69.6471C261.886 66.702 257.485 59.8221 250.948 51.656C247.596 47.4679 244.799 43.9993 240.413 39.7941C236.467 36.0101 232.99 33.3134 230.933 31.7261C227.17 28.8242 224.242 26.8948 220.709 24.5663C216.729 21.9438 214.239 20.3034 210.6 18.3529C207.973 16.9451 208.284 17.271 202.125 14.275C195.67 11.135 195.038 10.6355 190.853 8.74167C188.139 7.51349 185.865 6.49008 182.788 5.38836C178.518 3.86 174.87 2.9563 172.316 2.41534C181.98 8.03509 193.195 15.5441 204.794 25.4844C215.556 34.7067 224.172 43.9003 230.93 52.0507Z"/>
+      <path fill="currentColor" d="M222.303 50.3065C212.804 49.5232 199.025 49.7632 183.947 55.1934C180.081 56.5858 149.632 68.0464 133.48 98.0832C123.98 115.749 127.902 124.079 116.315 134.133C106.293 142.829 99.249 140.164 89.7096 151.3C88.0579 153.228 81.0255 161.127 77.4344 174.65C74.4374 185.936 77.0794 188.741 72.8574 195.311C71.5528 197.34 67.712 203.317 61.3387 204.254C55.3941 205.129 49.955 201.221 45.4165 197.96C43.5956 196.652 41.5578 194.917 37.4823 191.446C33.9956 188.477 32.6364 187.173 29.9488 185.67C26.9072 183.969 24.2959 183.205 23.1686 182.907C19.9415 182.055 16.9708 181.271 13.626 182.154C9.56319 183.226 8.64303 185.783 6.7237 185.123C5.04926 184.546 4.453 182.115 3.18796 177.725C2.69144 176.002 2.46312 174.716 2.04316 172.205C1.12079 166.691 0.659606 163.934 0.482077 162.487C-0.13075 157.494 -0.0459724 153.64 0.123582 145.933C0.299517 137.936 0.844006 131.938 1.11956 129.183C1.19023 128.477 1.5686 124.731 2.19603 120.332C2.95792 114.992 4.64697 103.152 8.03168 92.0802C9.12851 88.4925 13.5472 74.6888 24.061 59.2552C28.8112 52.282 38.7738 39.1473 55.344 27.2415C70.2452 16.5353 83.6428 11.7426 90.7258 9.26854C102.285 5.23026 111.408 3.66315 119.649 2.24769C119.649 2.24769 132.407 0.0557921 149.134 0.000822856C152.886 -0.0119378 158.3 0.0940742 164.577 2.48229C166.942 3.38241 168.761 4.35223 171.643 6.0494C174.838 7.93014 182.296 12.3228 189.283 17.7132C204.481 29.4383 220.643 48.3517 222.303 50.3065Z"/>
+    </svg>
+  </a>
 </nav>
 <button id="dm-toggle" style="position:fixed;bottom:28px;right:28px;z-index:200;width:42px;height:42px;border-radius:50%;border:1px solid var(--border);background:var(--bg);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;">☾</button>
 
 <!-- HERO IMAGE -->
-<div class="hero-img" style="padding-top:65px;"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024360/fd_01_hero_hlcjsk.png" alt="Home Passport" style="width:100%;display:block;"></div>
+<div class="hero-img"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024360/fd_01_hero_hlcjsk.png" alt="Home Passport" style="width:100%;height:auto;display:block;"></div>
 
+
+<!-- INTRO -->
+<div class="sec">
+  <div class="lbl r">Home Passport</div>
+  <div class="lbl-rule r"></div>
+  <p class="lead r d1">A Home Passport for Frontdoor × American Home Shield, every appliance, warranty, and repair in one living record, with proactive alerts, a paperless drawer, and an NFC passport for the home itself.</p>
+</div>
+
+<!-- INTRO GALLERY -->
+<div class="sec">
+  <div class="gal r d1">
+    <div class="gtile"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/c_fill,g_auto,ar_1.33,f_auto,q_auto/v1781024360/fd_08_dashboard_yockx3.png" alt="Home Passport dashboard" loading="lazy"></div>
+    <div class="gtile" data-alt="https://res.cloudinary.com/df0tysd6u/image/upload/c_fill,g_auto,ar_1.33,f_auto,q_auto/v1781024360/fd_11_paperless_drawer_qocfov.png"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/c_fill,g_auto,ar_1.33,f_auto,q_auto/v1781024361/fd_10_proactive_alerts_jf7kcb.png" alt="Proactive alerts" loading="lazy"></div>
+    <div class="gtile"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/c_fill,g_auto,ar_1.33,f_auto,q_auto/v1781024361/fd_12_brand_system_x2ul7z.png" alt="Brand system" loading="lazy"></div>
+    <div class="gtile" data-alt="https://res.cloudinary.com/df0tysd6u/image/upload/c_fill,g_auto,ar_1.33,f_auto,q_auto/v1781024361/fd_11.2_Branding_iqbphp.png"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/c_fill,g_auto,ar_1.33,f_auto,q_auto/v1781024361/fd_13_brand_spread_aurpvr.png" alt="Brand spread" loading="lazy"></div>
+    <div class="gtile"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/c_fill,g_auto,ar_1.33,f_auto,q_auto/v1781024362/fd_14_nfc_prototype_zrf2n3.png" alt="NFC prototype" loading="lazy"></div>
+    <div class="gtile" data-alt="https://res.cloudinary.com/df0tysd6u/image/upload/c_fill,g_auto,ar_1.33,f_auto,q_auto/v1781024360/AHS_App_sghnzs.png"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/c_fill,g_auto,ar_1.33,f_auto,q_auto/v1781024362/fd_06_case_study_xhkczh.png" alt="Field research" loading="lazy"></div>
+  </div>
+  <div class="case-cta r d2 mt40"><a href="#case" class="pill">View Full Case Study ↓</a></div>
+</div>
 
 <!-- 01 OVERVIEW -->
-<div class="sec">
+<div class="sec" id="case">
   <div class="lbl r">Project Overview</div>
   <div class="lbl-rule r"></div>
   <h1 class="r d1">Frontdoor partnered with ASU to eliminate onboarding friction and make Frontdoor+ the main appliance app for every household device.</h1>
@@ -221,26 +274,50 @@ html.dark .fbtn:hover { background:#e0e0e0 !important; color:#111 !important; }
   </div>
 </div>
 
-<!-- 02 THE PROBLEM -->
+<!-- 02+03 THE PROBLEM / THE STATS -->
 <div class="sec">
-  <div class="lbl r">The Problem</div>
+  <div class="lbl r">The Problem · The Scale</div>
   <div class="lbl-rule r"></div>
   <h2 class="r d1">Every smart appliance comes with an app. Almost no one uses it.</h2>
   <p class="body r d2 mt16">People do not register products because the setup is confusing and offers no immediate value. Current setup loops are designed around data collection instead of providing real help to the homeowner.</p>
-</div>
-
-<!-- 03 THE STATS -->
-<div class="sec">
-  <div class="lbl r">The Scale</div>
-  <div class="lbl-rule r"></div>
-  <div class="stat-row r d1">
-    <div>
-      <div class="stat-n"><span class="ora">1</span> in <span class="ora">2</span></div>
-      <p class="stat-t">U.S. homes owns a smart appliance today.</p>
+  <div class="viz r d2">
+    <div class="viz-row"><div class="viz-lbl">U.S. homes that own a smart appliance</div><div class="viz-track"><div class="viz-fill" style="--w:50%"></div></div><div class="viz-val">50%</div></div>
+    <div class="viz-row"><div class="viz-lbl">Homes that ever connect its app</div><div class="viz-track"><div class="viz-fill" style="--w:10%"></div></div><div class="viz-val">~10%</div></div>
+  </div>
+  <div class="diagrid r d3">
+    <div class="diapanel">
+      <svg viewBox="0 0 460 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Friction scale: using an appliance is easy, registering it is heavy">
+        <text class="dia-t" x="230" y="44" text-anchor="middle">FRICTION SCALE</text>
+        <line x1="70" y1="158" x2="390" y2="238" stroke="var(--soft)" stroke-width="3" stroke-linecap="round"/>
+        <path d="M205 292 L255 292 L230 244 Z" fill="var(--soft)"/>
+        <circle class="dia-c" cx="104" cy="118" r="44"/>
+        <text class="dia-n" x="104" y="123" text-anchor="middle">Using it</text>
+        <circle cx="322" cy="166" r="56" fill="var(--black)"/>
+        <text class="dia-nw" x="322" y="162" text-anchor="middle">Registering</text>
+        <text class="dia-nw" x="322" y="180" text-anchor="middle">it</text>
+      </svg>
     </div>
-    <div>
-      <div class="stat-n">~<span class="ora">10</span>%</div>
-      <p class="stat-t">ever connect it to the app built to support it.</p>
+    <div class="diapanel">
+      <svg viewBox="0 0 460 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Negative feedback loop: users never register, the app knows nothing, value only shows up at breakdown">
+        <defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="var(--soft)"/></marker></defs>
+        <text class="dia-t" x="230" y="150" text-anchor="middle">NEGATIVE</text>
+        <text class="dia-t" x="230" y="170" text-anchor="middle">FEEDBACK</text>
+        <text class="dia-t" x="230" y="190" text-anchor="middle">LOOP</text>
+        <circle class="dia-c" cx="330" cy="76" r="54"/>
+        <text class="dia-n" x="330" y="72" text-anchor="middle">Users never</text>
+        <text class="dia-n" x="330" y="90" text-anchor="middle">register</text>
+        <circle class="dia-c" cx="112" cy="170" r="54"/>
+        <text class="dia-n" x="112" y="158" text-anchor="middle">The app</text>
+        <text class="dia-n" x="112" y="176" text-anchor="middle">knows</text>
+        <text class="dia-n" x="112" y="194" text-anchor="middle">nothing</text>
+        <circle class="dia-c" cx="330" cy="264" r="54"/>
+        <text class="dia-n" x="330" y="252" text-anchor="middle">Value only</text>
+        <text class="dia-n" x="330" y="270" text-anchor="middle">shows up at</text>
+        <text class="dia-n" x="330" y="288" text-anchor="middle">breakdown</text>
+        <path class="dia-arrow" d="M300 30 Q220 8 150 112" marker-end="url(#ah)"/>
+        <path class="dia-arrow" d="M118 230 Q140 292 268 280" marker-end="url(#ah)"/>
+        <path class="dia-arrow" d="M388 240 Q412 170 386 100" marker-end="url(#ah)"/>
+      </svg>
     </div>
   </div>
   <div class="ins2 r d2">
@@ -269,8 +346,10 @@ html.dark .fbtn:hover { background:#e0e0e0 !important; color:#111 !important; }
     </ul>
     <span class="finding-badge">Form burden · Hidden dependency · Legacy exclusion</span>
   </div>
-  <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024362/LG_App_Experience_yohxgq.png" class="r d2 mt32" style="width:100%;border-radius:10px;display:block;" alt="LG ThinQ experience" />
-  <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024362/LG_App_Experience_2_azmbmw.png" class="r d3 mt24" style="width:100%;border-radius:10px;display:block;" alt="LG ThinQ experience 2" />
+  <div class="imgrow r d2 mt24">
+    <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024362/LG_App_Experience_yohxgq.png" loading="lazy" alt="LG ThinQ experience" />
+    <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024362/LG_App_Experience_2_azmbmw.png" loading="lazy" alt="LG ThinQ experience 2" />
+  </div>
 </div>
 
 <!-- 05 SAMSUNG -->
@@ -287,8 +366,10 @@ html.dark .fbtn:hover { background:#e0e0e0 !important; color:#111 !important; }
     </ul>
     <span class="finding-badge">Used market gap · Physical access failure · Ownership complexity</span>
   </div>
-  <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024362/Samsung_SmartThings_2_cinrtk.png" class="r d2 mt32" style="width:100%;border-radius:10px;display:block;" alt="Samsung SmartThings" />
-  <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024362/fd_06_case_study_xhkczh.png" class="r d3 mt24" style="width:100%;border-radius:10px;display:block;" alt="Samsung SmartThings case study" />
+  <div class="imgrow r d2 mt24">
+    <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024362/Samsung_SmartThings_2_cinrtk.png" loading="lazy" alt="Samsung SmartThings" />
+    <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024362/fd_06_case_study_xhkczh.png" loading="lazy" alt="Samsung SmartThings case study" />
+  </div>
 </div>
 
 <!-- 06 CURRENT AHS -->
@@ -305,7 +386,7 @@ html.dark .fbtn:hover { background:#e0e0e0 !important; color:#111 !important; }
     </ul>
     <span class="finding-badge">Home transfer flaw · Zero persistent model · Reactive only</span>
   </div>
-  <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024360/AHS_App_sghnzs.png" class="r d2 mt32" style="width:100%;border-radius:10px;display:block;" alt="Current AHS app" />
+  <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024360/AHS_App_sghnzs.png" class="r d2 mt24" style="display:block;" loading="lazy" alt="Current AHS app" />
 </div>
 
 <!-- 07 WHAT WE FOUND -->
@@ -347,7 +428,7 @@ html.dark .fbtn:hover { background:#e0e0e0 !important; color:#111 !important; }
       <div class="an-t">Timing matters as much as the flow.</div>
     </div>
   </div>
-  <div style="margin-top:32px;padding:28px 32px;background:var(--light);border:1px solid var(--border);border-radius:10px;" class="r d3">
+  <div style="margin-top:32px;padding:28px 32px;background:var(--bg);border:1px solid var(--border);border-radius:10px;text-align:center;" class="r d3">
     <p style="font-size:12px;font-weight:400;color:var(--soft);margin-bottom:8px;letter-spacing:.04em;">Design Principle</p>
     <p style="font-size:clamp(17px,2.2vw,24px);font-weight:400;color:var(--black);line-height:1.5;">The value has to come before the breakdown, not after.</p>
   </div>
@@ -392,19 +473,23 @@ html.dark .fbtn:hover { background:#e0e0e0 !important; color:#111 !important; }
   </div>
 </div>
 
-<!-- 12 NFC TAP -->
+<!-- 12+13 NFC TAP / BEFORE AFTER -->
 <div class="sec" id="features">
-  <div class="lbl r">01 NFC Tap Onboarding</div>
+  <div class="lbl r">01 NFC Tap Onboarding · Before / After</div>
   <div class="lbl-rule r"></div>
   <h2 class="r d1">Tap your phone. Passport updated.</h2>
   <p class="body r d2 mt8">No form. No account. No serial number. Three screens.</p>
-</div>
-
-<!-- 13 BEFORE AFTER -->
-<div class="sec">
-  <div class="lbl r">Before / After</div>
-  <div class="lbl-rule r"></div>
-  <h2 class="r d1">12 steps <span class="ora">→</span> 3 taps.</h2>
+  <h2 class="r d1 mt32">12 steps <span class="ora">→</span> 3 taps.</h2>
+  <div class="steps-viz r d2">
+    <div class="steps-cap"><span>Before: Current AHS service request</span><strong>12 steps</strong></div>
+    <div class="steps">
+      <div class="step">01</div><div class="step">02</div><div class="step">03</div><div class="step">04</div><div class="step">05</div><div class="step">06</div><div class="step">07</div><div class="step">08</div><div class="step">09</div><div class="step">10</div><div class="step">11</div><div class="step">12</div>
+    </div>
+    <div class="steps-cap"><span>After: Home Passport</span><strong>3 taps</strong></div>
+    <div class="steps">
+      <div class="step hi">Tap</div><div class="step hi">Confirm</div><div class="step hi">Done</div>
+    </div>
+  </div>
   <div class="ba r d2 mt32">
     <div class="ba-c">
       <div class="ba-l">Before: Current AHS</div>
@@ -425,42 +510,46 @@ html.dark .fbtn:hover { background:#e0e0e0 !important; color:#111 !important; }
   </div>
 </div>
 
-<!-- 14 DASHBOARD -->
-<div class="sec">
-  <div class="lbl r">02 Home Passport Dashboard</div>
-  <div class="lbl-rule r"></div>
-  <h2 class="r d1">Every appliance. One view.</h2>
-  <p class="body r d2 mt8">Health, age, last service, efficiency, all visible before anything breaks.</p>
-  <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024360/fd_08_dashboard_yockx3.png" class="r d3 mt32" style="width:100%;border-radius:10px;display:block;" alt="Home Passport dashboard" />
-</div>
-
-<!-- 15 PROACTIVE + PAPERLESS -->
-<div class="sec">
-  <div class="lbl r">03 & 04</div>
-  <div class="lbl-rule r"></div>
-  <div class="r d1 mt32">
-    <p class="num">Proactive Alerts</p>
-    <h3>"Your fridge coils are dusty. Save $15/month."</h3>
-    <p class="body mt8" style="font-size:15px">Predictive nudges before anything fails.</p>
-    <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024361/fd_10_proactive_alerts_jf7kcb.png" class="mt32" style="width:100%;border-radius:10px;display:block;" alt="Proactive alerts" />
-  </div>
-  <div class="r d2 mt48">
-    <p class="num">Paperless Drawer</p>
-    <h3>Every manual and receipt, stored on tap.</h3>
-    <p class="body mt8" style="font-size:15px">Export Verified Home History when you sell.</p>
-    <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024360/fd_11_paperless_drawer_qocfov.png" class="mt32" style="width:100%;border-radius:10px;display:block;" alt="Paperless drawer" />
-  </div>
-</div>
-
 <!-- 16 BRAND -->
 <div class="sec" id="process">
   <div class="lbl r">Brand System</div>
   <div class="lbl-rule r"></div>
   <h2 class="r d1">AHS is orange. We moved to blue.</h2>
   <p class="body r d2 mt8">Orange signals energy, not trust. Blue is the language of safety and reliability. Full token system, one variable updates everything.</p>
-  <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024361/fd_12_brand_system_x2ul7z.png" class="r d3 mt32" style="width:100%;border-radius:10px;display:block;" alt="Brand system" />
-  <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024361/fd_13_brand_spread_aurpvr.png" class="r d4 mt24" style="width:100%;border-radius:10px;display:block;" alt="Brand spread" />
-  <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024361/fd_11.2_Branding_iqbphp.png" class="r d2 mt24" style="width:100%;border-radius:10px;display:block;" alt="Branding detail 2" />
+  <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024361/fd_12_brand_system_x2ul7z.png" class="r d3 mt24" style="display:block;" loading="lazy" alt="Brand system" />
+  <div class="imgrow r d4 mt24">
+    <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024361/fd_13_brand_spread_aurpvr.png" loading="lazy" alt="Brand spread" />
+    <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024361/fd_11.2_Branding_iqbphp.png" loading="lazy" alt="Branding detail 2" />
+  </div>
+</div>
+
+<!-- 14 DASHBOARD -->
+<div class="sec">
+  <div class="lbl r">02 Home Passport Dashboard</div>
+  <div class="lbl-rule r"></div>
+  <h2 class="r d1">Every appliance. One view.</h2>
+  <p class="body r d2 mt8">Health, age, last service, efficiency, all visible before anything breaks.</p>
+  <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024360/fd_08_dashboard_yockx3.png" class="r d3 mt24" style="display:block;" loading="lazy" alt="Home Passport dashboard" />
+</div>
+
+<!-- 15 PROACTIVE + PAPERLESS -->
+<div class="sec">
+  <div class="lbl r">03 & 04</div>
+  <div class="lbl-rule r"></div>
+  <div class="imgrow r d1 mt16" style="gap:24px;align-items:start;padding:0 clamp(16px,2vw,32px);">
+    <div>
+      <p class="num">Proactive Alerts</p>
+      <h3>"Your fridge coils are dusty. Save $15/month."</h3>
+      <p class="body mt8" style="font-size:15px">Predictive nudges before anything fails.</p>
+      <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024361/fd_10_proactive_alerts_jf7kcb.png" class="mt16" style="width:100%;height:auto;border-radius:12px;display:block;" loading="lazy" alt="Proactive alerts" />
+    </div>
+    <div>
+      <p class="num">Paperless Drawer</p>
+      <h3>Every manual and receipt, stored on tap.</h3>
+      <p class="body mt8" style="font-size:15px">Export Verified Home History when you sell.</p>
+      <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024360/fd_11_paperless_drawer_qocfov.png" class="mt16" style="width:100%;height:auto;border-radius:12px;display:block;" loading="lazy" alt="Paperless drawer" />
+    </div>
+  </div>
 </div>
 
 <!-- 17 PROTOTYPE -->
@@ -469,7 +558,7 @@ html.dark .fbtn:hover { background:#e0e0e0 !important; color:#111 !important; }
   <div class="lbl-rule r"></div>
   <h2 class="r d1">The NFC tag. Any appliance.</h2>
   <p class="body r d2 mt16">Attaches to new or existing appliances. Tap once on arrival, registered.</p>
-  <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024362/fd_14_nfc_prototype_zrf2n3.png" class="r d3 mt32" style="width:100%;border-radius:10px;display:block;" alt="NFC prototype" />
+  <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024362/fd_14_nfc_prototype_zrf2n3.png" class="r d3 mt24" style="width:100%;max-width:560px;height:auto;border-radius:12px;display:block;margin:48px auto 0;" loading="lazy" alt="NFC prototype" />
 </div>
 
 <!-- 18 10 YEAR -->
@@ -477,7 +566,7 @@ html.dark .fbtn:hover { background:#e0e0e0 !important; color:#111 !important; }
   <div class="lbl r">10-Year Vision</div>
   <div class="lbl-rule r"></div>
   <h2 class="r d1">Making Frontdoor+ the trusted system for home care.</h2>
-  <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024362/fd_roadmap_svjipz.png" class="r d2 mt32" style="width:100%;border-radius:10px;display:block;" alt="10-year roadmap" />
+  <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024362/fd_roadmap_svjipz.png" class="r d2 mt24" style="display:block;" loading="lazy" alt="10-year roadmap" />
 </div>
 
 <!-- 19 OUTCOMES -->
@@ -490,8 +579,8 @@ html.dark .fbtn:hover { background:#e0e0e0 !important; color:#111 !important; }
     <div class="sc"><div class="sn">12<span>→</span>3</div><p class="sd">steps reduced to taps</p></div>
     <div class="sc"><div class="sn">1<span> system</span></div><p class="sd">blue token library delivered to Frontdoor</p></div>
   </div>
-  <div style="margin-top:20px;padding:24px 28px;background:#fdf0eb;border:1px solid #f0c4af;border-radius:10px;" class="r d3">
-    <p style="font-size:17px;font-weight:300;font-style:italic;color:var(--black);line-height:1.65;">Home services won't be won by who fixes things fastest, but by who knows your home best before anything breaks.</p>
+  <div style="margin-top:20px;padding:24px 28px;background:var(--light);border-radius:10px;text-align:center;" class="r d3">
+    <p style="font-size:17px;font-weight:400;font-style:italic;color:var(--black);line-height:1.65;">Home services won't be won by who fixes things fastest, but by who knows your home best before anything breaks.</p>
   </div>
 </div>
 
@@ -504,61 +593,11 @@ html.dark .fbtn:hover { background:#e0e0e0 !important; color:#111 !important; }
   <p class="body r d3 mt12">Working across physical design, UI systems, brand, and strategy simultaneously. That's where I do my best work.</p>
 </div>
 
-<!-- CONTACT -->
-<div style="background:var(--light);border-top:1px solid var(--border);padding:80px 80px;">
-  <div style="max-width:600px;margin:0 auto;">
-    <p style="font-size:13px;font-weight:400;color:var(--soft);margin-bottom:10px;letter-spacing:.04em;">Get in touch</p>
-    <div style="height:1px;background:var(--border);margin-bottom:32px;"></div>
-    <h2 style="font-size:clamp(24px,2.8vw,36px);font-weight:400;letter-spacing:-.022em;color:var(--black);margin-bottom:8px;">Send a message.</h2>
-    <p style="font-size:16px;font-weight:300;color:var(--gray);margin-bottom:32px;">Reach out directly. Usually responds within a day.</p>
-    <div style="display:flex;flex-direction:column;gap:16px;">
-      <input id="contact-name" type="text" placeholder="Your name" style="width:100%;padding:14px 18px;border:1px solid var(--border);border-radius:8px;font-size:15px;font-family:var(--f);background:var(--bg);color:var(--black);outline:none;transition:border-color .15s;" onfocus="this.style.borderColor='var(--black)'" onblur="this.style.borderColor='var(--border)'" />
-      <input id="contact-email" type="email" placeholder="Your email" style="width:100%;padding:14px 18px;border:1px solid var(--border);border-radius:8px;font-size:15px;font-family:var(--f);background:var(--bg);color:var(--black);outline:none;transition:border-color .15s;" onfocus="this.style.borderColor='var(--black)'" onblur="this.style.borderColor='var(--border)'" />
-      <textarea id="contact-msg" placeholder="What's on your mind?" rows="4" style="width:100%;padding:14px 18px;border:1px solid var(--border);border-radius:8px;font-size:15px;font-family:var(--f);background:var(--bg);color:var(--black);outline:none;resize:vertical;transition:border-color .15s;" onfocus="this.style.borderColor='var(--black)'" onblur="this.style.borderColor='var(--border)'"></textarea>
-      <button onclick="sendContact()" style="align-self:flex-start;padding:12px 28px;background:var(--black);color:#fff;border:none;border-radius:100px;font-size:14px;font-family:var(--f);font-weight:500;cursor:pointer;transition:all .15s;" onmouseover="this.style.background='#CD5028'" onmouseout="this.style.background='var(--black)'">Send message</button>
-      <p id="contact-status" style="font-size:13px;color:var(--soft);min-height:18px;"></p>
-    </div>
-  </div>
-</div>
-<script>
-function sendContact(){
-  const name=document.getElementById('contact-name').value.trim();
-  const email=document.getElementById('contact-email').value.trim();
-  const msg=document.getElementById('contact-msg').value.trim();
-  const status=document.getElementById('contact-status');
-  if(!name||!email||!msg){status.textContent='Please fill in all fields.';return;}
-  const mailto=`mailto:bhardwajmaitreyi6@gmail.com?subject=Portfolio inquiry from ${encodeURIComponent(name)}&body=${encodeURIComponent('From: '+name+'
-Email: '+email+'
+<footer style="padding:28px clamp(16px,2vw,32px);font-size:13px;color:#999;">© 2026 Maitreyi Bhardwaj</footer>
 
-'+msg)}`;
-  window.location.href=mailto;
-  status.textContent='Opening your email client...';
-}
-</script>
-<footer>
-  <p class="f-copy">© 2025 Maitreyi Bhardwaj</p>
-  <hr class="f-rule">
-  <p class="f-cta">Let's build something <span class="script">meaningful</span> together.</p>
-  <div class="f-btns">
-    <a href="mailto:bhardwajmaitreyi6@gmail.com" class="fbtn">bhardwajmaitreyi6@gmail.com</a>
-    <a href="https://www.linkedin.com/in/maitreyi-bhardwaj-3a6358220/" target="_blank" class="fbtn">LinkedIn</a>
-  </div>
-</footer>
+<noscript><style>.sec{opacity:1 !important;transform:none !important;}</style></noscript>
 
 <script>
-let lastY = 0;
-const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => {
-  const y = window.scrollY;
-  if (y > lastY && y > 80) nav.classList.add('hidden');
-  else nav.classList.remove('hidden');
-  lastY = y;
-}, { passive: true });
-const els = document.querySelectorAll('.r');
-const io = new IntersectionObserver(e => e.forEach(x => { if(x.isIntersecting) x.target.classList.add('on'); }), {threshold:.04, rootMargin:'0px 0px -20px 0px'});
-els.forEach(el => io.observe(el));
-window.addEventListener('load', () => els.forEach(el => { if(el.getBoundingClientRect().top < window.innerHeight) el.classList.add('on'); }));
-
 const _dmt = document.getElementById('dm-toggle');
 const _dms = localStorage.getItem('dm');
 if (_dms === '1') { document.documentElement.classList.add('dark'); _dmt.textContent = '☀'; }
@@ -568,6 +607,40 @@ _dmt.addEventListener('click', () => {
   _dmt.textContent = on ? '☀' : '☾';
 });
 
+/* GALLERY CYCLE */
+document.querySelectorAll('.gtile[data-alt]').forEach(function (t, i) {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var img = t.querySelector('img'), a = img.getAttribute('src'), b = t.getAttribute('data-alt'), on = false;
+  setInterval(function () {
+    img.style.opacity = 0;
+    setTimeout(function () { on = !on; img.src = on ? b : a; img.style.opacity = 1; }, 350);
+  }, 4600 + i * 900);
+});
+
+/* SEQUENTIAL SECTION REVEAL */
+(function () {
+  var secs = document.querySelectorAll('.sec');
+  if (!('IntersectionObserver' in window)) {
+    for (var i = 0; i < secs.length; i++) secs[i].classList.add('live');
+    return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        e.target.classList.add('live');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+  secs.forEach(function (s) {
+    var r = s.getBoundingClientRect();
+    if (r.top < window.innerHeight && r.bottom > 0) {
+      s.classList.add('live'); /* already in viewport at load, show immediately */
+    } else {
+      io.observe(s);
+    }
+  });
+})();
 </script>
 </body>
 </html>

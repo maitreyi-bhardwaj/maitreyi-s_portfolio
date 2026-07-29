@@ -5,7 +5,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Maitreyi Bhardwaj , Product Designer</title>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Dancing+Script:wght@500&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
@@ -13,11 +14,10 @@
   --black: #0a0a0a;
   --gray: #666;
   --soft: #999;
-  --light: #f7f7f5;
+  --light: #F8F8F8;
   --border: #e8e8e5;
-  --orange: #CD5028;
-  --f: 'Geist', -apple-system, sans-serif;
-  --script: 'Dancing Script', cursive;
+  --f: 'Inter', -apple-system, sans-serif;
+  --fh: 'Inter', sans-serif;
 }
 html, body { width: 100%; overflow-x: hidden; }
 body { font-family: var(--f); background: var(--bg); color: var(--black); -webkit-font-smoothing: antialiased; }
@@ -33,208 +33,131 @@ body { font-family: var(--f); background: var(--bg); color: var(--black); -webki
 .loader-head { width: 280px; height: 200px; }
 .loader-head svg { width: 100%; height: 100%; }
 
-/* NAV */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 20px 60px;
-  background: rgba(255,255,255,.97);
-  border-bottom: 1px solid var(--border);
-  transition: transform .3s cubic-bezier(.16,1,.3,1), opacity .5s ease;
-  opacity: 0;
-}
-nav.visible { opacity: 1; }
-nav.hidden { transform: translateY(-100%); }
-.nl, .nr { display: flex; gap: 28px; list-style: none; }
-nav a { font-size: 14px; font-weight: 400; color: var(--gray); text-decoration: none; transition: color .15s; }
-nav a:hover { color: var(--black); }
-.nav-bold { color: var(--black) !important; font-weight: 500 !important; }
-
 /* REVEAL */
 .r { opacity: 0; transform: translateY(20px); transition: opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1); }
 .r.on { opacity: 1; transform: none; }
 .d1{transition-delay:.07s} .d2{transition-delay:.14s} .d3{transition-delay:.21s}
 
-/* HERO */
-.hero {
-  min-height: 100vh;
-  display: flex; flex-direction: column; justify-content: center;
-  padding: 120px 60px 80px;
-}
-.hero-inner {
-  max-width: 1000px;
-  margin: 0 auto;
-  width: 100%;
-}
-.hero h1 {
-  font-size: clamp(32px, 3.6vw, 52px);
-  font-weight: 300; letter-spacing: -.02em;
-  line-height: 1.12; color: var(--black);
-  font-family: var(--f);
-  margin-bottom: 36px;
-  max-width: 100%;
-}
-.hero h1 * { color: var(--black); }
-.hero h1 .ora { color: var(--orange); }
-.hero h1 .script { font-family: var(--script); color: var(--black); font-size: 1.05em; }
-.pron { font-size: .52em; font-weight: 300; color: var(--orange); letter-spacing: .02em; vertical-align: middle; }
-
-.pills { display: flex; gap: 10px; flex-wrap: wrap; max-width: 900px; }
-.pill {
-  display: inline-flex; align-items: center; gap: 6px;
-  padding: 10px 22px; border: 1px solid var(--border);
-  border-radius: 100px; font-size: 13px; font-family: var(--f);
-  color: var(--black); text-decoration: none; transition: all .15s;
-}
-.pill:hover { background: var(--bg); color: #fff; border-color: var(--black); }
-
-/* PROJECTS */
-.projects-label {
-  text-align: center; font-size: 11px; font-weight: 500;
-  letter-spacing: .14em; text-transform: uppercase; color: var(--soft);
-  padding: 40px 0 24px; background: transparent;
-}
-
-/* PROJECTS WRAPPER */
-.grid-wrap { background:#eef4fc !important;
-  background: var(--light);
-  padding: 48px 60px 80px;
-  border-top: 1px solid var(--border);
-}
-.grid-wrap-inner {
-  max-width: 1100px;
-  margin: 0 auto;
-}
-.grid {
-  display: grid;
-  grid-template-columns: repeat(2,1fr);
-  gap: 20px;
-  max-width: 1100px;
-  margin: 0 auto;
-}
-
-/* CARD */
-.proj {
-  background: #fff;
-  text-decoration: none;
-  display: block;
-  border-radius: 10px;
-  overflow: hidden;
-  transition: transform .25s cubic-bezier(.16,1,.3,1), box-shadow .25s;
-}
-.proj:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(0,0,0,.1); }
-.proj:hover .proj-img-inner { transform: scale(1.02); }
-
-.proj-img { width: 100%; height: 260px; overflow: hidden; background: var(--light); }
-.proj-img-inner {
-  width: 100%; height: 100%;
-  display: flex; align-items: center; justify-content: center;
-  transition: transform .5s cubic-bezier(.16,1,.3,1);
-  position: relative; overflow: hidden;
-}
-.proj-img .slot-lbl { position: relative; z-index: 1; font-size: 11px; color: var(--soft); }
-
-
-.proj-body {
-  padding: 20px 24px 28px;
-}
-.proj-title {
-  font-size: 18px;
-  font-weight: 400; letter-spacing: -.015em; color: var(--black);
-  margin-bottom: 0;
-}
-.proj-arrow {
-  font-size: 16px; color: var(--soft);
-  transition: color .15s, transform .15s;
-  float: right; margin-top: -22px;
-}
-.proj:hover .proj-arrow { color: var(--black); transform: translate(2px,-2px); }
-
-/* ABOUT */
-.about {
-  padding: 120px 60px;
-  border-top: 1px solid var(--border);
-}
-.about-inner { max-width: 1000px; margin: 0 auto; }
-.about-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 80px; align-items: start; }
-.about h2 {
-  font-size: clamp(26px, 3.5vw, 44px);
-  font-weight: 400; letter-spacing: -.022em;
-  line-height: 1.1; color: var(--black); margin-bottom: 24px;
-}
-.about-body { font-size: 18px; font-weight: 300; color: var(--gray); line-height: 1.9; }
-.about-item {
-  padding: 28px 0; border-bottom: 1px solid var(--border);
-  display: flex; justify-content: space-between; align-items: center; gap: 40px;
-}
-.about-item:first-child { border-top: 1px solid var(--border); }
-.about-label { font-size: 14px; font-weight: 400; color: var(--soft); flex-shrink: 0; min-width: 120px; }
-.about-val { font-size: 20px; font-weight: 400; color: var(--black); text-align: right; }
-
-/* FOOTER */
-footer { padding: 80px 60px; background: #0a0a0a; border-top: 1px solid #222; }
-.f-copy { font-size: 13px; color: #555; margin-bottom: 14px; }
-.f-rule { border: none; border-top: 1px solid #222; margin-bottom: 28px; }
-.f-cta {
-  font-size: clamp(28px, 4vw, 52px); font-weight: 400; color: #f0f0ee;
-  letter-spacing: -.025em; line-height: 1.2; margin-bottom: 28px; max-width: 700px;
-}
-.f-cta .script { font-family: var(--script); color: var(--orange); }
-.f-btns { display: flex; gap: 8px; }
-.fbtn {
-  display: inline-flex; align-items: center; gap: 6px;
-  padding: 10px 20px; border: 1px solid #333;
-  border-radius: 100px; font-size: 14px; color: #f0f0ee;
-  text-decoration: none; background: transparent; transition: all .15s; font-family: var(--f);
-}
-.fbtn:hover { background: #f0f0ee; color: #0a0a0a; border-color: #f0f0ee; }
-
-@media(max-width:768px){
-  nav { padding: 16px 24px; }
-  .hero { padding: 110px 24px 64px; }
-  .grid { grid-template-columns: 1fr 1fr; }
-  .about { padding: 64px 24px; }
-  .about-grid { grid-template-columns: 1fr; gap: 40px; }
-  footer { padding: 60px 24px; }
-  .projects-label { padding: 32px 24px 24px; }
-}
-
 /* DARK MODE */
 html.dark { --bg:#0a0a0a; --black:#f0f0ee; --gray:#aaa; --soft:#666; --light:#141414; --border:#2a2a2a; }
 html.dark body { background:#0a0a0a; }
-html.dark nav { background:rgba(10,10,10,.97); }
-html.dark .pill { color:#f0f0ee; border-color:#2a2a2a; }
-html.dark .pill:hover, html.dark .pill.primary { background:#f0f0ee; color:#0a0a0a; border-color:#f0f0ee; }
-html.dark .fbtn { background:#0a0a0a; color:#f0f0ee; border-color:#2a2a2a; }
-html.dark .fbtn:hover { background:#f0f0ee; color:#0a0a0a; }
-html.dark .finding-list, html.dark .finding-list li { border-color:#2a2a2a; }
-html.dark .ins2, html.dark .g4, html.dark .ba, html.dark .arch { background:#2a2a2a; border-color:#2a2a2a; }
-html.dark .sr { border-color:#2a2a2a; }
-html.dark .sc { border-color:#2a2a2a; }
-html.dark .an, html.dark .comp-card { border-color:#2a2a2a; }
-html.dark footer { background:#141414; border-top-color:#2a2a2a; }
 html.dark #dm-toggle { background:#141414; border-color:#2a2a2a; color:#f0f0ee; }
-html.dark footer { background:#111 !important; border-top-color:#222 !important; }
-html.dark .f-copy { color:#666 !important; }
-html.dark .f-rule { border-top-color:#333 !important; }
-html.dark .f-cta { color:#e0e0e0 !important; }
-html.dark .fbtn { color:#e0e0e0 !important; border-color:#444 !important; background:transparent !important; }
-html.dark .fbtn:hover { background:#e0e0e0 !important; color:#111 !important; }
-html.dark .grid-wrap { background:#eef4fc !important; background:#0a0a0a; }
-html.dark .proj { background:#141414; }
-html.dark .proj-img { background:#1e1e1e; }
 
-/* HOVER IMAGE SWAP */
-.proj-img { position: relative; }
-.proj-img .img-hover {
-  position: absolute; inset: 0;
-  width: 100%; height: 100%; object-fit: cover;
-  opacity: 0;
-  transition: opacity .4s cubic-bezier(.16,1,.3,1);
-  z-index: 2;
+/* ============ BENTO HOME ============ */
+/* Full-bleed fluid shell: scales from iPad to ultrawide, no dead margins */
+.bento { width: 100%; padding: clamp(10px, 1.1vw, 16px); display: grid; grid-template-columns: clamp(300px, 25vw, 430px) 1fr; gap: clamp(10px, 1vw, 14px); align-items: stretch; }
+.bento-left { display: flex; flex-direction: column; gap: clamp(10px, 1vw, 14px); }
+/* Lorenzo-style cards: flat grey, no outline, squarer corners */
+.bcard { background: var(--light); border: none; border-radius: 8px; padding: clamp(20px, 1.8vw, 30px); }
+.bcard--name { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: clamp(30px, 2.8vw, 48px) clamp(20px, 1.8vw, 30px); }
+.blogo { width: clamp(165px, 15vw, 240px); height: auto; color: var(--black); display: block; }
+.blogo svg { width: 100%; height: auto; display: block; overflow: visible; }
+.bio-name { font-family: var(--fh); font-size: clamp(20px, 1.6vw, 27px); font-weight: 600; letter-spacing: -.015em; line-height: 1.2; color: var(--black); }
+.bio-pron { font-size: 13px; color: var(--soft); letter-spacing: .04em; margin: 4px 0 16px; }
+.bbio { font-size: 15px; line-height: 1.62; color: var(--gray); font-weight: 400; }
+.bbio b { color: var(--black); font-weight: 500; }
+.bcard-cta { display: flex; gap: 8px; margin-top: 22px; flex-wrap: wrap; }
+.bpill { display: inline-flex; align-items: center; gap: 6px; padding: 10px 20px; border-radius: 100px; font-size: 14px; font-family: var(--f); text-decoration: none; border: 1px solid var(--border); color: var(--black); background: var(--bg); transition: all .15s; }
+.bpill:hover { background: var(--black); color: var(--bg); border-color: var(--black); }
+.bpill--primary { background: var(--black); color: var(--bg); border-color: var(--black); }
+.bpill--primary:hover { background: var(--black); color: var(--bg); }
+.bcard--lists { flex: 1; }
+.blists { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.blist h4 { font-family: var(--fh); font-size: 13px; font-weight: 600; color: var(--black); margin-bottom: 14px; letter-spacing: -.01em; }
+.blist ul { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+.blist li { font-size: 13px; line-height: 1.3; color: var(--soft); }
+/* Browser-style tabs: flaps attached to one big grey sheet that holds the
+   cards. The active tab shares the sheet's fill so they read as one piece. */
+.bento-right { display: flex; flex-direction: column; gap: 0; }
+.bento-tabs { display: flex; gap: 6px; flex-wrap: wrap; }
+.btab { display: inline-flex; align-items: center; padding: 13px 26px 15px; border-radius: 8px 8px 0 0; font-size: 14px; font-weight: 500; font-family: var(--f); border: none; background: #ECECEA; color: var(--soft); cursor: pointer; transition: background .18s, color .18s; white-space: nowrap; }
+.btab:hover { color: var(--black); }
+.btab.active { background: var(--light); color: var(--black); }
+html.dark .btab { background: #1c1c1c; }
+/* The sheet matches the left rail's height (bottom-aligns with the skills
+   card) and the cards scroll INSIDE it, jkane-style */
+.bento-right { min-height: 0; }
+/* no overscroll containment: when the feed ends, the wheel hands off to the
+   page and carries you down to the fish */
+.tabsheet { background: var(--light); border-radius: 0 8px 8px 8px; padding: clamp(18px, 1.8vw, 28px); flex: 1 1 0; min-height: 0; overflow-y: auto; scrollbar-width: thin; scrollbar-color: #d8d8d5 transparent; }
+.tabsheet::-webkit-scrollbar { width: 8px; }
+.tabsheet::-webkit-scrollbar-thumb { background: #d8d8d5; border-radius: 8px; }
+html.dark .tabsheet { scrollbar-color: #333 transparent; }
+html.dark .tabsheet::-webkit-scrollbar-thumb { background: #333; }
+/* jkane-style scroll feed: ONE big card per row, alternating left/right,
+   the rest of the row left as empty sheet. Big enough that you scroll. */
+.bento-grid { display: flex; flex-direction: column; gap: clamp(72px, 7vw, 120px); }
+.bento-grid[hidden] { display: none; }
+/* each project reads as a mini case study: hero, blurb, image strip, CTA */
+.proj-sec { display: flex; flex-direction: column; gap: clamp(14px, 1.4vw, 22px); }
+.proj-desc { max-width: 680px; margin: clamp(4px, 0.6vw, 10px) 0 0; text-align: left; font-size: 15px; line-height: 1.65; color: var(--gray); }
+.proj-imgs { display: flex; gap: clamp(10px, 1vw, 14px); }
+.proj-imgs .pi { position: relative; flex: var(--ar) 1 0%; aspect-ratio: var(--ar); min-width: 0; border-radius: 8px; overflow: hidden; background: #ECECEA; }
+html.dark .proj-imgs .pi { background: #1c1c1c; }
+.proj-imgs img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0; transition: opacity .5s ease; }
+.proj-sec:hover .proj-imgs img:not(.img-alt) { opacity: 1; }
+/* second image inside a strip cell: ambient crossfade, some cells stay static */
+.proj-imgs .img-alt { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .8s ease; }
+.proj-sec:hover .pi.flip .img-alt { opacity: 1; }
+.jrow { display: flex; justify-content: flex-start; }
+.jrow--end { justify-content: flex-end; }
+.jtile { flex: none; }
+/* hero cards at the banners' EXACT ratio: images fill flush, zero bands */
+.jtile--cube { width: 78%; aspect-ratio: 1.85; }
+.btile--nda { cursor: default; }
+.btile--nda img { filter: blur(16px); transform: scale(1.12); }
+.btile--nda:hover img { transform: scale(1.12); }
+.nda-cap { position: absolute; inset: 0; z-index: 3; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; background: rgba(10,10,10,0.28); }
+.nda-t { font-size: clamp(22px, 2vw, 30px); font-weight: 600; color: #fff; letter-spacing: -.01em; }
+.nda-s { font-size: 14px; color: rgba(255,255,255,0.85); }
+.btile-empty { display: flex; align-items: center; justify-content: center; background: var(--bg); border: none; border-radius: 8px; color: var(--soft); font-size: 13px; letter-spacing: .02em; }
+.btile { position: relative; display: block; border-radius: 8px; overflow: hidden; text-decoration: none; background: var(--bg); border: none; }
+.btile img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .55s cubic-bezier(.16,1,.3,1), opacity .4s ease; }
+.btile .img-hover { opacity: 0; z-index: 2; transition: opacity .8s ease; }
+.btile:hover .img-hover, .btile.flip .img-hover { opacity: 1; }
+.btile:hover img { transform: scale(1.04); }
+/* Captions stay hidden until hover: pure imagery, jkane-style */
+.btile-cap { position: absolute; left: 0; right: 0; bottom: 0; z-index: 3; padding: 18px 20px; display: flex; flex-direction: column; gap: 2px; background: linear-gradient(to top, rgba(10,10,10,.62), rgba(10,10,10,.1) 55%, transparent); opacity: 0; transform: translateY(8px); transition: opacity .25s ease, transform .25s ease; }
+.btile:hover .btile-cap { opacity: 1; transform: none; }
+.btile-cap .t { font-family: var(--fh); font-size: 15px; font-weight: 600; color: #fff; letter-spacing: -.01em; }
+.btile-cap .s { font-size: 12px; color: rgba(255,255,255,.82); }
+.btile .arw { position: absolute; top: 16px; right: 18px; z-index: 3; font-size: 16px; color: #fff; opacity: 0; transform: translateY(-2px); transition: all .2s; }
+.btile:hover .arw { opacity: 1; transform: none; }
+@media (hover: none) { .btile-cap { opacity: 1; transform: none; } }
+
+/* Socials card: just the two marks */
+.bcard--social { display: flex; gap: 10px; padding: 22px 30px; }
+.sicon { width: 46px; height: 46px; border-radius: 50%; border: none; background: var(--bg); color: var(--black); display: inline-flex; align-items: center; justify-content: center; transition: all .15s; }
+.sicon:hover { background: var(--black); color: var(--bg); }
+.sicon svg { width: 19px; height: 19px; display: block; fill: currentColor; }
+
+/* Fish panel: a black slab card, white pixel fish under a starfield */
+.fishwrap { width: 100%; padding: 0 clamp(10px, 1.1vw, 16px) clamp(12px, 1.4vw, 18px); }
+.fishcard { background: #0a0a0a; border: none; border-radius: 8px; padding: 20px 26px; }
+.fish-row { display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: #9a9a96; }
+.fish-row--top { padding-bottom: 8px; }
+.fish-row--bottom { padding-top: 8px; color: #6d6d68; }
+#fish-time { font-variant-numeric: tabular-nums; }
+#fc-canvas { display: block; width: 100%; height: 320px; cursor: crosshair; touch-action: pan-y; image-rendering: pixelated; }
+
+@media(max-width: 900px){
+  .bento { grid-template-columns: 1fr; }
+  /* on small screens the sheet grows naturally; the page itself scrolls */
+  .tabsheet { flex: none; overflow-y: visible; }
 }
-.proj:hover .img-hover { opacity: 1; }
-.proj-img-inner img { position: relative; z-index: 1; }
+@media(max-width: 640px){
+  .jrow { flex-direction: column; }
+  .jtile--rect, .jtile--sq { width: 100%; }
+  .proj-imgs { flex-direction: column; }
+  .proj-imgs .pi { width: 100%; flex: none; }
+  .btab { padding: 10px 16px; font-size: 13px; }
+  #fc-canvas { height: 240px; }
+  /* keep the fixed dark-mode button off the fish card's bottom row */
+  .fishwrap { padding-bottom: 88px; }
+}
+
+h1,h2,h3{text-wrap:balance}
+p,.body,.lead,.sd,.stat-t{text-wrap:pretty}
 </style>
 </head>
 <body>
@@ -254,222 +177,196 @@ html.dark .proj-img { background:#1e1e1e; }
   </div>
 </div>
 
-<!-- NAV -->
-<nav id="nav">
-  <ul class="nl">
-    
-    <li><a href="about.html">About</a></li><li><a href="blog.html">Writing</a></li>
-  </ul>
-  <ul class="nr">
-    <li><a href="https://www.linkedin.com/in/maitreyi-bhardwaj-3a6358220/" target="_blank">LinkedIn</a></li>
-    <li><a href="https://drive.google.com/file/d/1l92lnpU0Z_aFT9_kO4f2fLXTiDSLKF9Y/view?usp=sharing" target="_blank">Resume</a></li>
-    <li><a href="#" class="nav-bold">Maitreyi Bhardwaj</a></li>
-  </ul>
-</nav>
+<!-- top navbar removed -->
+
 <button id="dm-toggle" style="position:fixed;bottom:28px;right:28px;z-index:200;width:42px;height:42px;border-radius:50%;border:1px solid var(--border);background:var(--bg);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;">☾</button>
 
 <!-- HERO -->
-<section class="hero">
-<div class="hero-inner">
-  <h1 class="r">
-    Maitreyi <span class="pron">(my·TRAY·ee)</span> designs systems that feel <span class="ora">human</span> across physical products, digital interfaces, and the space between.
-  </h1>
-  <div style="position:relative;width:100vw;margin-left:calc(-50vw + 50%);margin-top:32px;margin-bottom:32px;overflow:hidden;">
-    <canvas id="hero-fish" width="1600" height="110" style="display:block;width:100%;height:110px;cursor:crosshair;touch-action:none;"></canvas>
-    <div id="hero-fish-msg" style="position:absolute;bottom:10px;left:60px;font-size:12px;color:#999;font-family:Georgia,serif;pointer-events:none;opacity:0;transition:opacity .3s;">just a fun designer</div>
+<section class="bento">
+  <div class="bento-left">
+
+    <div class="bcard bcard--name r">
+      <span class="blogo" aria-hidden="true">
+        <svg viewBox="0 0 287 205" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g class="brow brow--l"><path fill="currentColor" d="M224.188 179.482C223.074 181.616 220.794 182.872 218.396 182.665C207.793 181.751 178.607 179.427 165.432 180.305C149.171 181.389 129.659 191.147 129.659 191.147C129.659 191.147 157.302 171.09 164.348 170.548C170.158 170.101 210.232 170.391 224.122 170.507C226.286 170.525 227.661 172.824 226.66 174.743L224.188 179.482Z"/></g>
+          <g class="brow brow--r"><path fill="currentColor" d="M257.599 174.168L251.709 184.108C251.596 184.3 251.835 184.504 252.004 184.358C254.256 182.418 260.252 177.568 266.248 175.427C270.647 173.856 274.499 173.377 276.96 173.253C278.826 173.158 280.487 172.039 281.259 170.338C282.159 168.356 283.046 165.946 282.509 165.087C281.986 164.251 280.9 163.527 280.01 163.037C279.34 162.669 278.526 162.859 278.039 163.447C277.645 163.923 276.991 164.505 275.91 165.087C274.273 165.968 267.958 168.004 263.723 169.326C261.152 170.128 258.972 171.851 257.599 174.168Z"/></g>
+          <path fill="currentColor" d="M230.93 52.0507C236.137 54.4954 242.881 58.3707 249.65 64.4657C252.129 66.698 258.457 72.6908 264.055 81.928C265.789 84.7899 267.103 87.474 269.73 92.8426C273.209 99.9525 275.771 105.902 276.874 108.572C284.264 126.456 286.507 142.973 286.953 142.882C287.336 142.805 285.27 130.727 283.321 121.49C282.755 118.808 281.26 111.939 278.939 103.882C278.863 103.619 278.798 103.397 278.745 103.214C276.892 96.8777 275.775 93.0577 273.7 88.0779C270.66 80.7831 267.581 75.8416 263.721 69.6471C261.886 66.702 257.485 59.8221 250.948 51.656C247.596 47.4679 244.799 43.9993 240.413 39.7941C236.467 36.0101 232.99 33.3134 230.933 31.7261C227.17 28.8242 224.242 26.8948 220.709 24.5663C216.729 21.9438 214.239 20.3034 210.6 18.3529C207.973 16.9451 208.284 17.271 202.125 14.275C195.67 11.135 195.038 10.6355 190.853 8.74167C188.139 7.51349 185.865 6.49008 182.788 5.38836C178.518 3.86 174.87 2.9563 172.316 2.41534C181.98 8.03509 193.195 15.5441 204.794 25.4844C215.556 34.7067 224.172 43.9003 230.93 52.0507Z"/>
+          <path fill="currentColor" d="M222.303 50.3065C212.804 49.5232 199.025 49.7632 183.947 55.1934C180.081 56.5858 149.632 68.0464 133.48 98.0832C123.98 115.749 127.902 124.079 116.315 134.133C106.293 142.829 99.249 140.164 89.7096 151.3C88.0579 153.228 81.0255 161.127 77.4344 174.65C74.4374 185.936 77.0794 188.741 72.8574 195.311C71.5528 197.34 67.712 203.317 61.3387 204.254C55.3941 205.129 49.955 201.221 45.4165 197.96C43.5956 196.652 41.5578 194.917 37.4823 191.446C33.9956 188.477 32.6364 187.173 29.9488 185.67C26.9072 183.969 24.2959 183.205 23.1686 182.907C19.9415 182.055 16.9708 181.271 13.626 182.154C9.56319 183.226 8.64303 185.783 6.7237 185.123C5.04926 184.546 4.453 182.115 3.18796 177.725C2.69144 176.002 2.46312 174.716 2.04316 172.205C1.12079 166.691 0.659606 163.934 0.482077 162.487C-0.13075 157.494 -0.0459724 153.64 0.123582 145.933C0.299517 137.936 0.844006 131.938 1.11956 129.183C1.19023 128.477 1.5686 124.731 2.19603 120.332C2.95792 114.992 4.64697 103.152 8.03168 92.0802C9.12851 88.4925 13.5472 74.6888 24.061 59.2552C28.8112 52.282 38.7738 39.1473 55.344 27.2415C70.2452 16.5353 83.6428 11.7426 90.7258 9.26854C102.285 5.23026 111.408 3.66315 119.649 2.24769C119.649 2.24769 132.407 0.0557921 149.134 0.000822856C152.886 -0.0119378 158.3 0.0940742 164.577 2.48229C166.942 3.38241 168.761 4.35223 171.643 6.0494C174.838 7.93014 182.296 12.3228 189.283 17.7132C204.481 29.4383 220.643 48.3517 222.303 50.3065Z"/>
+        </svg>
+      </span>
+    </div>
+
+    <div class="bcard r d1">
+      <p class="bio-name">Maitreyi Bhardwaj</p>
+      <p class="bio-pron">(my·TRAY·ee)</p>
+      <p class="bbio">UI designer crafting design systems and high-fidelity interfaces. Currently at D2Bridge · West Chester, Pennsylvania.</p>
+      <div class="bcard-cta">
+        <a class="bpill bpill--primary" href="mailto:bhardwajmaitreyi6@gmail.com">Let's talk</a>
+        <a class="bpill" href="about.html">About me</a>
+        <a class="bpill" href="resume.pdf" target="_blank">Resume</a>
+      </div>
+    </div>
+
+    <div class="bcard bcard--social r d1">
+      <a class="sicon" href="https://www.linkedin.com/in/maitreyi-bhardwaj-3a6358220/" target="_blank" aria-label="LinkedIn">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg>
+      </a>
+      <!-- TODO: swap in your real X profile URL -->
+      <a class="sicon" href="https://x.com" target="_blank" aria-label="X">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      </a>
+    </div>
+
+    <div class="bcard bcard--lists r d2">
+      <div class="blists">
+        <div class="blist">
+          <h4>Skills</h4>
+          <ul>
+            <li>UI Design</li>
+            <li>Design Systems</li>
+            <li>Information Architecture</li>
+            <li>Interactive Prototyping</li>
+            <li>WCAG Accessibility</li>
+          </ul>
+        </div>
+        <div class="blist">
+          <h4>Awards</h4>
+          <ul>
+            <li>Pit Boss UX, Winner</li>
+            <li>Google Packaging Mentorship</li>
+            <li>TiE Phoenix, $3,000</li>
+            <li>HackAZona, $2,000</li>
+            <li>NN/g Certified</li>
+          </ul>
+        </div>
+        <div class="blist">
+          <h4>Education</h4>
+          <ul>
+            <li>ASU Herberger</li>
+            <li>NID India</li>
+            <li>IDSA President</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
   </div>
-  <div class="pills r d1">
-    <a href="#work" class="pill">↓ View Work</a>
-    <a href="mailto:bhardwajmaitreyi6@gmail.com" class="pill">bhardwajmaitreyi6@gmail.com</a>
-</div>
+
+  <div class="bento-right" id="work">
+
+    <div class="bento-tabs">
+      <button type="button" class="btab active" data-tab="uiux">UI / UX</button>
+    </div>
+
+    <div class="tabsheet">
+
+    <div class="bento-grid" data-panel="uiux">
+
+    <section class="proj-sec">
+      <div class="jrow">
+        <a href="frontdoor.html" class="btile jtile jtile--cube r">
+          <img src="https://res.cloudinary.com/df0tysd6u/image/upload/c_fill,g_auto,ar_2.22,f_auto,q_auto/fd_08_dashboard_yockx3.png" alt="FrontDoor Home Passport dashboard">
+          <img class="img-hover" src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/fd_01_hero_hlcjsk.png" alt="">
+          <span class="arw">↗</span>
+          <span class="btile-cap"><span class="t">FrontDoor × AHS</span><span class="s">Home Passport</span></span>
+        </a>
+      </div>
+      <div class="proj-imgs">
+        <span class="pi" style="--ar: 1.835"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/fd_10_proactive_alerts_jf7kcb.png" alt="Proactive alerts" loading="lazy"><img class="img-alt" src="https://res.cloudinary.com/df0tysd6u/image/upload/c_fill,g_auto,ar_1.84,f_auto,q_auto/fd_11_paperless_drawer_qocfov.png" alt="" loading="lazy"></span>
+        <span class="pi" style="--ar: 1.632"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/fd_11.2_Branding_iqbphp.png" alt="Brand system" loading="lazy"><img class="img-alt" src="https://res.cloudinary.com/df0tysd6u/image/upload/c_fill,g_auto,ar_1.63,f_auto,q_auto/fd_12_brand_system_x2ul7z.png" alt="" loading="lazy"></span>
+        <span class="pi" style="--ar: 1.027"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/fd_14_nfc_prototype_zrf2n3.png" alt="NFC prototype" loading="lazy"></span>
+      </div>
+    </section>
+
+    <section class="proj-sec">
+      <div class="jrow jrow--end">
+        <a href="vibin.html" class="btile jtile jtile--cube r d1">
+          <img src="https://res.cloudinary.com/df0tysd6u/image/upload/c_fill,g_auto,ar_2.22,f_auto,q_auto/vibin_02_product_screens_w8wxsq.png" alt="Vibin app screens">
+          <img class="img-hover" src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/vibin_01_hero_qsdrid.png" alt="">
+          <span class="arw">↗</span>
+          <span class="btile-cap"><span class="t">Vibin</span><span class="s">Live iOS Social App</span></span>
+        </a>
+      </div>
+      <div class="proj-imgs">
+        <span class="pi" style="--ar: 2.016"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/vibin_06_final_ui_gzr8sh.png" alt="Vibin final UI" loading="lazy"><img class="img-alt" src="https://res.cloudinary.com/df0tysd6u/image/upload/c_fill,g_auto,ar_2.02,f_auto,q_auto/vibin_07_ui_final_hz5v6a.png" alt="" loading="lazy"></span>
+        <span class="pi" style="--ar: 0.619"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/vibin_12_traction_yzxejh.png" alt="Vibin traction" loading="lazy"></span>
+        <span class="pi" style="--ar: 2.222"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/vibin_08_poster_2_gqpetu.png" alt="Vibin poster" loading="lazy"><img class="img-alt" src="https://res.cloudinary.com/df0tysd6u/image/upload/c_fill,g_auto,ar_2.22,f_auto,q_auto/vibin_09_marketing_flyer_ddxb8d.png" alt="" loading="lazy"></span>
+      </div>
+    </section>
+
+    <section class="proj-sec">
+      <div class="jrow">
+        <a href="pastiche.html" class="btile jtile jtile--cube r">
+          <img src="https://res.cloudinary.com/df0tysd6u/image/upload/c_fill,g_auto,ar_2.22,f_auto,q_auto/pastiche_04_tokens_sex9ay.png" alt="Pastiche design tokens">
+          <img class="img-hover" src="https://res.cloudinary.com/df0tysd6u/image/upload/c_fill,g_auto,ar_2.22,f_auto,q_auto/pastiche_01_hero_st6gjl.png" alt="">
+          <span class="arw">↗</span>
+          <span class="btile-cap"><span class="t">Pastiche</span><span class="s">Color Archaeology</span></span>
+        </a>
+      </div>
+      <div class="proj-imgs">
+        <span class="pi" style="--ar: 1.5"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/pastiche_02_color_extraction_jvo4l0.png" alt="Color extraction" loading="lazy"><img class="img-alt" src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/pastiche_03_library_btqnsn.png" alt="" loading="lazy"></span>
+        <span class="pi" style="--ar: 1.5"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/pastiche_05_export_yspc6l.png" alt="Export" loading="lazy"></span>
+        <span class="pi" style="--ar: 1.5"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/pastiche_07_plugin_ui_ckstkh.png" alt="Plugin UI" loading="lazy"><img class="img-alt" src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/pastiche_06_example_lmfszf.png" alt="" loading="lazy"></span>
+      </div>
+    </section>
+
+    <section class="proj-sec">
+      <div class="jrow jrow--end">
+        <a href="distill.html" class="btile jtile jtile--cube r">
+          <img src="https://res.cloudinary.com/df0tysd6u/image/upload/c_fill,g_auto,ar_2.22,f_auto,q_auto/distill_02_UI_bnkfsj.png" alt="Distill translation panel over YouTube">
+          <img class="img-hover" src="https://res.cloudinary.com/df0tysd6u/image/upload/c_fill,g_auto,ar_2.22,f_auto,q_auto/distill_04_mock1_eb3iqp.png" alt="">
+          <span class="arw">↗</span>
+          <span class="btile-cap"><span class="t">Distill</span><span class="s">Real-Time ASL Translation</span></span>
+        </a>
+      </div>
+      <div class="proj-imgs">
+        <span class="pi" style="--ar: 1.778"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/distill_02_UI_bnkfsj.png" alt="Distill UI" loading="lazy"><img class="img-alt" src="https://res.cloudinary.com/df0tysd6u/image/upload/c_fill,g_auto,ar_1.78,f_auto,q_auto/distill_04_mock2_ASL_dpfqnp.png" alt="" loading="lazy"></span>
+        <span class="pi" style="--ar: 1.778"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/distill_03_what_does_it_do_c7nwsx.png" alt="What it does" loading="lazy"></span>
+        <span class="pi" style="--ar: 1.778"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/distill_05_how_it_works_ygndkk.png" alt="How it works" loading="lazy"><img class="img-alt" src="https://res.cloudinary.com/df0tysd6u/image/upload/c_fill,g_auto,ar_1.78,f_auto,q_auto/distill_06_end_ntluo5.png" alt="" loading="lazy"></span>
+      </div>
+    </section>
+
+    <section class="proj-sec">
+      <div class="jrow">
+        <div class="btile jtile jtile--cube btile--nda r">
+          <img src="d2bridge.png" alt="D2Bridge dashboard, blurred, under NDA">
+          <span class="nda-cap"><span class="nda-t">D2Bridge</span><span class="nda-s">Under NDA · Password protected</span></span>
+        </div>
+      </div>
+    </section>
+
+    </div>
+
+    </div>
+
+  </div>
 </section>
 
-<!-- PROJECTS -->
-<div class="grid-wrap"><div class="grid-wrap-inner"><div class="projects-label r" id="work">Projects</div>
-<div class="grid">
 
-  <!-- FRONTDOOR , WIDE -->
-  <a href="frontdoor.html" class="proj r">
-    <div class="proj-img">
-      <div class="proj-img-inner" style="padding:0;">
-        <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024360/fd_01_hero_hlcjsk.png" alt="Home Passport" style="width:100%;height:100%;object-fit:cover;display:block;">
-        <img class="img-hover" src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024360/fd_08_dashboard_yockx3.png" alt="Home Passport dashboard">
-      </div>
+<!-- FISH , the entire bottom bar is the game, nothing else -->
+<section class="fishwrap">
+  <div class="fishcard">
+    <div class="fish-row fish-row--top">
+      <span>tap a fish, catch a fact · score <span id="fc-pts">0</span></span>
+      <span id="fish-time">--:--:--</span>
     </div>
-    <div class="proj-body">
-      <div class="proj-title">FrontDoor × AHS , Home Passport</div>
-      <div class="proj-arrow">↗</div>
-    </div>
-  </a>
-
-  <!-- PASTICHE -->
-  <a href="pastiche.html" class="proj r d1">
-    <div class="proj-img">
-      <div class="proj-img-inner" style="padding:0;">
-        <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1780963087/pastiche_01_hero_st6gjl.png" alt="Pastiche" style="width:100%;height:100%;object-fit:cover;display:block;">
-        <img class="img-hover" src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1780963087/pastiche_04_tokens_sex9ay.png" alt="Pastiche tokens hover" />
-        <img class="img-hover" src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1780963086/pastiche_03_library_btqnsn.png" alt="Pastiche library">
-      </div>
-    </div>
-    <div class="proj-body">
-      <div class="proj-title">Pastiche , Color Archaeology</div>
-      <div class="proj-arrow">↗</div>
-    </div>
-  </a>
-
-  <!-- DISTILL -->
-  <a href="distill.html" class="proj r d2">
-    <div class="proj-img">
-      <div class="proj-img-inner" style="padding:0;">
-        <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781041541/distill_01_hero_m9wn4n.png" alt="Distill" style="width:100%;height:100%;object-fit:cover;display:block;">
-        <img class="img-hover" src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781041541/distill_04_mock1_eb3iqp.png" alt="Distill mockup">
-      </div>
-    </div>
-    <div class="proj-body">
-      <div class="proj-title">Distill , Real-Time ASL Translation</div>
-      <div class="proj-arrow">↗</div>
-    </div>
-  </a>
-
-
-  <!-- VIBIN -->
-  <a href="vibin.html" class="proj r d3">
-    <div class="proj-img">
-      <div class="proj-img-inner" style="padding:0;">
-        <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052635/vibin_01_hero_qsdrid.png" alt="Vibin" style="width:100%;height:100%;object-fit:cover;display:block;">
-        <img class="img-hover" src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052635/vibin_02_product_screens_w8wxsq.png" alt="Vibin app screens" />
-      </div>
-    </div>
-    <div class="proj-body">
-      <div class="proj-title">Vibin , Live iOS Social App</div>
-      <div class="proj-arrow">↗</div>
-    </div>
-  </a>
-
-</div></div></div>
-
-<!-- ABOUT -->
-<section class="about" id="about">
-  <div class="about-inner">
-    <div class="about-grid r">
-      <div class="about-left">
-        <h2>Product designer who builds what she designs.</h2>
-        <p class="about-body" style="margin-top:20px;">Physical product. Digital UI. Service design. Brand systems. Often all four at once.</p>
-        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:28px;">
-          <a href="about.html" style="display:inline-flex;align-items:center;gap:6px;padding:10px 20px;border:1px solid var(--border);border-radius:100px;font-size:14px;color:var(--black);text-decoration:none;background:var(--bg);font-family:var(--f);transition:all .15s;">More about me ↗</a>
-          <a href="https://www.linkedin.com/in/maitreyi-bhardwaj-3a6358220/" target="_blank" style="display:inline-flex;align-items:center;gap:6px;padding:10px 20px;border:1px solid var(--border);border-radius:100px;font-size:14px;color:var(--black);text-decoration:none;background:var(--bg);font-family:var(--f);transition:all .15s;">LinkedIn</a>
-          <a href="https://drive.google.com/file/d/1l92lnpU0Z_aFT9_kO4f2fLXTiDSLKF9Y/view?usp=sharing" target="_blank" style="display:inline-flex;align-items:center;gap:6px;padding:10px 20px;border:1px solid var(--border);border-radius:100px;font-size:14px;color:var(--black);text-decoration:none;background:var(--bg);font-family:var(--f);transition:all .15s;">Resume</a>
-        </div>
-      </div>
-      <div class="about-right r d1">
-        <div class="about-item">
-          <span class="about-label">Education</span>
-          <span class="about-val">ASU Herberger · NID India</span>
-        </div>
-        <div class="about-item">
-          <span class="about-label">Based</span>
-          <span class="about-val">Tempe, Arizona</span>
-        </div>
-        <div class="about-item">
-          <span class="about-label">Currently</span>
-          <span class="about-val">Designer, ASU University College</span>
-        </div>
-        <div class="about-item">
-          <span class="about-label">Awards</span>
-          <span class="about-val">Google · NNG · TiE Phoenix · FemTech · HackAZona</span>
-        </div>
-      </div>
+    <canvas id="fc-canvas" width="1600" height="320"></canvas>
+    <div class="fish-row fish-row--bottom">
+      <span>© 2026 Maitreyi Bhardwaj</span>
+      <span>byMaitreyi</span>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
-<!-- CONTACT -->
-<div style="background:var(--light);border-top:1px solid var(--border);padding:80px 80px;">
-  <div style="max-width:600px;margin:0 auto;">
-    <p style="font-size:13px;font-weight:400;color:var(--soft);margin-bottom:10px;letter-spacing:.04em;">Get in touch</p>
-    <div style="height:1px;background:var(--border);margin-bottom:32px;"></div>
-    <h2 style="font-size:clamp(24px,2.8vw,36px);font-weight:400;letter-spacing:-.022em;color:var(--black);margin-bottom:8px;">Send a message.</h2>
-    <p style="font-size:16px;font-weight:300;color:var(--gray);margin-bottom:32px;">Reach out directly. Usually responds within a day.</p>
-    <div style="display:flex;flex-direction:column;gap:16px;">
-      <input id="contact-name" type="text" placeholder="Your name" style="width:100%;padding:14px 18px;border:1px solid var(--border);border-radius:8px;font-size:15px;font-family:var(--f);background:var(--bg);color:var(--black);outline:none;transition:border-color .15s;" onfocus="this.style.borderColor='var(--black)'" onblur="this.style.borderColor='var(--border)'" />
-      <input id="contact-email" type="email" placeholder="Your email" style="width:100%;padding:14px 18px;border:1px solid var(--border);border-radius:8px;font-size:15px;font-family:var(--f);background:var(--bg);color:var(--black);outline:none;transition:border-color .15s;" onfocus="this.style.borderColor='var(--black)'" onblur="this.style.borderColor='var(--border)'" />
-      <textarea id="contact-msg" placeholder="What's on your mind?" rows="4" style="width:100%;padding:14px 18px;border:1px solid var(--border);border-radius:8px;font-size:15px;font-family:var(--f);background:var(--bg);color:var(--black);outline:none;resize:vertical;transition:border-color .15s;" onfocus="this.style.borderColor='var(--black)'" onblur="this.style.borderColor='var(--border)'"></textarea>
-      <button onclick="sendContact()" style="align-self:flex-start;padding:12px 28px;background:var(--black);color:#fff;border:none;border-radius:100px;font-size:14px;font-family:var(--f);font-weight:500;cursor:pointer;transition:all .15s;" onmouseover="this.style.background='#CD5028'" onmouseout="this.style.background='var(--black)'">Send message</button>
-      <p id="contact-status" style="font-size:13px;color:var(--soft);min-height:18px;"></p>
-    </div>
-  </div>
-</div>
 <script>
-function sendContact(){
-  const name=document.getElementById('contact-name').value.trim();
-  const email=document.getElementById('contact-email').value.trim();
-  const msg=document.getElementById('contact-msg').value.trim();
-  const status=document.getElementById('contact-status');
-  if(!name||!email||!msg){status.textContent='Please fill in all fields.';return;}
-  const mailto=`mailto:bhardwajmaitreyi6@gmail.com?subject=Portfolio inquiry from ${encodeURIComponent(name)}&body=${encodeURIComponent('From: '+name+'
-Email: '+email+'
-
-'+msg)}`;
-  window.location.href=mailto;
-  status.textContent='Opening your email client...';
-}
-</script>
-<footer>
-  <p class="f-copy">© 2025 Maitreyi Bhardwaj</p>
-  <hr class="f-rule">
-
-  <!-- FISH GAME -->
-  <div style="margin-bottom:0;margin-left:-60px;margin-right:-60px;">
-    <div style="display:flex;justify-content:space-between;align-items:center;padding:0 60px;margin-bottom:8px;">
-      <p style="font-size:11px;color:#555;letter-spacing:.06em;text-transform:uppercase;">tap the fish</p>
-      <span style="font-size:11px;color:#555;">score: <span id="fc-pts" style="color:#CD5028;font-weight:500;">0</span></span>
-    </div>
-    <canvas id="fc-canvas" width="1600" height="320" style="display:block;width:100%;height:320px;cursor:crosshair;touch-action:none;image-rendering:pixelated;background:#0a0a0a;"></canvas>
-  </div>
-
-  <!-- MEANINGFUL + CONTACT -->
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;max-width:1100px;padding-top:64px;align-items:start;">
-    <div>
-      <p class="f-cta">Let's build something <span class="script">meaningful</span> together.</p>
-      <div class="f-btns" style="margin-top:24px;">
-        <a href="https://www.linkedin.com/in/maitreyi-bhardwaj-3a6358220/" target="_blank" class="fbtn">LinkedIn</a>
-        <a href="https://drive.google.com/file/d/1l92lnpU0Z_aFT9_kO4f2fLXTiDSLKF9Y/view?usp=sharing" target="_blank" class="fbtn">Resume</a>
-      </div>
-    </div>
-    <div>
-      <p style="font-size:13px;color:#666;margin-bottom:20px;letter-spacing:.04em;text-transform:uppercase;">Send a message</p>
-      <div style="display:flex;flex-direction:column;gap:12px;">
-        <input id="contact-name" type="text" placeholder="Your name" style="width:100%;padding:12px 16px;border:1px solid #333;border-radius:8px;font-size:14px;font-family:'Geist',-apple-system,sans-serif;background:#141414;color:#f0f0ee;outline:none;" />
-        <input id="contact-email" type="email" placeholder="Your email" style="width:100%;padding:12px 16px;border:1px solid #333;border-radius:8px;font-size:14px;font-family:'Geist',-apple-system,sans-serif;background:#141414;color:#f0f0ee;outline:none;" />
-        <textarea id="contact-msg" placeholder="What's on your mind?" rows="3" style="width:100%;padding:12px 16px;border:1px solid #333;border-radius:8px;font-size:14px;font-family:'Geist',-apple-system,sans-serif;background:#141414;color:#f0f0ee;outline:none;resize:vertical;"></textarea>
-        <button onclick="sendContact()" style="align-self:flex-start;padding:10px 24px;background:#f0f0ee;color:#0a0a0a;border:none;border-radius:100px;font-size:13px;font-family:'Geist',-apple-system,sans-serif;font-weight:500;cursor:pointer;transition:all .15s;" onmouseover="this.style.background='#CD5028';this.style.color='#fff'" onmouseout="this.style.background='#f0f0ee';this.style.color='#0a0a0a'">Send</button>
-        <p id="contact-status" style="font-size:12px;color:#666;min-height:16px;"></p>
-      </div>
-    </div>
-  </div>
-</footer>
-<script>
-function sendContact(){
-  const name=document.getElementById('contact-name').value.trim();
-  const email=document.getElementById('contact-email').value.trim();
-  const msg=document.getElementById('contact-msg').value.trim();
-  const status=document.getElementById('contact-status');
-  if(!name||!email||!msg){status.textContent='Please fill in all fields.';return;}
-  window.location.href=`mailto:bhardwajmaitreyi6@gmail.com?subject=Portfolio inquiry from ${encodeURIComponent(name)}&body=${encodeURIComponent('From: '+name+'\nEmail: '+email+'\n\n'+msg)}`;
-  status.textContent='Opening your email client...';
-}
-</script>
-
-<script>
-// LOADER , cycles all 6 bg/logo combos then exits
+// LOADER , cycles b&w bg/logo combos then exits
 const frames = [
   ['#0a0a0a', '#ffffff'],
-  ['#CD5028', '#ffffff'],
+  ['#f7f7f5', '#0a0a0a'],
   ['#ffffff', '#0a0a0a'],
-  ['#0a0a0a', '#CD5028'],
-  ['#CD5028', '#0a0a0a'],
-  ['#ffffff', '#CD5028'],
+  ['#0a0a0a', '#f0f0ee'],
+  ['#e8e8e5', '#0a0a0a'],
+  ['#ffffff', '#0a0a0a'],
 ];
 let ci = 0;
 const loader = document.getElementById('loader');
@@ -494,34 +391,29 @@ const cycle = setInterval(() => {
 // Exit after all 6 frames shown (~2s)
 setTimeout(() => {
   clearInterval(cycle);
-  // Final state: black bg white logo
+  // Final state: black logo on white
   loader.style.background = '#fff';
-  setPaths('#ffffff');
+  setPaths('#0a0a0a');
 }, 1800);
 
 setTimeout(() => {
   loader.classList.add('out');
   document.body.style.overflow = '';
-  document.getElementById('nav').classList.add('visible');
   setTimeout(() => {
-    const els = document.querySelectorAll('.r');
+    const els = Array.from(document.querySelectorAll('.r'));
+    // reveal on scroll: each element waits until it is genuinely in view,
+    // so the next thing stays empty until you arrive at it
     const io = new IntersectionObserver(e => e.forEach(x => {
-      if (x.isIntersecting) x.target.classList.add('on');
-    }), { threshold: .04, rootMargin: '0px 0px -20px 0px' });
+      if (x.isIntersecting) { x.target.classList.add('on'); io.unobserve(x.target); }
+    }), { threshold: .15, rootMargin: '0px 0px -70px 0px' });
     els.forEach(el => io.observe(el));
-    els.forEach(el => { if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('on'); });
+    // what's already on screen enters slowly, one after the other
+    els.filter(el => el.getBoundingClientRect().top < window.innerHeight)
+       .forEach((el, i) => setTimeout(() => el.classList.add('on'), 150 + i * 300));
   }, 100);
 }, 2600);
 
-// Nav hide/show on scroll
-let lastY = 0;
-const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => {
-  const y = window.scrollY;
-  if (y > lastY && y > 80) nav.classList.add('hidden');
-  else nav.classList.remove('hidden');
-  lastY = y;
-}, { passive: true });
+// (top nav removed)
 
 const _dmt = document.getElementById('dm-toggle');
 const _dms = localStorage.getItem('dm');
@@ -533,155 +425,243 @@ _dmt.addEventListener('click', () => {
 });
 
 
-// FISH GAME , pixel art v3
+// FISH POND v4 - a living monochrome night pond: fish always swimming,
+// moonlit sky, swaying seaweed, bubbles; tap any fish to catch a fact
 (function(){
 const canvas = document.getElementById('fc-canvas');
 if(!canvas) return;
 const ctx = canvas.getContext('2d');
 ctx.imageSmoothingEnabled = false;
-const W=1600,H=320,WATER_Y=210,PX=5;
+const H=320,WATER_Y=168,PX=4,COUNT=7;
+// match the internal width to the on-screen aspect ratio: square pixels everywhere
+const _r0=canvas.getBoundingClientRect();
+const W=Math.max(360,Math.round(H*(_r0.width/Math.max(1,_r0.height||H))));
 canvas.width=W; canvas.height=H;
-let score=0,misses=0,fish=[],ripples=[],splashes=[],msgs=[],frame=0,spawnTimer=0,spawnInterval=110;
+let score=0,frame=0,leapTimer=90,factSeq=0;
 const ptsEl=document.getElementById('fc-pts');
-const missEl=document.getElementById('fc-miss');
 function rnd(a,b){return a+Math.random()*(b-a);}
+function PAL(){
+  return {ink:'#f0f0ee', shade:'#c2c2be', eye:'#0a0a0a', pupil:'#f0f0ee', wave1:'rgba(240,240,238,0.09)', wave2:'rgba(240,240,238,0.06)', shim:'240,240,238', splash:'#9a9a96', lblBg:'rgba(240,240,238,0.94)', lblTx:'#0a0a0a'};
+}
+const STARS=Array.from({length:36},()=>({x:rnd(12,W-12),y:rnd(12,WATER_Y-58),p:rnd(0,6.28),sz:Math.random()<0.22?4:2}));
+const WEEDS=Array.from({length:Math.max(6,Math.round(W/150))},()=>({x:rnd(26,W-26),h:rnd(40,96),p:rnd(0,6.28),sway:rnd(3,7)}));
 
 const FACTS=[
   "hi! welcome to maitreyi's portfolio",
   "she built this site in HTML + Claude",
   "pastiche turns paintings into design tokens",
   "distill won $2,000 at HackAZona",
-  "vibin has 100+ active iOS users",
+  "vibin is live on the App Store",
   "she's at ASU Herberger + NID India",
   "she designs physical + digital products",
-  "currently designer at ASU University College",
-  "GPA 3.98 and ships real products",
-  "google mentorship , 1 of 235 nationally",
+  "currently UI designer at D2Bridge",
+  "pit boss UX competition winner",
+  "google packaging mentorship 2026",
   "IDSA president at ASU",
   "she codes her own portfolio",
 ];
-let factIdx=0;
 
-const FISH_BODY=[
-  [0,0],[1,0],[2,0],[3,0],
-  [-1,0],[0,-1],[1,-1],[2,-1],
-  [0,1],[1,1],[2,1],
-  [-2,-1],[-2,0],[-2,1],
-  [4,0]
+/* classic pixel fish, after her sprite-sheet reference: crisp dark outline,
+   flat body, white belly, forked tail, dorsal + pectoral fin, glint eye.
+   O = outline  B = body  W = belly  F = fins/tail  e = eye
+   Most spawn silver; some spawn as the orange goldfish variant. */
+const FISH_ROWS=[
+  ".........OFFO.............",
+  "........OFFFFO............",
+  "OO.....OOFFFFOOO..........",
+  "OFO...OBBBBBBBBBOOO.......",
+  "OFFO.OBBBBBBBBBBBBBOO.....",
+  "OFFOOBBBBBBBBBBBBBBBBOO...",
+  "OFFFOBBBBBBBBBBBBBBBBeBOO.",
+  "OFFOOBBWWWWWWWWWWWWBBBBOO.",
+  "OFO..OBWWWFFWWWWWWWBBOO...",
+  "OO....OWWWWFFWWWWWWOO.....",
+  ".......OOOOWWWWWWOOO......",
+  "..........OOOOOO.........."
 ];
-const FISH_EYE=[4,-1];
+const FISH_PALS={
+  silver:{ O:'#1c222e', B:'#b6bec9', W:'#f2f4f6', F:'#78808c' },
+  orange:{ O:'#38200e', B:'#e0862f', W:'#f6ddb0', F:'#b85f18' }
+};
+const FISH_PX={ px:[], eye:null };
+FISH_ROWS.forEach((row,ri)=>{
+  for(let ci=0;ci<row.length;ci++){
+    const ch=row[ci]; if(ch==='.') continue;
+    const dc=ci-13, dr=ri-6;
+    if(ch==='e') FISH_PX.eye=[dc,dr];
+    else FISH_PX.px.push([dc,dr,ch]);
+  }
+});
 
-function spawnFish(){
-  const x=rnd(80,W-80);
-  _factIdx=(_factIdx||0)+1;fish.push({x,y:WATER_Y,vx:rnd(-1.4,1.4),vy:rnd(-14,-10),phase:'jump',hit:false,alpha:1,showLabel:true,_factIdx:_factIdx});
-  ripples.push({x,y:WATER_Y,r:0,alpha:0.6});
+function mkFish(fromEdge){
+  const dir=Math.random()<0.5?1:-1;
+  return {
+    x: fromEdge ? (dir===1?-36:W+36) : rnd(24,W-24),
+    y: rnd(WATER_Y+30,H-52),
+    vx: dir*rnd(0.35,0.95),
+    size: rnd(0.3,0.55),
+    variant: Math.random()<0.22?'orange':'silver',
+    wob: rnd(0,6.28),
+    state:'swim', vy:0, homeY:0, dove:false, alpha:1, caughtAt:0,
+    _factIdx: factSeq++
+  };
 }
+let fish=Array.from({length:COUNT},()=>mkFish(false));
+let splashes=[],ripples=[],bubbles=[],msgs=[];
+
 function addSplash(x,y,caught){
+  const p=PAL();
   for(let i=0;i<8;i++){
     const a=(Math.PI*2/8)*i;
-    splashes.push({x,y,vx:Math.cos(a)*rnd(1.5,3.5),vy:Math.sin(a)*rnd(-4,-1.5),alpha:1,color:caught?'#CD5028':'#444'});
+    splashes.push({x,y,vx:Math.cos(a)*rnd(1.5,3.5),vy:Math.sin(a)*rnd(-4,-1.5),alpha:1,color:caught?p.ink:p.splash});
   }
 }
 function addMsg(x,y,text){
-  msgs.push({x:Math.min(Math.max(x,180),W-180),y,text,alpha:1,vy:-0.9,t:0});
+  msgs.push({x:Math.min(Math.max(x,180),W-180),y:Math.min(y,WATER_Y+80),text,alpha:1,vy:-0.9,t:0});
 }
 
-function drawPixel(x,y,color){
-  ctx.fillStyle=color;
-  ctx.fillRect(Math.round(x)*1,Math.round(y)*1,PX,PX);
+function drawMoon(){
+  const p=PAL();
+  const mx=W-72,my=48,r=20;
+  ctx.fillStyle=`rgba(${p.shim},0.05)`;
+  ctx.beginPath(); ctx.arc(mx,my,r+12,0,6.29); ctx.fill();
+  ctx.fillStyle=`rgba(${p.shim},0.09)`;
+  ctx.beginPath(); ctx.arc(mx,my,r+6,0,6.29); ctx.fill();
+  ctx.fillStyle=`rgba(${p.shim},0.95)`;
+  ctx.beginPath(); ctx.arc(mx,my,r,0,6.29); ctx.fill();
+  ctx.fillStyle='rgba(10,10,10,0.18)';
+  ctx.beginPath(); ctx.arc(mx-7,my-4,4.5,0,6.29); ctx.fill();
+  ctx.beginPath(); ctx.arc(mx+6,my+7,3.2,0,6.29); ctx.fill();
+  ctx.beginPath(); ctx.arc(mx+3,my-10,2.2,0,6.29); ctx.fill();
+  ctx.beginPath(); ctx.arc(mx-2,my+3,1.8,0,6.29); ctx.fill();
+  const lg=ctx.createLinearGradient(0,WATER_Y,0,H);
+  lg.addColorStop(0,`rgba(${p.shim},0.09)`);
+  lg.addColorStop(1,`rgba(${p.shim},0)`);
+  ctx.fillStyle=lg;
+  ctx.fillRect(mx-28,WATER_Y,56,H-WATER_Y);
 }
 
-function drawFishPixel(f){
-  // show label while fish is above water
-  if(f.phase==='jump' && !f.hit && f.y < WATER_Y-20 && f.showLabel){
+function drawWeeds(){
+  const p=PAL();
+  WEEDS.forEach(w=>{
+    for(let k=0;k<w.h;k+=PX){
+      const t=k/w.h;
+      const off=Math.sin(frame*0.035+w.p+t*2.2)*w.sway*t;
+      const x=Math.round((w.x+off)/PX)*PX, y=H-10-k;
+      ctx.fillStyle=`rgba(${p.shim},${(0.20+0.10*(1-t)).toFixed(3)})`;
+      ctx.fillRect(x,y,PX,PX);
+      const step=k/PX;
+      if(step%3===1){
+        ctx.fillStyle=`rgba(${p.shim},${(0.12+0.08*(1-t)).toFixed(3)})`;
+        ctx.fillRect(x+((step%6===1)?PX:-PX),y,PX,PX);
+      }
+    }
+  });
+}
+
+function drawFish(f){
+  const p=PAL();
+  const s=Math.max(1,Math.round(PX*f.size));
+  const dir=f.vx>=0?1:-1;
+  const bob=f.state==='swim'?Math.sin(frame*0.05+f.wob)*3:0;
+  const cx=Math.round(f.x), cy=Math.round(f.y+bob);
+  const pal=FISH_PALS[f.variant]||FISH_PALS.silver;
+  ctx.save();
+  ctx.globalAlpha=f.alpha*(f.state==='swim'?0.92:1);
+  FISH_PX.px.forEach(([dc,dr,ch])=>{ctx.fillStyle=pal[ch];ctx.fillRect(cx+dc*dir*s,cy+dr*s,s,s);});
+  // tail flick: the fluke tip beats up and down
+  const flick=Math.sin(frame*0.2+f.wob)>0?1:0;
+  ctx.fillStyle=pal.F;
+  ctx.fillRect(cx+(-12)*dir*s,cy+(flick?-4:4)*s,s,s);
+  // eye: white with a dark pupil
+  ctx.fillStyle='#fff'; ctx.fillRect(cx+FISH_PX.eye[0]*dir*s,cy+FISH_PX.eye[1]*s,s,s);
+  ctx.fillStyle='#0a0a0a';
+  const ps=Math.max(1,s>>1);
+  ctx.fillRect(cx+FISH_PX.eye[0]*dir*s+ps,cy+FISH_PX.eye[1]*s+ps,ps,ps);
+  ctx.restore();
+  // fact label rides above a leaping fish
+  if(f.state==='leap'&&f.y<WATER_Y-14){
     ctx.save();
-    ctx.globalAlpha=Math.min(1,(WATER_Y-f.y)/60)*f.alpha;
-    ctx.font='500 12px Geist,-apple-system,sans-serif';
+    ctx.globalAlpha=Math.min(1,(WATER_Y-f.y)/50)*f.alpha;
+    ctx.font='500 12px Inter,-apple-system,sans-serif';
     ctx.textAlign='center';
-    ctx.fillStyle='#f0f0ee';
     const lbl=FACTS[f._factIdx%FACTS.length]||'';
     const tw=ctx.measureText(lbl).width;
-    ctx.fillStyle='rgba(10,10,10,0.85)';
+    const lx=Math.min(Math.max(f.x,tw/2+14),W-tw/2-14);
+    ctx.fillStyle=p.lblBg;
     ctx.beginPath();
-    if(ctx.roundRect) ctx.roundRect(f.x-tw/2-8,f.y-28,tw+16,22,4);
-    else ctx.rect(f.x-tw/2-8,f.y-28,tw+16,22);
+    if(ctx.roundRect) ctx.roundRect(lx-tw/2-8,f.y-30,tw+16,22,4); else ctx.rect(lx-tw/2-8,f.y-30,tw+16,22);
     ctx.fill();
-    ctx.fillStyle='#CD5028';
-    ctx.fillText(lbl,f.x,f.y-12);
+    ctx.fillStyle=p.lblTx;
+    ctx.fillText(lbl,lx,f.y-14);
     ctx.restore();
   }
-  ctx.save(); ctx.globalAlpha=f.alpha;
-  const dir=f.vx>=0?1:-1;
-  const cx=Math.round(f.x/PX)*PX;
-  const cy=Math.round(f.y/PX)*PX;
-  FISH_BODY.forEach(([dc,dr])=>drawPixel(cx+dc*dir*PX,cy+dr*PX,'#CD5028'));
-  [[1,1],[2,1]].forEach(([dc,dr])=>drawPixel(cx+dc*dir*PX,cy+dr*PX,'#9e3b1a'));
-  [[-2,-1],[-2,0],[-2,1]].forEach(([dc,dr])=>drawPixel(cx+dc*dir*PX,cy+dr*PX,'#9e3b1a'));
-  drawPixel(cx+FISH_EYE[0]*dir*PX,cy+FISH_EYE[1]*PX,'#fff');
-  ctx.fillStyle='#0a0a0a';
-  ctx.fillRect(cx+FISH_EYE[0]*dir*PX+2,cy+FISH_EYE[1]*PX+2,3,3);
-  ctx.restore();
 }
 
-function drawBg(){
-  ctx.fillStyle='#141414'; ctx.fillRect(0,0,W,H);
-  // smooth animated water fill
-  ctx.fillStyle='rgba(15,90,70,0.4)';
+function drawSky(){
+  const p=PAL();
+  for(const s of STARS){
+    const tw=0.5+0.5*Math.sin(frame*0.03+s.p);
+    ctx.fillStyle=`rgba(${p.shim},${((s.sz===4?0.18:0.10)+0.24*tw).toFixed(3)})`;
+    ctx.fillRect(Math.round(s.x/PX)*PX,Math.round(s.y/PX)*PX,s.sz,s.sz);
+  }
+  drawMoon();
+}
+
+function drawWater(){
+  const p=PAL();
+  const g=ctx.createLinearGradient(0,WATER_Y,0,H);
+  g.addColorStop(0,'rgba(240,240,238,0.16)');
+  g.addColorStop(0.45,'rgba(240,240,238,0.08)');
+  g.addColorStop(1,'rgba(240,240,238,0.03)');
+  ctx.fillStyle=g;
   ctx.beginPath(); ctx.moveTo(0,WATER_Y);
   for(let x=0;x<=W;x+=4){
-    const w1=Math.sin((x*0.025)+frame*0.18)*5;
-    const w2=Math.sin((x*0.04)+frame*0.11)*3;
-    ctx.lineTo(x,WATER_Y+w1+w2);
+    ctx.lineTo(x,WATER_Y+Math.sin((x*0.025)+frame*0.18)*5+Math.sin((x*0.04)+frame*0.11)*3);
   }
   ctx.lineTo(W,H); ctx.lineTo(0,H); ctx.closePath(); ctx.fill();
-
-  // second brighter wave layer
-  ctx.fillStyle='rgba(30,100,200,0.12)';
-  ctx.beginPath(); ctx.moveTo(0,WATER_Y);
-  for(let x=0;x<=W;x+=4){
-    const w1=Math.sin((x*0.03)+frame*0.22)*4;
-    const w2=Math.sin((x*0.05)+frame*0.13)*2;
-    ctx.lineTo(x,WATER_Y+w1+w2);
-  }
-  ctx.lineTo(W,H); ctx.lineTo(0,H); ctx.closePath(); ctx.fill();
-
-  // pixel surface shimmer line
   for(let x=0;x<W;x+=PX){
-    const w=Math.sin((x*0.03)+frame*0.18)*5+Math.sin((x*0.05)+frame*0.13)*3;
-    ctx.fillStyle=`rgba(60,140,220,${0.25+Math.sin(x*0.01+frame*0.02)*0.08})`;
+    const w=Math.sin((x*0.025)+frame*0.18)*5+Math.sin((x*0.04)+frame*0.11)*3;
+    ctx.fillStyle=`rgba(${p.shim},${(0.30+Math.sin(x*0.01+frame*0.02)*0.10).toFixed(3)})`;
     ctx.fillRect(x,Math.round((WATER_Y+w)/PX)*PX,PX,PX);
+  }
+  ctx.fillStyle=`rgba(${p.shim},0.10)`;
+  ctx.fillRect(0,H-12,W,12);
+  for(let x=0;x<W;x+=PX){
+    const h=((x*2654435761)>>>0)%97;
+    if(h<14){ ctx.fillStyle=`rgba(${p.shim},${h<5?0.30:0.16})`; ctx.fillRect(x,H-8-(h%3)*PX,PX,PX); }
   }
 }
 
 function drawRipples(){
+  const p=PAL();
   ripples.forEach(r=>{
     ctx.save(); ctx.globalAlpha=r.alpha*0.7;
     for(let i=0;i<Math.floor(r.r/PX);i+=2){
-      ctx.fillStyle='rgba(60,140,220,0.45)';
+      ctx.fillStyle=`rgba(${p.shim},0.30)`;
       const rx=Math.round((r.x+i*PX*1.6)/PX)*PX;
       const lx=Math.round((r.x-i*PX*1.6)/PX)*PX;
-      ctx.fillRect(rx,r.y,PX,PX);
-      ctx.fillRect(lx,r.y,PX,PX);
-      ctx.fillRect(rx,r.y-PX,PX,PX);
-      ctx.fillRect(lx,r.y-PX,PX,PX);
+      ctx.fillRect(rx,r.y,PX,PX); ctx.fillRect(lx,r.y,PX,PX);
+      ctx.fillRect(rx,r.y-PX,PX,PX); ctx.fillRect(lx,r.y-PX,PX,PX);
     }
     ctx.restore();
   });
 }
 
 function drawMsgs(){
+  const p=PAL();
   msgs.forEach(m=>{
     ctx.save();
     ctx.globalAlpha=m.alpha;
-    ctx.font='500 13px Georgia,serif';
+    ctx.font='500 13px Inter,-apple-system,sans-serif';
     const tw=ctx.measureText(m.text).width;
-    ctx.fillStyle='rgba(20,20,20,0.88)';
+    ctx.fillStyle=p.lblBg;
     const px=8,py=5;
     const bx=m.x-tw/2-px, by=m.y-18-py, bw=tw+px*2, bh=22+py*2;
     ctx.beginPath();
-    ctx.roundRect(bx,by,bw,bh,6);
+    if(ctx.roundRect) ctx.roundRect(bx,by,bw,bh,6); else ctx.rect(bx,by,bw,bh);
     ctx.fill();
-    ctx.fillStyle='#CD5028';
+    ctx.fillStyle=p.lblTx;
     ctx.textAlign='center';
     ctx.textBaseline='middle';
     ctx.fillText(m.text,m.x,m.y-6);
@@ -690,184 +670,139 @@ function drawMsgs(){
 }
 
 function tick(){
-  frame++;spawnTimer++;
-  if(spawnTimer>spawnInterval){spawnTimer=0;spawnInterval=rnd(70,140);spawnFish();}
+  frame++;
+  // a random swimmer leaps every few seconds, carrying a fact
+  if(--leapTimer<=0){
+    leapTimer=rnd(150,260);
+    const swimmers=fish.filter(f=>f.state==='swim');
+    if(swimmers.length){
+      const f=swimmers[Math.floor(rnd(0,swimmers.length))];
+      f.state='leap'; f.homeY=f.y; f.vy=-rnd(8.6,10.6); f.dove=false;
+      ripples.push({x:f.x,y:WATER_Y,r:0,alpha:0.55});
+      addSplash(f.x,WATER_Y,false);
+    }
+  }
   fish.forEach(f=>{
-    if(f.hit){f.alpha-=0.05;return;}
-    f.x+=f.vx; f.vy+=0.23; f.y+=f.vy;
-    if(f.y>=WATER_Y&&f.phase==='jump'){
-      f.phase='sink'; addSplash(f.x,WATER_Y,false);
-      ripples.push({x:f.x,y:WATER_Y,r:0,alpha:0.5});
-      if(!f.hit){misses++;if(missEl)missEl.textContent=misses;}
+    if(f.state==='caught'){ f.alpha-=0.055; return; }
+    if(f.state==='swim'){
+      f.x+=f.vx;
+      if(f.x<-40) f.x=W+38; else if(f.x>W+40) f.x=-38;
+      if(Math.random()<0.0018) f.vx*=-1;
+      if(Math.random()<0.02) bubbles.push({x:f.x+(f.vx>=0?14:-14),y:f.y-4,vy:-rnd(0.35,0.7),a:0.7,p:rnd(0,6.28)});
+    } else if(f.state==='leap'){
+      f.x+=f.vx*1.5; f.vy+=0.28; f.y+=f.vy;
+      if(f.vy>0 && !f.dove && f.y>=WATER_Y){
+        f.dove=true; addSplash(f.x,WATER_Y,false);
+        ripples.push({x:f.x,y:WATER_Y,r:0,alpha:0.5});
+      }
+      if(f.vy>0 && f.y>=f.homeY){ f.y=f.homeY; f.state='swim'; }
     }
   });
-  fish=fish.filter(f=>f.alpha>0&&f.y<WATER_Y+60);
+  // caught fish fade out; the pond restocks from the edges
+  fish=fish.filter(f=>f.alpha>0);
+  while(fish.length<COUNT) fish.push(mkFish(true));
+  bubbles.forEach(b=>{ b.y+=b.vy; b.x+=Math.sin(frame*0.08+b.p)*0.4; if(b.y<=WATER_Y+4) b.a-=0.12; });
+  bubbles=bubbles.filter(b=>b.a>0);
   ripples.forEach(r=>{r.r+=1.5;r.alpha-=0.022;});
   ripples=ripples.filter(r=>r.alpha>0);
   splashes.forEach(s=>{s.x+=s.vx;s.y+=s.vy;s.vy+=0.18;s.alpha-=0.04;});
   splashes=splashes.filter(s=>s.alpha>0);
   msgs.forEach(m=>{m.y+=m.vy;m.t++;if(m.t>70)m.alpha-=0.035;});
   msgs=msgs.filter(m=>m.alpha>0);
+
   ctx.clearRect(0,0,W,H);
-  drawBg();
+  drawSky();
+  drawWeeds();
+  fish.filter(f=>f.state!=='leap').forEach(drawFish);
+  const p=PAL();
+  bubbles.forEach(b=>{
+    ctx.save(); ctx.globalAlpha=b.a; ctx.fillStyle=`rgba(${p.shim},0.5)`;
+    ctx.fillRect(Math.round(b.x/PX)*PX,Math.round(b.y/PX)*PX,3,3);
+    ctx.restore();
+  });
+  drawWater();
   drawRipples();
+  fish.filter(f=>f.state==='leap').forEach(drawFish);
   splashes.forEach(s=>{
     ctx.save();ctx.globalAlpha=s.alpha;ctx.fillStyle=s.color;
     ctx.fillRect(Math.round(s.x/PX)*PX,Math.round(s.y/PX)*PX,PX,PX);
     ctx.restore();
   });
-  fish.forEach(drawFishPixel);
   drawMsgs();
   requestAnimationFrame(tick);
 }
 
 function catchAt(ex,ey){
   const rect=canvas.getBoundingClientRect();
-  const sx=(ex-rect.left)*(W/rect.width),sy=(ey-rect.top)*(H/rect.height);
+  const kx=rect.width/W, ky=rect.height/H;
+  let got=false;
   fish.forEach(f=>{
-    if(f.hit||f.phase!=='jump')return;
-    if(Math.abs(sx-f.x)<40&&Math.abs(sy-f.y)<36){
-      f.hit=true;score++;
+    if(got||f.state==='caught')return;
+    // hit-test in CSS pixels: a ~60px touch target on every screen size
+    const fx=rect.left+f.x*kx, fy=rect.top+f.y*ky;
+    if(Math.abs(ex-fx)<30&&Math.abs(ey-fy)<30){
+      got=true;
+      f.state='caught'; f.caughtAt=frame; score++;
       if(ptsEl)ptsEl.textContent=score;
       addSplash(f.x,f.y,true);
-      ripples.push({x:f.x,y:WATER_Y,r:0,alpha:0.8});
-      addMsg(f.x,f.y-20,FACTS[factIdx%FACTS.length]);
-      factIdx++;
+      if(f.y>=WATER_Y) ripples.push({x:f.x,y:WATER_Y,r:0,alpha:0.8});
+      addMsg(f.x,f.y-24,FACTS[f._factIdx%FACTS.length]);
     }
   });
 }
 canvas.addEventListener('click',e=>catchAt(e.clientX,e.clientY));
-canvas.addEventListener('touchstart',e=>{e.preventDefault();catchAt(e.touches[0].clientX,e.touches[0].clientY);},{passive:false});
+// passive: taps still catch (via the synthetic click too); vertical flicks keep scrolling
+canvas.addEventListener('touchstart',e=>{catchAt(e.touches[0].clientX,e.touches[0].clientY);},{passive:true});
 tick();
 })();
 
 
 
 
-
-// HERO MINI FISH
-(function(){
-const canvas = document.getElementById('hero-fish');
-if(!canvas) return;
-const ctx = canvas.getContext('2d');
-ctx.imageSmoothingEnabled = false;
-const W=1600,H=100,WATER_Y=72,PX=4;
-canvas.width=W; canvas.height=H;
-let fish=[],ripples=[],splashes=[],frame=0,spawnTimer=0,msgEl=document.getElementById('hero-fish-msg');
-
-function rnd(a,b){return a+Math.random()*(b-a);}
-
-const FISH_BODY=[[0,0],[1,0],[2,0],[3,0],[-1,0],[0,-1],[1,-1],[2,-1],[0,1],[1,1],[2,1],[-2,-1],[-2,0],[-2,1],[4,0]];
-const FISH_EYE=[4,-1];
-
-function spawnFish(){
-  const x=rnd(60,W-60);
-  fish.push({x,y:WATER_Y,vx:rnd(-1.2,1.2),vy:rnd(-6.5,-4),phase:'jump',hit:false,alpha:1});
-  ripples.push({x,y:WATER_Y,r:0,alpha:0.5});
-}
-
-function drawPixel(x,y,col){
-  ctx.fillStyle=col;
-  ctx.fillRect(Math.round(x),Math.round(y),PX,PX);
-}
-
-function drawFish(f){
-  ctx.save(); ctx.globalAlpha=f.alpha;
-  const dir=f.vx>=0?1:-1;
-  const cx=Math.round(f.x/PX)*PX, cy=Math.round(f.y/PX)*PX;
-  FISH_BODY.forEach(([dc,dr])=>drawPixel(cx+dc*dir*PX,cy+dr*PX,'#CD5028'));
-  [[1,1],[2,1]].forEach(([dc,dr])=>drawPixel(cx+dc*dir*PX,cy+dr*PX,'#9e3b1a'));
-  [[-2,-1],[-2,0],[-2,1]].forEach(([dc,dr])=>drawPixel(cx+dc*dir*PX,cy+dr*PX,'#9e3b1a'));
-  drawPixel(cx+FISH_EYE[0]*dir*PX,cy+FISH_EYE[1]*PX,'#fff');
-  ctx.fillStyle='#0a0a0a';
-  ctx.fillRect(cx+FISH_EYE[0]*dir*PX+2,cy+FISH_EYE[1]*PX+2,2,2);
-  ctx.restore();
-}
-
-function drawBg(){
-  ctx.clearRect(0,0,W,H);
-  // smooth water fill from edge to edge
-  ctx.fillStyle='rgba(15,50,120,0.18)';
-  ctx.beginPath(); ctx.moveTo(0,WATER_Y);
-  for(let x=0;x<=W;x+=4){
-    const w=Math.sin((x*0.025)+frame*0.16)*4+Math.sin((x*0.04)+frame*0.10)*2;
-    ctx.lineTo(x,WATER_Y+w);
-  }
-  ctx.lineTo(W,H); ctx.lineTo(0,H); ctx.closePath(); ctx.fill();
-  // second layer
-  ctx.fillStyle='rgba(20,80,180,0.10)';
-  ctx.beginPath(); ctx.moveTo(0,WATER_Y);
-  for(let x=0;x<=W;x+=4){
-    const w=Math.sin((x*0.03)+frame*0.13)*3+Math.sin((x*0.05)+frame*0.08)*2;
-    ctx.lineTo(x,WATER_Y+w);
-  }
-  ctx.lineTo(W,H); ctx.lineTo(0,H); ctx.closePath(); ctx.fill();
-  // pixel shimmer surface line
-  for(let x=0;x<W;x+=PX){
-    const w=Math.sin((x*0.03)+frame*0.16)*4+Math.sin((x*0.05)+frame*0.10)*2;
-    ctx.fillStyle=`rgba(40,100,200,${0.28+Math.sin(x*0.01+frame*0.02)*0.06})`;
-    ctx.fillRect(x,Math.round((WATER_Y+w)/PX)*PX,PX,PX);
-  }
-}
-
-function tick(){
-  frame++;spawnTimer++;
-  if(spawnTimer>140){spawnTimer=0;spawnFish();}
-  fish.forEach(f=>{
-    if(f.hit){f.alpha-=0.06;return;}
-    f.x+=f.vx; f.vy+=0.22; f.y+=f.vy;
-    if(f.y>=WATER_Y&&f.phase==='jump'){
-      f.phase='sink';
-      ripples.push({x:f.x,y:WATER_Y,r:0,alpha:0.5});
-      for(let i=0;i<5;i++){
-        const a=(Math.PI*2/5)*i;
-        splashes.push({x:f.x,y:WATER_Y,vx:Math.cos(a)*rnd(1,2.5),vy:Math.sin(a)*rnd(-3,-1),alpha:1,color:'#444'});
-      }
-    }
-  });
-  fish=fish.filter(f=>f.alpha>0&&f.y<WATER_Y+40);
-  ripples.forEach(r=>{r.r+=1.2;r.alpha-=0.025;});
-  ripples=ripples.filter(r=>r.alpha>0);
-  splashes.forEach(s=>{s.x+=s.vx;s.y+=s.vy;s.vy+=0.15;s.alpha-=0.05;});
-  splashes=splashes.filter(s=>s.alpha>0);
-  drawBg();
-  ripples.forEach(r=>{
-    for(let i=0;i<Math.floor(r.r/PX);i+=2){
-      ctx.save();ctx.globalAlpha=r.alpha*0.5;ctx.fillStyle='rgba(60,140,220,0.4)';
-      ctx.fillRect(Math.round((r.x+i*PX*1.5)/PX)*PX,r.y,PX,PX);
-      ctx.fillRect(Math.round((r.x-i*PX*1.5)/PX)*PX,r.y,PX,PX);
-      ctx.restore();
-    }
-  });
-  splashes.forEach(s=>{
-    ctx.save();ctx.globalAlpha=s.alpha;ctx.fillStyle=s.color;
-    ctx.fillRect(Math.round(s.x/PX)*PX,Math.round(s.y/PX)*PX,PX,PX);
-    ctx.restore();
-  });
-  fish.forEach(drawFish);
-  requestAnimationFrame(tick);
-}
-
-function catchAt(ex,ey){
-  const rect=canvas.getBoundingClientRect();
-  const sx=(ex-rect.left)*(W/rect.width),sy=(ey-rect.top)*(H/rect.height);
-  fish.forEach(f=>{
-    if(f.hit||f.phase!=='jump')return;
-    if(Math.abs(sx-f.x)<36&&Math.abs(sy-f.y)<30){
-      f.hit=true;
-      for(let i=0;i<6;i++){
-        const a=(Math.PI*2/6)*i;
-        splashes.push({x:f.x,y:f.y,vx:Math.cos(a)*rnd(1.5,3),vy:Math.sin(a)*rnd(-3,-1),alpha:1,color:'#CD5028'});
-      }
-      if(msgEl){msgEl.style.opacity='1';setTimeout(()=>msgEl.style.opacity='0',2200);}
-    }
-  });
-}
-canvas.addEventListener('click',e=>catchAt(e.clientX,e.clientY));
-canvas.addEventListener('touchstart',e=>{e.preventDefault();catchAt(e.touches[0].clientX,e.touches[0].clientY);},{passive:false});
-tick();
-})();
 
 </script>
+
+<script>
+// LIVE ARIZONA CLOCK in the fish bar (America/New_York, no DST)
+(function(){
+  const el = document.getElementById('fish-time');
+  if(!el) return;
+  function upd(){
+    el.textContent = new Date().toLocaleTimeString('en-US',{timeZone:'America/New_York',hour12:true,hour:'2-digit',minute:'2-digit',second:'2-digit'}) + ' / Pennsylvania';
+  }
+  upd(); setInterval(upd, 1000);
+})();
+</script>
+
+<script>
+// PROJECT TABS (UI/UX · Industrial Design · Graphic Work)
+document.querySelectorAll('.btab').forEach(function(tab){
+  tab.addEventListener('click', function(){
+    var t = tab.dataset.tab;
+    document.querySelectorAll('.btab').forEach(function(b){ b.classList.toggle('active', b === tab); });
+    document.querySelectorAll('.bento-grid').forEach(function(g){ g.hidden = (g.dataset.panel !== t); });
+  });
+});
+</script>
+
+<script>
+// AMBIENT TILE CYCLING: cards slowly swap their imagery on their own,
+// staggered so the grid keeps changing without any scrolling or hover
+(function(){
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var tiles = Array.prototype.filter.call(
+    document.querySelectorAll('.btile, .proj-imgs .pi'),
+    function(t){ return t.querySelector('.img-hover, .img-alt'); }
+  );
+  tiles.forEach(function(t, i){
+    setTimeout(function(){
+      setInterval(function(){
+        if (!t.matches(':hover')) t.classList.toggle('flip');
+      }, 4600);
+    }, 1200 + i * 1100);
+  });
+})();
+</script>
+
 </body>
 </html>

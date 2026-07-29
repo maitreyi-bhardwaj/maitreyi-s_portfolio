@@ -5,105 +5,110 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Distill , Maitreyi Bhardwaj</title>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500&family=Dancing+Script:wght@500&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-:root { --bg:#fff; --black:#0a0a0a; --gray:#666; --soft:#999; --light:#f7f7f5; --border:#e8e8e5; --orange:#CD5028; --f:'Geist',-apple-system,sans-serif; --script:'Dancing Script',cursive; }
-html { scroll-behavior: smooth; }
-body { font-family: var(--f); background: var(--bg); color: var(--black); -webkit-font-smoothing: antialiased; }
-nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; justify-content:space-between; align-items:center; padding:20px 60px; background:rgba(255,255,255,.97); border-bottom:1px solid var(--border); transition:transform .3s cubic-bezier(.16,1,.3,1); }
-nav.hidden { transform:translateY(-100%); }
-.nl,.nr { display:flex; gap:28px; list-style:none; }
-nav a { font-size:14px; font-weight:400; color:var(--gray); text-decoration:none; }
-nav a:hover,.bold { color:var(--black) !important; font-weight:500 !important; }
-.r { opacity:0; transform:translateY(20px); transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1); }
-.r.on { opacity:1; transform:none; }
-.d1{transition-delay:.07s}.d2{transition-delay:.14s}.d3{transition-delay:.21s}.d4{transition-delay:.28s}
-.sec { min-height:100vh; display:flex; flex-direction:column; justify-content:center; padding:100px 80px; }
+:root { --bg:#fff; --black:#0a0a0a; --gray:#666; --soft:#999; --light:#F8F8F8; --border:#e8e8e5; --f:'Inter',-apple-system,sans-serif; }
+body { font-family: var(--f); background: var(--bg); color: var(--black); -webkit-font-smoothing: antialiased; overflow-x: clip; }
+.r { opacity:1; transform:none; transition:none; }
+.sec { display:flex; flex-direction:column; padding:clamp(88px,9vw,150px) 48px; opacity:0; transform:translateY(16px); transition:opacity .55s ease, transform .55s ease; }
+.sec.live { opacity:1; transform:none; }
 .sec > * { max-width:1000px; width:100%; margin-left:auto; margin-right:auto; }
-.lbl { font-size:13px; font-weight:400; color:var(--soft); margin-bottom:10px; }
-.lbl-rule { height:1px; background:var(--border); margin-bottom:32px; }
-h1 { font-size:clamp(28px,3vw,44px); font-weight:400; letter-spacing:-.025em; line-height:1.1; color:var(--black); margin-bottom:32px; }
-h2 { font-size:clamp(24px,2.8vw,42px); font-weight:400; letter-spacing:-.022em; line-height:1.1; color:var(--black); margin-bottom:20px; }
-h3 { font-size:clamp(20px,2.6vw,32px); font-weight:400; letter-spacing:-.018em; line-height:1.15; color:var(--black); margin-bottom:16px; }
-.body { font-size:18px; font-weight:300; color:var(--gray); line-height:1.75; max-width:600px; }
-.body.w { max-width:860px; }
-.ora { color:var(--orange); }
-.pills { display:flex; gap:8px; flex-wrap:wrap; }
+.sec > .img-full, .sec > .img-pair { width:100vw; max-width:100vw; margin-left:calc(50% - 50vw); margin-top:48px; }
+.lbl { font-size:12px; font-weight:500; letter-spacing:.07em; text-transform:uppercase; color:var(--soft); margin-bottom:8px; }
+.lbl-rule { height:1px; background:var(--border); margin-bottom:18px; }
+h1 { font-size:clamp(40px,5.2vw,78px); font-weight:400; letter-spacing:-.03em; line-height:1.05; color:var(--black); margin-bottom:20px; }
+h2 { font-size:clamp(32px,4vw,60px); font-weight:400; letter-spacing:-.028em; line-height:1.06; color:var(--black); margin-bottom:16px; }
+h3 { font-size:clamp(18px,2vw,24px); font-weight:600; letter-spacing:-.01em; line-height:1.25; color:var(--black); margin-bottom:10px; }
+.body { font-size:18px; font-weight:400; color:var(--black); line-height:1.75; max-width:700px; }
+.body.w { max-width:700px; }
+.ora { color:var(--black); }
+.pills { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:28px; }
 .pill { padding:10px 22px; border:1px solid var(--border); border-radius:100px; font-size:14px; font-family:var(--f); color:var(--black); text-decoration:none; transition:all .15s; }
 .pill:hover { background:var(--black); color:#fff; border-color:var(--black); }
-.meta { display:grid; grid-template-columns:repeat(4,1fr); max-width:1000px; margin-top:72px; }
-.mc { padding:20px 24px 20px 0; border-top:1px solid var(--border); }
+.meta { display:grid; grid-template-columns:repeat(4,1fr); column-gap:48px; max-width:1000px; margin-top:32px; margin-bottom:32px; }
+.mc { padding:20px 0; border-top:1px solid var(--border); }
 .ml { font-size:13px; font-weight:400; color:var(--soft); margin-bottom:6px; }
 .mv { font-size:17px; font-weight:400; color:var(--black); line-height:1.4; }
-.hero-img { width:100%; padding-top:65px; }
-.hero-img img { width:100%; display:block; }
+.hero-img { width:100%; max-width:none; margin:0; max-height:78vh; overflow:hidden; border-radius:0; }
+.hero-img img { width:100%; height:auto; display:block; max-height:78vh; object-fit:cover; }
+.img-pair { display:grid; grid-template-columns:1fr; gap:24px; }
+.img-pair img { width:100%; height:auto; display:block; border-radius:0; }
 .mt8{margin-top:8px}.mt16{margin-top:16px}.mt24{margin-top:24px}.mt32{margin-top:32px}.mt40{margin-top:40px}.mt56{margin-top:56px}
 .ins2 { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--border); border:1px solid var(--border); border-radius:10px; overflow:hidden; max-width:900px; margin-top:40px; }
 .ins { background:var(--bg); padding:32px; }
-.ins.t { background:var(--light); }
+.ins.t { background:#fff; }
 .ins-l { font-size:12px; font-weight:500; letter-spacing:.08em; text-transform:uppercase; color:var(--soft); margin-bottom:10px; }
-.ins-t { font-size:17px; font-weight:300; color:var(--gray); line-height:1.7; max-width:none; }
-.ins-t strong { font-weight:400; color:var(--black); }
+.ins-t { font-size:17px; font-weight:400; color:var(--gray); line-height:1.7; max-width:none; }
+.ins-t strong { font-weight:600; color:var(--black); }
 .g4 { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:10px; overflow:hidden; max-width:1000px; margin-top:32px; }
-.card { background:var(--bg); padding:28px 24px; }
-.card.t { background:var(--light); }
+.card { background:var(--bg); padding:28px 24px; text-align:center; }
+.card.t { background:#fff; }
 .ctag { font-size:11px; font-weight:500; letter-spacing:.08em; text-transform:uppercase; color:var(--soft); margin-bottom:10px; }
 .chead { font-size:16px; font-weight:500; color:var(--black); margin-bottom:8px; }
-.cbody { font-size:14px; font-weight:300; color:var(--gray); line-height:1.65; max-width:none; }
+.cbody { font-size:14px; font-weight:400; color:var(--gray); line-height:1.65; max-width:none; }
 .tg4 { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; max-width:1000px; }
-.tg { background:var(--light); border-radius:10px; padding:20px; }
+.tg { background:#fff; border:1px solid #e8e8e5; border-radius:10px; padding:20px; }
 .tg-lbl { font-size:14px; font-weight:400; color:var(--black); text-align:center; margin-bottom:14px; }
 .tg-d { border:1.5px dashed var(--border); border-radius:8px; padding:14px; display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
 .ti { display:flex; flex-direction:column; align-items:center; gap:5px; }
 .ti-i { width:44px; height:44px; border-radius:10px; background:#fff; border:1px solid var(--border); display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:600; color:var(--black); }
-.ti-n { font-size:11px; font-weight:300; color:var(--gray); text-align:center; }
+.ti-n { font-size:11px; font-weight:400; color:var(--gray); text-align:center; }
 .sr { display:grid; grid-template-columns:repeat(3,1fr); border:1px solid var(--border); border-radius:10px; overflow:hidden; max-width:900px; }
-.sc { padding:36px 28px; border-right:1px solid var(--border); }
+.sc { padding:24px 28px; border-right:1px solid var(--border); text-align:center; }
 .sc:last-child { border-right:none; }
-.sn { font-size:48px; font-weight:300; letter-spacing:-.04em; line-height:1; color:var(--black); margin-bottom:8px; }
-.sn span { color:var(--orange); }
-.sd { font-size:16px; font-weight:300; color:var(--gray); line-height:1.5; }
+.sn { font-size:48px; font-weight:400; letter-spacing:-.04em; line-height:1; color:var(--black); margin-bottom:8px; }
+.sn span { color:var(--black); }
+.sd { font-size:16px; font-weight:400; color:var(--gray); line-height:1.5; margin-left:auto; margin-right:auto; }
 .num { font-size:11px; font-weight:500; letter-spacing:.08em; text-transform:uppercase; color:var(--soft); margin-bottom:10px; }
-.img-full { width:100%; display:block; border-radius:10px; }
-footer { padding:80px 60px; background:var(--light); border-top:1px solid var(--border); }
-.f-copy { font-size:13px; color:var(--soft); margin-bottom:14px; }
-.f-rule { border:none; border-top:1px solid var(--border); margin-bottom:28px; }
-.f-cta { font-size:clamp(28px,4vw,52px); font-weight:400; color:var(--black); letter-spacing:-.025em; line-height:1.2; margin-bottom:28px; max-width:700px; }
-.f-cta .script { font-family:var(--script); color:var(--orange); }
-.f-btns { display:flex; gap:8px; }
-.fbtn { display:inline-flex; align-items:center; gap:6px; padding:10px 20px; border:1px solid var(--border); border-radius:100px; font-size:14px; color:var(--black); text-decoration:none; background:var(--bg); transition:all .15s; font-family:var(--f); }
-.fbtn:hover { background:var(--black); color:#fff; border-color:var(--black); }
-@media(max-width:768px){ nav{padding:16px 24px;} .sec{padding:100px 24px;} .meta,.ins2,.g4,.tg4,.sr{grid-template-columns:1fr;} footer{padding:60px 24px;} }
+.img-full { width:100%; height:auto; display:block; border-radius:0; }
+img.cap { max-height:none; }
+@media(max-width:768px){ .sec{padding:clamp(72px,10vw,120px) 16px;} .meta,.ins2,.g4,.tg4,.sr,.img-pair{grid-template-columns:1fr;} }
+
+.sec > .body, .sec > .lead { margin-left: max(0px, calc((100% - 1000px)/2)); margin-right: 0; }
+
+/* DATA VIZ */
+.units { display:flex; flex-wrap:wrap; gap:6px; }
+.unit { width:38px; height:38px; border-radius:6px; background:var(--black); color:var(--bg); font-size:11px; font-weight:500; display:flex; align-items:center; justify-content:center; }
+.units-cap { font-size:14px; font-weight:400; color:var(--soft); margin-bottom:12px; }
+
+/* INTRO GALLERY */
+.lead { font-size:clamp(18px,2vw,24px); font-weight:400; color:var(--black); line-height:1.7; max-width:820px; }
+.sec > .gal { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; width:100vw; max-width:100vw; margin-left:calc(50% - 50vw); padding:0 clamp(16px,2vw,32px); }
+.gtile { overflow:hidden; background:var(--light); }
+.gtile img { width:100%; height:100%; aspect-ratio:4/3; object-fit:cover; display:block; transition:opacity .35s ease; }
+.case-cta { display:flex; justify-content:center; }
+@media(max-width:768px){ .sec > .gal { grid-template-columns:1fr 1fr; } }
 
 /* DARK MODE */
 html.dark { --bg:#0a0a0a; --black:#f0f0ee; --gray:#aaa; --soft:#666; --light:#141414; --border:#2a2a2a; }
 html.dark body { background:#0a0a0a; }
-html.dark nav { background:rgba(10,10,10,.97); }
 html.dark .pill { color:#f0f0ee; border-color:#2a2a2a; }
 html.dark .pill:hover, html.dark .pill.primary { background:#f0f0ee; color:#0a0a0a; border-color:#f0f0ee; }
-html.dark .fbtn { background:#0a0a0a; color:#f0f0ee; border-color:#2a2a2a; }
-html.dark .fbtn:hover { background:#f0f0ee; color:#0a0a0a; }
-html.dark .finding-list, html.dark .finding-list li { border-color:#2a2a2a; }
-html.dark .ins2, html.dark .g4, html.dark .ba, html.dark .arch { background:#2a2a2a; border-color:#2a2a2a; }
+html.dark .ins2, html.dark .g4 { background:#2a2a2a; border-color:#2a2a2a; }
 html.dark .sr { border-color:#2a2a2a; }
 html.dark .sc { border-color:#2a2a2a; }
-html.dark .an, html.dark .comp-card { border-color:#2a2a2a; }
-html.dark footer { background:#141414; border-top-color:#2a2a2a; }
+html.dark .ins.t, html.dark .card.t { background:var(--bg); }
+html.dark .tg { background:var(--bg); border-color:#2a2a2a; }
 html.dark #dm-toggle { background:#141414; border-color:#2a2a2a; color:#f0f0ee; }
-html.dark footer { background:#111 !important; border-top-color:#222 !important; }
-html.dark .f-copy { color:#666 !important; }
-html.dark .f-rule { border-top-color:#333 !important; }
-html.dark .f-cta { color:#e0e0e0 !important; }
-html.dark .fbtn { color:#e0e0e0 !important; border-color:#444 !important; background:transparent !important; }
-html.dark .fbtn:hover { background:#e0e0e0 !important; color:#111 !important; }
+
+h1,h2,h3{text-wrap:balance}
+p,.body,.lead,.sd,.stat-t{text-wrap:pretty}
 </style>
+<noscript><style>.sec { opacity:1 !important; transform:none !important; }</style></noscript>
 </head>
 <body>
 
-<nav id="nav">
-  <ul class="nl"><li><a href="https://drive.google.com/file/d/1l92lnpU0Z_aFT9_kO4f2fLXTiDSLKF9Y/view?usp=sharing" target="_blank">Resume</a></li></ul>
-  <ul class="nr"><li><a href="about.html">About</a></li><li><a href="index.html" class="bold">Maitreyi Bhardwaj</a></li></ul>
+<nav style="position:fixed;top:14px;left:clamp(16px,2vw,32px);z-index:300;">
+  <a href="index.html" aria-label="Back to home" style="display:flex;align-items:center;justify-content:center;width:62px;height:62px;padding:11px;border-radius:50%;background:var(--bg);box-shadow:0 2px 12px rgba(0,0,0,.14);color:var(--black,#0a0a0a);">
+    <svg viewBox="0 0 287 205" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;">
+      <path fill="currentColor" d="M224.188 179.482C223.074 181.616 220.794 182.872 218.396 182.665C207.793 181.751 178.607 179.427 165.432 180.305C149.171 181.389 129.659 191.147 129.659 191.147C129.659 191.147 157.302 171.09 164.348 170.548C170.158 170.101 210.232 170.391 224.122 170.507C226.286 170.525 227.661 172.824 226.66 174.743L224.188 179.482Z"/>
+      <path fill="currentColor" d="M257.599 174.168L251.709 184.108C251.596 184.3 251.835 184.504 252.004 184.358C254.256 182.418 260.252 177.568 266.248 175.427C270.647 173.856 274.499 173.377 276.96 173.253C278.826 173.158 280.487 172.039 281.259 170.338C282.159 168.356 283.046 165.946 282.509 165.087C281.986 164.251 280.9 163.527 280.01 163.037C279.34 162.669 278.526 162.859 278.039 163.447C277.645 163.923 276.991 164.505 275.91 165.087C274.273 165.968 267.958 168.004 263.723 169.326C261.152 170.128 258.972 171.851 257.599 174.168Z"/>
+      <path fill="currentColor" d="M230.93 52.0507C236.137 54.4954 242.881 58.3707 249.65 64.4657C252.129 66.698 258.457 72.6908 264.055 81.928C265.789 84.7899 267.103 87.474 269.73 92.8426C273.209 99.9525 275.771 105.902 276.874 108.572C284.264 126.456 286.507 142.973 286.953 142.882C287.336 142.805 285.27 130.727 283.321 121.49C282.755 118.808 281.26 111.939 278.939 103.882C278.863 103.619 278.798 103.397 278.745 103.214C276.892 96.8777 275.775 93.0577 273.7 88.0779C270.66 80.7831 267.581 75.8416 263.721 69.6471C261.886 66.702 257.485 59.8221 250.948 51.656C247.596 47.4679 244.799 43.9993 240.413 39.7941C236.467 36.0101 232.99 33.3134 230.933 31.7261C227.17 28.8242 224.242 26.8948 220.709 24.5663C216.729 21.9438 214.239 20.3034 210.6 18.3529C207.973 16.9451 208.284 17.271 202.125 14.275C195.67 11.135 195.038 10.6355 190.853 8.74167C188.139 7.51349 185.865 6.49008 182.788 5.38836C178.518 3.86 174.87 2.9563 172.316 2.41534C181.98 8.03509 193.195 15.5441 204.794 25.4844C215.556 34.7067 224.172 43.9003 230.93 52.0507Z"/>
+      <path fill="currentColor" d="M222.303 50.3065C212.804 49.5232 199.025 49.7632 183.947 55.1934C180.081 56.5858 149.632 68.0464 133.48 98.0832C123.98 115.749 127.902 124.079 116.315 134.133C106.293 142.829 99.249 140.164 89.7096 151.3C88.0579 153.228 81.0255 161.127 77.4344 174.65C74.4374 185.936 77.0794 188.741 72.8574 195.311C71.5528 197.34 67.712 203.317 61.3387 204.254C55.3941 205.129 49.955 201.221 45.4165 197.96C43.5956 196.652 41.5578 194.917 37.4823 191.446C33.9956 188.477 32.6364 187.173 29.9488 185.67C26.9072 183.969 24.2959 183.205 23.1686 182.907C19.9415 182.055 16.9708 181.271 13.626 182.154C9.56319 183.226 8.64303 185.783 6.7237 185.123C5.04926 184.546 4.453 182.115 3.18796 177.725C2.69144 176.002 2.46312 174.716 2.04316 172.205C1.12079 166.691 0.659606 163.934 0.482077 162.487C-0.13075 157.494 -0.0459724 153.64 0.123582 145.933C0.299517 137.936 0.844006 131.938 1.11956 129.183C1.19023 128.477 1.5686 124.731 2.19603 120.332C2.95792 114.992 4.64697 103.152 8.03168 92.0802C9.12851 88.4925 13.5472 74.6888 24.061 59.2552C28.8112 52.282 38.7738 39.1473 55.344 27.2415C70.2452 16.5353 83.6428 11.7426 90.7258 9.26854C102.285 5.23026 111.408 3.66315 119.649 2.24769C119.649 2.24769 132.407 0.0557921 149.134 0.000822856C152.886 -0.0119378 158.3 0.0940742 164.577 2.48229C166.942 3.38241 168.761 4.35223 171.643 6.0494C174.838 7.93014 182.296 12.3228 189.283 17.7132C204.481 29.4383 220.643 48.3517 222.303 50.3065Z"/>
+    </svg>
+  </a>
 </nav>
 <button id="dm-toggle" style="position:fixed;bottom:28px;right:28px;z-index:200;width:42px;height:42px;border-radius:50%;border:1px solid var(--border);background:var(--bg);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;">☾</button>
 
@@ -112,8 +117,28 @@ html.dark .fbtn:hover { background:#e0e0e0 !important; color:#111 !important; }
   <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781041541/distill_01_hero_m9wn4n.png" alt="Distill hero" />
 </div>
 
-<!-- 01 OVERVIEW -->
+<!-- INTRO -->
 <div class="sec">
+  <div class="lbl r">Distill</div>
+  <div class="lbl-rule r"></div>
+  <p class="lead r d1">Distill listens to your active browser tab, translates speech into 16 languages, and streams live ASL visual cards, a Chrome extension built in 36 hours that won the Microsoft Track at HackAZona.</p>
+</div>
+
+<!-- INTRO GALLERY -->
+<div class="sec">
+  <div class="gal r d1">
+    <div class="gtile"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/c_fill,g_auto,ar_1.33,f_auto,q_auto/v1781041541/distill_04_mock1_eb3iqp.png" alt="Distill on YouTube" loading="lazy"></div>
+    <div class="gtile" data-alt="https://res.cloudinary.com/df0tysd6u/image/upload/c_fill,g_auto,ar_1.33,f_auto,q_auto/v1781041541/distill_03_what_does_it_do_c7nwsx.png"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/c_fill,g_auto,ar_1.33,f_auto,q_auto/v1781041541/distill_02_UI_bnkfsj.png" alt="Extension UI" loading="lazy"></div>
+    <div class="gtile"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/c_fill,g_auto,ar_1.33,f_auto,q_auto/v1781041541/distill_04_mock2_ASL_dpfqnp.png" alt="ASL cards active" loading="lazy"></div>
+    <div class="gtile" data-alt="https://res.cloudinary.com/df0tysd6u/image/upload/c_fill,g_auto,ar_1.33,f_auto,q_auto/v1781041541/distill_05_how_it_works_ygndkk.png"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/c_fill,g_auto,ar_1.33,f_auto,q_auto/v1781041541/distill_04_mock3_wrxvm2.png" alt="Translated output" loading="lazy"></div>
+    <div class="gtile"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/c_fill,g_auto,ar_1.33,f_auto,q_auto/v1781041542/distill_06_end_ntluo5.png" alt="Every voice heard" loading="lazy"></div>
+    <div class="gtile"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/c_fill,g_auto,ar_1.33,f_auto,q_auto/v1781041541/distill_01_hero_m9wn4n.png" alt="Distill brand" loading="lazy"></div>
+  </div>
+  <div class="case-cta r d2 mt40"><a href="#case" class="pill">View Full Case Study ↓</a></div>
+</div>
+
+<!-- 01 OVERVIEW -->
+<div class="sec" id="case">
   <div class="lbl r">Project Overview</div>
   <div class="lbl-rule r d1"></div>
   <h1 class="r d1">Distill translates active tab audio across 16 languages and streams live ASL visual cards inside a unified Chrome interface.</h1>
@@ -130,22 +155,21 @@ html.dark .fbtn:hover { background:#e0e0e0 !important; color:#111 !important; }
   </div>
 </div>
 
-<!-- 02 WHAT DOES IT DO -->
+<!-- 02+03 WHAT DOES IT DO + UI DESIGN -->
 <div class="sec" id="challenge">
   <div class="lbl r">What It Does</div>
   <div class="lbl-rule r d1"></div>
   <h2 class="r d1">Real-time translation. Cross-platform. ASL accessibility. One extension.</h2>
   <p class="body w r d2 mt16">Distill listens to your active browser tab, translates speech into 16 languages simultaneously, and renders live ASL visual cards alongside the audio. Built for people who are deaf, hard of hearing, or learning a new language in real time.</p>
-  <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781041541/distill_03_what_does_it_do_c7nwsx.png" class="img-full r d3 mt32" alt="Distill features: Realtime Translation, Cross Platform, ASL Accessibility" />
-</div>
-
-<!-- 03 UI DESIGN -->
-<div class="sec" id="features">
-  <div class="lbl r">Interface Design</div>
-  <div class="lbl-rule r d1"></div>
-  <h2 class="r d1">Every component designed for high-speed readability during live speech.</h2>
-  <p class="body w r d2 mt16">Input language as a clear button group. Output as multi-select language tokens with color-coded fills. Speaker Diarization and Float Captions controlled via toggle switches. A single high-visibility blue CTA anchors the panel.</p>
-  <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781041541/distill_02_UI_bnkfsj.png" class="img-full r d3 mt32" alt="Distill extension UI" />
+  <div id="features" class="r d2 mt32">
+    <div class="lbl">Interface Design</div>
+    <h2>Every component designed for high-speed readability during live speech.</h2>
+    <p class="body w mt8">Input language as a clear button group. Output as multi-select language tokens with color-coded fills. Speaker Diarization and Float Captions controlled via toggle switches. A single high-visibility blue CTA anchors the panel.</p>
+  </div>
+  <div class="img-pair r d3 mt32">
+    <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781041541/distill_03_what_does_it_do_c7nwsx.png" loading="lazy" alt="Distill features: Realtime Translation, Cross Platform, ASL Accessibility" />
+    <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781041541/distill_02_UI_bnkfsj.png" loading="lazy" alt="Distill extension UI" />
+  </div>
 </div>
 
 <!-- 04 IN USE -->
@@ -154,9 +178,11 @@ html.dark .fbtn:hover { background:#e0e0e0 !important; color:#111 !important; }
   <div class="lbl-rule r d1"></div>
   <h2 class="r d1">Built to sit on top of any page without breaking it.</h2>
   <p class="body w r d2 mt16">The extension floats over YouTube, Zoom, Meet, and Teams without masking video controls or disrupting layout. Tested live on a Chinese lecture to validate multilingual output in context.</p>
-  <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781041541/distill_04_mock1_eb3iqp.png" class="img-full r d3 mt32" alt="Distill on YouTube , translation active" />
-  <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781041541/distill_04_mock2_ASL_dpfqnp.png" class="img-full r d3 mt24" alt="Distill on YouTube , ASL cards active" />
-  <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781041541/distill_04_mock3_wrxvm2.png" class="img-full r d4 mt24" alt="Distill on YouTube , translated output" />
+  <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781041541/distill_04_mock1_eb3iqp.png" class="img-full cap r d3 mt32" loading="lazy" alt="Distill on YouTube , translation active" />
+  <div class="img-pair r d4 mt24">
+    <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781041541/distill_04_mock2_ASL_dpfqnp.png" loading="lazy" alt="Distill on YouTube , ASL cards active" />
+    <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781041541/distill_04_mock3_wrxvm2.png" loading="lazy" alt="Distill on YouTube , translated output" />
+  </div>
 </div>
 
 <!-- 05 TECHNICAL PIPELINE -->
@@ -186,7 +212,7 @@ html.dark .fbtn:hover { background:#e0e0e0 !important; color:#111 !important; }
       <p class="cbody">Real-time token sync updates the panel. ASL cards populate instantly.</p>
     </div>
   </div>
-  <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781041541/distill_05_how_it_works_ygndkk.png" class="img-full r d3 mt32" alt="How it works , technical pipeline diagram" />
+  <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781041541/distill_05_how_it_works_ygndkk.png" class="img-full r d3 mt32" loading="lazy" alt="How it works , technical pipeline diagram" />
 </div>
 
 <!-- 06 TOOLS -->
@@ -204,11 +230,11 @@ html.dark .fbtn:hover { background:#e0e0e0 !important; color:#111 !important; }
 
 
 <!-- PROTOTYPE VIDEO -->
-<div class="sec" style="min-height:auto;padding-bottom:80px;">
+<div class="sec">
   <div class="lbl r">Prototype</div>
   <div class="lbl-rule r d1"></div>
   <h2 class="r d1">Watch it in action.</h2>
-  <div class="r d2 mt32" style="max-width:1000px;margin-left:auto;margin-right:auto;border-radius:12px;overflow:hidden;aspect-ratio:16/9;">
+  <div class="r d2 mt32" style="max-width:min(1240px,94vw);margin-left:auto;margin-right:auto;border-radius:12px;overflow:hidden;aspect-ratio:16/9;">
     <iframe width="100%" height="100%" src="https://www.youtube.com/embed/r8c9J0EY8eQ?autoplay=1&mute=1&loop=1&playlist=r8c9J0EY8eQ" frameborder="0" allow="autoplay; fullscreen" allowfullscreen style="display:block;"></iframe>
   </div>
 </div>
@@ -222,10 +248,19 @@ html.dark .fbtn:hover { background:#e0e0e0 !important; color:#111 !important; }
     <div class="sc"><div class="sn"><span>36</span>hr</div><p class="sd">full UI system and working backend built in one weekend</p></div>
     <div class="sc"><div class="sn"><span>16</span></div><p class="sd">languages supported with real-time ASL visual output</p></div>
   </div>
-  <div style="margin-top:24px;padding:28px 32px;background:var(--light);border:1px solid var(--border);border-radius:10px;max-width:900px;" class="r d3">
-    <p style="font-size:17px;font-weight:300;font-style:italic;color:var(--black);line-height:1.7;">Assistive products don't have to look clinical. They can be sleek, performant, and seamlessly integrated into daily workflow.</p>
+  <div class="r d3 mt32" style="max-width:900px;">
+    <p class="units-cap">16 live output languages, one square each, all running simultaneously</p>
+    <div class="units">
+      <div class="unit"></div><div class="unit"></div><div class="unit"></div><div class="unit"></div>
+      <div class="unit"></div><div class="unit"></div><div class="unit"></div><div class="unit"></div>
+      <div class="unit"></div><div class="unit"></div><div class="unit"></div><div class="unit"></div>
+      <div class="unit"></div><div class="unit"></div><div class="unit"></div><div class="unit"></div>
+    </div>
   </div>
-  <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781041542/distill_06_end_ntluo5.png" class="img-full r d4 mt32" alt="Every voice heard. Every language understood." />
+  <div style="margin-top:16px;padding:20px 24px;background:var(--bg);border:1px solid var(--border);border-radius:10px;max-width:900px;text-align:center;" class="r d3">
+    <p style="font-size:17px;font-weight:400;font-style:italic;color:var(--black);line-height:1.7;">Assistive products don't have to look clinical. They can be sleek, performant, and seamlessly integrated into daily workflow.</p>
+  </div>
+  <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781041542/distill_06_end_ntluo5.png" class="img-full cap r d4 mt32" loading="lazy" alt="Every voice heard. Every language understood." />
 </div>
 
 <!-- 08 TAKEAWAYS -->
@@ -237,56 +272,9 @@ html.dark .fbtn:hover { background:#e0e0e0 !important; color:#111 !important; }
   <p class="body r d3 mt8">A 36-hour sprint with a clear constraint produces sharper work than an open-ended brief with unlimited time.</p>
 </div>
 
-<!-- CONTACT -->
-<div style="background:var(--light);border-top:1px solid var(--border);padding:80px 80px;">
-  <div style="max-width:600px;margin:0 auto;">
-    <p style="font-size:13px;font-weight:400;color:var(--soft);margin-bottom:10px;letter-spacing:.04em;">Get in touch</p>
-    <div style="height:1px;background:var(--border);margin-bottom:32px;"></div>
-    <h2 style="font-size:clamp(24px,2.8vw,36px);font-weight:400;letter-spacing:-.022em;color:var(--black);margin-bottom:8px;">Send a message.</h2>
-    <p style="font-size:16px;font-weight:300;color:var(--gray);margin-bottom:32px;">Reach out directly. Usually responds within a day.</p>
-    <div style="display:flex;flex-direction:column;gap:16px;">
-      <input id="contact-name" type="text" placeholder="Your name" style="width:100%;padding:14px 18px;border:1px solid var(--border);border-radius:8px;font-size:15px;font-family:var(--f);background:var(--bg);color:var(--black);outline:none;transition:border-color .15s;" onfocus="this.style.borderColor='var(--black)'" onblur="this.style.borderColor='var(--border)'" />
-      <input id="contact-email" type="email" placeholder="Your email" style="width:100%;padding:14px 18px;border:1px solid var(--border);border-radius:8px;font-size:15px;font-family:var(--f);background:var(--bg);color:var(--black);outline:none;transition:border-color .15s;" onfocus="this.style.borderColor='var(--black)'" onblur="this.style.borderColor='var(--border)'" />
-      <textarea id="contact-msg" placeholder="What's on your mind?" rows="4" style="width:100%;padding:14px 18px;border:1px solid var(--border);border-radius:8px;font-size:15px;font-family:var(--f);background:var(--bg);color:var(--black);outline:none;resize:vertical;transition:border-color .15s;" onfocus="this.style.borderColor='var(--black)'" onblur="this.style.borderColor='var(--border)'"></textarea>
-      <button onclick="sendContact()" style="align-self:flex-start;padding:12px 28px;background:var(--black);color:#fff;border:none;border-radius:100px;font-size:14px;font-family:var(--f);font-weight:500;cursor:pointer;transition:all .15s;" onmouseover="this.style.background='#CD5028'" onmouseout="this.style.background='var(--black)'">Send message</button>
-      <p id="contact-status" style="font-size:13px;color:var(--soft);min-height:18px;"></p>
-    </div>
-  </div>
-</div>
-<script>
-function sendContact(){
-  const name=document.getElementById('contact-name').value.trim();
-  const email=document.getElementById('contact-email').value.trim();
-  const msg=document.getElementById('contact-msg').value.trim();
-  const status=document.getElementById('contact-status');
-  if(!name||!email||!msg){status.textContent='Please fill in all fields.';return;}
-  const mailto=`mailto:bhardwajmaitreyi6@gmail.com?subject=Portfolio inquiry from ${encodeURIComponent(name)}&body=${encodeURIComponent('From: '+name+'
-Email: '+email+'
-
-'+msg)}`;
-  window.location.href=mailto;
-  status.textContent='Opening your email client...';
-}
-</script>
-<footer>
-  <p class="f-copy">© 2025 Maitreyi Bhardwaj</p>
-  <hr class="f-rule">
-  <p class="f-cta">Let's build something <span class="script">meaningful</span> together.</p>
-  <div class="f-btns">
-    <a href="mailto:bhardwajmaitreyi6@gmail.com" class="fbtn">bhardwajmaitreyi6@gmail.com</a>
-    <a href="https://www.linkedin.com/in/maitreyi-bhardwaj-3a6358220/" target="_blank" class="fbtn">LinkedIn</a>
-  </div>
-</footer>
+<footer style="padding:18px clamp(16px,2vw,32px);font-size:13px;color:#999;">© 2026 Maitreyi Bhardwaj</footer>
 
 <script>
-let lastY = 0;
-const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => { const y = window.scrollY; if(y > lastY && y > 80) nav.classList.add('hidden'); else nav.classList.remove('hidden'); lastY = y; }, { passive: true });
-const els = document.querySelectorAll('.r');
-const io = new IntersectionObserver(e => e.forEach(x => { if(x.isIntersecting) x.target.classList.add('on'); }), {threshold:.04, rootMargin:'0px 0px -20px 0px'});
-els.forEach(el => io.observe(el));
-window.addEventListener('load', () => els.forEach(el => { if(el.getBoundingClientRect().top < window.innerHeight) el.classList.add('on'); }));
-
 const _dmt = document.getElementById('dm-toggle');
 const _dms = localStorage.getItem('dm');
 if (_dms === '1') { document.documentElement.classList.add('dark'); _dmt.textContent = '☀'; }
@@ -296,6 +284,38 @@ _dmt.addEventListener('click', () => {
   _dmt.textContent = on ? '☀' : '☾';
 });
 
+/* GALLERY CYCLE */
+document.querySelectorAll('.gtile[data-alt]').forEach(function (t, i) {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var img = t.querySelector('img'), a = img.getAttribute('src'), b = t.getAttribute('data-alt'), on = false;
+  setInterval(function () {
+    img.style.opacity = 0;
+    setTimeout(function () { on = !on; img.src = on ? b : a; img.style.opacity = 1; }, 350);
+  }, 4600 + i * 900);
+});
+
+(function () {
+  var secs = document.querySelectorAll('.sec');
+  if (!('IntersectionObserver' in window)) {
+    secs.forEach(function (s) { s.classList.add('live'); });
+    return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        e.target.classList.add('live');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+  secs.forEach(function (s) {
+    if (s.getBoundingClientRect().top < window.innerHeight) {
+      s.classList.add('live');
+    } else {
+      io.observe(s);
+    }
+  });
+})();
 </script>
 </body>
 </html>
