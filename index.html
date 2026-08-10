@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+<script>if(localStorage.getItem("dm")==="1")document.documentElement.classList.add("dark");</script>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Maitreyi Bhardwaj — Product Designer</title>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Dancing+Script:wght@500&display=swap" rel="stylesheet">
+<title>Maitreyi Bhardwaj , Product Designer</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Red+Hat+Display:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
@@ -12,530 +14,423 @@
   --black: #0a0a0a;
   --gray: #666;
   --soft: #999;
-  --light: #f7f7f5;
+  --light: #F8F8F8;
   --border: #e8e8e5;
-  --orange: #CD5028;
-  --f: 'Geist', -apple-system, sans-serif;
-  --script: 'Dancing Script', cursive;
+  --f: 'Inter', -apple-system, sans-serif;
+  --fh: 'Inter', sans-serif;
 }
 html, body { width: 100%; overflow-x: hidden; }
 body { font-family: var(--f); background: var(--bg); color: var(--black); -webkit-font-smoothing: antialiased; }
 
-/* ─── LOADER ─── */
+/* LOADER */
 #loader {
   position: fixed; inset: 0; z-index: 1000;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  background: var(--black);
-  transition: opacity .6s ease, visibility .6s ease;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--bg);
+  transition: opacity .5s ease, visibility .5s ease;
 }
 #loader.out { opacity: 0; visibility: hidden; }
+.loader-head { width: 280px; height: 200px; }
+.loader-head svg { width: 100%; height: 100%; }
 
-.loader-head {
-  position: relative;
-  width: 180px; height: 130px;
-  margin-bottom: 32px;
-}
-
-.loader-head svg {
-  width: 100%; height: 100%;
-  transition: fill .4s ease;
-}
-
-/* Cycling background behind head */
-.loader-bg {
-  position: absolute; inset: -24px;
-  border-radius: 50%;
-  z-index: -1;
-  transition: background .4s ease;
-}
-
-.loader-name {
-  font-size: 22px; font-weight: 400;
-  letter-spacing: -.01em;
-  color: #fff;
-  opacity: 0;
-  transform: translateY(10px);
-  transition: opacity .5s ease, transform .5s ease;
-}
-.loader-name.show { opacity: 1; transform: none; }
-
-.loader-pronunciation {
-  font-size: 14px; font-weight: 300;
-  color: rgba(255,255,255,.45);
-  margin-top: 8px;
-  letter-spacing: .1em;
-  opacity: 0;
-  transition: opacity .5s ease .2s;
-}
-.loader-pronunciation.show { opacity: 1; }
-
-.loader-title {
-  font-size: 13px; font-weight: 400;
-  color: var(--orange);
-  margin-top: 6px;
-  letter-spacing: .06em;
-  text-transform: uppercase;
-  opacity: 0;
-  transition: opacity .5s ease .35s;
-}
-.loader-title.show { opacity: 1; }
-
-/* ─── NAV ─── */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 20px 60px;
-  background: rgba(255,255,255,.97);
-  border-bottom: 1px solid var(--border);
-  transition: transform .3s cubic-bezier(.16,1,.3,1);
-  opacity: 0;
-}
-nav.visible { opacity: 1; transition: opacity .6s ease .2s, transform .3s cubic-bezier(.16,1,.3,1); }
-nav.hidden { transform: translateY(-100%); }
-.nl, .nr { display: flex; gap: 28px; list-style: none; }
-nav a { font-size: 14px; font-weight: 400; color: var(--gray); text-decoration: none; transition: color .15s; }
-nav a:hover { color: var(--black); }
-.nav-name { color: var(--black) !important; font-weight: 500 !important; }
-
-/* ─── REVEAL ─── */
+/* REVEAL */
 .r { opacity: 0; transform: translateY(20px); transition: opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1); }
 .r.on { opacity: 1; transform: none; }
-.d1{transition-delay:.07s} .d2{transition-delay:.14s} .d3{transition-delay:.21s} .d4{transition-delay:.28s} .d5{transition-delay:.35s}
+.d1{transition-delay:.07s} .d2{transition-delay:.14s} .d3{transition-delay:.21s}
 
-/* ─── HERO ─── */
-.hero {
-  min-height: 100vh;
-  display: flex; flex-direction: column; justify-content: center;
-  padding: 120px 60px 80px;
-}
-.hero > * { max-width: 1000px; width: 100%; margin: 0 auto; }
+/* DARK MODE */
+html.dark { --bg:#0a0a0a; --black:#f0f0ee; --gray:#aaa; --soft:#666; --light:#141414; --border:#2a2a2a; }
+html.dark body { background:#0a0a0a; }
+html.dark #dm-toggle { background:#141414; border-color:#2a2a2a; color:#f0f0ee; }
 
-.hero-eyebrow {
-  font-size: 13px; font-weight: 400; color: var(--soft);
-  letter-spacing: .04em; margin-bottom: 28px;
-  display: flex; align-items: center; gap: 12px;
-}
-.hero-eyebrow::after {
-  content: ''; flex: 1; max-width: 48px; height: 1px; background: var(--border);
-}
+/* ============ BENTO HOME ============ */
+/* Full-bleed fluid shell: scales from iPad to ultrawide, no dead margins */
+.bento { width: 100%; padding: clamp(10px, 1.1vw, 16px); display: grid; grid-template-columns: clamp(300px, 25vw, 430px) 1fr; gap: clamp(10px, 1vw, 14px); align-items: stretch; }
+.bento-left { display: flex; flex-direction: column; gap: clamp(10px, 1vw, 14px); }
+/* Lorenzo-style cards: flat grey, no outline, squarer corners */
+.bcard { background: var(--light); border: none; border-radius: 8px; padding: clamp(20px, 1.8vw, 30px); }
+.bcard--name { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: clamp(30px, 2.8vw, 48px) clamp(20px, 1.8vw, 30px); }
+.blogo { width: clamp(165px, 15vw, 240px); height: auto; color: var(--black); display: block; }
+.blogo svg { width: 100%; height: auto; display: block; overflow: visible; }
+.bio-name { font-family: var(--fh); font-size: clamp(20px, 1.6vw, 27px); font-weight: 600; letter-spacing: -.015em; line-height: 1.2; color: var(--black); }
+.bio-pron { font-size: 13px; color: var(--soft); letter-spacing: .04em; margin: 4px 0 16px; }
+.bbio { font-size: 15px; line-height: 1.62; color: var(--gray); font-weight: 400; }
+.bbio b { color: var(--black); font-weight: 500; }
+.bcard-cta { display: flex; gap: 8px; margin-top: 22px; flex-wrap: wrap; }
+.bpill { display: inline-flex; align-items: center; gap: 6px; padding: 10px 20px; border-radius: 100px; font-size: 14px; font-family: var(--f); text-decoration: none; border: 1px solid var(--border); color: var(--black); background: var(--bg); transition: all .15s; }
+.bpill:hover { background: var(--black); color: var(--bg); border-color: var(--black); }
+.bpill--primary { background: var(--black); color: var(--bg); border-color: var(--black); }
+.bpill--primary:hover { background: var(--black); color: var(--bg); }
+.bcard--lists { flex: 1; }
+.blists { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.blist h4 { font-family: var(--fh); font-size: 13px; font-weight: 600; color: var(--black); margin-bottom: 14px; letter-spacing: -.01em; }
+.blist ul { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+.blist li { font-size: 13px; line-height: 1.3; color: var(--soft); }
+/* Browser-style tabs: flaps attached to one big grey sheet that holds the
+   cards. The active tab shares the sheet's fill so they read as one piece. */
+.bento-right { display: flex; flex-direction: column; gap: 0; }
+.bento-tabs { display: flex; gap: 6px; flex-wrap: wrap; }
+.btab { display: inline-flex; align-items: center; padding: 13px 26px 15px; border-radius: 8px 8px 0 0; font-size: 14px; font-weight: 500; font-family: var(--f); border: none; background: #ECECEA; color: var(--soft); cursor: pointer; transition: background .18s, color .18s; white-space: nowrap; }
+.btab:hover { color: var(--black); }
+.btab.active { background: var(--light); color: var(--black); }
+html.dark .btab { background: #1c1c1c; }
+/* The sheet matches the left rail's height (bottom-aligns with the skills
+   card) and the cards scroll INSIDE it, jkane-style */
+.bento-right { min-height: 0; }
+/* no overscroll containment: when the feed ends, the wheel hands off to the
+   page and carries you down to the fish */
+.tabsheet { background: var(--light); border-radius: 0 8px 8px 8px; padding: clamp(18px, 1.8vw, 28px); flex: 1 1 0; min-height: 0; overflow-y: auto; scrollbar-width: thin; scrollbar-color: #d8d8d5 transparent; }
+.tabsheet::-webkit-scrollbar { width: 8px; }
+.tabsheet::-webkit-scrollbar-thumb { background: #d8d8d5; border-radius: 8px; }
+html.dark .tabsheet { scrollbar-color: #333 transparent; }
+html.dark .tabsheet::-webkit-scrollbar-thumb { background: #333; }
+/* jkane-style scroll feed: ONE big card per row, alternating left/right,
+   the rest of the row left as empty sheet. Big enough that you scroll. */
+.bento-grid { display: flex; flex-direction: column; gap: clamp(72px, 7vw, 120px); }
+.bento-grid[hidden] { display: none; }
+/* each project reads as a mini case study: hero, blurb, image strip, CTA */
+.proj-sec { display: flex; flex-direction: column; gap: clamp(14px, 1.4vw, 22px); }
+.proj-desc { max-width: 680px; margin: clamp(4px, 0.6vw, 10px) 0 0; text-align: left; font-size: 15px; line-height: 1.65; color: var(--gray); }
+.proj-imgs { display: flex; gap: clamp(10px, 1vw, 14px); }
+.proj-imgs .pi { position: relative; flex: var(--ar) 1 0%; aspect-ratio: var(--ar); min-width: 0; border-radius: 8px; overflow: hidden; background: #ECECEA; }
+html.dark .proj-imgs .pi { background: #1c1c1c; }
+.proj-imgs img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0; transition: opacity .5s ease; }
+.proj-sec:hover .proj-imgs img:not(.img-alt) { opacity: 1; }
+/* second image inside a strip cell: ambient crossfade, some cells stay static */
+.proj-imgs .img-alt { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .8s ease; }
+.proj-sec:hover .pi.flip .img-alt { opacity: 1; }
+.jrow { display: flex; justify-content: flex-start; }
+.jrow--end { justify-content: flex-end; }
+.jtile { flex: none; }
+/* hero cards at the banners' EXACT ratio: images fill flush, zero bands */
+.jtile--cube { width: 78%; aspect-ratio: 1.85; }
+.btile--nda { cursor: default; }
+.btile--nda img { filter: blur(16px); transform: scale(1.12); }
+.btile--nda:hover img { transform: scale(1.12); }
+.nda-cap { position: absolute; inset: 0; z-index: 3; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; background: rgba(10,10,10,0.28); }
+.nda-t { font-size: clamp(22px, 2vw, 30px); font-weight: 600; color: #fff; letter-spacing: -.01em; }
+.nda-s { font-size: 14px; color: rgba(255,255,255,0.85); }
+.btile-empty { display: flex; align-items: center; justify-content: center; background: var(--bg); border: none; border-radius: 8px; color: var(--soft); font-size: 13px; letter-spacing: .02em; }
+.btile { position: relative; display: block; border-radius: 8px; overflow: hidden; text-decoration: none; background: var(--bg); border: none; }
+.btile img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .55s cubic-bezier(.16,1,.3,1), opacity .4s ease; }
+.btile .img-hover { opacity: 0; z-index: 2; transition: opacity .8s ease; }
+.btile:hover .img-hover, .btile.flip .img-hover { opacity: 1; }
+.btile:hover img { transform: scale(1.04); }
+/* Captions stay hidden until hover: pure imagery, jkane-style */
+.btile-cap { position: absolute; left: 0; right: 0; bottom: 0; z-index: 3; padding: 18px 20px; display: flex; flex-direction: column; gap: 2px; background: linear-gradient(to top, rgba(10,10,10,.62), rgba(10,10,10,.1) 55%, transparent); opacity: 0; transform: translateY(8px); transition: opacity .25s ease, transform .25s ease; }
+.btile:hover .btile-cap { opacity: 1; transform: none; }
+.btile-cap .t { font-family: var(--fh); font-size: 15px; font-weight: 600; color: #fff; letter-spacing: -.01em; }
+.btile-cap .s { font-size: 12px; color: rgba(255,255,255,.82); }
+.btile .arw { position: absolute; top: 16px; right: 18px; z-index: 3; font-size: 16px; color: #fff; opacity: 0; transform: translateY(-2px); transition: all .2s; }
+.btile:hover .arw { opacity: 1; transform: none; }
+@media (hover: none) { .btile-cap { opacity: 1; transform: none; } }
 
-.hero h1 {
-  font-size: clamp(36px, 5.5vw, 72px);
-  font-weight: 400; letter-spacing: -.03em;
-  line-height: 1.04; color: var(--black);
-  margin-bottom: 24px;
-  max-width: 820px;
-}
+/* Socials card: just the two marks */
+.bcard--social { display: flex; gap: 10px; padding: 22px 30px; }
+.sicon { width: 46px; height: 46px; border-radius: 50%; border: none; background: var(--bg); color: var(--black); display: inline-flex; align-items: center; justify-content: center; transition: all .15s; }
+.sicon:hover { background: var(--black); color: var(--bg); }
+.sicon svg { width: 19px; height: 19px; display: block; fill: currentColor; }
 
-.hero h1 .ora { color: var(--orange); }
-.hero h1 .script { font-family: var(--script); font-size: 1.05em; color: var(--black); }
+/* Fish panel: a black slab card, white pixel fish under a starfield */
+.fishwrap { width: 100%; padding: 0 clamp(10px, 1.1vw, 16px) clamp(12px, 1.4vw, 18px); }
+.fishcard { background: #0a0a0a; border: none; border-radius: 8px; padding: 20px 26px; }
+.fish-row { display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: #9a9a96; }
+.fish-row--top { padding-bottom: 8px; }
+.fish-row--bottom { padding-top: 8px; color: #6d6d68; }
+#fish-time { font-variant-numeric: tabular-nums; }
+#fc-canvas { display: block; width: 100%; height: 320px; cursor: crosshair; touch-action: pan-y; image-rendering: pixelated; }
 
-.hero-sub {
-  font-size: 18px; font-weight: 300; color: var(--gray);
-  max-width: 460px; line-height: 1.65; margin-bottom: 40px;
+@media(max-width: 900px){
+  .bento { grid-template-columns: 1fr; }
+  /* on small screens the sheet grows naturally; the page itself scrolls */
+  .tabsheet { flex: none; overflow-y: visible; }
 }
-
-.hero-pills { display: flex; gap: 10px; flex-wrap: wrap; }
-.pill {
-  display: inline-flex; align-items: center; gap: 6px;
-  padding: 10px 20px; border: 1px solid var(--border);
-  border-radius: 100px; font-size: 13px; font-family: var(--f);
-  color: var(--gray); text-decoration: none; transition: all .15s;
-}
-.pill:hover { background: var(--black); color: #fff; border-color: var(--black); }
-.pill .dot { width: 6px; height: 6px; border-radius: 50%; background: #3cb371; flex-shrink: 0; }
-
-/* ─── PROJECTS LABEL ─── */
-.projects-label {
-  text-align: center;
-  font-size: 11px; font-weight: 500;
-  letter-spacing: .14em; text-transform: uppercase;
-  color: var(--soft);
-  padding: 40px 60px 32px;
-  border-top: 1px solid var(--border);
-}
-
-/* ─── PROJECT GRID — like the reference sites ─── */
-.grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1px;
-  background: var(--border);
-  border-top: 1px solid var(--border);
-}
-
-.proj {
-  background: var(--bg);
-  text-decoration: none;
-  display: block;
-  position: relative;
-  overflow: hidden;
-  transition: background .2s;
-}
-.proj:hover { background: var(--light); }
-.proj:hover .proj-img-inner { transform: scale(1.02); }
-
-.proj-img {
-  width: 100%; height: 380px;
-  overflow: hidden;
-  background: var(--light);
-  position: relative;
-}
-.proj-img-inner {
-  width: 100%; height: 100%;
-  display: flex; align-items: center; justify-content: center;
-  transition: transform .5s cubic-bezier(.16,1,.3,1);
-  background: var(--light);
-  position: relative;
-  overflow: hidden;
-}
-
-/* Placeholder patterns per project */
-.proj-img-inner::before {
-  content: ''; position: absolute; inset: 0;
-  background: repeating-linear-gradient(45deg,transparent,transparent 24px,rgba(0,0,0,.025) 24px,rgba(0,0,0,.025) 25px);
-}
-
-.proj-img .label {
-  position: relative; z-index: 1;
-  font-size: 11px; color: var(--soft); letter-spacing: .04em;
-}
-
-.proj-body { padding: 32px 36px 40px; border-top: 1px solid var(--border); }
-
-.proj-tags {
-  display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px;
-}
-.tag {
-  font-size: 11px; font-weight: 500; letter-spacing: .06em;
-  text-transform: uppercase; color: var(--soft);
-  padding: 4px 10px; border: 1px solid var(--border);
-  border-radius: 4px;
-}
-.tag.orange { color: var(--orange); border-color: rgba(205,80,40,.25); background: rgba(205,80,40,.05); }
-
-.proj-title {
-  font-size: clamp(20px, 2.2vw, 28px);
-  font-weight: 400; letter-spacing: -.02em;
-  color: var(--black); margin-bottom: 10px;
-  line-height: 1.15;
-}
-
-.proj-desc {
-  font-size: 15px; font-weight: 300;
-  color: var(--gray); line-height: 1.65;
-  max-width: 460px;
+@media(max-width: 640px){
+  .jrow { flex-direction: column; }
+  .jtile--rect, .jtile--sq { width: 100%; }
+  .proj-imgs { flex-direction: column; }
+  .proj-imgs .pi { width: 100%; flex: none; }
+  .btab { padding: 10px 16px; font-size: 13px; }
+  #fc-canvas { height: 240px; }
+  /* keep the fixed dark-mode button off the fish card's bottom row */
+  .fishwrap { padding-bottom: 88px; }
 }
 
-.proj-arrow {
-  position: absolute; bottom: 36px; right: 36px;
-  width: 36px; height: 36px;
-  border: 1px solid var(--border); border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 14px; color: var(--black);
-  transition: all .2s;
-}
-.proj:hover .proj-arrow {
-  background: var(--black); color: #fff; border-color: var(--black);
-}
+/* EXPERIENCE + CONNECT */
+.exp { padding: clamp(70px,11vh,150px) 0 0; }
+.exp .plabel, .connect .plabel { font-size:17px; font-weight:600; margin-bottom:18px; padding:0 clamp(20px,3.5vw,56px); }
+.exp h2, .connect h2 { font-family:'Red Hat Display',var(--f); font-size:clamp(26px,2.6vw,40px); font-weight:700; letter-spacing:-.018em; margin-bottom:clamp(36px,4vw,60px); padding:0 clamp(20px,3.5vw,56px); }
+.xtable { border-top:1px solid var(--border); }
+.xrow { display:grid; grid-template-columns:minmax(150px,.8fr) minmax(300px,1.9fr) minmax(160px,.9fr); gap:clamp(20px,4vw,70px); align-items:baseline; padding:28px clamp(20px,3.5vw,56px); border-bottom:1px solid var(--border); text-decoration:none; color:var(--black); transition:background .15s; }
+a.xrow:hover { background:var(--light); }
+.xrow .xc { font-size:17px; font-weight:500; }
+.xrow .xd { font-size:17px; }
+.xrow .xs { font-size:16px; color:var(--soft); text-align:right; }
+.connect { padding: clamp(90px,14vh,190px) 0 clamp(40px,6vh,80px); }
+.connect .cbig { display:inline-block; font-family:'Red Hat Display',var(--f); font-size:clamp(26px,4.2vw,64px); font-weight:700; letter-spacing:-.02em; color:var(--black); text-decoration:none; border-bottom:3px solid var(--black); padding-bottom:6px; margin:0 clamp(20px,3.5vw,56px); }
+.connect .cbig:hover { opacity:.6; }
+.connect .csub { margin:26px clamp(20px,3.5vw,56px) 0; font-size:16px; color:var(--gray); }
+.connect .csub a { color:var(--black); text-underline-offset:3px; }
+@media(max-width:900px){ .xrow { grid-template-columns:1fr; gap:6px; padding:22px clamp(20px,3.5vw,56px); } .xrow .xs { text-align:left; } .connect .cbig { font-size:clamp(20px,6vw,34px); word-break:break-all; } }
 
-/* Wide project (spans full width) */
-.proj.wide { grid-column: 1 / -1; }
-.proj.wide .proj-img { height: 460px; }
+/* MINIMAL HOME */
+.mini-nav { display:flex; justify-content:space-between; align-items:center; padding:26px clamp(20px,3.5vw,56px); font-size:15px; flex-wrap:wrap; gap:14px; }
+.mini-nav a { color:var(--black); text-decoration:none; transition:opacity .15s; }
+.mini-nav a:hover { opacity:.55; }
+.hero-min { min-height: calc(100svh - 96px); display:flex; flex-direction:column; justify-content:center; padding:0 clamp(20px,3.5vw,56px) clamp(60px,10vh,120px); will-change:opacity,transform; }
+.nb { white-space:nowrap; }
+.hero-min h1 { font-family:'Red Hat Display',var(--f); font-size:clamp(19px,4.3vw,66px); font-weight:500; letter-spacing:-.025em; line-height:1.18; color:var(--black); margin:0; max-width:1250px; }
+.hero-logo { display:inline-block; vertical-align:-.1em; }
+.hero-logo svg { height:.82em; width:auto; display:inline-block; fill:currentColor; }
+.hero-meta { margin-top:26px; font-size:clamp(15px,1.35vw,19px); color:var(--gray); }
+.hero-meta + .hero-meta { margin-top:8px; }
+/* PROCESS */
+.proc { padding: clamp(60px,10vh,140px) clamp(20px,3.5vw,56px) clamp(90px,14vh,200px); }
+.proc .plabel, .proc h2, .pstep { opacity:0; transform:translateY(26px); transition:opacity .9s cubic-bezier(.16,1,.3,1), transform .9s cubic-bezier(.16,1,.3,1); }
+.proc .on { opacity:1; transform:none; }
+.ptag { display:inline-block; padding:3px 10px; border-radius:6px; font-size:12.5px; font-weight:600; background:var(--light); color:var(--black); margin-right:4px; }
+html.dark .ptag { background:#1c1c1c; }
+@media (prefers-reduced-motion: reduce) { .proc .plabel, .proc h2, .pstep { opacity:1; transform:none; transition:none; } }
+.proc .plabel { font-size:17px; font-weight:600; margin-bottom:18px; }
+.proc h2 { font-family:'Red Hat Display',var(--f); font-size:clamp(26px,2.6vw,40px); font-weight:700; letter-spacing:-.018em; margin-bottom:clamp(44px,5vw,74px); }
+.plist { display:grid; grid-template-columns:repeat(6,1fr); gap:32px; }
+.pstep { position:relative; }
+.pstep .pn { font-family:'Red Hat Display',var(--f); font-size:clamp(34px,3vw,52px); font-weight:700; line-height:1; color:#DDDDD8; margin-bottom:16px; }
+html.dark .pstep .pn { color:#2e2e2e; }
+.pstep h4 { font-family:'Red Hat Display',var(--f); font-size:17px; font-weight:700; line-height:1.25; margin-bottom:10px; }
+.pstep p { font-size:14px; line-height:1.65; color:var(--gray); }
+@media(max-width:1080px){ .plist { grid-template-columns:repeat(3,1fr); row-gap:48px; } }
+@media(max-width:640px){ .plist { grid-template-columns:1fr 1fr; } }
 
-/* ─── ABOUT STRIP ─── */
-.about {
-  padding: 100px 60px;
-  border-top: 1px solid var(--border);
-  display: flex; flex-direction: column; align-items: flex-start;
-}
-.about > * { max-width: 1000px; width: 100%; margin: 0 auto; }
+.works { display:grid; grid-template-columns:1fr 1fr; gap:clamp(36px,4vw,64px) clamp(20px,2.5vw,40px); padding:clamp(40px,6vh,90px) clamp(20px,3.5vw,56px) clamp(70px,9vw,120px); }
+.wcard { display:block; text-decoration:none; color:var(--black); transition: opacity .4s ease; }
+.works:hover .wcard { opacity: .15; }
+.works:hover .wcard:hover { opacity: 1; }
+.wimg { position:relative; border-radius:16px; overflow:hidden; aspect-ratio:2.05; background:var(--light); }
+.wimg img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .5s cubic-bezier(.16,1,.3,1); }
+.wcard:hover .wimg img { transform:scale(1.03); }
+.wcard h3 { font-family:'Red Hat Display',var(--f); margin-top:18px; font-size:clamp(20px,1.9vw,28px); font-weight:700; letter-spacing:-.015em; }
+.wcard p { margin-top:8px; font-size:15px; color:var(--gray); }
+.wcard--nda { cursor:default; }
+.wimg--nda img { filter:blur(14px); transform:scale(1.1); }
+.wcard--nda:hover .wimg img { transform:scale(1.1); }
+.wnda { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px; background:rgba(10,10,10,.28); }
+.wnda-t { font-size:clamp(20px,1.8vw,26px); font-weight:600; color:#fff; }
+.wnda-s { font-size:14px; color:rgba(255,255,255,.85); }
+@media(max-width:760px){ .works { grid-template-columns:1fr; } .mini-nav { font-size:14px; } .hero-min { padding-top:clamp(50px,9vh,100px); } }
 
-.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
-
-.about-left h2 {
-  font-size: clamp(28px, 3.5vw, 44px);
-  font-weight: 400; letter-spacing: -.022em;
-  line-height: 1.1; color: var(--black);
-  margin-bottom: 24px;
-}
-.about-left p {
-  font-size: 17px; font-weight: 300;
-  color: var(--gray); line-height: 1.75;
-}
-
-.about-right { padding-top: 8px; }
-.about-item {
-  padding: 18px 0; border-bottom: 1px solid var(--border);
-  display: flex; justify-content: space-between; align-items: baseline;
-}
-.about-item:first-child { border-top: 1px solid var(--border); }
-.about-label { font-size: 12px; font-weight: 400; color: var(--soft); letter-spacing: .04em; }
-.about-val { font-size: 15px; font-weight: 400; color: var(--black); }
-
-/* ─── FOOTER ─── */
-footer {
-  padding: 80px 60px;
-  background: var(--light);
-  border-top: 1px solid var(--border);
-}
-.f-copy { font-size: 13px; color: var(--soft); margin-bottom: 14px; }
-.f-rule { border: none; border-top: 1px solid var(--border); margin-bottom: 28px; }
-.f-cta {
-  font-size: clamp(28px, 4vw, 52px);
-  font-weight: 400; color: var(--black);
-  letter-spacing: -.025em; line-height: 1.2;
-  margin-bottom: 28px; max-width: 700px;
-}
-.f-cta .script { font-family: var(--script); color: var(--orange); }
-.f-btns { display: flex; gap: 8px; }
-.fbtn {
-  display: inline-flex; align-items: center; gap: 6px;
-  padding: 10px 20px; border: 1px solid var(--border);
-  border-radius: 100px; font-size: 14px; color: var(--black);
-  text-decoration: none; background: var(--bg);
-  transition: all .15s; font-family: var(--f);
-}
-.fbtn:hover { background: var(--black); color: #fff; border-color: var(--black); }
-
-@media(max-width:768px){
-  nav{padding:16px 24px;}
-  .hero{padding:110px 24px 64px;}
-  .grid{grid-template-columns:1fr;}
-  .proj.wide{grid-column:1;}
-  .about-grid{grid-template-columns:1fr;}
-  footer{padding:60px 24px;}
-  .projects-label{padding:32px 24px 24px;}
-}
+h1,h2,h3{text-wrap:balance}
+p,.body,.lead,.sd,.stat-t{text-wrap:pretty}
 </style>
 </head>
 <body>
 
-<!-- ─── LOADER ─── -->
+<!-- LOADER -->
 <div id="loader">
   <div class="loader-head">
-    <div class="loader-bg" id="loaderBg"></div>
     <svg id="loaderSvg" viewBox="0 0 287 205" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <g clip-path="url(#c0)">
-        <path id="p1" d="M224.188 179.482C223.074 181.616 220.794 182.872 218.396 182.665C207.793 181.751 178.607 179.427 165.432 180.305C149.171 181.389 129.659 191.147 129.659 191.147C129.659 191.147 157.302 171.09 164.348 170.548C170.158 170.101 210.232 170.391 224.122 170.507C226.286 170.525 227.661 172.824 226.66 174.743L224.188 179.482Z"/>
-        <path id="p2" d="M257.599 174.168L251.709 184.108C251.596 184.3 251.835 184.504 252.004 184.358C254.256 182.418 260.252 177.568 266.248 175.427C270.647 173.856 274.499 173.377 276.96 173.253C278.826 173.158 280.487 172.039 281.259 170.338C282.159 168.356 283.046 165.946 282.509 165.087C281.986 164.251 280.9 163.527 280.01 163.037C279.34 162.669 278.526 162.859 278.039 163.447C277.645 163.923 276.991 164.505 275.91 165.087C274.273 165.968 267.958 168.004 263.723 169.326C261.152 170.128 258.972 171.851 257.599 174.168Z"/>
-        <path id="p3" d="M230.93 52.0507C236.137 54.4954 242.881 58.3707 249.65 64.4657C252.129 66.698 258.457 72.6908 264.055 81.928C265.789 84.7899 267.103 87.474 269.73 92.8426C273.209 99.9525 275.771 105.902 276.874 108.572C284.264 126.456 286.507 142.973 286.953 142.882C287.336 142.805 285.27 130.727 283.321 121.49C282.755 118.808 281.26 111.939 278.939 103.882C278.863 103.619 278.798 103.397 278.745 103.214C276.892 96.8777 275.775 93.0577 273.7 88.0779C270.66 80.7831 267.581 75.8416 263.721 69.6471C261.886 66.702 257.485 59.8221 250.948 51.656C247.596 47.4679 244.799 43.9993 240.413 39.7941C236.467 36.0101 232.99 33.3134 230.933 31.7261C227.17 28.8242 224.242 26.8948 220.709 24.5663C216.729 21.9438 214.239 20.3034 210.6 18.3529C207.973 16.9451 208.284 17.271 202.125 14.275C195.67 11.135 195.038 10.6355 190.853 8.74167C188.139 7.51349 185.865 6.49008 182.788 5.38836C178.518 3.86 174.87 2.9563 172.316 2.41534C181.98 8.03509 193.195 15.5441 204.794 25.4844C215.556 34.7067 224.172 43.9003 230.93 52.0507Z"/>
-        <path id="p4" d="M222.303 50.3065C212.804 49.5232 199.025 49.7632 183.947 55.1934C180.081 56.5858 149.632 68.0464 133.48 98.0832C123.98 115.749 127.902 124.079 116.315 134.133C106.293 142.829 99.249 140.164 89.7096 151.3C88.0579 153.228 81.0255 161.127 77.4344 174.65C74.4374 185.936 77.0794 188.741 72.8574 195.311C71.5528 197.34 67.712 203.317 61.3387 204.254C55.3941 205.129 49.955 201.221 45.4165 197.96C43.5956 196.652 41.5578 194.917 37.4823 191.446C33.9956 188.477 32.6364 187.173 29.9488 185.67C26.9072 183.969 24.2959 183.205 23.1686 182.907C19.9415 182.055 16.9708 181.271 13.626 182.154C9.56319 183.226 8.64303 185.783 6.7237 185.123C5.04926 184.546 4.453 182.115 3.18796 177.725C2.69144 176.002 2.46312 174.716 2.04316 172.205C1.12079 166.691 0.659606 163.934 0.482077 162.487C-0.13075 157.494 -0.0459724 153.64 0.123582 145.933C0.299517 137.936 0.844006 131.938 1.11956 129.183C1.19023 128.477 1.5686 124.731 2.19603 120.332C2.95792 114.992 4.64697 103.152 8.03168 92.0802C9.12851 88.4925 13.5472 74.6888 24.061 59.2552C28.8112 52.282 38.7738 39.1473 55.344 27.2415C70.2452 16.5353 83.6428 11.7426 90.7258 9.26854C102.285 5.23026 111.408 3.66315 119.649 2.24769C119.649 2.24769 132.407 0.0557921 149.134 0.000822856C152.886 -0.0119378 158.3 0.0940742 164.577 2.48229C166.942 3.38241 168.761 4.35223 171.643 6.0494C174.838 7.93014 182.296 12.3228 189.283 17.7132C204.481 29.4383 220.643 48.3517 222.303 50.3065Z"/>
+      <g clip-path="url(#lc)">
+        <path id="p1" fill="#fff" d="M224.188 179.482C223.074 181.616 220.794 182.872 218.396 182.665C207.793 181.751 178.607 179.427 165.432 180.305C149.171 181.389 129.659 191.147 129.659 191.147C129.659 191.147 157.302 171.09 164.348 170.548C170.158 170.101 210.232 170.391 224.122 170.507C226.286 170.525 227.661 172.824 226.66 174.743L224.188 179.482Z"/>
+        <path id="p2" fill="#fff" d="M257.599 174.168L251.709 184.108C251.596 184.3 251.835 184.504 252.004 184.358C254.256 182.418 260.252 177.568 266.248 175.427C270.647 173.856 274.499 173.377 276.96 173.253C278.826 173.158 280.487 172.039 281.259 170.338C282.159 168.356 283.046 165.946 282.509 165.087C281.986 164.251 280.9 163.527 280.01 163.037C279.34 162.669 278.526 162.859 278.039 163.447C277.645 163.923 276.991 164.505 275.91 165.087C274.273 165.968 267.958 168.004 263.723 169.326C261.152 170.128 258.972 171.851 257.599 174.168Z"/>
+        <path id="p3" fill="#fff" d="M230.93 52.0507C236.137 54.4954 242.881 58.3707 249.65 64.4657C252.129 66.698 258.457 72.6908 264.055 81.928C265.789 84.7899 267.103 87.474 269.73 92.8426C273.209 99.9525 275.771 105.902 276.874 108.572C284.264 126.456 286.507 142.973 286.953 142.882C287.336 142.805 285.27 130.727 283.321 121.49C282.755 118.808 281.26 111.939 278.939 103.882C278.863 103.619 278.798 103.397 278.745 103.214C276.892 96.8777 275.775 93.0577 273.7 88.0779C270.66 80.7831 267.581 75.8416 263.721 69.6471C261.886 66.702 257.485 59.8221 250.948 51.656C247.596 47.4679 244.799 43.9993 240.413 39.7941C236.467 36.0101 232.99 33.3134 230.933 31.7261C227.17 28.8242 224.242 26.8948 220.709 24.5663C216.729 21.9438 214.239 20.3034 210.6 18.3529C207.973 16.9451 208.284 17.271 202.125 14.275C195.67 11.135 195.038 10.6355 190.853 8.74167C188.139 7.51349 185.865 6.49008 182.788 5.38836C178.518 3.86 174.87 2.9563 172.316 2.41534C181.98 8.03509 193.195 15.5441 204.794 25.4844C215.556 34.7067 224.172 43.9003 230.93 52.0507Z"/>
+        <path id="p4" fill="#fff" d="M222.303 50.3065C212.804 49.5232 199.025 49.7632 183.947 55.1934C180.081 56.5858 149.632 68.0464 133.48 98.0832C123.98 115.749 127.902 124.079 116.315 134.133C106.293 142.829 99.249 140.164 89.7096 151.3C88.0579 153.228 81.0255 161.127 77.4344 174.65C74.4374 185.936 77.0794 188.741 72.8574 195.311C71.5528 197.34 67.712 203.317 61.3387 204.254C55.3941 205.129 49.955 201.221 45.4165 197.96C43.5956 196.652 41.5578 194.917 37.4823 191.446C33.9956 188.477 32.6364 187.173 29.9488 185.67C26.9072 183.969 24.2959 183.205 23.1686 182.907C19.9415 182.055 16.9708 181.271 13.626 182.154C9.56319 183.226 8.64303 185.783 6.7237 185.123C5.04926 184.546 4.453 182.115 3.18796 177.725C2.69144 176.002 2.46312 174.716 2.04316 172.205C1.12079 166.691 0.659606 163.934 0.482077 162.487C-0.13075 157.494 -0.0459724 153.64 0.123582 145.933C0.299517 137.936 0.844006 131.938 1.11956 129.183C1.19023 128.477 1.5686 124.731 2.19603 120.332C2.95792 114.992 4.64697 103.152 8.03168 92.0802C9.12851 88.4925 13.5472 74.6888 24.061 59.2552C28.8112 52.282 38.7738 39.1473 55.344 27.2415C70.2452 16.5353 83.6428 11.7426 90.7258 9.26854C102.285 5.23026 111.408 3.66315 119.649 2.24769C119.649 2.24769 132.407 0.0557921 149.134 0.000822856C152.886 -0.0119378 158.3 0.0940742 164.577 2.48229C166.942 3.38241 168.761 4.35223 171.643 6.0494C174.838 7.93014 182.296 12.3228 189.283 17.7132C204.481 29.4383 220.643 48.3517 222.303 50.3065Z"/>
       </g>
-      <defs>
-        <clipPath id="c0"><rect width="287" height="204.379" fill="white"/></clipPath>
-      </defs>
+      <defs><clipPath id="lc"><rect width="287" height="204.379" fill="white"/></clipPath></defs>
     </svg>
   </div>
-  <div class="loader-name" id="loaderName">Maitreyi Bhardwaj</div>
-  <div class="loader-pronunciation" id="loaderPron">my · TRAY · ee · BHAR · dj</div>
-  <div class="loader-title" id="loaderTitle">Product Designer</div>
 </div>
 
-<!-- ─── NAV ─── -->
-<nav id="nav">
-  <ul class="nl">
-    <li><a href="#work">Work</a></li>
-    <li><a href="#about">About</a></li>
-  </ul>
-  <ul class="nr">
-    <li><a href="https://linkedin.com/in/maitreyi-bhardwaj" target="_blank">LinkedIn</a></li>
-    <li><a href="Maitreyi_Bhardwaj_Resume.pdf" target="_blank">Resume</a></li>
-    <li><a href="#" class="nav-name">Maitreyi Bhardwaj</a></li>
-  </ul>
-</nav>
+<!-- top navbar removed -->
 
-<!-- ─── HERO ─── -->
-<section class="hero">
-  <p class="hero-eyebrow r">Product Designer · Tempe, Arizona · Open to Work</p>
-  <h1 class="r d1">
-    Maitreyi designs systems that feel <span class="ora">human</span> — across physical products, digital interfaces, and the space <span class="script">between.</span>
-  </h1>
-  <p class="hero-sub r d2">
-    5 years building at the intersection of UX research, brand systems, and product engineering.
-  </p>
-  <div class="hero-pills r d3">
-    <span class="pill"><span class="dot"></span> Available June 2025</span>
-    <a href="#work" class="pill">↓ View Work</a>
-    <a href="mailto:mbhardw9@asu.edu" class="pill">mbhardw9@asu.edu</a>
+<button id="dm-toggle" style="position:fixed;bottom:28px;right:28px;z-index:200;width:42px;height:42px;border-radius:50%;border:1px solid var(--border);background:var(--bg);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;">☾</button>
+
+<!-- NAV -->
+<header class="mini-nav">
+  <a href="#works">Works</a>
+  <a href="about.html">About me</a>
+  <a href="resume.pdf" target="_blank">Resume</a>
+  <a href="mailto:bhardwajmaitreyi6@gmail.com">Say Hello</a>
+</header>
+
+<!-- HERO -->
+<section class="hero-min">
+  <h1><span class="nb">Hey there! I'm <span class="hero-logo"><svg viewBox="0 0 287 205" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M224.188 179.482C223.074 181.616 220.794 182.872 218.396 182.665C207.793 181.751 178.607 179.427 165.432 180.305C149.171 181.389 129.659 191.147 129.659 191.147C129.659 191.147 157.302 171.09 164.348 170.548C170.158 170.101 210.232 170.391 224.122 170.507C226.286 170.525 227.661 172.824 226.66 174.743L224.188 179.482Z"/><path fill="currentColor" d="M257.599 174.168L251.709 184.108C251.596 184.3 251.835 184.504 252.004 184.358C254.256 182.418 260.252 177.568 266.248 175.427C270.647 173.856 274.499 173.377 276.96 173.253C278.826 173.158 280.487 172.039 281.259 170.338C282.159 168.356 283.046 165.946 282.509 165.087C281.986 164.251 280.9 163.527 280.01 163.037C279.34 162.669 278.526 162.859 278.039 163.447C277.645 163.923 276.991 164.505 275.91 165.087C274.273 165.968 267.958 168.004 263.723 169.326C261.152 170.128 258.972 171.851 257.599 174.168Z"/><path fill="currentColor" d="M230.93 52.0507C236.137 54.4954 242.881 58.3707 249.65 64.4657C252.129 66.698 258.457 72.6908 264.055 81.928C265.789 84.7899 267.103 87.474 269.73 92.8426C273.209 99.9525 275.771 105.902 276.874 108.572C284.264 126.456 286.507 142.973 286.953 142.882C287.336 142.805 285.27 130.727 283.321 121.49C282.755 118.808 281.26 111.939 278.939 103.882C278.863 103.619 278.798 103.397 278.745 103.214C276.892 96.8777 275.775 93.0577 273.7 88.0779C270.66 80.7831 267.581 75.8416 263.721 69.6471C261.886 66.702 257.485 59.8221 250.948 51.656C247.596 47.4679 244.799 43.9993 240.413 39.7941C236.467 36.0101 232.99 33.3134 230.933 31.7261C227.17 28.8242 224.242 26.8948 220.709 24.5663C216.729 21.9438 214.239 20.3034 210.6 18.3529C207.973 16.9451 208.284 17.271 202.125 14.275C195.67 11.135 195.038 10.6355 190.853 8.74167C188.139 7.51349 185.865 6.49008 182.788 5.38836C178.518 3.86 174.87 2.9563 172.316 2.41534C181.98 8.03509 193.195 15.5441 204.794 25.4844C215.556 34.7067 224.172 43.9003 230.93 52.0507Z"/><path fill="currentColor" d="M222.303 50.3065C212.804 49.5232 199.025 49.7632 183.947 55.1934C180.081 56.5858 149.632 68.0464 133.48 98.0832C123.98 115.749 127.902 124.079 116.315 134.133C106.293 142.829 99.249 140.164 89.7096 151.3C88.0579 153.228 81.0255 161.127 77.4344 174.65C74.4374 185.936 77.0794 188.741 72.8574 195.311C71.5528 197.34 67.712 203.317 61.3387 204.254C55.3941 205.129 49.955 201.221 45.4165 197.96C43.5956 196.652 41.5578 194.917 37.4823 191.446C33.9956 188.477 32.6364 187.173 29.9488 185.67C26.9072 183.969 24.2959 183.205 23.1686 182.907C19.9415 182.055 16.9708 181.271 13.626 182.154C9.56319 183.226 8.64303 185.783 6.7237 185.123C5.04926 184.546 4.453 182.115 3.18796 177.725C2.69144 176.002 2.46312 174.716 2.04316 172.205C1.12079 166.691 0.659606 163.934 0.482077 162.487C-0.13075 157.494 -0.0459724 153.64 0.123582 145.933C0.299517 137.936 0.844006 131.938 1.11956 129.183C1.19023 128.477 1.5686 124.731 2.19603 120.332C2.95792 114.992 4.64697 103.152 8.03168 92.0802C9.12851 88.4925 13.5472 74.6888 24.061 59.2552C28.8112 52.282 38.7738 39.1473 55.344 27.2415C70.2452 16.5353 83.6428 11.7426 90.7258 9.26854C102.285 5.23026 111.408 3.66315 119.649 2.24769C119.649 2.24769 132.407 0.0557921 149.134 0.000822856C152.886 -0.0119378 158.3 0.0940742 164.577 2.48229C166.942 3.38241 168.761 4.35223 171.643 6.0494C174.838 7.93014 182.296 12.3228 189.283 17.7132C204.481 29.4383 220.643 48.3517 222.303 50.3065Z"/></svg></span> Maitreyi Bhardwaj</span><br>I design UI and build design systems, the kind where every value has a reason and a source.</h1>
+  <p class="hero-meta">UI Designer @ D2Bridge (contract)</p>
+  <p class="hero-meta">Based in West Chester, Pennsylvania</p>
+</section>
+
+<!-- PROCESS -->
+<section class="proc">
+  <p class="plabel">(my process)</p>
+  <h2>How I build design systems</h2>
+  <div class="plist">
+    <div class="pstep"><div class="pn">01</div><h4>Define principles &amp; guidelines</h4><p>Set the rules: what the system believes, and what good looks like.</p></div>
+    <div class="pstep"><div class="pn">02</div><h4>Select a methodology</h4><p>Structure it, usually Atomic Design. Clear levels, clear jobs.</p></div>
+    <div class="pstep"><div class="pn">03</div><h4>Build the component library</h4><p>Every component, every state, bound to tokens. I use AI to generate edge-case variants and stress-test naming.</p></div>
+    <div class="pstep"><div class="pn">04</div><h4>Collaborative iteration</h4><p>Refine with designers and devs on real screens. AI prototypes let us test flows before anything ships.</p></div>
+    <div class="pstep"><div class="pn">05</div><h4>Documentation</h4><p>Usage, accessibility, do's and don'ts. AI drafts the first pass, I make it true. <span class="ptag">zeroheight</span><span class="ptag">Storybook</span><span class="ptag">Figma</span></p></div>
+    <div class="pstep"><div class="pn">06</div><h4>Maintenance &amp; governance</h4><p>Versioning and contribution rules that keep the system alive and trusted.</p></div>
   </div>
 </section>
 
-<!-- ─── PROJECTS ─── -->
-<div class="projects-label r" id="work">PROJECTS</div>
-
-<div class="grid">
-
-  <!-- FRONTDOOR — WIDE -->
-  <a href="frontdoor.html" class="proj wide r">
-    <div class="proj-img">
-      <div class="proj-img-inner" style="background:#f0ede8;padding:0;">
-        <img src="01_hero.jpeg" alt="Home Passport" style="width:100%;height:100%;object-fit:cover;display:block;">
-      </div>
-    </div>
-    <div class="proj-body">
-      <div class="proj-tags">
-        <span class="tag orange">Industry Studio</span>
-        <span class="tag">Service Design</span>
-        <span class="tag">UI Systems</span>
-        <span class="tag">Physical Prototype</span>
-      </div>
-      <div class="proj-title">FrontDoor × AHS — Home Passport</div>
-      <p class="proj-desc">Redesigned the AHS app and NFC onboarding system to make connecting a home appliance as easy as tapping your phone. 12 steps to 3 taps.</p>
-    </div>
-    <div class="proj-arrow">↗</div>
+<!-- WORKS -->
+<section class="works" id="works">
+  <a class="wcard" href="frontdoor.html">
+    <div class="wimg"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/fd_01_hero_hlcjsk.png" alt="Home Passport hero"></div>
+    <h3>Frontdoor App Design System Redesign</h3>
+    <p>American Home Shield / 2026</p>
   </a>
-
-  <!-- PASTICHE -->
-  <a href="pastiche.html" class="proj r d1">
-    <div class="proj-img">
-      <div class="proj-img-inner" style="background:#f5f0ea;">
-        <span class="label">01_hero.png</span>
-      </div>
-    </div>
-    <div class="proj-body">
-      <div class="proj-tags">
-        <span class="tag orange">Live Product</span>
-        <span class="tag">Figma Plugin</span>
-        <span class="tag">Client-Side ML</span>
-      </div>
-      <div class="proj-title">Pastiche — Color Archaeology</div>
-      <p class="proj-desc">Solo-built Figma plugin extracting color tokens from museum masterworks. $0/month infrastructure. Approved by Figma Community next day.</p>
-    </div>
-    <div class="proj-arrow">↗</div>
+  <a class="wcard" href="vibin.html">
+    <div class="wimg"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/vibin_01_hero_qsdrid.png" alt="Vibin hero"></div>
+    <h3>Vibin iOS App</h3>
+    <p>Components, UI &amp; UX / 2025</p>
   </a>
-
-  <!-- DISTILL -->
-  <a href="distill.html" class="proj r d2">
-    <div class="proj-img">
-      <div class="proj-img-inner" style="background:#edf0f5;">
-        <span class="label">01_hero.png</span>
-      </div>
-    </div>
-    <div class="proj-body">
-      <div class="proj-tags">
-        <span class="tag orange">$2,000 Winner</span>
-        <span class="tag">HackAZona</span>
-        <span class="tag">Accessibility</span>
-      </div>
-      <div class="proj-title">Distill — Real-Time ASL Translation</div>
-      <p class="proj-desc">Chrome extension translating active tab audio across 16 languages with live ASL visual cards. Built and shipped in 36 hours.</p>
-    </div>
-    <div class="proj-arrow">↗</div>
+  <a class="wcard" href="pastiche.html">
+    <div class="wimg"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/pastiche_01_hero_st6gjl.png" alt="Pastiche hero"></div>
+    <h3>Pastiche Figma Plugin</h3>
+    <p>Design System / 2026</p>
   </a>
-
-</div>
-
-<!-- ─── ABOUT ─── -->
-<section class="about" id="about">
-  <div class="about-grid r">
-    <div class="about-left">
-      <h2>Product designer who builds what she designs.</h2>
-      <p class="mt24" style="font-size:17px;font-weight:300;color:var(--gray);line-height:1.75;">BS Industrial Design from ASU Herberger. Foundation from National Institute of Design. I work across physical product, digital UI, service design, and brand systems — often all four at once.</p>
-      <p style="font-size:17px;font-weight:300;color:var(--gray);line-height:1.75;margin-top:16px;">Google Packaging Mentorship. Nielsen Norman certified. IDSA Chapter President. FemTech 1st place. HackAZona winner.</p>
-    </div>
-    <div class="about-right r d1">
-      <div class="about-item">
-        <span class="about-label">Education</span>
-        <span class="about-val">ASU Herberger · NID Andhra Pradesh</span>
-      </div>
-      <div class="about-item">
-        <span class="about-label">Currently</span>
-        <span class="about-val">Awaiting OPT · June 2025</span>
-      </div>
-      <div class="about-item">
-        <span class="about-label">Based</span>
-        <span class="about-val">Tempe, Arizona</span>
-      </div>
-      <div class="about-item">
-        <span class="about-label">Tools</span>
-        <span class="about-val">Figma · Claude · VS Code · Rhino</span>
-      </div>
-      <div class="about-item">
-        <span class="about-label">Recognition</span>
-        <span class="about-val">Google · NNG · TiE Phoenix · FemTech</span>
-      </div>
-    </div>
+  <a class="wcard" href="distill.html">
+    <div class="wimg"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/distill_01_hero_m9wn4n.png" alt="Distill hero"></div>
+    <h3>Distill Chrome Extension</h3>
+    <p>UI Design / 2026</p>
+  </a>
+  <div class="wcard wcard--nda">
+    <div class="wimg wimg--nda"><img src="d2bridge.png" alt="D2Bridge, under NDA"><span class="wnda"><span class="wnda-t">D2Bridge</span><span class="wnda-s">Under NDA · Password protected</span></span></div>
+    <h3>D2Bridge HMI Design System</h3>
+    <p>Under NDA / 2026</p>
   </div>
 </section>
 
-<!-- ─── FOOTER ─── -->
-<footer>
-  <p class="f-copy">© 2025 Maitreyi Bhardwaj</p>
-  <hr class="f-rule">
-  <p class="f-cta">Let's build something <span class="script">meaningful</span> together.</p>
-  <div class="f-btns">
-    <a href="mailto:mbhardw9@asu.edu" class="fbtn">mbhardw9@asu.edu</a>
-    <a href="https://linkedin.com/in/maitreyi-bhardwaj" target="_blank" class="fbtn">LinkedIn</a>
-    <a href="Maitreyi_Bhardwaj_Resume.pdf" target="_blank" class="fbtn">Resume</a>
+<!-- EXPERIENCE -->
+<section class="exp">
+  <p class="plabel">(experience)</p>
+  <h2>Where I've worked</h2>
+  <div class="xtable">
+    <div class="xrow"><span class="xc">D2Bridge</span><span class="xd">UI Designer, 72kW HMI design system (contract)</span><span class="xs">2026 – Present</span></div>
+    <div class="xrow"><span class="xc">University College ASU</span><span class="xd">Designer, IA and navigation for 15+ platforms used by 10,000+ students</span><span class="xs">Jan 2026 – Present</span></div>
+    <div class="xrow"><span class="xc">VisLab ASU</span><span class="xd">Visual Designer, NASA Psyche mission and NextGen research sites</span><span class="xs">Jun – Dec 2025</span></div>
+    <a class="xrow" href="vibin.html"><span class="xc">Vibin</span><span class="xd">Product Designer and Co-founder, live social discovery iOS app</span><span class="xs">Apr 2025 – Present</span></a>
+    <div class="xrow"><span class="xc">City of Chandler</span><span class="xd">Creative Arts Fellow, research and visual design for community arts</span><span class="xs">Oct 2025 – Present</span></div>
+    <div class="xrow"><span class="xc">IDSA at ASU</span><span class="xd">President, workshops and portfolio reviews for 50+ students</span><span class="xs">Aug 2025 – Present</span></div>
+    <div class="xrow"><span class="xc">BodyStories Teresa Fellion Dance</span><span class="xd">Design Intern, editorial layouts across web and print</span><span class="xs">Jan 2024 – May 2025</span></div>
   </div>
-</footer>
+</section>
 
-<style>
-.mt24{margin-top:24px}
-</style>
+<!-- LET'S CONNECT -->
+<section class="connect">
+  <p class="plabel">(let's connect)</p>
+  <h2>Have a project or a role in mind?</h2>
+  <a class="cbig" href="mailto:bhardwajmaitreyi6@gmail.com">bhardwajmaitreyi6@gmail.com</a>
+  <p class="csub">Or find me on <a href="https://www.linkedin.com/in/maitreyi-bhardwaj-3a6358220/" target="_blank">LinkedIn</a>, I read everything.</p>
+</section>
+
+<footer style="display:flex;justify-content:space-between;padding:60px clamp(20px,3.5vw,56px) 40px;font-size:13px;color:var(--soft);"><span>© 2026 Maitreyi Bhardwaj</span><span>byMaitreyi</span></footer>
 
 <script>
-// ─── LOADER COLOR CYCLE ───
-const colors = ['#CD5028','#0a0a0a','#2a2a2a','#CD5028','#1a1a1a'];
-const svgFills = ['#ffffff','#CD5028','#ffffff','#CD5028','#ffffff'];
-const bgColors = ['#CD5028','#ffffff','#CD5028','#222222','#CD5028'];
+// LOADER , cycles b&w bg/logo combos then exits
+const frames = [
+  ['#0a0a0a', '#ffffff'],
+  ['#f7f7f5', '#0a0a0a'],
+  ['#ffffff', '#0a0a0a'],
+  ['#0a0a0a', '#f0f0ee'],
+  ['#e8e8e5', '#0a0a0a'],
+  ['#ffffff', '#0a0a0a'],
+];
 let ci = 0;
-const svg = document.getElementById('loaderSvg');
-const bg = document.getElementById('loaderBg');
 const loader = document.getElementById('loader');
 
 function setPaths(fill) {
   ['p1','p2','p3','p4'].forEach(id => {
-    document.getElementById(id).style.fill = fill;
+    const el = document.getElementById(id);
+    if (el) el.setAttribute('fill', fill);
   });
 }
 
-// Initial state — orange bg, white head
-document.body.style.overflow = 'hidden';
-loader.style.background = '#0a0a0a';
-setPaths('#ffffff');
+function startReveal() {
+  const els = Array.from(document.querySelectorAll('.r'));
+  // reveal on scroll: each element waits until it is genuinely in view,
+  // so the next thing stays empty until you arrive at it
+  const io = new IntersectionObserver(e => e.forEach(x => {
+    if (x.isIntersecting) { x.target.classList.add('on'); io.unobserve(x.target); }
+  }), { threshold: .15, rootMargin: '0px 0px -70px 0px' });
+  els.forEach(el => io.observe(el));
+  // what's already on screen enters slowly, one after the other
+  els.filter(el => el.getBoundingClientRect().top < window.innerHeight)
+     .forEach((el, i) => setTimeout(() => el.classList.add('on'), 150 + i * 300));
+}
 
-// Cycle colors
-const cycleInterval = setInterval(() => {
-  ci = (ci + 1) % colors.length;
-  loader.style.background = colors[ci];
-  setPaths(svgFills[ci]);
-}, 350);
+// the moving intro plays only on the first visit this session;
+// after that the loader just fades straight out
+if (sessionStorage.getItem('mbSeenIntro')) {
+  loader.style.background = '#fff';
+  setPaths('#0a0a0a');
+  requestAnimationFrame(() => loader.classList.add('out'));
+  setTimeout(startReveal, 120);
+} else {
+  sessionStorage.setItem('mbSeenIntro', '1');
+  document.body.style.overflow = 'hidden';
+  loader.style.background = frames[0][0];
+  setPaths(frames[0][1]);
 
-// After 1.4s show name
-setTimeout(() => {
-  clearInterval(cycleInterval);
-  loader.style.background = '#0a0a0a';
-  setPaths('#ffffff');
-  document.getElementById('loaderName').classList.add('show');
-  document.getElementById('loaderPron').classList.add('show');
-  document.getElementById('loaderTitle').classList.add('show');
-}, 1400);
+  const cycle = setInterval(() => {
+    ci = (ci + 1) % frames.length;
+    loader.style.background = frames[ci][0];
+    setPaths(frames[ci][1]);
+  }, 200);
 
-// After 2.6s exit loader
-setTimeout(() => {
-  loader.classList.add('out');
-  document.body.style.overflow = '';
-  document.getElementById('nav').classList.add('visible');
-  // trigger reveals
   setTimeout(() => {
-    const els = document.querySelectorAll('.r');
-    const io = new IntersectionObserver(e => e.forEach(x => { if(x.isIntersecting) x.target.classList.add('on'); }), {threshold:.04, rootMargin:'0px 0px -20px 0px'});
-    els.forEach(el => io.observe(el));
-    els.forEach(el => { if(el.getBoundingClientRect().top < window.innerHeight) el.classList.add('on'); });
-  }, 100);
-}, 2800);
+    clearInterval(cycle);
+    loader.style.background = '#fff';
+    setPaths('#0a0a0a');
+  }, 1200);
 
-// Nav hide/show on scroll
-let lastY = 0;
-const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => {
-  const y = window.scrollY;
-  if (y > lastY && y > 80) nav.classList.add('hidden');
-  else nav.classList.remove('hidden');
-  lastY = y;
-}, { passive: true });
+  setTimeout(() => {
+    loader.classList.add('out');
+    document.body.style.overflow = '';
+    setTimeout(startReveal, 100);
+  }, 1500);
+}
+
+// (top nav removed)
+
+const _dmt = document.getElementById('dm-toggle');
+const _dms = localStorage.getItem('dm');
+if (_dms === '1') { document.documentElement.classList.add('dark'); _dmt.textContent = '☀'; }
+_dmt.addEventListener('click', () => {
+  const on = document.documentElement.classList.toggle('dark');
+  localStorage.setItem('dm', on ? '1' : '0');
+  _dmt.textContent = on ? '☀' : '☾';
+});
+
+
+</script>
+
+
+
+
+<script>
+// hero fades as you scroll; the six steps load in slowly
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
+  const hero=document.querySelector('.hero-min');
+  addEventListener('scroll',()=>{
+    const f=Math.min(1,Math.max(0,scrollY/(innerHeight*0.55)));
+    hero.style.opacity=(1-f).toFixed(3);
+    hero.style.transform='translateY('+(-f*44).toFixed(1)+'px)';
+  },{passive:true});
+}
+(function(){
+  const els=[document.querySelector('.proc .plabel'),document.querySelector('.proc h2'),...document.querySelectorAll('.pstep')].filter(Boolean);
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches){ els.forEach(e=>e.classList.add('on')); return; }
+  const io=new IntersectionObserver(en=>en.forEach(x=>{
+    if(x.isIntersecting){
+      const i=els.indexOf(x.target);
+      setTimeout(()=>x.target.classList.add('on'), Math.max(0,i)*170);
+      io.unobserve(x.target);
+    }
+  }),{threshold:.2});
+  els.forEach(e=>io.observe(e));
+})();
 </script>
 </body>
 </html>

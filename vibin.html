@@ -6,353 +6,178 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Vibin , Maitreyi Bhardwaj</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-:root { --bg:#fff; --black:#0a0a0a; --gray:#666; --soft:#999; --light:#F8F8F8; --border:#e8e8e5; --f:'Inter',-apple-system,sans-serif; }
+:root {
+  --bg: #EFEEEA; --black: #1a1a1a; --gray: #4b4b48; --soft: #8b8b86;
+  --border: #dddcd6; --dark: #171717; --dark2: #242224; --dinklight: #cfcfcb;
+  --f: 'Inter', -apple-system, sans-serif;
+  --fd: 'Red Hat Display', 'Inter', sans-serif;
+  --pad: clamp(20px, 4vw, 64px);
+}
 body { font-family: var(--f); background: var(--bg); color: var(--black); -webkit-font-smoothing: antialiased; overflow-x: clip; }
-.r { opacity:1; transform:none; transition:none; }
-.sec { display:flex; flex-direction:column; padding:clamp(88px,9vw,150px) 80px; opacity:0; transform:translateY(16px); transition:opacity .55s ease, transform .55s ease; }
-.sec.live { opacity:1; transform:none; }
-.sec>* { max-width:min(1240px,94vw); width:100%; margin-left:auto; margin-right:auto; }
-.sec>img, .sec>.imgrow, .sec>figure { width:100vw; max-width:100vw; margin-left:calc(50% - 50vw); margin-top:48px; }
-.sec img { width:100%; height:auto; display:block; }
-.lbl { font-size:12px; font-weight:500; letter-spacing:.07em; text-transform:uppercase; color:var(--soft); margin-bottom:8px; }
-.lbl-rule { height:1px; background:var(--border); margin-bottom:18px; }
-h1 { font-size:clamp(40px,5.2vw,78px); font-weight:400; letter-spacing:-.03em; line-height:1.05; color:var(--black); margin-bottom:20px; }
-h2 { font-size:clamp(32px,4vw,60px); font-weight:400; letter-spacing:-.028em; line-height:1.06; color:var(--black); margin-bottom:16px; }
-h3 { font-size:clamp(18px,2vw,24px); font-weight:600; letter-spacing:-.01em; line-height:1.25; color:var(--black); margin-bottom:10px; }
-.body { font-size:18px; font-weight:400; color:var(--black); line-height:1.75; max-width:640px; }
-.body.w { max-width:700px; }
-.mt8{margin-top:8px}.mt16{margin-top:16px}.mt24{margin-top:24px}.mt32{margin-top:32px}.mt40{margin-top:40px}.mt56{margin-top:56px}
-.imgrow { display:grid; grid-template-columns:1fr; gap:24px; align-items:start; }
-.imgrow img { width:100%; height:auto; display:block; border-radius:0; }
-.tworow { display:grid; grid-template-columns:minmax(0,1fr) minmax(260px,420px); gap:36px; align-items:start; }
-.pills { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:28px; }
-.pill { padding:10px 22px; border:1px solid var(--border); border-radius:100px; font-size:14px; font-family:var(--f); color:var(--black); text-decoration:none; transition:all .15s; }
-.pill:hover,.pill.primary { background:var(--black); color:#fff; border-color:var(--black); }
-.meta { display:grid; grid-template-columns:repeat(4,1fr); column-gap:48px; max-width:1000px; margin-top:32px; margin-bottom:72px; }
-.mc { padding:20px 0; border-top:1px solid var(--border); }
-.ml { font-size:13px; color:var(--soft); margin-bottom:6px; }
-.mv { font-size:17px; font-weight:400; color:var(--black); line-height:1.4; }
-.img-full { width:100%; display:block; border-radius:0; }
-.ins2 { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--border); border:1px solid var(--border); border-radius:10px; overflow:hidden; max-width:900px; margin-top:40px; }
-.ins { background:var(--bg); padding:32px; }
-.ins.t { background:#fff; border:1px solid #e8e8e5; }
-.ins-l { font-size:12px; font-weight:500; letter-spacing:.08em; text-transform:uppercase; color:var(--soft); margin-bottom:10px; }
-.ins-t { font-size:17px; font-weight:400; color:var(--gray); line-height:1.7; }
-.ins-t strong { font-weight:600; color:var(--black); }
-.g3 { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:10px; overflow:hidden; max-width:1000px; margin-top:32px; }
-.g4 { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:10px; overflow:hidden; max-width:1000px; margin-top:32px; }
-.card { background:var(--bg); padding:28px 24px; text-align:center; }
-.card.t { background:#fff; border:1px solid #e8e8e5; }
-.ctag { font-size:11px; font-weight:500; letter-spacing:.08em; text-transform:uppercase; color:var(--soft); margin-bottom:10px; }
-.chead { font-size:16px; font-weight:500; color:var(--black); margin-bottom:8px; }
-.cbody { font-size:14px; font-weight:400; color:var(--gray); line-height:1.65; }
-.sr { display:grid; grid-template-columns:repeat(3,1fr); border:1px solid var(--border); border-radius:10px; overflow:hidden; max-width:900px; margin-top:40px; }
-.sc { padding:36px 28px; border-right:1px solid var(--border); text-align:center; }
-.sc:last-child { border-right:none; }
-.sn { font-size:48px; font-weight:400; letter-spacing:-.04em; line-height:1; color:var(--black); margin-bottom:8px; }
-.sn span { color:var(--black); }
-.sd { font-size:16px; font-weight:400; color:var(--gray); line-height:1.5; }
-.sec > .body, .sec > .lead { margin-left: max(0px, calc((100% - min(1240px,94vw))/2)); margin-right: 0; }
-.sec > .viz { margin-left: max(0px, calc((100% - min(1240px,94vw))/2)); margin-right: 0; }
+img { max-width: 100%; display: block; }
+h1,h2,h3,h4 { font-family: var(--fd); text-wrap: balance; }
+p { text-wrap: pretty; }
 
-/* DATA VIZ BARS */
-.viz { max-width:900px; margin-top:28px; }
-.viz-row { display:flex; align-items:center; gap:16px; margin-top:14px; }
-.viz-lbl { flex:0 0 clamp(140px,24vw,250px); font-size:14px; font-weight:400; color:var(--gray); text-align:right; line-height:1.35; }
-.viz-track { flex:1; height:18px; background:var(--light); border-radius:4px; overflow:hidden; }
-.viz-fill { height:100%; width:0; background:var(--black); border-radius:0 4px 4px 0; transition:width 1s cubic-bezier(.16,1,.3,1) .25s; }
-.sec.live .viz-fill { width:var(--w); }
-.viz-val { flex:0 0 110px; font-size:14px; font-weight:500; color:var(--black); }
-@media (prefers-reduced-motion: reduce) { .viz-fill { transition:none; width:var(--w); } }
+.mini-nav { display: flex; justify-content: space-between; align-items: center; padding: 28px var(--pad); font-size: 15px; flex-wrap: wrap; gap: 14px; }
+.mini-nav a { color: var(--black); text-decoration: none; transition: opacity .15s; }
+.mini-nav a:hover { opacity: .55; }
 
-/* INTRO GALLERY */
-.lead { font-size:clamp(18px,2vw,24px); font-weight:400; color:var(--black); line-height:1.7; max-width:820px; }
-.sec > .gal { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; width:100vw; max-width:100vw; margin-left:calc(50% - 50vw); padding:0 clamp(16px,2vw,32px); }
-.gtile { overflow:hidden; background:var(--light); }
-.gtile img { width:100%; height:100%; aspect-ratio:4/3; object-fit:cover; display:block; transition:opacity .35s ease; }
-.case-cta { display:flex; justify-content:center; }
-@media(max-width:768px){ .sec > .gal { grid-template-columns:1fr 1fr; } }
+.case-hero { padding: 8px var(--pad) 0; }
+.case-hero img { width: 100%; max-height: 84vh; object-fit: cover; border-radius: 28px; opacity: 0; transform: scale(.94); animation: heroIn 1.3s cubic-bezier(.16,1,.3,1) .15s forwards; }
+@keyframes heroIn { 0% { opacity: 0; transform: scale(.94); } 45% { opacity: 1; } 100% { opacity: 1; transform: scale(1); } }
+@media (prefers-reduced-motion: reduce) { .case-hero img { animation: none; opacity: 1; transform: none; } }
 
-/* DARK MODE */
-html.dark { --bg:#0a0a0a; --black:#f0f0ee; --gray:#aaa; --soft:#666; --light:#141414; --border:#2a2a2a; }
-html.dark body { background:#0a0a0a; }
-html.dark .ins.t,html.dark .card.t { background:var(--bg); border-color:var(--border); }
-html.dark .pill { color:#f0f0ee; border-color:#2a2a2a; }
-html.dark .pill:hover,html.dark .pill.primary { background:#f0f0ee; color:#0a0a0a; border-color:#f0f0ee; }
-html.dark .ins2,html.dark .g3,html.dark .g4 { background:#2a2a2a; border-color:#2a2a2a; }
-html.dark .sr { border-color:#2a2a2a; }
-html.dark .sc { border-color:#2a2a2a; }
-html.dark #dm-toggle { background:#141414; border-color:#2a2a2a; color:#f0f0ee; }
-@media(max-width:768px){ .sec{padding:clamp(72px,10vw,120px) 24px;} .meta,.ins2,.g3,.g4,.sr,.imgrow,.tworow{grid-template-columns:1fr;} }
+.split { display: grid; grid-template-columns: minmax(280px, 1fr) 1.35fr; gap: clamp(32px, 5vw, 100px); padding: clamp(80px, 11vw, 180px) var(--pad); align-items: start; }
+.split h1 { font-size: clamp(38px, 4.2vw, 68px); font-weight: 700; letter-spacing: -.02em; line-height: 1.06; }
+.plabel { font-size: 17px; font-weight: 600; margin-bottom: 18px; }
+.split p, .prob p { font-size: 17px; line-height: 1.8; color: var(--gray); max-width: 720px; }
+.split p + p { margin-top: 18px; }
+.meta-rule { border: none; border-top: 1px solid var(--border); margin: 44px 0; }
+.meta4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+.meta4 .ml { font-size: 14px; color: var(--soft); margin-bottom: 8px; }
+.meta4 .mv { font-size: 16px; font-weight: 500; }
 
-h1,h2,h3{text-wrap:balance}
-p,.body,.lead,.sd,.stat-t{text-wrap:pretty}
+.prob { padding: 0 var(--pad) clamp(90px, 12vw, 190px); max-width: 1200px; }
+.prob .plabel { margin-bottom: 24px; }
+.prob h2 { font-size: clamp(32px, 3.6vw, 58px); font-weight: 700; letter-spacing: -.018em; line-height: 1.1; margin-bottom: 28px; }
+
+.bts { background: var(--dark); color: #fff; border-radius: 44px; margin: 0 10px; padding: clamp(90px, 12vw, 190px) var(--pad) clamp(80px, 10vw, 150px); }
+.bts-pill { display: inline-block; border: 1px solid rgba(255,255,255,.45); border-radius: 100px; padding: 10px 20px; font-size: 14px; letter-spacing: .1em; text-transform: uppercase; color: #fff; }
+.bts-title { font-size: clamp(40px, 4.8vw, 78px); font-weight: 700; letter-spacing: -.015em; margin: 38px 0 0; }
+.chap { display: grid; grid-template-columns: minmax(240px, 1fr) 1.4fr; gap: clamp(32px, 5vw, 100px); padding-top: clamp(120px, 16vw, 240px); align-items: start; }
+.chap-side { position: sticky; top: 120px; display: flex; align-items: center; gap: 16px; }
+.chap-side .tick { width: 56px; height: 1px; background: rgba(255,255,255,.7); flex: none; }
+.chap-side .lab { font-size: 17px; color: #fff; }
+.chap-main h3 { font-size: clamp(30px, 3.4vw, 56px); font-weight: 700; letter-spacing: -.015em; line-height: 1.1; margin-bottom: 30px; }
+.chap-main > p { font-size: 17px; line-height: 1.85; color: var(--dinklight); max-width: 700px; }
+.chap-main > p + p { margin-top: 18px; }
+.dcards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 48px; max-width: 860px; }
+.dcard { background: var(--dark2); border-radius: 16px; padding: 26px 24px; }
+.dcard h4 { font-size: 17px; font-weight: 600; color: #fff; margin-bottom: 10px; }
+.dcard p { font-size: 14px; line-height: 1.65; color: var(--dinklight); }
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 64px; max-width: 780px; }
+.stat .n { font-family: var(--fd); font-size: clamp(46px, 4.8vw, 78px); font-weight: 500; line-height: 1; }
+.stat .c { margin-top: 14px; font-size: 15px; line-height: 1.55; color: var(--dinklight); }
+
+/* image strip: auto-scrolls, and you can grab or scroll it yourself */
+.marq { overflow-x: auto; margin-top: clamp(64px, 8vw, 120px); border-radius: 18px; cursor: grab; scrollbar-width: none; -ms-overflow-style: none; -webkit-overflow-scrolling: touch; }
+.marq::-webkit-scrollbar { display: none; }
+.marq.dragging { cursor: grabbing; }
+.marq-track { display: flex; gap: 18px; width: max-content; }
+.marq img { height: clamp(180px, 32vw, 400px); width: auto; border-radius: 14px; background: var(--dark2); pointer-events: none; }
+
+.outcome { padding: clamp(90px, 12vw, 180px) var(--pad) clamp(60px, 7vw, 100px); }
+.outcome h2 { font-size: clamp(32px, 3.6vw, 58px); font-weight: 700; letter-spacing: -.018em; max-width: 950px; }
+.outcome p { margin-top: 26px; font-size: 17px; line-height: 1.8; color: var(--gray); max-width: 740px; }
+.case-next { display: inline-block; margin-top: 40px; font-size: 16px; font-weight: 500; color: var(--black); text-decoration: none; border-bottom: 1px solid var(--black); padding-bottom: 3px; }
+.case-next:hover { opacity: .6; }
+
+footer { display: flex; justify-content: space-between; padding: 30px var(--pad) 44px; font-size: 13px; color: var(--soft); }
+
+@media(max-width: 860px){
+  .mini-nav { font-size: 14px; }
+  .case-hero img { border-radius: 18px; }
+  .bts-title { font-size: clamp(34px, 9vw, 48px); }
+  .split, .chap { grid-template-columns: 1fr; }
+  .chap-side { position: static; }
+  .meta4 { grid-template-columns: 1fr 1fr; }
+  .stats { grid-template-columns: 1fr; gap: 38px; }
+  .dcards { grid-template-columns: 1fr; }
+  .bts { border-radius: 28px; margin: 0 6px; }
+}
+
+html.dark { --bg:#0f0f0f; --black:#f0f0ee; --gray:#b5b5b0; --soft:#7d7d78; --border:#2a2a2a; }
+html.dark body { background: var(--bg); }
+html.dark #dm-toggle { background:#171717; border-color:#2a2a2a; color:#f0f0ee; }
 </style>
-<noscript><style>.sec{opacity:1 !important;transform:none !important;}</style></noscript>
 </head>
 <body>
 
-<nav style="position:fixed;top:14px;left:clamp(16px,2vw,32px);z-index:300;">
-  <a href="index.html" aria-label="Back to home" style="display:flex;align-items:center;justify-content:center;width:62px;height:62px;padding:11px;border-radius:50%;background:var(--bg);box-shadow:0 2px 12px rgba(0,0,0,.14);color:var(--black,#0a0a0a);">
-    <svg viewBox="0 0 287 205" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;">
-      <path fill="currentColor" d="M224.188 179.482C223.074 181.616 220.794 182.872 218.396 182.665C207.793 181.751 178.607 179.427 165.432 180.305C149.171 181.389 129.659 191.147 129.659 191.147C129.659 191.147 157.302 171.09 164.348 170.548C170.158 170.101 210.232 170.391 224.122 170.507C226.286 170.525 227.661 172.824 226.66 174.743L224.188 179.482Z"/>
-      <path fill="currentColor" d="M257.599 174.168L251.709 184.108C251.596 184.3 251.835 184.504 252.004 184.358C254.256 182.418 260.252 177.568 266.248 175.427C270.647 173.856 274.499 173.377 276.96 173.253C278.826 173.158 280.487 172.039 281.259 170.338C282.159 168.356 283.046 165.946 282.509 165.087C281.986 164.251 280.9 163.527 280.01 163.037C279.34 162.669 278.526 162.859 278.039 163.447C277.645 163.923 276.991 164.505 275.91 165.087C274.273 165.968 267.958 168.004 263.723 169.326C261.152 170.128 258.972 171.851 257.599 174.168Z"/>
-      <path fill="currentColor" d="M230.93 52.0507C236.137 54.4954 242.881 58.3707 249.65 64.4657C252.129 66.698 258.457 72.6908 264.055 81.928C265.789 84.7899 267.103 87.474 269.73 92.8426C273.209 99.9525 275.771 105.902 276.874 108.572C284.264 126.456 286.507 142.973 286.953 142.882C287.336 142.805 285.27 130.727 283.321 121.49C282.755 118.808 281.26 111.939 278.939 103.882C278.863 103.619 278.798 103.397 278.745 103.214C276.892 96.8777 275.775 93.0577 273.7 88.0779C270.66 80.7831 267.581 75.8416 263.721 69.6471C261.886 66.702 257.485 59.8221 250.948 51.656C247.596 47.4679 244.799 43.9993 240.413 39.7941C236.467 36.0101 232.99 33.3134 230.933 31.7261C227.17 28.8242 224.242 26.8948 220.709 24.5663C216.729 21.9438 214.239 20.3034 210.6 18.3529C207.973 16.9451 208.284 17.271 202.125 14.275C195.67 11.135 195.038 10.6355 190.853 8.74167C188.139 7.51349 185.865 6.49008 182.788 5.38836C178.518 3.86 174.87 2.9563 172.316 2.41534C181.98 8.03509 193.195 15.5441 204.794 25.4844C215.556 34.7067 224.172 43.9003 230.93 52.0507Z"/>
-      <path fill="currentColor" d="M222.303 50.3065C212.804 49.5232 199.025 49.7632 183.947 55.1934C180.081 56.5858 149.632 68.0464 133.48 98.0832C123.98 115.749 127.902 124.079 116.315 134.133C106.293 142.829 99.249 140.164 89.7096 151.3C88.0579 153.228 81.0255 161.127 77.4344 174.65C74.4374 185.936 77.0794 188.741 72.8574 195.311C71.5528 197.34 67.712 203.317 61.3387 204.254C55.3941 205.129 49.955 201.221 45.4165 197.96C43.5956 196.652 41.5578 194.917 37.4823 191.446C33.9956 188.477 32.6364 187.173 29.9488 185.67C26.9072 183.969 24.2959 183.205 23.1686 182.907C19.9415 182.055 16.9708 181.271 13.626 182.154C9.56319 183.226 8.64303 185.783 6.7237 185.123C5.04926 184.546 4.453 182.115 3.18796 177.725C2.69144 176.002 2.46312 174.716 2.04316 172.205C1.12079 166.691 0.659606 163.934 0.482077 162.487C-0.13075 157.494 -0.0459724 153.64 0.123582 145.933C0.299517 137.936 0.844006 131.938 1.11956 129.183C1.19023 128.477 1.5686 124.731 2.19603 120.332C2.95792 114.992 4.64697 103.152 8.03168 92.0802C9.12851 88.4925 13.5472 74.6888 24.061 59.2552C28.8112 52.282 38.7738 39.1473 55.344 27.2415C70.2452 16.5353 83.6428 11.7426 90.7258 9.26854C102.285 5.23026 111.408 3.66315 119.649 2.24769C119.649 2.24769 132.407 0.0557921 149.134 0.000822856C152.886 -0.0119378 158.3 0.0940742 164.577 2.48229C166.942 3.38241 168.761 4.35223 171.643 6.0494C174.838 7.93014 182.296 12.3228 189.283 17.7132C204.481 29.4383 220.643 48.3517 222.303 50.3065Z"/>
-    </svg>
-  </a>
-</nav>
+<header class="mini-nav">
+  <a href="index.html">Works</a>
+  <a href="about.html">About me</a>
+  <a href="resume.pdf" target="_blank">Resume</a>
+  <a href="mailto:bhardwajmaitreyi6@gmail.com">Say Hello</a>
+</header>
 <button id="dm-toggle" style="position:fixed;bottom:28px;right:28px;z-index:200;width:42px;height:42px;border-radius:50%;border:1px solid var(--border);background:var(--bg);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;">☾</button>
 
-<!-- HERO -->
-<div style="max-height:78vh;overflow:hidden;">
-  <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052635/vibin_01_hero_qsdrid.png" style="width:100%;height:auto;max-height:78vh;object-fit:cover;display:block;" alt="Vibin hero" />
-</div>
+<div class="case-hero"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052635/vibin_01_hero_qsdrid.png" alt="Vibin hero"></div>
 
-<!-- INTRO -->
-<div class="sec">
-  <div class="lbl r">Vibin</div>
-  <div class="lbl-rule r"></div>
-  <p class="lead r d1">Vibin is a live iOS social discovery app helping Gen Z find nearby places and events through real-time vibes shared by people already there, co-founded, designed, and shipped to the App Store.</p>
-</div>
-
-<!-- INTRO GALLERY -->
-<div class="sec">
-  <div class="gal r d1">
-    <div class="gtile"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/c_fill,g_auto,ar_1.33,f_auto,q_auto/v1781052635/vibin_02_product_screens_w8wxsq.png" alt="Product screens" loading="lazy"></div>
-    <div class="gtile" data-alt="https://res.cloudinary.com/df0tysd6u/image/upload/c_fill,g_auto,ar_1.33,f_auto,q_auto/v1781052636/vibin_07_ui_final_hz5v6a.png"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/c_fill,g_auto,ar_1.33,f_auto,q_auto/v1781052636/vibin_06_final_ui_gzr8sh.png" alt="Final UI" loading="lazy"></div>
-    <div class="gtile"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/c_fill,g_auto,ar_1.33,f_auto,q_auto/v1781052635/vibin_06_using_the_colours_across_brand_ui_zgcjzt.png" alt="Colours across brand and UI" loading="lazy"></div>
-    <div class="gtile" data-alt="https://res.cloudinary.com/df0tysd6u/image/upload/c_fill,g_auto,ar_1.33,f_auto,q_auto/v1781052636/vibin_09_marketing_flyer_ddxb8d.png"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/c_fill,g_auto,ar_1.33,f_auto,q_auto/v1781052636/vibin_08_poster_2_gqpetu.png" alt="Poster" loading="lazy"></div>
-    <div class="gtile"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/c_fill,g_auto,ar_1.33,f_auto,q_auto/v1781052635/vibin_05_wireframes_e63ivd.png" alt="Wireframes" loading="lazy"></div>
-    <div class="gtile" data-alt="https://res.cloudinary.com/df0tysd6u/image/upload/c_fill,g_auto,ar_1.33,f_auto,q_auto/v1781052637/vibin_10_paper_bag_mtzcxp.png"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/c_fill,g_auto,ar_1.33,f_auto,q_auto/v1781052637/vibin_10_event_poster_isktxj.png" alt="Event poster" loading="lazy"></div>
-  </div>
-  <div class="case-cta r d2 mt40"><a href="#case" class="pill">View Full Case Study ↓</a></div>
-</div>
-
-<!-- 01 OVERVIEW -->
-<div class="sec" id="case">
-  <div class="lbl r">Project Overview</div>
-  <div class="lbl-rule r d1"></div>
-  <h1 class="r d1">Vibin is a live social discovery platform helping Gen Z find nearby places and events based on real-time vibes shared by people already there.</h1>
-  <div class="pills r d2">
-    <a href="https://apps.apple.com/us/app/vibin-discover-places/id6743381804" target="_blank" class="pill primary">Download on App Store</a>
-    <a href="#problem" class="pill">↓ The Problem</a>
-    <a href="#design" class="pill">↓ UX Design</a>
-    <a href="#outcomes" class="pill">↓ Outcomes</a>
-  </div>
-  <div class="meta r d3">
-    <div class="mc"><div class="ml">Type</div><div class="mv">Live iOS App, Co-founded</div></div>
-    <div class="mc"><div class="ml">Timeline</div><div class="mv">April 2025, Present</div></div>
-    <div class="mc"><div class="ml">Role</div><div class="mv">Product Designer, UX Researcher</div></div>
-    <div class="mc"><div class="ml">Stack</div><div class="mv">Figma, iOS, Supabase, Google API, GenAI</div></div>
-  </div>
-</div>
-
-<!-- 02 PROBLEM -->
-<div class="sec" id="problem">
-  <div class="lbl r">The Problem</div>
-  <div class="lbl-rule r d1"></div>
-  <h2 class="r d1">Tonight's reality: no one knows what's actually happening.</h2>
-  <p class="body w r d2 mt16">Reviews are stale. Social feeds are curated. The result is wasted time, missed moments, and zero real-time signal for where to go next. Gen Z checks 5 apps to make one social decision.</p>
-  <div class="ins2 r d3">
-    <div class="ins">
-      <div class="ins-l">The Gap</div>
-      <p class="ins-t">No product bridges <strong>explicit interaction</strong> (checking apps) and <strong>ambient awareness</strong> (knowing what's happening nearby right now). Existing tools show what happened, not what's happening.</p>
+<section class="split">
+  <h1>Vibin</h1>
+  <div>
+    <p class="plabel">(brief)</p>
+    <p>Vibin is a live social discovery app for Gen Z. People at a venue post the vibe in real time, GenAI turns it into data, and the map shows what is actually happening right now. Co-founded, designed, and shipped to the App Store.</p>
+    <hr class="meta-rule">
+    <div class="meta4">
+      <div><div class="ml">Company</div><div class="mv">Vibin (co-founder)</div></div>
+      <div><div class="ml">Tools</div><div class="mv">Figma, iOS, GenAI</div></div>
+      <div><div class="ml">Role</div><div class="mv">Product Designer</div></div>
+      <div><div class="ml">Year</div><div class="mv">2025</div></div>
     </div>
-    <div class="ins t">
-      <div class="ins-l">The Insight</div>
-      <p class="ins-t"><strong>Gen Z doesn't follow the crowd, they follow the vibe.</strong> The highest-value moment is a 3-second answer to "is anything worth going to right now?" without opening six apps.</p>
-    </div>
+    <hr class="meta-rule">
+    <p class="plabel">(my role)</p>
+    <p>I co-founded Vibin and designed the product end to end: the research, the information architecture, the wireframes, the final UI, and all the brand and marketing collateral, posters, flyers, merch. After launch I iterated using real behavioral data from our users.</p>
   </div>
-</div>
+</section>
 
-<!-- 03 PRODUCT -->
-<div class="sec">
-  <div class="lbl r">The Product</div>
-  <div class="lbl-rule r d1"></div>
-  <h2 class="r d1">Capture, upload, analyze, explore.</h2>
-  <p class="body w r d2 mt8">A social discovery app where users post real-time vibes at venues. GenAI classifies atmosphere into data. The map shows what's live right now.</p>
-  <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052635/vibin_02_product_screens_w8wxsq.png" loading="lazy" class="img-full r d3 mt32" alt="Vibin product screens" />
-</div>
+<section class="prob">
+  <p class="plabel">(the problem)</p>
+  <h2>Five apps to make one plan.</h2>
+  <p>To decide where to go tonight, people check the map, Instagram, stories, reviews, and group chats, and still do not know what a place feels like right now. Photos are old, reviews are older. The one thing that matters, the live vibe, is nowhere. Our research showed the decision runs on FOMO and spontaneity, not on star ratings.</p>
+</section>
 
-<!-- 04 INFORMATION ARCHITECTURE -->
-<div class="sec" id="design">
-  <div class="lbl r">Information Architecture</div>
-  <div class="lbl-rule r d1"></div>
-  <h2 class="r d1">Two IA models: the place and the person.</h2>
-  <p class="body w r d2 mt8">Separate data structures for venue vibe reports and user profiles. Each node maps to a real screen state , no orphaned content, no ambiguous hierarchy.</p>
-
-  <div class="imgrow r d2 mt24">
-    <div>
-      <p class="lbl">Vibe Report , Place</p>
-      <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052635/vibin_03_ia_place_x4vifm.png" loading="lazy" class="img-full" alt="IA , Vibe Report Place" />
-    </div>
-    <div>
-      <p class="lbl">Vibe Report , People</p>
-      <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052635/vibin_04_ia_people_durqn8.png" loading="lazy" class="img-full" alt="IA , Vibe Report People" />
-    </div>
+<section class="bts">
+  <span class="bts-pill">Vibin</span>
+  <h2 class="bts-title">Behind the scenes...</h2>
+  <div class="chap">
+    <div class="chap-side"><span class="tick"></span><span class="lab">Live vibes</span></div>
+    <div class="chap-main"><h3>See what a place feels like right now</h3><p>The core loop had to be effortless on both ends. Posting a vibe takes seconds, one photo, one line, and GenAI does the heavy lifting: it classifies the atmosphere into structured data, so “packed rooftop, live music” becomes something you can search and filter.</p><p>I designed the map as the home screen, filtered by vibe rather than category, and gave every venue a live Vibe Report, a scorecard built from what people posted in the last hour, not last year.</p><div class="dcards"><div class="dcard"><h4>Post in seconds</h4><p>One photo and one line, GenAI handles the rest</p></div><div class="dcard"><h4>Browse by vibe</h4><p>Chill, party, eats, live, the map filters by feeling</p></div><div class="dcard"><h4>Vibe Report</h4><p>A live scorecard per venue, built from the last hour</p></div></div><div class="stats"><div class="stat"><div class="n">50+</div><div class="c">active users reached with zero paid promotion</div></div><div class="stat"><div class="n">0%</div><div class="c">commission, Posh charges 15%, Eventbrite 3.5% + $1.59</div></div><div class="stat"><div class="n">2</div><div class="c">sides of the marketplace get value from day one</div></div></div></div>
   </div>
-</div>
-
-<!-- 05 WIREFRAMES -->
-<div class="sec">
-  <div class="lbl r">Wireframes</div>
-  <div class="lbl-rule r d1"></div>
-  <h2 class="r d1">Lo-fi first. Test the architecture before the aesthetics.</h2>
-  <p class="body w r d2 mt8">Low-fidelity wireframes mapped every screen state , empty, loading, populated, error. Usability tested on ASU students before any visual design was applied.</p>
-  <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052635/vibin_05_wireframes_e63ivd.png" loading="lazy" class="img-full r d3 mt32" alt="Vibin wireframes" />
-</div>
-
-<!-- 06 BRAND + UI -->
-<div class="sec">
-  <div class="lbl r">Brand System</div>
-  <div class="lbl-rule r d1"></div>
-  <h2 class="r d1">Blue as the language of trust and live energy.</h2>
-  <p class="body w r d2 mt8">Electric blue as the primary, dark navy for depth, hot pink as the accent for deals and urgency. Full token system applied across UI and marketing collateral.</p>
-  <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052635/vibin_06_using_the_colours_across_brand_ui_zgcjzt.png" loading="lazy" class="img-full r d3 mt32" alt="Vibin brand and color system" />
-</div>
-
-<!-- 07 UI ITERATIONS -->
-<div class="sec">
-  <div class="lbl r">UI Design</div>
-  <div class="lbl-rule r d1"></div>
-  <h2 class="r d1">Multiple iterations. One constraint: 3-second decisions.</h2>
-  <p class="body w r d2 mt8">Every screen had to answer the user's question in under 3 seconds. Hierarchy, contrast, and interaction density were tested across multiple rounds before shipping.</p>
-
-  <div class="imgrow r d2 mt24">
-    <div>
-      <p class="lbl">Iteration 01</p>
-      <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052636/vibin_06_final_ui_gzr8sh.png" loading="lazy" class="img-full" alt="Vibin UI iteration 1" />
-    </div>
-    <div>
-      <p class="lbl">Final UI</p>
-      <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052636/vibin_07_ui_final_hz5v6a.png" loading="lazy" class="img-full" alt="Vibin final UI" />
-    </div>
+<div class="marq"><div class="marq-track"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052635/vibin_02_product_screens_w8wxsq.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052636/vibin_06_final_ui_gzr8sh.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052636/vibin_07_ui_final_hz5v6a.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052635/vibin_05_wireframes_e63ivd.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052635/vibin_02_product_screens_w8wxsq.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052636/vibin_06_final_ui_gzr8sh.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052636/vibin_07_ui_final_hz5v6a.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052635/vibin_05_wireframes_e63ivd.png" alt="" loading="lazy"></div></div>
+  <div class="chap">
+    <div class="chap-side"><span class="tick"></span><span class="lab">Brand & launch</span></div>
+    <div class="chap-main"><h3>A brand built for the streets</h3><p>Vibin had to feel like nightlife, not like software. I designed every asset in-house, event posters, vendor flyers, branded merch, social content, all pulling from the same gradient-and-glow system as the app, so a poster on a wall and a screen in your hand read as one brand.</p><p>Launch was scrappy on purpose: real events, real vendors, paper bags and posters instead of ad spend.</p></div>
   </div>
-</div>
-
-<!-- 08 MARKETING -->
-<div class="sec">
-  <div class="lbl r">Marketing Design</div>
-  <div class="lbl-rule r d1"></div>
-  <h2 class="r d1">Brand applied across physical and digital touchpoints.</h2>
-  <p class="body w r d2 mt8">Designed all marketing collateral in-house: event posters, vendor flyers, branded merch, and social content. Every asset had to work on its own and as a system.</p>
-
-  <div class="imgrow r d3 mt24">
-    <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052636/vibin_08_poster_2_gqpetu.png" loading="lazy" class="img-full" alt="Vibin event poster" />
-    <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052636/vibin_09_marketing_flyer_ddxb8d.png" loading="lazy" class="img-full" alt="Vibin vendor flyer" />
+<div class="marq"><div class="marq-track"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052636/vibin_08_poster_2_gqpetu.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052636/vibin_09_marketing_flyer_ddxb8d.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/c_fill,g_auto,ar_2.4,f_auto,q_auto/v1781052637/vibin_10_event_poster_isktxj.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052637/vibin_10_paper_bag_mtzcxp.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781053394/vibin_12_traction_yzxejh.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052636/vibin_08_poster_2_gqpetu.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052636/vibin_09_marketing_flyer_ddxb8d.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/c_fill,g_auto,ar_2.4,f_auto,q_auto/v1781052637/vibin_10_event_poster_isktxj.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052637/vibin_10_paper_bag_mtzcxp.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781053394/vibin_12_traction_yzxejh.png" alt="" loading="lazy"></div></div>
+  <div class="chap">
+    <div class="chap-side"><span class="tick"></span><span class="lab">Marketplace</span></div>
+    <div class="chap-main"><h3>Value to both sides from day one</h3><p>Vendors get visibility and foot traffic, users get live vibes and exclusive deals. Eventbrite charges 3.5% + $1.59 per ticket, Posh takes 15% commission. Vibin charges neither side, the marketplace runs on presence, not fees.</p><p>I mapped the information architecture twice, once around places, once around people, tested both, and let real usage decide. Post-launch behavioral data invalidated three assumptions from our interviews, real usage beats what people say.</p><div class="dcards"><div class="dcard"><h4>For vendors</h4><p>Visibility and foot traffic without commission</p></div><div class="dcard"><h4>For users</h4><p>Live vibes and exclusive deals at the door</p></div><div class="dcard"><h4>For the product</h4><p>Every post makes the map smarter</p></div></div></div>
   </div>
+<div class="marq"><div class="marq-track"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052637/vibin_11_2_sided_marketplace_js4j5n.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052635/vibin_03_ia_place_x4vifm.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052635/vibin_04_ia_people_durqn8.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052636/vibin_10_event_broucher_vdwjbq.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052637/vibin_11_2_sided_marketplace_js4j5n.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052635/vibin_03_ia_place_x4vifm.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052635/vibin_04_ia_people_durqn8.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052636/vibin_10_event_broucher_vdwjbq.png" alt="" loading="lazy"></div></div>
+</section>
 
-  <div class="imgrow r d1 mt16">
-    <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052636/vibin_10_event_broucher_vdwjbq.png" loading="lazy" class="img-full" alt="Vibin event brochure" />
-    <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052637/vibin_10_paper_bag_mtzcxp.png" loading="lazy" class="img-full" alt="Vibin branded merch bag" />
-  </div>
+<section class="outcome">
+  <p class="plabel">(the outcome)</p>
+  <h2>Live on the App Store.</h2>
+  <p>Vibin shipped as a real product with real users and a two-sided marketplace that charges neither side. The biggest lesson: launch early, because the data you get after shipping is worth more than another month of polish.</p>
+  <a class="case-next" href="pastiche.html">Next project: Pastiche &rarr;</a>
+</section>
 
-  <img src="https://res.cloudinary.com/df0tysd6u/image/upload/c_fill,g_auto,ar_2.4,f_auto,q_auto/v1781052637/vibin_10_event_poster_isktxj.png" loading="lazy" class="img-full r d3 mt16" alt="Rodeo 4.10 event poster" />
-</div>
-
-<!-- 09 BUSINESS MODEL -->
-<div class="sec">
-  <div class="lbl r">Business Model</div>
-  <div class="lbl-rule r d1"></div>
-  <h2 class="r d1">Two-sided marketplace. Value to both sides from day one.</h2>
-  <p class="body w r d2 mt8">Vendors get visibility and foot traffic. Users get live vibes and exclusive deals. Eventbrite charges 3.5% + $1.59. Posh charges 15% commission. Vibin charges neither.</p>
-  <div class="viz r d2">
-    <div class="viz-row"><div class="viz-lbl">Posh commission</div><div class="viz-track"><div class="viz-fill" style="--w:100%"></div></div><div class="viz-val">15%</div></div>
-    <div class="viz-row"><div class="viz-lbl">Eventbrite fee</div><div class="viz-track"><div class="viz-fill" style="--w:23%"></div></div><div class="viz-val">3.5% + $1.59</div></div>
-    <div class="viz-row"><div class="viz-lbl">Vibin</div><div class="viz-track"><div class="viz-fill" style="--w:0%"></div></div><div class="viz-val">$0</div></div>
-  </div>
-  <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052637/vibin_11_2_sided_marketplace_js4j5n.png" loading="lazy" class="img-full r d3 mt32" alt="Two-sided marketplace" />
-  <div class="g3 r d2 mt32" style="max-width:1000px;">
-    <div class="card t">
-      <div class="ctag">Revenue 01</div>
-      <div class="chead">Freemium</div>
-      <p class="cbody">Basic access free, premium features paid.</p>
-    </div>
-    <div class="card">
-      <div class="ctag">Revenue 02</div>
-      <div class="chead">Sponsorship</div>
-      <p class="cbody">Brands pay to promote events or time-bound deals.</p>
-    </div>
-    <div class="card t">
-      <div class="ctag">Revenue 03</div>
-      <div class="chead">Annual Subscription</div>
-      <p class="cbody">Venues pay yearly for full access and analytics.</p>
-    </div>
-  </div>
-</div>
-
-<!-- 10 OUTCOMES -->
-<div class="sec" id="outcomes">
-  <div class="lbl r">Outcomes</div>
-  <div class="lbl-rule r d1"></div>
-  <h2 class="r d1">The app is live.</h2>
-  <div class="tworow r d2 mt24">
-    <ul style="list-style:none;max-width:640px;display:flex;flex-direction:column;gap:12px;">
-      <li style="font-size:18px;font-weight:400;color:var(--gray);padding-left:20px;border-left:2px solid var(--border);">100+ active users, no paid promotion</li>
-      <li style="font-size:18px;font-weight:400;color:var(--gray);padding-left:20px;border-left:2px solid var(--border);">1,000+ Instagram followers</li>
-      <li style="font-size:18px;font-weight:400;color:var(--gray);padding-left:20px;border-left:2px solid var(--border);">10+ venue and event partnerships in Tempe</li>
-      <li style="font-size:18px;font-weight:400;color:var(--gray);padding-left:20px;border-left:2px solid var(--border);">Built entirely in-house, $0 spent on production</li>
-      <li style="font-size:18px;font-weight:400;color:var(--gray);padding-left:20px;border-left:2px solid var(--border);">Partnered with DevsnBevs for a live event (Rodeo, April 10)</li>
-    </ul>
-    <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781053394/vibin_12_traction_yzxejh.png" loading="lazy" style="width:100%;height:auto;display:block;border-radius:12px;" alt="Vibin live on App Store" />
-  </div>
-</div>
-
-<!-- 11 TAKEAWAYS -->
-<div class="sec">
-  <div class="lbl r">Takeaways</div>
-  <div class="lbl-rule r d1"></div>
-  <h2 class="r d1">Shipping a live product changes how you design.</h2>
-  <p class="body r d2 mt16">Post-launch behavioral data invalidated three assumptions made during research. Real usage patterns don't match what users say in interviews.</p>
-  <p class="body r d3 mt8">Co-founding means owning the full product loop, from IA through growth campaigns. That context makes every design decision sharper.</p>
-  <div class="pills r d4 mt32">
-    <a href="https://apps.apple.com/us/app/vibin-discover-places/id6743381804" target="_blank" class="pill primary">Download on App Store</a>
-  </div>
-</div>
-
-<footer style="padding:28px clamp(16px,2vw,32px);font-size:13px;color:#999;">© 2026 Maitreyi Bhardwaj</footer>
+<footer><span>&copy; 2026 Maitreyi Bhardwaj</span><span>byMaitreyi</span></footer>
 
 <script>
-const _dmt=document.getElementById('dm-toggle');
+const _dmt = document.getElementById('dm-toggle');
 if(localStorage.getItem('dm')==='1'){document.documentElement.classList.add('dark');_dmt.textContent='☀';}
 _dmt.addEventListener('click',()=>{const on=document.documentElement.classList.toggle('dark');localStorage.setItem('dm',on?'1':'0');_dmt.textContent=on?'☀':'☾';});
-</script>
-<script>
-/* GALLERY CYCLE */
-document.querySelectorAll('.gtile[data-alt]').forEach(function (t, i) {
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  var img = t.querySelector('img'), a = img.getAttribute('src'), b = t.getAttribute('data-alt'), on = false;
-  setInterval(function () {
-    img.style.opacity = 0;
-    setTimeout(function () { on = !on; img.src = on ? b : a; img.style.opacity = 1; }, 350);
-  }, 4600 + i * 900);
-});
 
-(function(){
-  var secs=Array.prototype.slice.call(document.querySelectorAll('.sec'));
-  if(!('IntersectionObserver' in window)){secs.forEach(function(s){s.classList.add('live');});return;}
-  var io=new IntersectionObserver(function(entries){
-    entries.forEach(function(en){
-      if(!en.isIntersecting)return;
-      var rootH=en.rootBounds?en.rootBounds.height:window.innerHeight;
-      var boxH=en.boundingClientRect.height||1;
-      /* reveal at 15% visibility; if the section is so tall that 15% can never fit in the viewport, reveal as soon as it intersects */
-      if(en.intersectionRatio>=0.15||boxH*0.15>=rootH){
-        en.target.classList.add('live');
-        io.unobserve(en.target);
-      }
-    });
-  },{threshold:[0,0.15],rootMargin:'0px 0px -60px 0px'});
-  secs.forEach(function(s){
-    var r=s.getBoundingClientRect();
-    if(r.top<window.innerHeight&&r.bottom>0){s.classList.add('live');}
-    else{io.observe(s);}
-  });
-})();
+// image strips: auto-scroll, but the user can grab, drag, or wheel them anytime
+document.querySelectorAll('.marq').forEach(m=>{
+  const track=m.querySelector('.marq-track');
+  const half=()=>track.scrollWidth/2;
+  let auto=!matchMedia('(prefers-reduced-motion: reduce)').matches, resume;
+  function pause(){ auto=false; clearTimeout(resume); resume=setTimeout(()=>auto=true, 2200); }
+  (function step(){ if(auto){ m.scrollLeft+=0.7; } if(m.scrollLeft>=half()) m.scrollLeft-=half(); if(m.scrollLeft<0) m.scrollLeft+=half(); requestAnimationFrame(step); })();
+  m.addEventListener('wheel',pause,{passive:true});
+  m.addEventListener('touchstart',pause,{passive:true});
+  let down=false,sx=0,sl=0;
+  m.addEventListener('pointerdown',e=>{ down=true; sx=e.clientX; sl=m.scrollLeft; m.classList.add('dragging'); pause(); });
+  window.addEventListener('pointermove',e=>{ if(down){ m.scrollLeft=sl-(e.clientX-sx); pause(); } });
+  window.addEventListener('pointerup',()=>{ down=false; m.classList.remove('dragging'); });
+});
 </script>
 </body>
 </html>
