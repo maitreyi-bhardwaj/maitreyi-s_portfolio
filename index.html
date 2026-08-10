@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-<script>if(localStorage.getItem("dm")==="1")document.documentElement.classList.add("dark");</script>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Maitreyi Bhardwaj , Product Designer</title>
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<title>Maitreyi Bhardwaj — Product Designer</title>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Dancing+Script:wght@500&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
@@ -14,795 +12,530 @@
   --black: #0a0a0a;
   --gray: #666;
   --soft: #999;
-  --light: #F8F8F8;
+  --light: #f7f7f5;
   --border: #e8e8e5;
-  --f: 'Inter', -apple-system, sans-serif;
-  --fh: 'Inter', sans-serif;
+  --orange: #CD5028;
+  --f: 'Geist', -apple-system, sans-serif;
+  --script: 'Dancing Script', cursive;
 }
 html, body { width: 100%; overflow-x: hidden; }
 body { font-family: var(--f); background: var(--bg); color: var(--black); -webkit-font-smoothing: antialiased; }
 
-/* LOADER */
+/* ─── LOADER ─── */
 #loader {
   position: fixed; inset: 0; z-index: 1000;
-  display: flex; align-items: center; justify-content: center;
-  background: var(--bg);
-  transition: opacity .7s ease, visibility .7s ease;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  background: var(--black);
+  transition: opacity .6s ease, visibility .6s ease;
 }
 #loader.out { opacity: 0; visibility: hidden; }
-.loader-head { width: 280px; height: 200px; }
-.loader-head svg { width: 100%; height: 100%; }
 
-/* REVEAL */
+.loader-head {
+  position: relative;
+  width: 180px; height: 130px;
+  margin-bottom: 32px;
+}
+
+.loader-head svg {
+  width: 100%; height: 100%;
+  transition: fill .4s ease;
+}
+
+/* Cycling background behind head */
+.loader-bg {
+  position: absolute; inset: -24px;
+  border-radius: 50%;
+  z-index: -1;
+  transition: background .4s ease;
+}
+
+.loader-name {
+  font-size: 22px; font-weight: 400;
+  letter-spacing: -.01em;
+  color: #fff;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity .5s ease, transform .5s ease;
+}
+.loader-name.show { opacity: 1; transform: none; }
+
+.loader-pronunciation {
+  font-size: 14px; font-weight: 300;
+  color: rgba(255,255,255,.45);
+  margin-top: 8px;
+  letter-spacing: .1em;
+  opacity: 0;
+  transition: opacity .5s ease .2s;
+}
+.loader-pronunciation.show { opacity: 1; }
+
+.loader-title {
+  font-size: 13px; font-weight: 400;
+  color: var(--orange);
+  margin-top: 6px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  opacity: 0;
+  transition: opacity .5s ease .35s;
+}
+.loader-title.show { opacity: 1; }
+
+/* ─── NAV ─── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 20px 60px;
+  background: rgba(255,255,255,.97);
+  border-bottom: 1px solid var(--border);
+  transition: transform .3s cubic-bezier(.16,1,.3,1);
+  opacity: 0;
+}
+nav.visible { opacity: 1; transition: opacity .6s ease .2s, transform .3s cubic-bezier(.16,1,.3,1); }
+nav.hidden { transform: translateY(-100%); }
+.nl, .nr { display: flex; gap: 28px; list-style: none; }
+nav a { font-size: 14px; font-weight: 400; color: var(--gray); text-decoration: none; transition: color .15s; }
+nav a:hover { color: var(--black); }
+.nav-name { color: var(--black) !important; font-weight: 500 !important; }
+
+/* ─── REVEAL ─── */
 .r { opacity: 0; transform: translateY(20px); transition: opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1); }
 .r.on { opacity: 1; transform: none; }
-.d1{transition-delay:.07s} .d2{transition-delay:.14s} .d3{transition-delay:.21s}
+.d1{transition-delay:.07s} .d2{transition-delay:.14s} .d3{transition-delay:.21s} .d4{transition-delay:.28s} .d5{transition-delay:.35s}
 
-/* DARK MODE */
-html.dark { --bg:#0a0a0a; --black:#f0f0ee; --gray:#aaa; --soft:#666; --light:#141414; --border:#2a2a2a; }
-html.dark body { background:#0a0a0a; }
-html.dark #dm-toggle { background:#141414; border-color:#2a2a2a; color:#f0f0ee; }
-
-/* ============ BENTO HOME ============ */
-/* Full-bleed fluid shell: scales from iPad to ultrawide, no dead margins */
-.bento { width: 100%; padding: clamp(10px, 1.1vw, 16px); display: grid; grid-template-columns: clamp(300px, 25vw, 430px) 1fr; gap: clamp(10px, 1vw, 14px); align-items: stretch; }
-.bento-left { display: flex; flex-direction: column; gap: clamp(10px, 1vw, 14px); }
-/* Lorenzo-style cards: flat grey, no outline, squarer corners */
-.bcard { background: var(--light); border: none; border-radius: 8px; padding: clamp(20px, 1.8vw, 30px); }
-.bcard--name { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: clamp(30px, 2.8vw, 48px) clamp(20px, 1.8vw, 30px); }
-.blogo { width: clamp(165px, 15vw, 240px); height: auto; color: var(--black); display: block; }
-.blogo svg { width: 100%; height: auto; display: block; overflow: visible; }
-.bio-name { font-family: var(--fh); font-size: clamp(20px, 1.6vw, 27px); font-weight: 600; letter-spacing: -.015em; line-height: 1.2; color: var(--black); }
-.bio-pron { font-size: 13px; color: var(--soft); letter-spacing: .04em; margin: 4px 0 16px; }
-.bbio { font-size: 15px; line-height: 1.62; color: var(--gray); font-weight: 400; }
-.bbio b { color: var(--black); font-weight: 500; }
-.bcard-cta { display: flex; gap: 8px; margin-top: 22px; flex-wrap: wrap; }
-.bpill { display: inline-flex; align-items: center; gap: 6px; padding: 10px 20px; border-radius: 100px; font-size: 14px; font-family: var(--f); text-decoration: none; border: 1px solid var(--border); color: var(--black); background: var(--bg); transition: all .15s; }
-.bpill:hover { background: var(--black); color: var(--bg); border-color: var(--black); }
-.bpill--primary { background: var(--black); color: var(--bg); border-color: var(--black); }
-.bpill--primary:hover { background: var(--black); color: var(--bg); }
-.bcard--lists { flex: 1; }
-.blists { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
-.blist h4 { font-family: var(--fh); font-size: 13px; font-weight: 600; color: var(--black); margin-bottom: 14px; letter-spacing: -.01em; }
-.blist ul { list-style: none; display: flex; flex-direction: column; gap: 9px; }
-.blist li { font-size: 13px; line-height: 1.3; color: var(--soft); }
-/* Browser-style tabs: flaps attached to one big grey sheet that holds the
-   cards. The active tab shares the sheet's fill so they read as one piece. */
-.bento-right { display: flex; flex-direction: column; gap: 0; }
-.bento-tabs { display: flex; gap: 6px; flex-wrap: wrap; }
-.btab { display: inline-flex; align-items: center; padding: 13px 26px 15px; border-radius: 8px 8px 0 0; font-size: 14px; font-weight: 500; font-family: var(--f); border: none; background: #ECECEA; color: var(--soft); cursor: pointer; transition: background .18s, color .18s; white-space: nowrap; }
-.btab:hover { color: var(--black); }
-.btab.active { background: var(--light); color: var(--black); }
-html.dark .btab { background: #1c1c1c; }
-/* The sheet matches the left rail's height (bottom-aligns with the skills
-   card) and the cards scroll INSIDE it, jkane-style */
-.bento-right { min-height: 0; }
-/* no overscroll containment: when the feed ends, the wheel hands off to the
-   page and carries you down to the fish */
-.tabsheet { background: var(--light); border-radius: 0 8px 8px 8px; padding: clamp(18px, 1.8vw, 28px); flex: 1 1 0; min-height: 0; overflow-y: auto; scrollbar-width: thin; scrollbar-color: #d8d8d5 transparent; }
-.tabsheet::-webkit-scrollbar { width: 8px; }
-.tabsheet::-webkit-scrollbar-thumb { background: #d8d8d5; border-radius: 8px; }
-html.dark .tabsheet { scrollbar-color: #333 transparent; }
-html.dark .tabsheet::-webkit-scrollbar-thumb { background: #333; }
-/* jkane-style scroll feed: ONE big card per row, alternating left/right,
-   the rest of the row left as empty sheet. Big enough that you scroll. */
-.bento-grid { display: flex; flex-direction: column; gap: clamp(72px, 7vw, 120px); }
-.bento-grid[hidden] { display: none; }
-/* each project reads as a mini case study: hero, blurb, image strip, CTA */
-.proj-sec { display: flex; flex-direction: column; gap: clamp(14px, 1.4vw, 22px); }
-.proj-desc { max-width: 680px; margin: clamp(4px, 0.6vw, 10px) 0 0; text-align: left; font-size: 15px; line-height: 1.65; color: var(--gray); }
-.proj-imgs { display: flex; gap: clamp(10px, 1vw, 14px); }
-.proj-imgs .pi { position: relative; flex: var(--ar) 1 0%; aspect-ratio: var(--ar); min-width: 0; border-radius: 8px; overflow: hidden; background: #ECECEA; }
-html.dark .proj-imgs .pi { background: #1c1c1c; }
-.proj-imgs img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0; transition: opacity .5s ease; }
-.proj-sec:hover .proj-imgs img:not(.img-alt) { opacity: 1; }
-/* second image inside a strip cell: ambient crossfade, some cells stay static */
-.proj-imgs .img-alt { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .8s ease; }
-.proj-sec:hover .pi.flip .img-alt { opacity: 1; }
-.jrow { display: flex; justify-content: flex-start; }
-.jrow--end { justify-content: flex-end; }
-.jtile { flex: none; }
-/* hero cards at the banners' EXACT ratio: images fill flush, zero bands */
-.jtile--cube { width: 78%; aspect-ratio: 1.85; }
-.btile--nda { cursor: default; }
-.btile--nda img { filter: blur(16px); transform: scale(1.12); }
-.btile--nda:hover img { transform: scale(1.12); }
-.nda-cap { position: absolute; inset: 0; z-index: 3; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; background: rgba(10,10,10,0.28); }
-.nda-t { font-size: clamp(22px, 2vw, 30px); font-weight: 600; color: #fff; letter-spacing: -.01em; }
-.nda-s { font-size: 14px; color: rgba(255,255,255,0.85); }
-.btile-empty { display: flex; align-items: center; justify-content: center; background: var(--bg); border: none; border-radius: 8px; color: var(--soft); font-size: 13px; letter-spacing: .02em; }
-.btile { position: relative; display: block; border-radius: 8px; overflow: hidden; text-decoration: none; background: var(--bg); border: none; }
-.btile img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .55s cubic-bezier(.16,1,.3,1), opacity .4s ease; }
-.btile .img-hover { opacity: 0; z-index: 2; transition: opacity .8s ease; }
-.btile:hover .img-hover, .btile.flip .img-hover { opacity: 1; }
-.btile:hover img { transform: scale(1.04); }
-/* Captions stay hidden until hover: pure imagery, jkane-style */
-.btile-cap { position: absolute; left: 0; right: 0; bottom: 0; z-index: 3; padding: 18px 20px; display: flex; flex-direction: column; gap: 2px; background: linear-gradient(to top, rgba(10,10,10,.62), rgba(10,10,10,.1) 55%, transparent); opacity: 0; transform: translateY(8px); transition: opacity .25s ease, transform .25s ease; }
-.btile:hover .btile-cap { opacity: 1; transform: none; }
-.btile-cap .t { font-family: var(--fh); font-size: 15px; font-weight: 600; color: #fff; letter-spacing: -.01em; }
-.btile-cap .s { font-size: 12px; color: rgba(255,255,255,.82); }
-.btile .arw { position: absolute; top: 16px; right: 18px; z-index: 3; font-size: 16px; color: #fff; opacity: 0; transform: translateY(-2px); transition: all .2s; }
-.btile:hover .arw { opacity: 1; transform: none; }
-@media (hover: none) { .btile-cap { opacity: 1; transform: none; } }
-
-/* Socials card: just the two marks */
-.bcard--social { display: flex; gap: 10px; padding: 22px 30px; }
-.sicon { width: 46px; height: 46px; border-radius: 50%; border: none; background: var(--bg); color: var(--black); display: inline-flex; align-items: center; justify-content: center; transition: all .15s; }
-.sicon:hover { background: var(--black); color: var(--bg); }
-.sicon svg { width: 19px; height: 19px; display: block; fill: currentColor; }
-
-/* Fish panel: a black slab card, white pixel fish under a starfield */
-.fishwrap { width: 100%; padding: 0 clamp(10px, 1.1vw, 16px) clamp(12px, 1.4vw, 18px); }
-.fishcard { background: #0a0a0a; border: none; border-radius: 8px; padding: 20px 26px; }
-.fish-row { display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: #9a9a96; }
-.fish-row--top { padding-bottom: 8px; }
-.fish-row--bottom { padding-top: 8px; color: #6d6d68; }
-#fish-time { font-variant-numeric: tabular-nums; }
-#fc-canvas { display: block; width: 100%; height: 320px; cursor: crosshair; touch-action: pan-y; image-rendering: pixelated; }
-
-@media(max-width: 900px){
-  .bento { grid-template-columns: 1fr; }
-  /* on small screens the sheet grows naturally; the page itself scrolls */
-  .tabsheet { flex: none; overflow-y: visible; }
+/* ─── HERO ─── */
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 120px 60px 80px;
 }
-@media(max-width: 640px){
-  .jrow { flex-direction: column; }
-  .jtile--rect, .jtile--sq { width: 100%; }
-  .proj-imgs { flex-direction: column; }
-  .proj-imgs .pi { width: 100%; flex: none; }
-  .btab { padding: 10px 16px; font-size: 13px; }
-  #fc-canvas { height: 240px; }
-  /* keep the fixed dark-mode button off the fish card's bottom row */
-  .fishwrap { padding-bottom: 88px; }
+.hero > * { max-width: 1000px; width: 100%; margin: 0 auto; }
+
+.hero-eyebrow {
+  font-size: 13px; font-weight: 400; color: var(--soft);
+  letter-spacing: .04em; margin-bottom: 28px;
+  display: flex; align-items: center; gap: 12px;
+}
+.hero-eyebrow::after {
+  content: ''; flex: 1; max-width: 48px; height: 1px; background: var(--border);
 }
 
-h1,h2,h3{text-wrap:balance}
-p,.body,.lead,.sd,.stat-t{text-wrap:pretty}
+.hero h1 {
+  font-size: clamp(36px, 5.5vw, 72px);
+  font-weight: 400; letter-spacing: -.03em;
+  line-height: 1.04; color: var(--black);
+  margin-bottom: 24px;
+  max-width: 820px;
+}
+
+.hero h1 .ora { color: var(--orange); }
+.hero h1 .script { font-family: var(--script); font-size: 1.05em; color: var(--black); }
+
+.hero-sub {
+  font-size: 18px; font-weight: 300; color: var(--gray);
+  max-width: 460px; line-height: 1.65; margin-bottom: 40px;
+}
+
+.hero-pills { display: flex; gap: 10px; flex-wrap: wrap; }
+.pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 10px 20px; border: 1px solid var(--border);
+  border-radius: 100px; font-size: 13px; font-family: var(--f);
+  color: var(--gray); text-decoration: none; transition: all .15s;
+}
+.pill:hover { background: var(--black); color: #fff; border-color: var(--black); }
+.pill .dot { width: 6px; height: 6px; border-radius: 50%; background: #3cb371; flex-shrink: 0; }
+
+/* ─── PROJECTS LABEL ─── */
+.projects-label {
+  text-align: center;
+  font-size: 11px; font-weight: 500;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--soft);
+  padding: 40px 60px 32px;
+  border-top: 1px solid var(--border);
+}
+
+/* ─── PROJECT GRID — like the reference sites ─── */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--border);
+  border-top: 1px solid var(--border);
+}
+
+.proj {
+  background: var(--bg);
+  text-decoration: none;
+  display: block;
+  position: relative;
+  overflow: hidden;
+  transition: background .2s;
+}
+.proj:hover { background: var(--light); }
+.proj:hover .proj-img-inner { transform: scale(1.02); }
+
+.proj-img {
+  width: 100%; height: 380px;
+  overflow: hidden;
+  background: var(--light);
+  position: relative;
+}
+.proj-img-inner {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  transition: transform .5s cubic-bezier(.16,1,.3,1);
+  background: var(--light);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Placeholder patterns per project */
+.proj-img-inner::before {
+  content: ''; position: absolute; inset: 0;
+  background: repeating-linear-gradient(45deg,transparent,transparent 24px,rgba(0,0,0,.025) 24px,rgba(0,0,0,.025) 25px);
+}
+
+.proj-img .label {
+  position: relative; z-index: 1;
+  font-size: 11px; color: var(--soft); letter-spacing: .04em;
+}
+
+.proj-body { padding: 32px 36px 40px; border-top: 1px solid var(--border); }
+
+.proj-tags {
+  display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px;
+}
+.tag {
+  font-size: 11px; font-weight: 500; letter-spacing: .06em;
+  text-transform: uppercase; color: var(--soft);
+  padding: 4px 10px; border: 1px solid var(--border);
+  border-radius: 4px;
+}
+.tag.orange { color: var(--orange); border-color: rgba(205,80,40,.25); background: rgba(205,80,40,.05); }
+
+.proj-title {
+  font-size: clamp(20px, 2.2vw, 28px);
+  font-weight: 400; letter-spacing: -.02em;
+  color: var(--black); margin-bottom: 10px;
+  line-height: 1.15;
+}
+
+.proj-desc {
+  font-size: 15px; font-weight: 300;
+  color: var(--gray); line-height: 1.65;
+  max-width: 460px;
+}
+
+.proj-arrow {
+  position: absolute; bottom: 36px; right: 36px;
+  width: 36px; height: 36px;
+  border: 1px solid var(--border); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; color: var(--black);
+  transition: all .2s;
+}
+.proj:hover .proj-arrow {
+  background: var(--black); color: #fff; border-color: var(--black);
+}
+
+/* Wide project (spans full width) */
+.proj.wide { grid-column: 1 / -1; }
+.proj.wide .proj-img { height: 460px; }
+
+/* ─── ABOUT STRIP ─── */
+.about {
+  padding: 100px 60px;
+  border-top: 1px solid var(--border);
+  display: flex; flex-direction: column; align-items: flex-start;
+}
+.about > * { max-width: 1000px; width: 100%; margin: 0 auto; }
+
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+
+.about-left h2 {
+  font-size: clamp(28px, 3.5vw, 44px);
+  font-weight: 400; letter-spacing: -.022em;
+  line-height: 1.1; color: var(--black);
+  margin-bottom: 24px;
+}
+.about-left p {
+  font-size: 17px; font-weight: 300;
+  color: var(--gray); line-height: 1.75;
+}
+
+.about-right { padding-top: 8px; }
+.about-item {
+  padding: 18px 0; border-bottom: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: baseline;
+}
+.about-item:first-child { border-top: 1px solid var(--border); }
+.about-label { font-size: 12px; font-weight: 400; color: var(--soft); letter-spacing: .04em; }
+.about-val { font-size: 15px; font-weight: 400; color: var(--black); }
+
+/* ─── FOOTER ─── */
+footer {
+  padding: 80px 60px;
+  background: var(--light);
+  border-top: 1px solid var(--border);
+}
+.f-copy { font-size: 13px; color: var(--soft); margin-bottom: 14px; }
+.f-rule { border: none; border-top: 1px solid var(--border); margin-bottom: 28px; }
+.f-cta {
+  font-size: clamp(28px, 4vw, 52px);
+  font-weight: 400; color: var(--black);
+  letter-spacing: -.025em; line-height: 1.2;
+  margin-bottom: 28px; max-width: 700px;
+}
+.f-cta .script { font-family: var(--script); color: var(--orange); }
+.f-btns { display: flex; gap: 8px; }
+.fbtn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 10px 20px; border: 1px solid var(--border);
+  border-radius: 100px; font-size: 14px; color: var(--black);
+  text-decoration: none; background: var(--bg);
+  transition: all .15s; font-family: var(--f);
+}
+.fbtn:hover { background: var(--black); color: #fff; border-color: var(--black); }
+
+@media(max-width:768px){
+  nav{padding:16px 24px;}
+  .hero{padding:110px 24px 64px;}
+  .grid{grid-template-columns:1fr;}
+  .proj.wide{grid-column:1;}
+  .about-grid{grid-template-columns:1fr;}
+  footer{padding:60px 24px;}
+  .projects-label{padding:32px 24px 24px;}
+}
 </style>
 </head>
 <body>
 
-<!-- LOADER -->
+<!-- ─── LOADER ─── -->
 <div id="loader">
   <div class="loader-head">
+    <div class="loader-bg" id="loaderBg"></div>
     <svg id="loaderSvg" viewBox="0 0 287 205" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <g clip-path="url(#lc)">
-        <path id="p1" fill="#fff" d="M224.188 179.482C223.074 181.616 220.794 182.872 218.396 182.665C207.793 181.751 178.607 179.427 165.432 180.305C149.171 181.389 129.659 191.147 129.659 191.147C129.659 191.147 157.302 171.09 164.348 170.548C170.158 170.101 210.232 170.391 224.122 170.507C226.286 170.525 227.661 172.824 226.66 174.743L224.188 179.482Z"/>
-        <path id="p2" fill="#fff" d="M257.599 174.168L251.709 184.108C251.596 184.3 251.835 184.504 252.004 184.358C254.256 182.418 260.252 177.568 266.248 175.427C270.647 173.856 274.499 173.377 276.96 173.253C278.826 173.158 280.487 172.039 281.259 170.338C282.159 168.356 283.046 165.946 282.509 165.087C281.986 164.251 280.9 163.527 280.01 163.037C279.34 162.669 278.526 162.859 278.039 163.447C277.645 163.923 276.991 164.505 275.91 165.087C274.273 165.968 267.958 168.004 263.723 169.326C261.152 170.128 258.972 171.851 257.599 174.168Z"/>
-        <path id="p3" fill="#fff" d="M230.93 52.0507C236.137 54.4954 242.881 58.3707 249.65 64.4657C252.129 66.698 258.457 72.6908 264.055 81.928C265.789 84.7899 267.103 87.474 269.73 92.8426C273.209 99.9525 275.771 105.902 276.874 108.572C284.264 126.456 286.507 142.973 286.953 142.882C287.336 142.805 285.27 130.727 283.321 121.49C282.755 118.808 281.26 111.939 278.939 103.882C278.863 103.619 278.798 103.397 278.745 103.214C276.892 96.8777 275.775 93.0577 273.7 88.0779C270.66 80.7831 267.581 75.8416 263.721 69.6471C261.886 66.702 257.485 59.8221 250.948 51.656C247.596 47.4679 244.799 43.9993 240.413 39.7941C236.467 36.0101 232.99 33.3134 230.933 31.7261C227.17 28.8242 224.242 26.8948 220.709 24.5663C216.729 21.9438 214.239 20.3034 210.6 18.3529C207.973 16.9451 208.284 17.271 202.125 14.275C195.67 11.135 195.038 10.6355 190.853 8.74167C188.139 7.51349 185.865 6.49008 182.788 5.38836C178.518 3.86 174.87 2.9563 172.316 2.41534C181.98 8.03509 193.195 15.5441 204.794 25.4844C215.556 34.7067 224.172 43.9003 230.93 52.0507Z"/>
-        <path id="p4" fill="#fff" d="M222.303 50.3065C212.804 49.5232 199.025 49.7632 183.947 55.1934C180.081 56.5858 149.632 68.0464 133.48 98.0832C123.98 115.749 127.902 124.079 116.315 134.133C106.293 142.829 99.249 140.164 89.7096 151.3C88.0579 153.228 81.0255 161.127 77.4344 174.65C74.4374 185.936 77.0794 188.741 72.8574 195.311C71.5528 197.34 67.712 203.317 61.3387 204.254C55.3941 205.129 49.955 201.221 45.4165 197.96C43.5956 196.652 41.5578 194.917 37.4823 191.446C33.9956 188.477 32.6364 187.173 29.9488 185.67C26.9072 183.969 24.2959 183.205 23.1686 182.907C19.9415 182.055 16.9708 181.271 13.626 182.154C9.56319 183.226 8.64303 185.783 6.7237 185.123C5.04926 184.546 4.453 182.115 3.18796 177.725C2.69144 176.002 2.46312 174.716 2.04316 172.205C1.12079 166.691 0.659606 163.934 0.482077 162.487C-0.13075 157.494 -0.0459724 153.64 0.123582 145.933C0.299517 137.936 0.844006 131.938 1.11956 129.183C1.19023 128.477 1.5686 124.731 2.19603 120.332C2.95792 114.992 4.64697 103.152 8.03168 92.0802C9.12851 88.4925 13.5472 74.6888 24.061 59.2552C28.8112 52.282 38.7738 39.1473 55.344 27.2415C70.2452 16.5353 83.6428 11.7426 90.7258 9.26854C102.285 5.23026 111.408 3.66315 119.649 2.24769C119.649 2.24769 132.407 0.0557921 149.134 0.000822856C152.886 -0.0119378 158.3 0.0940742 164.577 2.48229C166.942 3.38241 168.761 4.35223 171.643 6.0494C174.838 7.93014 182.296 12.3228 189.283 17.7132C204.481 29.4383 220.643 48.3517 222.303 50.3065Z"/>
+      <g clip-path="url(#c0)">
+        <path id="p1" d="M224.188 179.482C223.074 181.616 220.794 182.872 218.396 182.665C207.793 181.751 178.607 179.427 165.432 180.305C149.171 181.389 129.659 191.147 129.659 191.147C129.659 191.147 157.302 171.09 164.348 170.548C170.158 170.101 210.232 170.391 224.122 170.507C226.286 170.525 227.661 172.824 226.66 174.743L224.188 179.482Z"/>
+        <path id="p2" d="M257.599 174.168L251.709 184.108C251.596 184.3 251.835 184.504 252.004 184.358C254.256 182.418 260.252 177.568 266.248 175.427C270.647 173.856 274.499 173.377 276.96 173.253C278.826 173.158 280.487 172.039 281.259 170.338C282.159 168.356 283.046 165.946 282.509 165.087C281.986 164.251 280.9 163.527 280.01 163.037C279.34 162.669 278.526 162.859 278.039 163.447C277.645 163.923 276.991 164.505 275.91 165.087C274.273 165.968 267.958 168.004 263.723 169.326C261.152 170.128 258.972 171.851 257.599 174.168Z"/>
+        <path id="p3" d="M230.93 52.0507C236.137 54.4954 242.881 58.3707 249.65 64.4657C252.129 66.698 258.457 72.6908 264.055 81.928C265.789 84.7899 267.103 87.474 269.73 92.8426C273.209 99.9525 275.771 105.902 276.874 108.572C284.264 126.456 286.507 142.973 286.953 142.882C287.336 142.805 285.27 130.727 283.321 121.49C282.755 118.808 281.26 111.939 278.939 103.882C278.863 103.619 278.798 103.397 278.745 103.214C276.892 96.8777 275.775 93.0577 273.7 88.0779C270.66 80.7831 267.581 75.8416 263.721 69.6471C261.886 66.702 257.485 59.8221 250.948 51.656C247.596 47.4679 244.799 43.9993 240.413 39.7941C236.467 36.0101 232.99 33.3134 230.933 31.7261C227.17 28.8242 224.242 26.8948 220.709 24.5663C216.729 21.9438 214.239 20.3034 210.6 18.3529C207.973 16.9451 208.284 17.271 202.125 14.275C195.67 11.135 195.038 10.6355 190.853 8.74167C188.139 7.51349 185.865 6.49008 182.788 5.38836C178.518 3.86 174.87 2.9563 172.316 2.41534C181.98 8.03509 193.195 15.5441 204.794 25.4844C215.556 34.7067 224.172 43.9003 230.93 52.0507Z"/>
+        <path id="p4" d="M222.303 50.3065C212.804 49.5232 199.025 49.7632 183.947 55.1934C180.081 56.5858 149.632 68.0464 133.48 98.0832C123.98 115.749 127.902 124.079 116.315 134.133C106.293 142.829 99.249 140.164 89.7096 151.3C88.0579 153.228 81.0255 161.127 77.4344 174.65C74.4374 185.936 77.0794 188.741 72.8574 195.311C71.5528 197.34 67.712 203.317 61.3387 204.254C55.3941 205.129 49.955 201.221 45.4165 197.96C43.5956 196.652 41.5578 194.917 37.4823 191.446C33.9956 188.477 32.6364 187.173 29.9488 185.67C26.9072 183.969 24.2959 183.205 23.1686 182.907C19.9415 182.055 16.9708 181.271 13.626 182.154C9.56319 183.226 8.64303 185.783 6.7237 185.123C5.04926 184.546 4.453 182.115 3.18796 177.725C2.69144 176.002 2.46312 174.716 2.04316 172.205C1.12079 166.691 0.659606 163.934 0.482077 162.487C-0.13075 157.494 -0.0459724 153.64 0.123582 145.933C0.299517 137.936 0.844006 131.938 1.11956 129.183C1.19023 128.477 1.5686 124.731 2.19603 120.332C2.95792 114.992 4.64697 103.152 8.03168 92.0802C9.12851 88.4925 13.5472 74.6888 24.061 59.2552C28.8112 52.282 38.7738 39.1473 55.344 27.2415C70.2452 16.5353 83.6428 11.7426 90.7258 9.26854C102.285 5.23026 111.408 3.66315 119.649 2.24769C119.649 2.24769 132.407 0.0557921 149.134 0.000822856C152.886 -0.0119378 158.3 0.0940742 164.577 2.48229C166.942 3.38241 168.761 4.35223 171.643 6.0494C174.838 7.93014 182.296 12.3228 189.283 17.7132C204.481 29.4383 220.643 48.3517 222.303 50.3065Z"/>
       </g>
-      <defs><clipPath id="lc"><rect width="287" height="204.379" fill="white"/></clipPath></defs>
+      <defs>
+        <clipPath id="c0"><rect width="287" height="204.379" fill="white"/></clipPath>
+      </defs>
     </svg>
   </div>
+  <div class="loader-name" id="loaderName">Maitreyi Bhardwaj</div>
+  <div class="loader-pronunciation" id="loaderPron">my · TRAY · ee · BHAR · dj</div>
+  <div class="loader-title" id="loaderTitle">Product Designer</div>
 </div>
 
-<!-- top navbar removed -->
+<!-- ─── NAV ─── -->
+<nav id="nav">
+  <ul class="nl">
+    <li><a href="#work">Work</a></li>
+    <li><a href="#about">About</a></li>
+  </ul>
+  <ul class="nr">
+    <li><a href="https://linkedin.com/in/maitreyi-bhardwaj" target="_blank">LinkedIn</a></li>
+    <li><a href="Maitreyi_Bhardwaj_Resume.pdf" target="_blank">Resume</a></li>
+    <li><a href="#" class="nav-name">Maitreyi Bhardwaj</a></li>
+  </ul>
+</nav>
 
-<button id="dm-toggle" style="position:fixed;bottom:28px;right:28px;z-index:200;width:42px;height:42px;border-radius:50%;border:1px solid var(--border);background:var(--bg);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;">☾</button>
-
-<!-- HERO -->
-<section class="bento">
-  <div class="bento-left">
-
-    <div class="bcard bcard--name r">
-      <span class="blogo" aria-hidden="true">
-        <svg viewBox="0 0 287 205" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <g class="brow brow--l"><path fill="currentColor" d="M224.188 179.482C223.074 181.616 220.794 182.872 218.396 182.665C207.793 181.751 178.607 179.427 165.432 180.305C149.171 181.389 129.659 191.147 129.659 191.147C129.659 191.147 157.302 171.09 164.348 170.548C170.158 170.101 210.232 170.391 224.122 170.507C226.286 170.525 227.661 172.824 226.66 174.743L224.188 179.482Z"/></g>
-          <g class="brow brow--r"><path fill="currentColor" d="M257.599 174.168L251.709 184.108C251.596 184.3 251.835 184.504 252.004 184.358C254.256 182.418 260.252 177.568 266.248 175.427C270.647 173.856 274.499 173.377 276.96 173.253C278.826 173.158 280.487 172.039 281.259 170.338C282.159 168.356 283.046 165.946 282.509 165.087C281.986 164.251 280.9 163.527 280.01 163.037C279.34 162.669 278.526 162.859 278.039 163.447C277.645 163.923 276.991 164.505 275.91 165.087C274.273 165.968 267.958 168.004 263.723 169.326C261.152 170.128 258.972 171.851 257.599 174.168Z"/></g>
-          <path fill="currentColor" d="M230.93 52.0507C236.137 54.4954 242.881 58.3707 249.65 64.4657C252.129 66.698 258.457 72.6908 264.055 81.928C265.789 84.7899 267.103 87.474 269.73 92.8426C273.209 99.9525 275.771 105.902 276.874 108.572C284.264 126.456 286.507 142.973 286.953 142.882C287.336 142.805 285.27 130.727 283.321 121.49C282.755 118.808 281.26 111.939 278.939 103.882C278.863 103.619 278.798 103.397 278.745 103.214C276.892 96.8777 275.775 93.0577 273.7 88.0779C270.66 80.7831 267.581 75.8416 263.721 69.6471C261.886 66.702 257.485 59.8221 250.948 51.656C247.596 47.4679 244.799 43.9993 240.413 39.7941C236.467 36.0101 232.99 33.3134 230.933 31.7261C227.17 28.8242 224.242 26.8948 220.709 24.5663C216.729 21.9438 214.239 20.3034 210.6 18.3529C207.973 16.9451 208.284 17.271 202.125 14.275C195.67 11.135 195.038 10.6355 190.853 8.74167C188.139 7.51349 185.865 6.49008 182.788 5.38836C178.518 3.86 174.87 2.9563 172.316 2.41534C181.98 8.03509 193.195 15.5441 204.794 25.4844C215.556 34.7067 224.172 43.9003 230.93 52.0507Z"/>
-          <path fill="currentColor" d="M222.303 50.3065C212.804 49.5232 199.025 49.7632 183.947 55.1934C180.081 56.5858 149.632 68.0464 133.48 98.0832C123.98 115.749 127.902 124.079 116.315 134.133C106.293 142.829 99.249 140.164 89.7096 151.3C88.0579 153.228 81.0255 161.127 77.4344 174.65C74.4374 185.936 77.0794 188.741 72.8574 195.311C71.5528 197.34 67.712 203.317 61.3387 204.254C55.3941 205.129 49.955 201.221 45.4165 197.96C43.5956 196.652 41.5578 194.917 37.4823 191.446C33.9956 188.477 32.6364 187.173 29.9488 185.67C26.9072 183.969 24.2959 183.205 23.1686 182.907C19.9415 182.055 16.9708 181.271 13.626 182.154C9.56319 183.226 8.64303 185.783 6.7237 185.123C5.04926 184.546 4.453 182.115 3.18796 177.725C2.69144 176.002 2.46312 174.716 2.04316 172.205C1.12079 166.691 0.659606 163.934 0.482077 162.487C-0.13075 157.494 -0.0459724 153.64 0.123582 145.933C0.299517 137.936 0.844006 131.938 1.11956 129.183C1.19023 128.477 1.5686 124.731 2.19603 120.332C2.95792 114.992 4.64697 103.152 8.03168 92.0802C9.12851 88.4925 13.5472 74.6888 24.061 59.2552C28.8112 52.282 38.7738 39.1473 55.344 27.2415C70.2452 16.5353 83.6428 11.7426 90.7258 9.26854C102.285 5.23026 111.408 3.66315 119.649 2.24769C119.649 2.24769 132.407 0.0557921 149.134 0.000822856C152.886 -0.0119378 158.3 0.0940742 164.577 2.48229C166.942 3.38241 168.761 4.35223 171.643 6.0494C174.838 7.93014 182.296 12.3228 189.283 17.7132C204.481 29.4383 220.643 48.3517 222.303 50.3065Z"/>
-        </svg>
-      </span>
-    </div>
-
-    <div class="bcard r d1">
-      <p class="bio-name">Maitreyi Bhardwaj</p>
-      <p class="bio-pron">(my·TRAY·ee)</p>
-      <p class="bbio">UI designer crafting design systems and high-fidelity interfaces. Currently at D2Bridge · West Chester, Pennsylvania.</p>
-      <div class="bcard-cta">
-        <a class="bpill bpill--primary" href="mailto:bhardwajmaitreyi6@gmail.com">Let's talk</a>
-        <a class="bpill" href="about.html">About me</a>
-        <a class="bpill" href="resume.pdf" target="_blank">Resume</a>
-      </div>
-    </div>
-
-    <div class="bcard bcard--social r d1">
-      <a class="sicon" href="https://www.linkedin.com/in/maitreyi-bhardwaj-3a6358220/" target="_blank" aria-label="LinkedIn">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg>
-      </a>
-      <!-- TODO: swap in your real X profile URL -->
-      <a class="sicon" href="https://x.com" target="_blank" aria-label="X">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-      </a>
-    </div>
-
-    <div class="bcard bcard--lists r d2">
-      <div class="blists">
-        <div class="blist">
-          <h4>Skills</h4>
-          <ul>
-            <li>UI Design</li>
-            <li>Design Systems</li>
-            <li>Information Architecture</li>
-            <li>Interactive Prototyping</li>
-            <li>WCAG Accessibility</li>
-          </ul>
-        </div>
-        <div class="blist">
-          <h4>Awards</h4>
-          <ul>
-            <li>Pit Boss UX, Winner</li>
-            <li>Google Packaging Mentorship</li>
-            <li>TiE Phoenix, $3,000</li>
-            <li>HackAZona, $2,000</li>
-            <li>NN/g Certified</li>
-          </ul>
-        </div>
-        <div class="blist">
-          <h4>Education</h4>
-          <ul>
-            <li>ASU Herberger</li>
-            <li>NID India</li>
-            <li>IDSA President</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <div class="bento-right" id="work">
-
-    <div class="bento-tabs">
-      <button type="button" class="btab active" data-tab="uiux">UI / UX</button>
-    </div>
-
-    <div class="tabsheet">
-
-    <div class="bento-grid" data-panel="uiux">
-
-    <section class="proj-sec">
-      <div class="jrow">
-        <a href="frontdoor.html" class="btile jtile jtile--cube r">
-          <img src="https://res.cloudinary.com/df0tysd6u/image/upload/c_fill,g_auto,ar_2.22,f_auto,q_auto/fd_08_dashboard_yockx3.png" alt="FrontDoor Home Passport dashboard">
-          <img class="img-hover" src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/fd_01_hero_hlcjsk.png" alt="">
-          <span class="arw">↗</span>
-          <span class="btile-cap"><span class="t">FrontDoor × AHS</span><span class="s">Home Passport</span></span>
-        </a>
-      </div>
-      <div class="proj-imgs">
-        <span class="pi" style="--ar: 1.835"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/fd_10_proactive_alerts_jf7kcb.png" alt="Proactive alerts" loading="lazy"><img class="img-alt" src="https://res.cloudinary.com/df0tysd6u/image/upload/c_fill,g_auto,ar_1.84,f_auto,q_auto/fd_11_paperless_drawer_qocfov.png" alt="" loading="lazy"></span>
-        <span class="pi" style="--ar: 1.632"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/fd_11.2_Branding_iqbphp.png" alt="Brand system" loading="lazy"><img class="img-alt" src="https://res.cloudinary.com/df0tysd6u/image/upload/c_fill,g_auto,ar_1.63,f_auto,q_auto/fd_12_brand_system_x2ul7z.png" alt="" loading="lazy"></span>
-        <span class="pi" style="--ar: 1.027"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/fd_14_nfc_prototype_zrf2n3.png" alt="NFC prototype" loading="lazy"></span>
-      </div>
-    </section>
-
-    <section class="proj-sec">
-      <div class="jrow jrow--end">
-        <a href="vibin.html" class="btile jtile jtile--cube r d1">
-          <img src="https://res.cloudinary.com/df0tysd6u/image/upload/c_fill,g_auto,ar_2.22,f_auto,q_auto/vibin_02_product_screens_w8wxsq.png" alt="Vibin app screens">
-          <img class="img-hover" src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/vibin_01_hero_qsdrid.png" alt="">
-          <span class="arw">↗</span>
-          <span class="btile-cap"><span class="t">Vibin</span><span class="s">Live iOS Social App</span></span>
-        </a>
-      </div>
-      <div class="proj-imgs">
-        <span class="pi" style="--ar: 2.016"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/vibin_06_final_ui_gzr8sh.png" alt="Vibin final UI" loading="lazy"><img class="img-alt" src="https://res.cloudinary.com/df0tysd6u/image/upload/c_fill,g_auto,ar_2.02,f_auto,q_auto/vibin_07_ui_final_hz5v6a.png" alt="" loading="lazy"></span>
-        <span class="pi" style="--ar: 0.619"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/vibin_12_traction_yzxejh.png" alt="Vibin traction" loading="lazy"></span>
-        <span class="pi" style="--ar: 2.222"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/vibin_08_poster_2_gqpetu.png" alt="Vibin poster" loading="lazy"><img class="img-alt" src="https://res.cloudinary.com/df0tysd6u/image/upload/c_fill,g_auto,ar_2.22,f_auto,q_auto/vibin_09_marketing_flyer_ddxb8d.png" alt="" loading="lazy"></span>
-      </div>
-    </section>
-
-    <section class="proj-sec">
-      <div class="jrow">
-        <a href="pastiche.html" class="btile jtile jtile--cube r">
-          <img src="https://res.cloudinary.com/df0tysd6u/image/upload/c_fill,g_auto,ar_2.22,f_auto,q_auto/pastiche_04_tokens_sex9ay.png" alt="Pastiche design tokens">
-          <img class="img-hover" src="https://res.cloudinary.com/df0tysd6u/image/upload/c_fill,g_auto,ar_2.22,f_auto,q_auto/pastiche_01_hero_st6gjl.png" alt="">
-          <span class="arw">↗</span>
-          <span class="btile-cap"><span class="t">Pastiche</span><span class="s">Color Archaeology</span></span>
-        </a>
-      </div>
-      <div class="proj-imgs">
-        <span class="pi" style="--ar: 1.5"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/pastiche_02_color_extraction_jvo4l0.png" alt="Color extraction" loading="lazy"><img class="img-alt" src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/pastiche_03_library_btqnsn.png" alt="" loading="lazy"></span>
-        <span class="pi" style="--ar: 1.5"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/pastiche_05_export_yspc6l.png" alt="Export" loading="lazy"></span>
-        <span class="pi" style="--ar: 1.5"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/pastiche_07_plugin_ui_ckstkh.png" alt="Plugin UI" loading="lazy"><img class="img-alt" src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/pastiche_06_example_lmfszf.png" alt="" loading="lazy"></span>
-      </div>
-    </section>
-
-    <section class="proj-sec">
-      <div class="jrow jrow--end">
-        <a href="distill.html" class="btile jtile jtile--cube r">
-          <img src="https://res.cloudinary.com/df0tysd6u/image/upload/c_fill,g_auto,ar_2.22,f_auto,q_auto/distill_02_UI_bnkfsj.png" alt="Distill translation panel over YouTube">
-          <img class="img-hover" src="https://res.cloudinary.com/df0tysd6u/image/upload/c_fill,g_auto,ar_2.22,f_auto,q_auto/distill_04_mock1_eb3iqp.png" alt="">
-          <span class="arw">↗</span>
-          <span class="btile-cap"><span class="t">Distill</span><span class="s">Real-Time ASL Translation</span></span>
-        </a>
-      </div>
-      <div class="proj-imgs">
-        <span class="pi" style="--ar: 1.778"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/distill_02_UI_bnkfsj.png" alt="Distill UI" loading="lazy"><img class="img-alt" src="https://res.cloudinary.com/df0tysd6u/image/upload/c_fill,g_auto,ar_1.78,f_auto,q_auto/distill_04_mock2_ASL_dpfqnp.png" alt="" loading="lazy"></span>
-        <span class="pi" style="--ar: 1.778"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/distill_03_what_does_it_do_c7nwsx.png" alt="What it does" loading="lazy"></span>
-        <span class="pi" style="--ar: 1.778"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/distill_05_how_it_works_ygndkk.png" alt="How it works" loading="lazy"><img class="img-alt" src="https://res.cloudinary.com/df0tysd6u/image/upload/c_fill,g_auto,ar_1.78,f_auto,q_auto/distill_06_end_ntluo5.png" alt="" loading="lazy"></span>
-      </div>
-    </section>
-
-    <section class="proj-sec">
-      <div class="jrow">
-        <div class="btile jtile jtile--cube btile--nda r">
-          <img src="d2bridge.png" alt="D2Bridge dashboard, blurred, under NDA">
-          <span class="nda-cap"><span class="nda-t">D2Bridge</span><span class="nda-s">Under NDA · Password protected</span></span>
-        </div>
-      </div>
-    </section>
-
-    </div>
-
-    </div>
-
+<!-- ─── HERO ─── -->
+<section class="hero">
+  <p class="hero-eyebrow r">Product Designer · Tempe, Arizona · Open to Work</p>
+  <h1 class="r d1">
+    Maitreyi designs systems that feel <span class="ora">human</span> — across physical products, digital interfaces, and the space <span class="script">between.</span>
+  </h1>
+  <p class="hero-sub r d2">
+    5 years building at the intersection of UX research, brand systems, and product engineering.
+  </p>
+  <div class="hero-pills r d3">
+    <span class="pill"><span class="dot"></span> Available June 2025</span>
+    <a href="#work" class="pill">↓ View Work</a>
+    <a href="mailto:mbhardw9@asu.edu" class="pill">mbhardw9@asu.edu</a>
   </div>
 </section>
 
+<!-- ─── PROJECTS ─── -->
+<div class="projects-label r" id="work">PROJECTS</div>
 
-<!-- FISH , the entire bottom bar is the game, nothing else -->
-<section class="fishwrap">
-  <div class="fishcard">
-    <div class="fish-row fish-row--top">
-      <span>tap a fish, catch a fact · score <span id="fc-pts">0</span></span>
-      <span id="fish-time">--:--:--</span>
+<div class="grid">
+
+  <!-- FRONTDOOR — WIDE -->
+  <a href="frontdoor.html" class="proj wide r">
+    <div class="proj-img">
+      <div class="proj-img-inner" style="background:#f0ede8;padding:0;">
+        <img src="01_hero.jpeg" alt="Home Passport" style="width:100%;height:100%;object-fit:cover;display:block;">
+      </div>
     </div>
-    <canvas id="fc-canvas" width="1600" height="320"></canvas>
-    <div class="fish-row fish-row--bottom">
-      <span>© 2026 Maitreyi Bhardwaj</span>
-      <span>byMaitreyi</span>
+    <div class="proj-body">
+      <div class="proj-tags">
+        <span class="tag orange">Industry Studio</span>
+        <span class="tag">Service Design</span>
+        <span class="tag">UI Systems</span>
+        <span class="tag">Physical Prototype</span>
+      </div>
+      <div class="proj-title">FrontDoor × AHS — Home Passport</div>
+      <p class="proj-desc">Redesigned the AHS app and NFC onboarding system to make connecting a home appliance as easy as tapping your phone. 12 steps to 3 taps.</p>
+    </div>
+    <div class="proj-arrow">↗</div>
+  </a>
+
+  <!-- PASTICHE -->
+  <a href="pastiche.html" class="proj r d1">
+    <div class="proj-img">
+      <div class="proj-img-inner" style="background:#f5f0ea;">
+        <span class="label">01_hero.png</span>
+      </div>
+    </div>
+    <div class="proj-body">
+      <div class="proj-tags">
+        <span class="tag orange">Live Product</span>
+        <span class="tag">Figma Plugin</span>
+        <span class="tag">Client-Side ML</span>
+      </div>
+      <div class="proj-title">Pastiche — Color Archaeology</div>
+      <p class="proj-desc">Solo-built Figma plugin extracting color tokens from museum masterworks. $0/month infrastructure. Approved by Figma Community next day.</p>
+    </div>
+    <div class="proj-arrow">↗</div>
+  </a>
+
+  <!-- DISTILL -->
+  <a href="distill.html" class="proj r d2">
+    <div class="proj-img">
+      <div class="proj-img-inner" style="background:#edf0f5;">
+        <span class="label">01_hero.png</span>
+      </div>
+    </div>
+    <div class="proj-body">
+      <div class="proj-tags">
+        <span class="tag orange">$2,000 Winner</span>
+        <span class="tag">HackAZona</span>
+        <span class="tag">Accessibility</span>
+      </div>
+      <div class="proj-title">Distill — Real-Time ASL Translation</div>
+      <p class="proj-desc">Chrome extension translating active tab audio across 16 languages with live ASL visual cards. Built and shipped in 36 hours.</p>
+    </div>
+    <div class="proj-arrow">↗</div>
+  </a>
+
+</div>
+
+<!-- ─── ABOUT ─── -->
+<section class="about" id="about">
+  <div class="about-grid r">
+    <div class="about-left">
+      <h2>Product designer who builds what she designs.</h2>
+      <p class="mt24" style="font-size:17px;font-weight:300;color:var(--gray);line-height:1.75;">BS Industrial Design from ASU Herberger. Foundation from National Institute of Design. I work across physical product, digital UI, service design, and brand systems — often all four at once.</p>
+      <p style="font-size:17px;font-weight:300;color:var(--gray);line-height:1.75;margin-top:16px;">Google Packaging Mentorship. Nielsen Norman certified. IDSA Chapter President. FemTech 1st place. HackAZona winner.</p>
+    </div>
+    <div class="about-right r d1">
+      <div class="about-item">
+        <span class="about-label">Education</span>
+        <span class="about-val">ASU Herberger · NID Andhra Pradesh</span>
+      </div>
+      <div class="about-item">
+        <span class="about-label">Currently</span>
+        <span class="about-val">Awaiting OPT · June 2025</span>
+      </div>
+      <div class="about-item">
+        <span class="about-label">Based</span>
+        <span class="about-val">Tempe, Arizona</span>
+      </div>
+      <div class="about-item">
+        <span class="about-label">Tools</span>
+        <span class="about-val">Figma · Claude · VS Code · Rhino</span>
+      </div>
+      <div class="about-item">
+        <span class="about-label">Recognition</span>
+        <span class="about-val">Google · NNG · TiE Phoenix · FemTech</span>
+      </div>
     </div>
   </div>
 </section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <p class="f-copy">© 2025 Maitreyi Bhardwaj</p>
+  <hr class="f-rule">
+  <p class="f-cta">Let's build something <span class="script">meaningful</span> together.</p>
+  <div class="f-btns">
+    <a href="mailto:mbhardw9@asu.edu" class="fbtn">mbhardw9@asu.edu</a>
+    <a href="https://linkedin.com/in/maitreyi-bhardwaj" target="_blank" class="fbtn">LinkedIn</a>
+    <a href="Maitreyi_Bhardwaj_Resume.pdf" target="_blank" class="fbtn">Resume</a>
+  </div>
+</footer>
+
+<style>
+.mt24{margin-top:24px}
+</style>
 
 <script>
-// LOADER , cycles b&w bg/logo combos then exits
-const frames = [
-  ['#0a0a0a', '#ffffff'],
-  ['#f7f7f5', '#0a0a0a'],
-  ['#ffffff', '#0a0a0a'],
-  ['#0a0a0a', '#f0f0ee'],
-  ['#e8e8e5', '#0a0a0a'],
-  ['#ffffff', '#0a0a0a'],
-];
+// ─── LOADER COLOR CYCLE ───
+const colors = ['#CD5028','#0a0a0a','#2a2a2a','#CD5028','#1a1a1a'];
+const svgFills = ['#ffffff','#CD5028','#ffffff','#CD5028','#ffffff'];
+const bgColors = ['#CD5028','#ffffff','#CD5028','#222222','#CD5028'];
 let ci = 0;
+const svg = document.getElementById('loaderSvg');
+const bg = document.getElementById('loaderBg');
 const loader = document.getElementById('loader');
 
 function setPaths(fill) {
   ['p1','p2','p3','p4'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.setAttribute('fill', fill);
+    document.getElementById(id).style.fill = fill;
   });
 }
 
+// Initial state — orange bg, white head
 document.body.style.overflow = 'hidden';
-loader.style.background = frames[0][0];
-setPaths(frames[0][1]);
+loader.style.background = '#0a0a0a';
+setPaths('#ffffff');
 
-const cycle = setInterval(() => {
-  ci = (ci + 1) % frames.length;
-  loader.style.background = frames[ci][0];
-  setPaths(frames[ci][1]);
-}, 300);
+// Cycle colors
+const cycleInterval = setInterval(() => {
+  ci = (ci + 1) % colors.length;
+  loader.style.background = colors[ci];
+  setPaths(svgFills[ci]);
+}, 350);
 
-// Exit after all 6 frames shown (~2s)
+// After 1.4s show name
 setTimeout(() => {
-  clearInterval(cycle);
-  // Final state: black logo on white
-  loader.style.background = '#fff';
-  setPaths('#0a0a0a');
-}, 1800);
+  clearInterval(cycleInterval);
+  loader.style.background = '#0a0a0a';
+  setPaths('#ffffff');
+  document.getElementById('loaderName').classList.add('show');
+  document.getElementById('loaderPron').classList.add('show');
+  document.getElementById('loaderTitle').classList.add('show');
+}, 1400);
 
+// After 2.6s exit loader
 setTimeout(() => {
   loader.classList.add('out');
   document.body.style.overflow = '';
+  document.getElementById('nav').classList.add('visible');
+  // trigger reveals
   setTimeout(() => {
-    const els = Array.from(document.querySelectorAll('.r'));
-    // reveal on scroll: each element waits until it is genuinely in view,
-    // so the next thing stays empty until you arrive at it
-    const io = new IntersectionObserver(e => e.forEach(x => {
-      if (x.isIntersecting) { x.target.classList.add('on'); io.unobserve(x.target); }
-    }), { threshold: .15, rootMargin: '0px 0px -70px 0px' });
+    const els = document.querySelectorAll('.r');
+    const io = new IntersectionObserver(e => e.forEach(x => { if(x.isIntersecting) x.target.classList.add('on'); }), {threshold:.04, rootMargin:'0px 0px -20px 0px'});
     els.forEach(el => io.observe(el));
-    // what's already on screen enters slowly, one after the other
-    els.filter(el => el.getBoundingClientRect().top < window.innerHeight)
-       .forEach((el, i) => setTimeout(() => el.classList.add('on'), 150 + i * 300));
+    els.forEach(el => { if(el.getBoundingClientRect().top < window.innerHeight) el.classList.add('on'); });
   }, 100);
-}, 2600);
+}, 2800);
 
-// (top nav removed)
-
-const _dmt = document.getElementById('dm-toggle');
-const _dms = localStorage.getItem('dm');
-if (_dms === '1') { document.documentElement.classList.add('dark'); _dmt.textContent = '☀'; }
-_dmt.addEventListener('click', () => {
-  const on = document.documentElement.classList.toggle('dark');
-  localStorage.setItem('dm', on ? '1' : '0');
-  _dmt.textContent = on ? '☀' : '☾';
-});
-
-
-// FISH POND v4 - a living monochrome night pond: fish always swimming,
-// moonlit sky, swaying seaweed, bubbles; tap any fish to catch a fact
-(function(){
-const canvas = document.getElementById('fc-canvas');
-if(!canvas) return;
-const ctx = canvas.getContext('2d');
-ctx.imageSmoothingEnabled = false;
-const H=320,WATER_Y=168,PX=4,COUNT=7;
-// match the internal width to the on-screen aspect ratio: square pixels everywhere
-const _r0=canvas.getBoundingClientRect();
-const W=Math.max(360,Math.round(H*(_r0.width/Math.max(1,_r0.height||H))));
-canvas.width=W; canvas.height=H;
-let score=0,frame=0,leapTimer=90,factSeq=0;
-const ptsEl=document.getElementById('fc-pts');
-function rnd(a,b){return a+Math.random()*(b-a);}
-function PAL(){
-  return {ink:'#f0f0ee', shade:'#c2c2be', eye:'#0a0a0a', pupil:'#f0f0ee', wave1:'rgba(240,240,238,0.09)', wave2:'rgba(240,240,238,0.06)', shim:'240,240,238', splash:'#9a9a96', lblBg:'rgba(240,240,238,0.94)', lblTx:'#0a0a0a'};
-}
-const STARS=Array.from({length:36},()=>({x:rnd(12,W-12),y:rnd(12,WATER_Y-58),p:rnd(0,6.28),sz:Math.random()<0.22?4:2}));
-const WEEDS=Array.from({length:Math.max(6,Math.round(W/150))},()=>({x:rnd(26,W-26),h:rnd(40,96),p:rnd(0,6.28),sway:rnd(3,7)}));
-
-const FACTS=[
-  "hi! welcome to maitreyi's portfolio",
-  "she built this site in HTML + Claude",
-  "pastiche turns paintings into design tokens",
-  "distill won $2,000 at HackAZona",
-  "vibin is live on the App Store",
-  "she's at ASU Herberger + NID India",
-  "she designs physical + digital products",
-  "currently UI designer at D2Bridge",
-  "pit boss UX competition winner",
-  "google packaging mentorship 2026",
-  "IDSA president at ASU",
-  "she codes her own portfolio",
-];
-
-/* classic pixel fish, after her sprite-sheet reference: crisp dark outline,
-   flat body, white belly, forked tail, dorsal + pectoral fin, glint eye.
-   O = outline  B = body  W = belly  F = fins/tail  e = eye
-   Most spawn silver; some spawn as the orange goldfish variant. */
-const FISH_ROWS=[
-  ".........OFFO.............",
-  "........OFFFFO............",
-  "OO.....OOFFFFOOO..........",
-  "OFO...OBBBBBBBBBOOO.......",
-  "OFFO.OBBBBBBBBBBBBBOO.....",
-  "OFFOOBBBBBBBBBBBBBBBBOO...",
-  "OFFFOBBBBBBBBBBBBBBBBeBOO.",
-  "OFFOOBBWWWWWWWWWWWWBBBBOO.",
-  "OFO..OBWWWFFWWWWWWWBBOO...",
-  "OO....OWWWWFFWWWWWWOO.....",
-  ".......OOOOWWWWWWOOO......",
-  "..........OOOOOO.........."
-];
-const FISH_PALS={
-  silver:{ O:'#1c222e', B:'#b6bec9', W:'#f2f4f6', F:'#78808c' },
-  orange:{ O:'#38200e', B:'#e0862f', W:'#f6ddb0', F:'#b85f18' }
-};
-const FISH_PX={ px:[], eye:null };
-FISH_ROWS.forEach((row,ri)=>{
-  for(let ci=0;ci<row.length;ci++){
-    const ch=row[ci]; if(ch==='.') continue;
-    const dc=ci-13, dr=ri-6;
-    if(ch==='e') FISH_PX.eye=[dc,dr];
-    else FISH_PX.px.push([dc,dr,ch]);
-  }
-});
-
-function mkFish(fromEdge){
-  const dir=Math.random()<0.5?1:-1;
-  return {
-    x: fromEdge ? (dir===1?-36:W+36) : rnd(24,W-24),
-    y: rnd(WATER_Y+30,H-52),
-    vx: dir*rnd(0.35,0.95),
-    size: rnd(0.3,0.55),
-    variant: Math.random()<0.22?'orange':'silver',
-    wob: rnd(0,6.28),
-    state:'swim', vy:0, homeY:0, dove:false, alpha:1, caughtAt:0,
-    _factIdx: factSeq++
-  };
-}
-let fish=Array.from({length:COUNT},()=>mkFish(false));
-let splashes=[],ripples=[],bubbles=[],msgs=[];
-
-function addSplash(x,y,caught){
-  const p=PAL();
-  for(let i=0;i<8;i++){
-    const a=(Math.PI*2/8)*i;
-    splashes.push({x,y,vx:Math.cos(a)*rnd(1.5,3.5),vy:Math.sin(a)*rnd(-4,-1.5),alpha:1,color:caught?p.ink:p.splash});
-  }
-}
-function addMsg(x,y,text){
-  msgs.push({x:Math.min(Math.max(x,180),W-180),y:Math.min(y,WATER_Y+80),text,alpha:1,vy:-0.9,t:0});
-}
-
-function drawMoon(){
-  const p=PAL();
-  const mx=W-72,my=48,r=20;
-  ctx.fillStyle=`rgba(${p.shim},0.05)`;
-  ctx.beginPath(); ctx.arc(mx,my,r+12,0,6.29); ctx.fill();
-  ctx.fillStyle=`rgba(${p.shim},0.09)`;
-  ctx.beginPath(); ctx.arc(mx,my,r+6,0,6.29); ctx.fill();
-  ctx.fillStyle=`rgba(${p.shim},0.95)`;
-  ctx.beginPath(); ctx.arc(mx,my,r,0,6.29); ctx.fill();
-  ctx.fillStyle='rgba(10,10,10,0.18)';
-  ctx.beginPath(); ctx.arc(mx-7,my-4,4.5,0,6.29); ctx.fill();
-  ctx.beginPath(); ctx.arc(mx+6,my+7,3.2,0,6.29); ctx.fill();
-  ctx.beginPath(); ctx.arc(mx+3,my-10,2.2,0,6.29); ctx.fill();
-  ctx.beginPath(); ctx.arc(mx-2,my+3,1.8,0,6.29); ctx.fill();
-  const lg=ctx.createLinearGradient(0,WATER_Y,0,H);
-  lg.addColorStop(0,`rgba(${p.shim},0.09)`);
-  lg.addColorStop(1,`rgba(${p.shim},0)`);
-  ctx.fillStyle=lg;
-  ctx.fillRect(mx-28,WATER_Y,56,H-WATER_Y);
-}
-
-function drawWeeds(){
-  const p=PAL();
-  WEEDS.forEach(w=>{
-    for(let k=0;k<w.h;k+=PX){
-      const t=k/w.h;
-      const off=Math.sin(frame*0.035+w.p+t*2.2)*w.sway*t;
-      const x=Math.round((w.x+off)/PX)*PX, y=H-10-k;
-      ctx.fillStyle=`rgba(${p.shim},${(0.20+0.10*(1-t)).toFixed(3)})`;
-      ctx.fillRect(x,y,PX,PX);
-      const step=k/PX;
-      if(step%3===1){
-        ctx.fillStyle=`rgba(${p.shim},${(0.12+0.08*(1-t)).toFixed(3)})`;
-        ctx.fillRect(x+((step%6===1)?PX:-PX),y,PX,PX);
-      }
-    }
-  });
-}
-
-function drawFish(f){
-  const p=PAL();
-  const s=Math.max(1,Math.round(PX*f.size));
-  const dir=f.vx>=0?1:-1;
-  const bob=f.state==='swim'?Math.sin(frame*0.05+f.wob)*3:0;
-  const cx=Math.round(f.x), cy=Math.round(f.y+bob);
-  const pal=FISH_PALS[f.variant]||FISH_PALS.silver;
-  ctx.save();
-  ctx.globalAlpha=f.alpha*(f.state==='swim'?0.92:1);
-  FISH_PX.px.forEach(([dc,dr,ch])=>{ctx.fillStyle=pal[ch];ctx.fillRect(cx+dc*dir*s,cy+dr*s,s,s);});
-  // tail flick: the fluke tip beats up and down
-  const flick=Math.sin(frame*0.2+f.wob)>0?1:0;
-  ctx.fillStyle=pal.F;
-  ctx.fillRect(cx+(-12)*dir*s,cy+(flick?-4:4)*s,s,s);
-  // eye: white with a dark pupil
-  ctx.fillStyle='#fff'; ctx.fillRect(cx+FISH_PX.eye[0]*dir*s,cy+FISH_PX.eye[1]*s,s,s);
-  ctx.fillStyle='#0a0a0a';
-  const ps=Math.max(1,s>>1);
-  ctx.fillRect(cx+FISH_PX.eye[0]*dir*s+ps,cy+FISH_PX.eye[1]*s+ps,ps,ps);
-  ctx.restore();
-  // fact label rides above a leaping fish
-  if(f.state==='leap'&&f.y<WATER_Y-14){
-    ctx.save();
-    ctx.globalAlpha=Math.min(1,(WATER_Y-f.y)/50)*f.alpha;
-    ctx.font='500 12px Inter,-apple-system,sans-serif';
-    ctx.textAlign='center';
-    const lbl=FACTS[f._factIdx%FACTS.length]||'';
-    const tw=ctx.measureText(lbl).width;
-    const lx=Math.min(Math.max(f.x,tw/2+14),W-tw/2-14);
-    ctx.fillStyle=p.lblBg;
-    ctx.beginPath();
-    if(ctx.roundRect) ctx.roundRect(lx-tw/2-8,f.y-30,tw+16,22,4); else ctx.rect(lx-tw/2-8,f.y-30,tw+16,22);
-    ctx.fill();
-    ctx.fillStyle=p.lblTx;
-    ctx.fillText(lbl,lx,f.y-14);
-    ctx.restore();
-  }
-}
-
-function drawSky(){
-  const p=PAL();
-  for(const s of STARS){
-    const tw=0.5+0.5*Math.sin(frame*0.03+s.p);
-    ctx.fillStyle=`rgba(${p.shim},${((s.sz===4?0.18:0.10)+0.24*tw).toFixed(3)})`;
-    ctx.fillRect(Math.round(s.x/PX)*PX,Math.round(s.y/PX)*PX,s.sz,s.sz);
-  }
-  drawMoon();
-}
-
-function drawWater(){
-  const p=PAL();
-  const g=ctx.createLinearGradient(0,WATER_Y,0,H);
-  g.addColorStop(0,'rgba(240,240,238,0.16)');
-  g.addColorStop(0.45,'rgba(240,240,238,0.08)');
-  g.addColorStop(1,'rgba(240,240,238,0.03)');
-  ctx.fillStyle=g;
-  ctx.beginPath(); ctx.moveTo(0,WATER_Y);
-  for(let x=0;x<=W;x+=4){
-    ctx.lineTo(x,WATER_Y+Math.sin((x*0.025)+frame*0.18)*5+Math.sin((x*0.04)+frame*0.11)*3);
-  }
-  ctx.lineTo(W,H); ctx.lineTo(0,H); ctx.closePath(); ctx.fill();
-  for(let x=0;x<W;x+=PX){
-    const w=Math.sin((x*0.025)+frame*0.18)*5+Math.sin((x*0.04)+frame*0.11)*3;
-    ctx.fillStyle=`rgba(${p.shim},${(0.30+Math.sin(x*0.01+frame*0.02)*0.10).toFixed(3)})`;
-    ctx.fillRect(x,Math.round((WATER_Y+w)/PX)*PX,PX,PX);
-  }
-  ctx.fillStyle=`rgba(${p.shim},0.10)`;
-  ctx.fillRect(0,H-12,W,12);
-  for(let x=0;x<W;x+=PX){
-    const h=((x*2654435761)>>>0)%97;
-    if(h<14){ ctx.fillStyle=`rgba(${p.shim},${h<5?0.30:0.16})`; ctx.fillRect(x,H-8-(h%3)*PX,PX,PX); }
-  }
-}
-
-function drawRipples(){
-  const p=PAL();
-  ripples.forEach(r=>{
-    ctx.save(); ctx.globalAlpha=r.alpha*0.7;
-    for(let i=0;i<Math.floor(r.r/PX);i+=2){
-      ctx.fillStyle=`rgba(${p.shim},0.30)`;
-      const rx=Math.round((r.x+i*PX*1.6)/PX)*PX;
-      const lx=Math.round((r.x-i*PX*1.6)/PX)*PX;
-      ctx.fillRect(rx,r.y,PX,PX); ctx.fillRect(lx,r.y,PX,PX);
-      ctx.fillRect(rx,r.y-PX,PX,PX); ctx.fillRect(lx,r.y-PX,PX,PX);
-    }
-    ctx.restore();
-  });
-}
-
-function drawMsgs(){
-  const p=PAL();
-  msgs.forEach(m=>{
-    ctx.save();
-    ctx.globalAlpha=m.alpha;
-    ctx.font='500 13px Inter,-apple-system,sans-serif';
-    const tw=ctx.measureText(m.text).width;
-    ctx.fillStyle=p.lblBg;
-    const px=8,py=5;
-    const bx=m.x-tw/2-px, by=m.y-18-py, bw=tw+px*2, bh=22+py*2;
-    ctx.beginPath();
-    if(ctx.roundRect) ctx.roundRect(bx,by,bw,bh,6); else ctx.rect(bx,by,bw,bh);
-    ctx.fill();
-    ctx.fillStyle=p.lblTx;
-    ctx.textAlign='center';
-    ctx.textBaseline='middle';
-    ctx.fillText(m.text,m.x,m.y-6);
-    ctx.restore();
-  });
-}
-
-function tick(){
-  frame++;
-  // a random swimmer leaps every few seconds, carrying a fact
-  if(--leapTimer<=0){
-    leapTimer=rnd(150,260);
-    const swimmers=fish.filter(f=>f.state==='swim');
-    if(swimmers.length){
-      const f=swimmers[Math.floor(rnd(0,swimmers.length))];
-      f.state='leap'; f.homeY=f.y; f.vy=-rnd(8.6,10.6); f.dove=false;
-      ripples.push({x:f.x,y:WATER_Y,r:0,alpha:0.55});
-      addSplash(f.x,WATER_Y,false);
-    }
-  }
-  fish.forEach(f=>{
-    if(f.state==='caught'){ f.alpha-=0.055; return; }
-    if(f.state==='swim'){
-      f.x+=f.vx;
-      if(f.x<-40) f.x=W+38; else if(f.x>W+40) f.x=-38;
-      if(Math.random()<0.0018) f.vx*=-1;
-      if(Math.random()<0.02) bubbles.push({x:f.x+(f.vx>=0?14:-14),y:f.y-4,vy:-rnd(0.35,0.7),a:0.7,p:rnd(0,6.28)});
-    } else if(f.state==='leap'){
-      f.x+=f.vx*1.5; f.vy+=0.28; f.y+=f.vy;
-      if(f.vy>0 && !f.dove && f.y>=WATER_Y){
-        f.dove=true; addSplash(f.x,WATER_Y,false);
-        ripples.push({x:f.x,y:WATER_Y,r:0,alpha:0.5});
-      }
-      if(f.vy>0 && f.y>=f.homeY){ f.y=f.homeY; f.state='swim'; }
-    }
-  });
-  // caught fish fade out; the pond restocks from the edges
-  fish=fish.filter(f=>f.alpha>0);
-  while(fish.length<COUNT) fish.push(mkFish(true));
-  bubbles.forEach(b=>{ b.y+=b.vy; b.x+=Math.sin(frame*0.08+b.p)*0.4; if(b.y<=WATER_Y+4) b.a-=0.12; });
-  bubbles=bubbles.filter(b=>b.a>0);
-  ripples.forEach(r=>{r.r+=1.5;r.alpha-=0.022;});
-  ripples=ripples.filter(r=>r.alpha>0);
-  splashes.forEach(s=>{s.x+=s.vx;s.y+=s.vy;s.vy+=0.18;s.alpha-=0.04;});
-  splashes=splashes.filter(s=>s.alpha>0);
-  msgs.forEach(m=>{m.y+=m.vy;m.t++;if(m.t>70)m.alpha-=0.035;});
-  msgs=msgs.filter(m=>m.alpha>0);
-
-  ctx.clearRect(0,0,W,H);
-  drawSky();
-  drawWeeds();
-  fish.filter(f=>f.state!=='leap').forEach(drawFish);
-  const p=PAL();
-  bubbles.forEach(b=>{
-    ctx.save(); ctx.globalAlpha=b.a; ctx.fillStyle=`rgba(${p.shim},0.5)`;
-    ctx.fillRect(Math.round(b.x/PX)*PX,Math.round(b.y/PX)*PX,3,3);
-    ctx.restore();
-  });
-  drawWater();
-  drawRipples();
-  fish.filter(f=>f.state==='leap').forEach(drawFish);
-  splashes.forEach(s=>{
-    ctx.save();ctx.globalAlpha=s.alpha;ctx.fillStyle=s.color;
-    ctx.fillRect(Math.round(s.x/PX)*PX,Math.round(s.y/PX)*PX,PX,PX);
-    ctx.restore();
-  });
-  drawMsgs();
-  requestAnimationFrame(tick);
-}
-
-function catchAt(ex,ey){
-  const rect=canvas.getBoundingClientRect();
-  const kx=rect.width/W, ky=rect.height/H;
-  let got=false;
-  fish.forEach(f=>{
-    if(got||f.state==='caught')return;
-    // hit-test in CSS pixels: a ~60px touch target on every screen size
-    const fx=rect.left+f.x*kx, fy=rect.top+f.y*ky;
-    if(Math.abs(ex-fx)<30&&Math.abs(ey-fy)<30){
-      got=true;
-      f.state='caught'; f.caughtAt=frame; score++;
-      if(ptsEl)ptsEl.textContent=score;
-      addSplash(f.x,f.y,true);
-      if(f.y>=WATER_Y) ripples.push({x:f.x,y:WATER_Y,r:0,alpha:0.8});
-      addMsg(f.x,f.y-24,FACTS[f._factIdx%FACTS.length]);
-    }
-  });
-}
-canvas.addEventListener('click',e=>catchAt(e.clientX,e.clientY));
-// passive: taps still catch (via the synthetic click too); vertical flicks keep scrolling
-canvas.addEventListener('touchstart',e=>{catchAt(e.touches[0].clientX,e.touches[0].clientY);},{passive:true});
-tick();
-})();
-
-
-
-
-
+// Nav hide/show on scroll
+let lastY = 0;
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  if (y > lastY && y > 80) nav.classList.add('hidden');
+  else nav.classList.remove('hidden');
+  lastY = y;
+}, { passive: true });
 </script>
-
-<script>
-// LIVE ARIZONA CLOCK in the fish bar (America/New_York, no DST)
-(function(){
-  const el = document.getElementById('fish-time');
-  if(!el) return;
-  function upd(){
-    el.textContent = new Date().toLocaleTimeString('en-US',{timeZone:'America/New_York',hour12:true,hour:'2-digit',minute:'2-digit',second:'2-digit'}) + ' / Pennsylvania';
-  }
-  upd(); setInterval(upd, 1000);
-})();
-</script>
-
-<script>
-// PROJECT TABS (UI/UX · Industrial Design · Graphic Work)
-document.querySelectorAll('.btab').forEach(function(tab){
-  tab.addEventListener('click', function(){
-    var t = tab.dataset.tab;
-    document.querySelectorAll('.btab').forEach(function(b){ b.classList.toggle('active', b === tab); });
-    document.querySelectorAll('.bento-grid').forEach(function(g){ g.hidden = (g.dataset.panel !== t); });
-  });
-});
-</script>
-
-<script>
-// AMBIENT TILE CYCLING: cards slowly swap their imagery on their own,
-// staggered so the grid keeps changing without any scrolling or hover
-(function(){
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  var tiles = Array.prototype.filter.call(
-    document.querySelectorAll('.btile, .proj-imgs .pi'),
-    function(t){ return t.querySelector('.img-hover, .img-alt'); }
-  );
-  tiles.forEach(function(t, i){
-    setTimeout(function(){
-      setInterval(function(){
-        if (!t.matches(':hover')) t.classList.toggle('flip');
-      }, 4600);
-    }, 1200 + i * 1100);
-  });
-})();
-</script>
-
 </body>
 </html>

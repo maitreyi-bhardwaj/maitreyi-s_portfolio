@@ -1,164 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
-<script>if(localStorage.getItem("dm")==="1")document.documentElement.classList.add("dark");</script>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pastiche , Maitreyi Bhardwaj</title>
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>Pastiche — Maitreyi Bhardwaj</title>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500&family=Dancing+Script:wght@500&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-:root { --bg:#fff; --black:#0a0a0a; --gray:#666; --soft:#999; --light:#F8F8F8; --border:#e8e8e5; --f:'Inter',-apple-system,sans-serif; }
-body { font-family: var(--f); background: var(--bg); color: var(--black); -webkit-font-smoothing: antialiased; overflow-x: clip; }
-.r { opacity:1; transform:none; transition:none; }
-.sec { opacity:0; transform:translateY(16px); transition:opacity .55s ease, transform .55s ease; }
-.sec.live { opacity:1; transform:none; }
-.hero-img, .hero-img.live { opacity:1; transform:none; }
-@media (prefers-reduced-motion: reduce) { .sec, .hero-img { opacity:1; transform:none; transition:none; } }
-.sec { display:flex; flex-direction:column; padding:clamp(88px,9vw,150px) clamp(20px,4vw,64px); }
-.sec > * { max-width:min(1240px,94vw); width:100%; margin-left:auto; margin-right:auto; }
-.sec > .wide { width:100vw; max-width:100vw; margin-left:calc(50% - 50vw); margin-top:48px; }
-.lbl { font-size:12px; font-weight:500; letter-spacing:.07em; text-transform:uppercase; color:var(--soft); margin-bottom:8px; }
-.lbl-rule { height:1px; background:var(--border); margin-bottom:18px; }
-h1 { font-size:clamp(40px,5.2vw,78px); font-weight:400; letter-spacing:-.03em; line-height:1.05; color:var(--black); margin-bottom:20px; }
-h2 { font-size:clamp(32px,4vw,60px); font-weight:400; letter-spacing:-.028em; line-height:1.06; color:var(--black); margin-bottom:16px; }
-h3 { font-size:clamp(18px,2vw,24px); font-weight:600; letter-spacing:-.01em; line-height:1.25; color:var(--black); margin-bottom:10px; }
-.body { font-size:18px; font-weight:400; color:var(--black); line-height:1.75; max-width:600px; }
-.body.w { max-width:700px; }
-.feat { display:grid; grid-template-columns:minmax(280px,440px) 1fr; gap:clamp(20px,2.5vw,40px); align-items:center; }
-.sec > .feat.wide { padding:0 clamp(20px,4vw,64px); }
-.feat img { width:100%; height:auto; display:block; border-radius:12px; }
-.g2i { display:grid; grid-template-columns:1fr; gap:24px; }
-.g2i img { width:100%; height:auto; display:block; border-radius:0; }
-.pills { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:28px; }
+:root { --bg:#fff; --black:#0a0a0a; --gray:#666; --soft:#999; --light:#f7f7f5; --border:#e8e8e5; --orange:#CD5028; --f:'Geist',-apple-system,sans-serif; --script:'Dancing Script',cursive; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--f); background: var(--bg); color: var(--black); -webkit-font-smoothing: antialiased; }
+nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; justify-content:space-between; align-items:center; padding:20px 60px; background:rgba(255,255,255,.97); border-bottom:1px solid var(--border); transition:transform .3s cubic-bezier(.16,1,.3,1); }
+nav.hidden { transform:translateY(-100%); }
+.nl,.nr { display:flex; gap:28px; list-style:none; }
+nav a { font-size:14px; font-weight:400; color:var(--gray); text-decoration:none; }
+nav a:hover,.bold { color:var(--black) !important; font-weight:500 !important; }
+.r { opacity:0; transform:translateY(20px); transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1); }
+.r.on { opacity:1; transform:none; }
+.d1{transition-delay:.07s}.d2{transition-delay:.14s}.d3{transition-delay:.21s}.d4{transition-delay:.28s}
+.sec { min-height:100vh; display:flex; flex-direction:column; justify-content:center; padding:100px 80px; }
+.sec > * { max-width:1000px; width:100%; margin-left:auto; margin-right:auto; }
+.lbl { font-size:13px; font-weight:400; color:var(--soft); margin-bottom:10px; }
+.lbl-rule { height:1px; background:var(--border); margin-bottom:32px; }
+h1 { font-size:clamp(28px,3vw,44px); font-weight:400; letter-spacing:-.025em; line-height:1.1; color:var(--black); margin-bottom:32px; }
+h2 { font-size:clamp(24px,2.8vw,42px); font-weight:400; letter-spacing:-.022em; line-height:1.1; color:var(--black); margin-bottom:20px; }
+h3 { font-size:clamp(20px,2.6vw,32px); font-weight:400; letter-spacing:-.018em; line-height:1.15; color:var(--black); margin-bottom:16px; }
+.body { font-size:18px; font-weight:300; color:var(--gray); line-height:1.75; max-width:600px; }
+.body.w { max-width:860px; }
+.ora { color:var(--orange); }
+.pills { display:flex; gap:8px; flex-wrap:wrap; }
 .pill { padding:10px 22px; border:1px solid var(--border); border-radius:100px; font-size:14px; font-family:var(--f); color:var(--black); text-decoration:none; transition:all .15s; }
 .pill:hover { background:var(--black); color:#fff; border-color:var(--black); }
-.pill.primary { background:var(--black); color:#fff; border-color:var(--black); }
-.pill.primary:hover { background:var(--black); border-color:var(--black); }
-.meta { display:grid; grid-template-columns:repeat(4,1fr); column-gap:48px; max-width:1000px; margin-top:32px; margin-bottom:40px; }
-.mc { padding:24px 0; border-top:1px solid var(--border); }
+.meta { display:grid; grid-template-columns:repeat(4,1fr); max-width:1000px; margin-top:72px; }
+.mc { padding:20px 24px 20px 0; border-top:1px solid var(--border); }
 .ml { font-size:13px; font-weight:400; color:var(--soft); margin-bottom:6px; }
 .mv { font-size:17px; font-weight:400; color:var(--black); line-height:1.4; }
-.hero-img { width:100%; max-height:78vh; overflow:hidden; }
-.hero-img img { width:100%; height:auto; display:block; max-height:78vh; object-fit:cover; }
+.hero-img { width:100%; }
+.hero-img img { width:100%; display:block; max-height:90vh; object-fit:cover; }
 .mt8{margin-top:8px}.mt16{margin-top:16px}.mt24{margin-top:24px}.mt32{margin-top:32px}.mt40{margin-top:40px}.mt56{margin-top:56px}
-.ins2 { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--border); border:1px solid var(--border); border-radius:10px; overflow:hidden; max-width:900px; margin-top:20px; }
+.two { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:start; }
+.two.c { align-items:center; }
+.ins2 { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--border); border:1px solid var(--border); border-radius:10px; overflow:hidden; max-width:900px; margin-top:40px; }
 .ins { background:var(--bg); padding:32px; }
-.ins.t { background:var(--bg); }
+.ins.t { background:var(--light); }
 .ins-l { font-size:12px; font-weight:500; letter-spacing:.08em; text-transform:uppercase; color:var(--soft); margin-bottom:10px; }
-.ins-t { font-size:17px; font-weight:400; color:var(--gray); line-height:1.7; max-width:none; }
-.ins-t strong { font-weight:600; color:var(--black); }
-.g3 { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:10px; overflow:hidden; max-width:1000px; margin-top:18px; }
+.ins-t { font-size:17px; font-weight:300; color:var(--gray); line-height:1.7; max-width:none; }
+.ins-t strong { font-weight:400; color:var(--black); }
+.g3 { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:10px; overflow:hidden; max-width:1000px; margin-top:32px; }
 .card { background:var(--bg); padding:32px 28px; }
-.card.t { background:var(--bg); }
+.card.t { background:var(--light); }
 .ctag { font-size:11px; font-weight:500; letter-spacing:.08em; text-transform:uppercase; color:var(--soft); margin-bottom:10px; }
 .chead { font-size:17px; font-weight:500; color:var(--black); margin-bottom:10px; }
-.cbody { font-size:15px; font-weight:400; color:var(--gray); line-height:1.65; }
-.arch { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--border); border:1px solid var(--border); border-radius:10px; overflow:hidden; max-width:1000px; margin-top:18px; }
+.cbody { font-size:15px; font-weight:300; color:var(--gray); line-height:1.65; max-width:none; }
+.arch { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--border); border:1px solid var(--border); border-radius:10px; overflow:hidden; max-width:1000px; margin-top:32px; }
 .arch-col { background:var(--bg); padding:32px; }
-.arch-col:last-child { background:var(--bg); }
+.arch-col:last-child { background:var(--light); }
 .arch-head { font-size:12px; font-weight:500; letter-spacing:.08em; text-transform:uppercase; color:var(--soft); margin-bottom:16px; }
 .arch-list { list-style:none; }
-.arch-list li { font-size:15px; font-weight:400; color:var(--gray); padding:8px 0; border-bottom:1px solid var(--border); line-height:1.5; }
+.arch-list li { font-size:15px; font-weight:300; color:var(--gray); padding:8px 0; border-bottom:1px solid var(--border); display:flex; gap:10px; line-height:1.5; }
 .arch-list li:last-child { border-bottom:none; }
+.arch-list li::before { content:''; color:var(--border); flex-shrink:0; }
 .tg4 { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; max-width:1000px; }
-.tg { background:var(--bg); border:1px solid var(--border); border-radius:10px; padding:20px; }
+.tg { background:var(--light); border-radius:10px; padding:20px; }
 .tg-lbl { font-size:14px; font-weight:400; color:var(--black); text-align:center; margin-bottom:14px; }
 .tg-d { border:1.5px dashed var(--border); border-radius:8px; padding:14px; display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
 .ti { display:flex; flex-direction:column; align-items:center; gap:5px; }
 .ti-i { width:44px; height:44px; border-radius:10px; background:#fff; border:1px solid var(--border); display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:600; color:var(--black); }
-.ti-n { font-size:11px; font-weight:400; color:var(--gray); text-align:center; }
+.ti-n { font-size:11px; font-weight:300; color:var(--gray); text-align:center; }
+.slot { width:100%; background:var(--light); border:1px solid var(--border); border-radius:10px; display:flex; align-items:center; justify-content:center; color:var(--soft); font-size:11px; position:relative; overflow:hidden; }
+.slot::before { content:''; position:absolute; inset:0; background:repeating-linear-gradient(45deg,transparent,transparent 16px,rgba(0,0,0,.016) 16px,rgba(0,0,0,.017) 17px); }
+.slot span { position:relative; z-index:1; }
+.h600{height:600px}.h500{height:500px}.h420{height:420px}.h360{height:360px}.h300{height:300px}
 .sr { display:grid; grid-template-columns:repeat(3,1fr); border:1px solid var(--border); border-radius:10px; overflow:hidden; max-width:900px; }
-.sc { padding:36px 28px; border-right:1px solid var(--border); text-align:center; }
+.sc { padding:36px 28px; border-right:1px solid var(--border); }
 .sc:last-child { border-right:none; }
-.sn { font-size:48px; font-weight:400; letter-spacing:-.04em; line-height:1; color:var(--black); margin-bottom:8px; }
-.sn span { color:var(--black); }
-.sd { font-size:16px; font-weight:400; color:var(--gray); line-height:1.5; }
-.img-full { width:100%; height:auto; display:block; border-radius:0; }
-.img-full-pad { width:100vw; max-width:100vw; margin-left:calc(50% - 50vw); margin-right:0; }
-@media(max-width:768px){ .sec{padding:clamp(72px,10vw,120px) 20px;} .meta,.ins2,.g3,.arch,.tg4,.sr,.feat,.g2i{grid-template-columns:1fr;} }
-
-.sec > .body, .sec > .lead { margin-left: max(0px, calc((100% - min(1240px,94vw))/2)); margin-right: 0; }
-
-/* INTRO GALLERY */
-.lead { font-size:clamp(18px,2vw,24px); font-weight:400; color:var(--black); line-height:1.7; max-width:820px; }
-.sec > .gal { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; width:100vw; max-width:100vw; margin-left:calc(50% - 50vw); padding:0 clamp(16px,2vw,32px); }
-.gtile { overflow:hidden; background:var(--light); }
-.gtile img { width:100%; height:100%; aspect-ratio:4/3; object-fit:cover; display:block; transition:opacity .35s ease; }
-.case-cta { display:flex; justify-content:center; }
-@media(max-width:768px){ .sec > .gal { grid-template-columns:1fr 1fr; } }
-
-/* DARK MODE */
-html.dark { --bg:#0a0a0a; --black:#f0f0ee; --gray:#aaa; --soft:#666; --light:#141414; --border:#2a2a2a; }
-html.dark body { background:#0a0a0a; }
-html.dark .pill { color:#f0f0ee; border-color:#2a2a2a; }
-html.dark .pill:hover, html.dark .pill.primary { background:#f0f0ee; color:#0a0a0a; border-color:#f0f0ee; }
-html.dark .finding-list, html.dark .finding-list li { border-color:#2a2a2a; }
-html.dark .ins2, html.dark .g4, html.dark .ba, html.dark .arch { background:#2a2a2a; border-color:#2a2a2a; }
-html.dark .sr { border-color:#2a2a2a; }
-html.dark .sc { border-color:#2a2a2a; }
-html.dark .an, html.dark .comp-card { border-color:#2a2a2a; }
-html.dark #dm-toggle { background:#141414; border-color:#2a2a2a; color:#f0f0ee; }
-
-h1,h2,h3{text-wrap:balance}
-p,.body,.lead,.sd,.stat-t{text-wrap:pretty}
+.sn { font-size:48px; font-weight:300; letter-spacing:-.04em; line-height:1; color:var(--black); margin-bottom:8px; }
+.sn span { color:var(--orange); }
+.sd { font-size:16px; font-weight:300; color:var(--gray); line-height:1.5; }
+.vid { width:100%; max-width:900px; height:400px; background:#111; border-radius:12px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; }
+.vid-p { width:48px; height:48px; border:1px solid rgba(255,255,255,.2); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:15px; color:rgba(255,255,255,.4); }
+.vid-l { font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.3); }
+footer { padding:80px 60px; background:var(--light); border-top:1px solid var(--border); }
+.f-copy { font-size:13px; color:var(--soft); margin-bottom:14px; }
+.f-rule { border:none; border-top:1px solid var(--border); margin-bottom:28px; }
+.f-cta { font-size:clamp(28px,4vw,52px); font-weight:400; color:var(--black); letter-spacing:-.025em; line-height:1.2; margin-bottom:28px; max-width:700px; }
+.f-cta .script { font-family:var(--script); color:var(--orange); }
+.f-btns { display:flex; gap:8px; }
+.fbtn { display:inline-flex; align-items:center; gap:6px; padding:10px 20px; border:1px solid var(--border); border-radius:100px; font-size:14px; color:var(--black); text-decoration:none; background:var(--bg); transition:all .15s; font-family:var(--f); }
+.fbtn:hover { background:var(--black); color:#fff; border-color:var(--black); }
+@media(max-width:768px){ nav{padding:16px 24px;} .sec{padding:100px 24px;} .meta,.two,.ins2,.g3,.arch,.tg4,.sr{grid-template-columns:1fr;} footer{padding:60px 24px;} }
 </style>
-<noscript><style>.sec, .hero-img { opacity:1 !important; transform:none !important; }</style></noscript>
 </head>
 <body>
 
-<nav style="position:fixed;top:14px;left:clamp(16px,2vw,32px);z-index:300;">
-  <a href="index.html" aria-label="Back to home" style="display:flex;align-items:center;justify-content:center;width:62px;height:62px;padding:11px;border-radius:50%;background:var(--bg);box-shadow:0 2px 12px rgba(0,0,0,.14);color:var(--black,#0a0a0a);">
-    <svg viewBox="0 0 287 205" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;">
-      <path fill="currentColor" d="M224.188 179.482C223.074 181.616 220.794 182.872 218.396 182.665C207.793 181.751 178.607 179.427 165.432 180.305C149.171 181.389 129.659 191.147 129.659 191.147C129.659 191.147 157.302 171.09 164.348 170.548C170.158 170.101 210.232 170.391 224.122 170.507C226.286 170.525 227.661 172.824 226.66 174.743L224.188 179.482Z"/>
-      <path fill="currentColor" d="M257.599 174.168L251.709 184.108C251.596 184.3 251.835 184.504 252.004 184.358C254.256 182.418 260.252 177.568 266.248 175.427C270.647 173.856 274.499 173.377 276.96 173.253C278.826 173.158 280.487 172.039 281.259 170.338C282.159 168.356 283.046 165.946 282.509 165.087C281.986 164.251 280.9 163.527 280.01 163.037C279.34 162.669 278.526 162.859 278.039 163.447C277.645 163.923 276.991 164.505 275.91 165.087C274.273 165.968 267.958 168.004 263.723 169.326C261.152 170.128 258.972 171.851 257.599 174.168Z"/>
-      <path fill="currentColor" d="M230.93 52.0507C236.137 54.4954 242.881 58.3707 249.65 64.4657C252.129 66.698 258.457 72.6908 264.055 81.928C265.789 84.7899 267.103 87.474 269.73 92.8426C273.209 99.9525 275.771 105.902 276.874 108.572C284.264 126.456 286.507 142.973 286.953 142.882C287.336 142.805 285.27 130.727 283.321 121.49C282.755 118.808 281.26 111.939 278.939 103.882C278.863 103.619 278.798 103.397 278.745 103.214C276.892 96.8777 275.775 93.0577 273.7 88.0779C270.66 80.7831 267.581 75.8416 263.721 69.6471C261.886 66.702 257.485 59.8221 250.948 51.656C247.596 47.4679 244.799 43.9993 240.413 39.7941C236.467 36.0101 232.99 33.3134 230.933 31.7261C227.17 28.8242 224.242 26.8948 220.709 24.5663C216.729 21.9438 214.239 20.3034 210.6 18.3529C207.973 16.9451 208.284 17.271 202.125 14.275C195.67 11.135 195.038 10.6355 190.853 8.74167C188.139 7.51349 185.865 6.49008 182.788 5.38836C178.518 3.86 174.87 2.9563 172.316 2.41534C181.98 8.03509 193.195 15.5441 204.794 25.4844C215.556 34.7067 224.172 43.9003 230.93 52.0507Z"/>
-      <path fill="currentColor" d="M222.303 50.3065C212.804 49.5232 199.025 49.7632 183.947 55.1934C180.081 56.5858 149.632 68.0464 133.48 98.0832C123.98 115.749 127.902 124.079 116.315 134.133C106.293 142.829 99.249 140.164 89.7096 151.3C88.0579 153.228 81.0255 161.127 77.4344 174.65C74.4374 185.936 77.0794 188.741 72.8574 195.311C71.5528 197.34 67.712 203.317 61.3387 204.254C55.3941 205.129 49.955 201.221 45.4165 197.96C43.5956 196.652 41.5578 194.917 37.4823 191.446C33.9956 188.477 32.6364 187.173 29.9488 185.67C26.9072 183.969 24.2959 183.205 23.1686 182.907C19.9415 182.055 16.9708 181.271 13.626 182.154C9.56319 183.226 8.64303 185.783 6.7237 185.123C5.04926 184.546 4.453 182.115 3.18796 177.725C2.69144 176.002 2.46312 174.716 2.04316 172.205C1.12079 166.691 0.659606 163.934 0.482077 162.487C-0.13075 157.494 -0.0459724 153.64 0.123582 145.933C0.299517 137.936 0.844006 131.938 1.11956 129.183C1.19023 128.477 1.5686 124.731 2.19603 120.332C2.95792 114.992 4.64697 103.152 8.03168 92.0802C9.12851 88.4925 13.5472 74.6888 24.061 59.2552C28.8112 52.282 38.7738 39.1473 55.344 27.2415C70.2452 16.5353 83.6428 11.7426 90.7258 9.26854C102.285 5.23026 111.408 3.66315 119.649 2.24769C119.649 2.24769 132.407 0.0557921 149.134 0.000822856C152.886 -0.0119378 158.3 0.0940742 164.577 2.48229C166.942 3.38241 168.761 4.35223 171.643 6.0494C174.838 7.93014 182.296 12.3228 189.283 17.7132C204.481 29.4383 220.643 48.3517 222.303 50.3065Z"/>
-    </svg>
-  </a>
+<nav id="nav">
+  <ul class="nl"><li><a href="index.html">Work</a></li><li><a href="Maitreyi_Bhardwaj_Resume.pdf" target="_blank">Resume</a></li></ul>
+  <ul class="nr"><li><a href="index.html#about">About</a></li><li><a href="#" class="bold">Maitreyi Bhardwaj</a></li></ul>
 </nav>
-<button id="dm-toggle" style="position:fixed;bottom:28px;right:28px;z-index:200;width:42px;height:42px;border-radius:50%;border:1px solid var(--border);background:var(--bg);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;">☾</button>
-
-<!-- HERO IMAGE -->
-<div class="hero-img">
-  <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1780963087/pastiche_01_hero_st6gjl.png" alt="Pastiche hero" />
-</div>
-
-<!-- INTRO -->
-<div class="sec">
-  <div class="lbl r">Pastiche</div>
-  <div class="lbl-rule r"></div>
-  <p class="lead r d1">Pastiche is a Figma plugin that turns 500 years of museum painting into ready-to-use design tokens, palettes, primitives, and variables written straight into your file from 5,800 open-access artworks.</p>
-</div>
-
-<!-- INTRO GALLERY -->
-<div class="sec">
-  <div class="gal r d1">
-    <div class="gtile"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/c_fill,g_auto,ar_1.33,f_auto,q_auto/v1780963087/pastiche_07_plugin_ui_ckstkh.png" alt="Plugin UI" loading="lazy"></div>
-    <div class="gtile" data-alt="https://res.cloudinary.com/df0tysd6u/image/upload/c_fill,g_auto,ar_1.33,f_auto,q_auto/v1780963086/pastiche_03_library_btqnsn.png"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/c_fill,g_auto,ar_1.33,f_auto,q_auto/v1780963087/pastiche_02_color_extraction_jvo4l0.png" alt="Color extraction" loading="lazy"></div>
-    <div class="gtile" data-alt="https://res.cloudinary.com/df0tysd6u/image/upload/c_fill,g_auto,ar_1.33,f_auto,q_auto/v1780963087/pastiche_04_tokens_sex9ay.png"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/c_fill,g_auto,ar_1.33,f_auto,q_auto/v1780963086/pastiche_05_export_yspc6l.png" alt="Token export" loading="lazy"></div>
-  </div>
-  <div class="case-cta r d2 mt40"><a href="#case" class="pill">View Full Case Study ↓</a></div>
-</div>
 
 <!-- 01 OVERVIEW -->
-<div class="sec" id="case">
+<div class="sec">
   <div class="lbl r">Project Overview</div>
   <div class="lbl-rule r d1"></div>
-  <h1 class="r d1">Pastiche turns 500 years of painting into Figma design tokens.</h1>
+  <h1 class="r d1">Pastiche extracts the intentional color relationships of historical masterworks directly into Figma design tokens.</h1>
   <div class="pills r d2">
-    <a href="https://www.figma.com/community/plugin/1641224136546421137" target="_blank" class="pill primary">Install Plugin</a>
-    <a href="https://medium.com/@mbhardw9/your-color-palette-has-been-waiting-in-a-museum-since-1665-0f70446fee85" target="_blank" class="pill">Read Article</a>
-    <a href="#features" class="pill">↓ Features</a>
+    <a href="#features" class="pill">↓ Core Features</a>
+    <a href="#architecture" class="pill">↓ Architecture</a>
     <a href="#outcomes" class="pill">↓ Outcomes</a>
   </div>
   <div class="meta r d3">
-    <div class="mc"><div class="ml">Type</div><div class="mv">Figma Plugin</div></div>
-    <div class="mc"><div class="ml">Timeline</div><div class="mv">Aug 2025 – Present</div></div>
-    <div class="mc"><div class="ml">Role</div><div class="mv">Solo Engineer + Designer</div></div>
-    <div class="mc"><div class="ml">Stack</div><div class="mv">JS · k-means · Figma API · Cloudflare</div></div>
+    <div class="mc"><div class="ml">Project Type</div><div class="mv">Independent Figma Plugin</div></div>
+    <div class="mc"><div class="ml">Timeline</div><div class="mv">August 2025 – Present</div></div>
+    <div class="mc"><div class="ml">Role</div><div class="mv">Solo Engineer & Product Designer</div></div>
+    <div class="mc"><div class="ml">Stack</div><div class="mv">JavaScript · k-means ML · Figma API · Cloudflare Workers</div></div>
   </div>
+</div>
+
+<!-- HERO IMAGE -->
+<div class="hero-img">
+  <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1780963087/pastiche_01_hero_st6gjl.png" style="width:100%;display:block;" alt="Pastiche hero" class="r" />
 </div>
 
 <!-- 02 THE IDEA -->
@@ -166,108 +126,130 @@ p,.body,.lead,.sd,.stat-t{text-wrap:pretty}
   <div class="lbl r">The Idea</div>
   <div class="lbl-rule r d1"></div>
   <h2 class="r d1">Your color palette has been waiting in a museum since 1665.</h2>
-  <p class="body w r d2 mt16">Designers default to the same digital palettes. Pastiche pulls from 5,800 open-access museum works, capturing the real color relationships masters spent decades perfecting, and writes them directly into your Figma file as variable tokens.</p>
+  <p class="body w r d2 mt16">Instead of reusing the same predictable startup palettes from Pinterest or Mobbin, Pastiche captures real visual tension and harmony directly from art history. Inspired by the balanced, physical color choices of 17th-century painters like Vermeer and my great-grandfather, Pt. Bhawani Dutt Shastri.</p>
   <div class="ins2 r d3">
     <div class="ins">
       <div class="ins-l">The Problem</div>
-      <p class="ins-t">Every interface pulls from the same 12 palettes on Pinterest. Color has stopped being a design decision.</p>
+      <p class="ins-t">Designers default to the same digital palettes. The result is an industry of interfaces that look identical.</p>
     </div>
     <div class="ins t">
       <div class="ins-l">The Insight</div>
-      <p class="ins-t"><strong>Masters solved color balance we're still copying poorly.</strong> That knowledge is freely available in museum archives. No one had made it usable in a design tool.</p>
+      <p class="ins-t"><strong>Masters spent decades perfecting color balance.</strong> That knowledge sits freely in public museum archives. No one had made it usable inside a design tool.</p>
     </div>
-  </div>
-</div>
-
-<!-- COLOR EXTRACTION IMAGE -->
-<div class="sec" style="padding:0 clamp(20px,4vw,64px) clamp(32px,3.5vw,56px);">
-  <div class="img-full-pad r">
-    <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1780963087/pastiche_02_color_extraction_jvo4l0.png" class="img-full" loading="lazy" alt="Color extraction: Girl with a Pearl Earring" />
   </div>
 </div>
 
 <!-- 03 ARCHITECTURE -->
 <div class="sec" id="architecture">
-  <div class="lbl r">Architecture</div>
+  <div class="lbl r">Backend Strategy</div>
   <div class="lbl-rule r d1"></div>
-  <h2 class="r d1">No servers. No database. $0/month.</h2>
-  <p class="body w r d2 mt16">Everything runs inside Figma's local iframe. The only external call is a zero-maintenance Cloudflare Worker that proxies museum images around browser CORS restrictions.</p>
+  <h2 class="r d1">No databases. No servers. No maintenance costs. Everything runs in the browser.</h2>
+  <p class="body w r d2 mt16">Pastiche runs entirely inside Figma's local iframe. The only cloud infrastructure is a zero-maintenance Cloudflare Worker used strictly to bypass browser CORS blocks when loading museum images.</p>
   <div class="arch r d2 mt32">
     <div class="arch-col">
-      <div class="arch-head">Local (Inside Figma)</div>
+      <div class="arch-head">Inside Figma (Local)</div>
       <ul class="arch-list">
-        <li>ui.html: k-means clustering in the browser</li>
-        <li>code.js: canvas writes and token generation</li>
-        <li>Figma Variables: written directly into the file</li>
+        <li>ui.html — runs k-means clustering in the browser</li>
+        <li>code.js — executes Figma canvas interactions</li>
+        <li>Figma File — generates layers and variable tokens</li>
       </ul>
     </div>
     <div class="arch-col">
-      <div class="arch-head">Cloud (Public, Zero-Cost)</div>
+      <div class="arch-head">External Services (Public Cloud)</div>
       <ul class="arch-list">
-        <li>GitHub: hosts 82MB NGA painting catalog</li>
-        <li>Cloudflare Worker: CORS proxy for museum images</li>
-        <li>NGA API: source JPEG delivery</li>
+        <li>GitHub — hosts 82MB NGA painting catalog</li>
+        <li>Cloudflare Worker — image proxy for CORS bypass</li>
+        <li>NGA Server — delivers source JPEG files</li>
       </ul>
+    </div>
+  </div>
+  <p class="body r d3 mt32">Data never leaves the file. The proxy handles public museum metadata, never user design files.</p>
+</div>
+
+<!-- 04 DATA FLOW -->
+<div class="sec">
+  <div class="lbl r">End-to-End Data Flow</div>
+  <div class="lbl-rule r d1"></div>
+  <h2 class="r d1">From opening the panel to generating tokens in under 3 seconds.</h2>
+  <div class="g3 r d2">
+    <div class="card">
+      <div class="ctag">01 — Init</div>
+      <div class="chead">Load Catalog</div>
+      <p class="cbody">UI opens. Pulls 82MB NGA catalog CSV from GitHub. Parses 5,800 painting records directly into RAM.</p>
+    </div>
+    <div class="card t">
+      <div class="ctag">02 — Fetch</div>
+      <div class="chead">Stream Image</div>
+      <p class="cbody">User clicks a painting. Public ID is passed to Cloudflare proxy. Worker streams the museum JPEG back to the plugin.</p>
+    </div>
+    <div class="card">
+      <div class="ctag">03 — Math</div>
+      <div class="chead">Extract Colors</div>
+      <p class="cbody">JPEG is drawn to canvas. Local k-means algorithm isolates dominant, accent, and neutral color hexes from the painting.</p>
+    </div>
+  </div>
+  <div class="g3 r d3" style="margin-top:1px">
+    <div class="card">
+      <div class="ctag">04 — Write</div>
+      <div class="chead">Build Tokens</div>
+      <p class="cbody">Color array is sent to code.js. Figma API alters layer fills and builds a complete Variable Token System in the file.</p>
+    </div>
+    <div class="card t">
+      <div class="ctag">Result</div>
+      <div class="chead">Zero Server Cost</div>
+      <p class="cbody">Entire system operates within free cloud serverless tiers. $0.00 per month infrastructure cost.</p>
+    </div>
+    <div class="card">
+      <div class="ctag">Privacy</div>
+      <div class="chead">No Tracking</div>
+      <p class="cbody">No cookies, no user accounts, no file scraping. Writes are purely additive and only fire on explicit designer action.</p>
     </div>
   </div>
 </div>
 
-<!-- 04 KEY FEATURES -->
+<!-- 05 COLOR ENGINE IMAGE -->
+<div class="sec" style="min-height:auto;padding:40px 80px;">
+  <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1780963087/pastiche_02_color_extraction_jvo4l0.png" style="width:100%;display:block;border-radius:10px;" alt="Color extraction" class="r d3" />
+</div>
+
+<!-- 06 KEY FEATURES -->
 <div class="sec" id="features">
   <div class="lbl r">Key Features</div>
   <div class="lbl-rule r d1"></div>
-  <h2 class="r d1">Three capabilities. One panel.</h2>
+  <h2 class="r d1">Three layers of capability built into one plugin panel.</h2>
 
-  <div class="feat wide mt24 r d1">
-    <div>
-      <p class="lbl">01 Painting Library</p>
-      <h3>5,800 masterworks. Instantly searchable.</h3>
-      <p class="body mt8">In-memory keyword search across the full NGA open-access catalog. Results as a grid of 24 thumbnails with name, artist, year, and medium.</p>
-    </div>
-    <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1780963086/pastiche_03_library_btqnsn.png" loading="lazy" alt="Pastiche library" />
+  <div class="mt40">
+    <p class="num r">01 — Painting Library</p>
+    <h3 class="r d1">5,800 masterworks. Instantly searchable.</h3>
+    <p class="body w r d2 mt8">Featured carousel of prominent global works for instant generation. In-memory keyword search across the full NGA open-access catalog. Results in a clean grid of 24 thumbnails. Select any artwork and see the full name, artist, year, and original medium.</p>
+    <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1780963086/pastiche_03_library_btqnsn.png" style="width:100%;display:block;border-radius:10px;margin-top:32px;" alt="Pastiche library panel" class="r d3" />
   </div>
 
-  <div class="feat wide mt32 r d1">
-    <div>
-      <p class="lbl">02 Color Extraction</p>
-      <h3>Relationship-driven sampling.</h3>
-      <p class="body mt8">k-means isolates structurally distinct shades: dominant warmth, cool accents, and neutral anchors. Outputs a full 5-token palette plus brand, secondary, and neutral scales.</p>
-    </div>
-    <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1780963087/pastiche_04_tokens_sex9ay.png" loading="lazy" alt="Token output" />
+  <div class="mt56">
+    <p class="num r">02 — Color Extraction Engine</p>
+    <h3 class="r d1">Relationship-driven sampling, not just dominant colors.</h3>
+    <p class="body w r d2 mt8">Rather than pulling the most common pixels, the k-means algorithm identifies structurally distinct shades — isolating dominant warmth, cool accents, and neutral anchors. Builds a full 5-token palette plus complete brand, secondary, and neutral scales. Slight randomness on re-runs keeps the palette alive while staying faithful to the artwork.</p>
+    <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1780963087/pastiche_04_tokens_sex9ay.png" style="width:100%;display:block;border-radius:10px;margin-top:32px;" alt="Token output" class="r d3" />
   </div>
 
-  <div class="feat wide mt32 r d1">
-    <div>
-      <p class="lbl">03 Export</p>
-      <h3>Developer-ready in one click.</h3>
-      <p class="body mt8">Writes organized Variable Collections directly into the Figma file. Exports as JSON Design Tokens and native CSS custom properties.</p>
-    </div>
-    <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1780963086/pastiche_05_export_yspc6l.png" loading="lazy" alt="Export view" />
-  </div>
-</div>
-
-<!-- 05/06 IN USE -->
-<div class="sec">
-  <div class="lbl r">In Use</div>
-  <div class="lbl-rule r d1"></div>
-  <h2 class="r d1">A live frame recolored with Vermeer's palette.</h2>
-  <p class="body w r d2 mt16">Select any layer, pick a painting, click generate. Pastiche walks nested groups, fills, and borders. Writes tokens and repaints the canvas in seconds.</p>
-  <div class="g2i wide r d2 mt24">
-    <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1780963087/pastiche_07_plugin_ui_ckstkh.png" loading="lazy" alt="Full plugin UI" />
-    <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1780963086/pastiche_06_example_lmfszf.png" loading="lazy" alt="Example: frame recolored with Vermeer palette" />
+  <div class="mt56">
+    <p class="num r">03 — Canvas Interaction and Export</p>
+    <h3 class="r d1">Deep layer support. Developer-ready export.</h3>
+    <p class="body w r d2 mt8">Recursively walks chosen vector selections to paint deeply nested children groups, fills, and borders. Creates organized Figma Variable Collections directly in the file. Exports as JSON Tokens and native CSS custom properties for immediate production use.</p>
+    <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1780963086/pastiche_05_export_yspc6l.png" style="width:100%;display:block;border-radius:10px;margin-top:32px;" alt="Export — Variable collection and CSS output" class="r d3" />
   </div>
 </div>
 
 <!-- 07 TOOLS -->
 <div class="sec">
-  <div class="lbl r">Stack</div>
+  <div class="lbl r">Tools</div>
   <div class="lbl-rule r d1"></div>
-  <h2 class="r d1">Built to run free, forever.</h2>
+  <h2 class="r d1">Engineering Stack</h2>
   <div class="tg4 r d2 mt40">
-    <div class="tg"><div class="tg-lbl">ML</div><div class="tg-d"><div class="ti"><div class="ti-i">KM</div><div class="ti-n">k-means</div></div><div class="ti"><div class="ti-i">CV</div><div class="ti-n">Canvas API</div></div></div></div>
-    <div class="tg"><div class="tg-lbl">Design</div><div class="tg-d"><div class="ti"><div class="ti-i">Fig</div><div class="ti-n">Figma API</div></div><div class="ti"><div class="ti-i">TK</div><div class="ti-n">Variables</div></div></div></div>
-    <div class="tg"><div class="tg-lbl">Infra</div><div class="tg-d"><div class="ti"><div class="ti-i">CF</div><div class="ti-n">Cloudflare</div></div><div class="ti"><div class="ti-i">GH</div><div class="ti-n">GitHub</div></div></div></div>
-    <div class="tg"><div class="tg-lbl">Data</div><div class="tg-d"><div class="ti"><div class="ti-i">NGA</div><div class="ti-n">Nat'l Gallery</div></div><div class="ti"><div class="ti-i">CSV</div><div class="ti-n">5,800 rows</div></div></div></div>
+    <div class="tg"><div class="tg-lbl">ML Algorithm</div><div class="tg-d"><div class="ti"><div class="ti-i">KM</div><div class="ti-n">k-means</div></div><div class="ti"><div class="ti-i">CV</div><div class="ti-n">Canvas API</div></div></div></div>
+    <div class="tg"><div class="tg-lbl">Design System</div><div class="tg-d"><div class="ti"><div class="ti-i">Fig</div><div class="ti-n">Figma API</div></div><div class="ti"><div class="ti-i">TK</div><div class="ti-n">Variables</div></div></div></div>
+    <div class="tg"><div class="tg-lbl">Infrastructure</div><div class="tg-d"><div class="ti"><div class="ti-i">CF</div><div class="ti-n">Cloudflare</div></div><div class="ti"><div class="ti-i">GH</div><div class="ti-n">GitHub</div></div></div></div>
+    <div class="tg"><div class="tg-lbl">Data Source</div><div class="tg-d"><div class="ti"><div class="ti-i">NGA</div><div class="ti-n">Nat'l Gallery</div></div><div class="ti"><div class="ti-i">CSV</div><div class="ti-n">5,800 rows</div></div></div></div>
   </div>
 </div>
 
@@ -277,17 +259,14 @@ p,.body,.lead,.sd,.stat-t{text-wrap:pretty}
   <div class="lbl-rule r d1"></div>
   <h2 class="r d1">Approved by Figma Community the next day.</h2>
   <div class="sr r d2 mt40">
-    <div class="sc"><div class="sn">$<span>0</span></div><p class="sd">per month. Runs entirely on free tiers</p></div>
-    <div class="sc"><div class="sn">3<span>s</span></div><p class="sd">painting to complete token generation</p></div>
-    <div class="sc"><div class="sn">5,<span>800</span></div><p class="sd">open-access artworks in the catalog</p></div>
+    <div class="sc"><div class="sn">$<span>0</span></div><p class="sd">per month infrastructure cost — runs entirely on free tiers</p></div>
+    <div class="sc"><div class="sn">3<span>s</span></div><p class="sd">from painting selection to complete token generation</p></div>
+    <div class="sc"><div class="sn">5,<span>800</span></div><p class="sd">open-access artworks in the searchable catalog</p></div>
   </div>
-  <div style="margin-top:16px;padding:20px 24px;background:var(--bg);border:1px solid var(--border);border-radius:10px;max-width:900px;text-align:center;" class="r d3">
-    <p style="font-size:17px;font-weight:400;font-style:italic;color:var(--black);line-height:1.7;">You don't need a bloated backend to ship a production-ready product. Keep heavy lifting local. Use serverless only where the browser can't.</p>
+  <div style="margin-top:24px;padding:28px 32px;background:var(--light);border:1px solid var(--border);border-radius:10px;max-width:900px;" class="r d3">
+    <p style="font-size:17px;font-weight:300;font-style:italic;color:var(--black);line-height:1.7;">You don't need a bloated backend to ship a secure, production-ready product. By keeping heavy lifting local and using serverless tech only to bypass browser limitations, Pastiche proved that.</p>
   </div>
-  <div class="pills r d4 mt24">
-    <a href="https://www.figma.com/community/plugin/1641224136546421137" target="_blank" class="pill primary">Install on Figma Community</a>
-    <a href="https://medium.com/@mbhardw9/your-color-palette-has-been-waiting-in-a-museum-since-1665-0f70446fee85" target="_blank" class="pill">Read the Medium article</a>
-  </div>
+  <div class="vid r d4 mt32"><div class="vid-p">▶</div><div class="vid-l">Plugin walkthrough</div></div>
 </div>
 
 <!-- 09 TAKEAWAYS -->
@@ -295,61 +274,28 @@ p,.body,.lead,.sd,.stat-t{text-wrap:pretty}
   <div class="lbl r">Takeaways</div>
   <div class="lbl-rule r d1"></div>
   <h2 class="r d1">Engineering discipline is a design skill.</h2>
-  <p class="body r d2 mt16">The right architecture, not the most impressive one, is what lets a solo product ship fast and stay maintainable.</p>
+  <p class="body r d2 mt16">Choosing the right architecture — not the most impressive one — is what lets a solo product ship fast and stay maintainable.</p>
   <p class="body r d3 mt8">Art history is an underused design resource. The masters solved color problems we're still copying poorly from Pinterest.</p>
 </div>
 
-
-<!-- PROTOTYPE VIDEO -->
-<div class="sec" style="padding-bottom:clamp(40px,4vw,64px);">
-  <div class="lbl r">Prototype</div>
-  <div class="lbl-rule r d1"></div>
-  <h2 class="r d1">Watch the plugin in action.</h2>
-  <div class="r d2 mt16" style="max-width:min(1240px,94vw);margin-left:auto;margin-right:auto;border-radius:12px;overflow:hidden;aspect-ratio:16/9;">
-    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/Ja_oLHQ-GUU?autoplay=1&mute=1&loop=1&playlist=Ja_oLHQ-GUU" frameborder="0" allow="autoplay; fullscreen" allowfullscreen style="display:block;"></iframe>
+<footer>
+  <p class="f-copy">© 2025 Maitreyi Bhardwaj</p>
+  <hr class="f-rule">
+  <p class="f-cta">Let's build something <span class="script">meaningful</span> together.</p>
+  <div class="f-btns">
+    <a href="mailto:mbhardw9@asu.edu" class="fbtn">mbhardw9@asu.edu</a>
+    <a href="#" class="fbtn">LinkedIn</a>
   </div>
-</div>
-<footer style="padding:28px clamp(16px,2vw,32px);font-size:13px;color:#999;">© 2026 Maitreyi Bhardwaj</footer>
+</footer>
 
 <script>
-const _dmt = document.getElementById('dm-toggle');
-const _dms = localStorage.getItem('dm');
-if (_dms === '1') { document.documentElement.classList.add('dark'); _dmt.textContent = '☀'; }
-_dmt.addEventListener('click', () => {
-  const on = document.documentElement.classList.toggle('dark');
-  localStorage.setItem('dm', on ? '1' : '0');
-  _dmt.textContent = on ? '☀' : '☾';
-});
-</script>
-<script>
-// Sequential section reveal
-/* GALLERY CYCLE */
-document.querySelectorAll('.gtile[data-alt]').forEach(function (t, i) {
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  var img = t.querySelector('img'), a = img.getAttribute('src'), b = t.getAttribute('data-alt'), on = false;
-  setInterval(function () {
-    img.style.opacity = 0;
-    setTimeout(function () { on = !on; img.src = on ? b : a; img.style.opacity = 1; }, 350);
-  }, 4600 + i * 900);
-});
-
-(function () {
-  var blocks = Array.prototype.slice.call(document.querySelectorAll('.sec, .hero-img'));
-  if (!('IntersectionObserver' in window)) {
-    blocks.forEach(function (b) { b.classList.add('live'); });
-    return;
-  }
-  var io = new IntersectionObserver(function (entries) {
-    entries.forEach(function (e) {
-      if (e.isIntersecting) { e.target.classList.add('live'); io.unobserve(e.target); }
-    });
-  }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
-  blocks.forEach(function (b) {
-    var r = b.getBoundingClientRect();
-    if (r.top < window.innerHeight && r.bottom > 0) { b.classList.add('live'); }
-    else { io.observe(b); }
-  });
-})();
+let lastY = 0;
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => { const y = window.scrollY; if(y > lastY && y > 80) nav.classList.add('hidden'); else nav.classList.remove('hidden'); lastY = y; }, { passive: true });
+const els = document.querySelectorAll('.r');
+const io = new IntersectionObserver(e => e.forEach(x => { if(x.isIntersecting) x.target.classList.add('on'); }), {threshold:.04, rootMargin:'0px 0px -20px 0px'});
+els.forEach(el => io.observe(el));
+window.addEventListener('load', () => els.forEach(el => { if(el.getBoundingClientRect().top < window.innerHeight) el.classList.add('on'); }));
 </script>
 </body>
 </html>
