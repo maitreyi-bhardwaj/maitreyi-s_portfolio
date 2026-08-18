@@ -9,13 +9,10 @@
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
-  --bg: #EFEEEA; --black: #1a1a1a; --gray: #4b4b48; --soft: #8b8b86;
-  --border: #dddcd6; --dark: #171717; --dark2: #242224; --dinklight: #cfcfcb;
-  --square: #E6E6E6;
-  --btn-before: #F34113;
-  --btn-after: #DA3A11;
-  --fail: #FF6B52;
-  --pass: #4ADE80;
+  --bg: #EFEEEA; --card: #ffffff; --panel: #F5F4F0; --black: #1a1a1a; --gray: #4b4b48; --soft: #8b8b86;
+  --border: #dddcd6; --square: #E6E6E6;
+  --btn-before: #F34113; --btn-after: #DA3A11;
+  --fail: #C0392B; --pass: #1E8E3E;
   --f: 'Inter', -apple-system, sans-serif;
   --fd: 'Red Hat Display', 'Inter', sans-serif;
   --mono: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, monospace;
@@ -51,7 +48,7 @@ p { text-wrap: pretty; }
 .prob h2 { font-size: clamp(32px, 3.6vw, 58px); font-weight: 700; letter-spacing: -.018em; line-height: 1.1; margin-bottom: 28px; }
 .prob p + p { margin-top: 18px; }
 
-/* 12 vs 3 flow, light */
+/* 12 vs 3 flow */
 .flow { margin-top: 52px; }
 .flow-row + .flow-row { margin-top: 24px; }
 .flow-lab { font-size: 14px; color: var(--soft); margin-bottom: 10px; }
@@ -59,58 +56,63 @@ p { text-wrap: pretty; }
 .sq { width: 26px; height: 26px; border-radius: 5px; background: var(--square); }
 .sq.dk { background: var(--black); }
 
-/* dark slab */
-.bts { background: var(--dark); color: #fff; border-radius: 44px; margin: 0 10px; padding: clamp(90px, 12vw, 190px) var(--pad) clamp(80px, 10vw, 150px); }
-.bts-pill { display: inline-block; border: 1px solid rgba(255,255,255,.45); border-radius: 100px; padding: 10px 20px; font-size: 14px; letter-spacing: .1em; text-transform: uppercase; color: #fff; }
-.bts-title { font-size: clamp(40px, 4.8vw, 78px); font-weight: 700; letter-spacing: -.015em; margin: 38px 0 0; }
-.chap { display: grid; grid-template-columns: minmax(240px, 1fr) 1.4fr; gap: clamp(32px, 5vw, 100px); padding-top: clamp(110px, 14vw, 210px); align-items: start; }
-.chap-side { position: sticky; top: 120px; display: flex; align-items: center; gap: 16px; }
-.chap-side .tick { width: 56px; height: 1px; background: rgba(255,255,255,.7); flex: none; }
-.chap-side .lab { font-size: 17px; color: #fff; }
-.chap-main { min-width: 0; }
-.chap-main h3 { font-size: clamp(30px, 3.4vw, 56px); font-weight: 700; letter-spacing: -.015em; line-height: 1.1; margin-bottom: 30px; }
-.chap-main > p { font-size: 17px; line-height: 1.85; color: var(--dinklight); max-width: 700px; }
-.chap-main > p + p { margin-top: 18px; }
-.chap-main code { font-family: var(--mono); font-size: .92em; }
-.dcards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 48px; max-width: 860px; }
-.dcard { background: var(--dark2); border-radius: 16px; padding: 26px 24px; }
-.dcard h4 { font-size: 17px; font-weight: 600; color: #fff; margin-bottom: 10px; }
-.dcard p { font-size: 14px; line-height: 1.65; color: var(--dinklight); }
-.stats { display: grid; grid-template-columns: repeat(var(--n, 3), 1fr); gap: 30px; margin-top: 56px; max-width: 860px; }
-.stat .n { font-family: var(--fd); font-size: clamp(42px, 4.4vw, 72px); font-weight: 500; line-height: 1; }
-.stat .c { margin-top: 14px; font-size: 15px; line-height: 1.55; color: var(--dinklight); }
+/* NUMBERED STEPS */
+.step { padding: clamp(70px, 9vw, 140px) var(--pad); }
+.step-in { max-width: 1200px; margin: 0 auto; }
+.stepnum { font-family: var(--fd); font-size: 15px; font-weight: 600; color: var(--soft); margin-bottom: 20px; }
+.step h2 { font-size: clamp(28px, 3.2vw, 46px); font-weight: 700; letter-spacing: -.016em; line-height: 1.16; max-width: 820px; margin-bottom: 22px; }
+.step p { font-size: 17px; line-height: 1.8; color: var(--gray); max-width: 680px; }
+.step p + p { margin-top: 14px; }
+.step code { font-family: var(--mono); font-size: .92em; color: var(--black); }
+.step:nth-child(even) { background: var(--panel); }
 
-.fig { margin-top: 44px; max-width: 900px; }
-.fig img { width: 100%; border-radius: 16px; background: var(--dark2); }
-.figcap { font-size: 14px; color: rgba(255,255,255,.5); margin-top: 12px; }
+.trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 44px; max-width: 900px; }
+.tcard { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px 22px; }
+.tcard h4 { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+.tcard p { font-size: 14px; line-height: 1.6; color: var(--gray); }
 
-/* contrast block, dark */
-.cblock { margin-top: 48px; display: flex; flex-direction: column; gap: 28px; max-width: 720px; }
+.nums { display: grid; grid-template-columns: repeat(var(--n, 3), 1fr); gap: 28px; margin-top: 52px; max-width: 860px; }
+.num .n { font-family: var(--fd); font-size: clamp(38px, 4vw, 60px); font-weight: 700; line-height: 1; color: var(--black); }
+.num .c { margin-top: 12px; font-size: 14.5px; line-height: 1.5; color: var(--gray); }
+
+/* BIG final screens */
+.big { margin-top: 48px; border-radius: 20px; overflow: hidden; background: var(--panel); }
+.big img { width: 100%; display: block; }
+.big-cap { margin-top: 14px; font-size: 14px; color: var(--soft); }
+
+/* what I solved + per-step result */
+.solved { margin-top: 36px; padding: 24px 28px; background: var(--card); border: 1px solid var(--border); border-radius: 16px; max-width: 760px; }
+.solved .sl { font-size: 12.5px; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--soft); margin-bottom: 10px; }
+.prob .solved p, .solved p { font-size: 18px; line-height: 1.6; color: var(--black); font-weight: 500; max-width: none; margin: 0; }
+.res { margin-top: 34px; padding-left: 20px; border-left: 2px solid var(--black); max-width: 700px; }
+.res .rl { font-size: 12.5px; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--soft); margin-bottom: 7px; }
+.step .res p, .res p { font-size: 16.5px; line-height: 1.7; color: var(--black); max-width: none; margin: 0; }
+.two-up { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 44px; }
+.two-up img { width: 100%; border-radius: 16px; display: block; }
+
+/* audit evidence, light */
+.cblock { margin-top: 44px; display: flex; flex-direction: column; gap: 26px; max-width: 720px; }
 .crow { display: flex; align-items: center; gap: clamp(16px, 3vw, 40px); flex-wrap: wrap; }
 .cbtn { flex: none; width: 200px; padding: 15px 0; border-radius: 8px; color: #ffffff; font-size: 14px; font-weight: 600; letter-spacing: .04em; text-align: center; }
 .cbtn.before { background: var(--btn-before); }
 .cbtn.after { background: var(--btn-after); }
-.cratio { font-family: var(--fd); font-size: clamp(22px, 2.4vw, 32px); font-weight: 600; }
+.cratio { font-family: var(--fd); font-size: clamp(22px, 2.4vw, 32px); font-weight: 700; }
 .cratio.bad { color: var(--fail); }
 .cratio.good { color: var(--pass); }
 .cwrap { display: flex; flex-direction: column; gap: 8px; }
-.ccap { font-size: 13.5px; color: rgba(255,255,255,.55); }
-.cverdict { margin-left: auto; font-size: 15px; color: var(--dinklight); }
+.ccap { font-size: 13.5px; color: var(--soft); }
+.cverdict { margin-left: auto; font-size: 15px; color: var(--gray); }
 
-/* width bars, dark */
-.wbars { margin-top: 48px; display: flex; flex-direction: column; gap: 14px; max-width: 860px; }
+.wbars { margin-top: 44px; display: flex; flex-direction: column; gap: 14px; max-width: 860px; }
 .wrow { display: flex; align-items: center; gap: 18px; }
-.wtrack { flex: 1; background: rgba(255,255,255,.10); border-radius: 6px; height: 38px; position: relative; }
-.wbar { position: absolute; left: 0; top: 0; bottom: 0; background: #fff; border-radius: 6px; display: flex; align-items: center; padding: 0 14px; color: var(--dark); font-size: 12.5px; font-weight: 500; letter-spacing: .03em; white-space: nowrap; overflow: hidden; }
-.wval { flex: none; width: 56px; font-size: 14px; color: rgba(255,255,255,.6); text-align: right; }
+.wtrack { flex: 1; background: var(--panel); border-radius: 6px; height: 38px; position: relative; }
+.wbar { position: absolute; left: 0; top: 0; bottom: 0; background: var(--black); border-radius: 6px; display: flex; align-items: center; padding: 0 14px; color: #fff; font-size: 12.5px; font-weight: 500; letter-spacing: .03em; white-space: nowrap; overflow: hidden; }
+.wval { flex: none; width: 56px; font-size: 14px; color: var(--soft); text-align: right; }
 
-/* swatch table, dark */
-.tscroll { overflow-x: auto; margin-top: 48px; max-width: 860px; }
+.tscroll { overflow-x: auto; margin-top: 44px; max-width: 860px; }
 table { border-collapse: collapse; width: 100%; min-width: 560px; }
-th, td { text-align: left; padding: 14px 18px 14px 0; border-bottom: 1px solid rgba(255,255,255,.14); font-size: 15px; color: #fff; }
-td { color: var(--dinklight); }
-td:first-child { color: #fff; font-weight: 500; }
-th { font-size: 13px; font-weight: 500; color: rgba(255,255,255,.5); }
+th, td { text-align: left; padding: 14px 18px 14px 0; border-bottom: 1px solid var(--border); font-size: 15px; }
+th { font-size: 13px; font-weight: 500; color: var(--soft); }
 .sw { display: inline-block; width: 11px; height: 11px; border-radius: 2px; margin-right: 8px; }
 .sw--before { background: var(--btn-before); }
 .sw--after { background: var(--btn-after); }
@@ -120,36 +122,27 @@ th { font-size: 13px; font-weight: 500; color: rgba(255,255,255,.5); }
 .sw--78 { background: #78706A; }
 .sw--e0 { background: #E0502B; }
 
-/* token tiers + pipeline, dark */
-.tiers { margin-top: 48px; display: flex; flex-direction: column; align-items: flex-start; }
+.tiers { margin-top: 44px; display: flex; flex-direction: column; align-items: flex-start; }
 .tier { display: flex; align-items: center; gap: 22px; }
-.tier code { font-family: var(--mono); font-size: 15px; background: var(--dark2); border: 1px solid rgba(255,255,255,.14); border-radius: 8px; padding: 12px 18px; color: #fff; }
-.tier .why { font-size: 14px; color: rgba(255,255,255,.55); }
-.tarr { font-size: 18px; color: rgba(255,255,255,.5); padding: 6px 0 6px 26px; }
-.pipe { margin-top: 48px; display: flex; flex-direction: column; align-items: flex-start; }
+.tier code { font-family: var(--mono); font-size: 15px; background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 12px 18px; }
+.tier .why { font-size: 14px; color: var(--soft); }
+.tarr { font-size: 18px; color: var(--soft); padding: 6px 0 6px 26px; }
+
+.pipe { margin-top: 44px; display: flex; flex-direction: column; align-items: flex-start; }
 .pnode { display: flex; align-items: center; gap: 22px; }
-.pnode .box { font-size: 15px; font-weight: 500; background: var(--dark2); border: 1px solid rgba(255,255,255,.14); border-radius: 8px; padding: 13px 20px; color: #fff; }
-.pnode .why { font-size: 14px; color: rgba(255,255,255,.55); }
+.pnode .box { font-size: 15px; font-weight: 500; background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 13px 20px; }
+.pnode .why { font-size: 14px; color: var(--soft); }
 .parr { display: flex; align-items: center; gap: 14px; padding: 8px 0 8px 26px; }
-.parr .a { font-size: 17px; color: rgba(255,255,255,.5); }
-.parr .t { font-size: 13.5px; color: rgba(255,255,255,.55); }
+.parr .a { font-size: 17px; color: var(--soft); }
+.parr .t { font-size: 13.5px; color: var(--soft); }
 
-pre.code { margin-top: 44px; font-family: var(--mono); font-size: 14px; line-height: 1.8; background: #0e0e0e; border: 1px solid rgba(255,255,255,.15); border-radius: 12px; padding: 22px 26px; overflow-x: auto; max-width: 720px; color: #d8d8d4; }
-pre.code .bad { color: var(--fail); font-weight: 600; }
+pre.code { margin-top: 44px; font-family: var(--mono); font-size: 14px; line-height: 1.8; background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 26px; overflow-x: auto; max-width: 720px; }
+pre.code .bad { color: var(--fail); font-weight: 700; }
 
-/* image strip: auto-scrolls, and you can grab or scroll it yourself */
-.marq { overflow-x: auto; margin-top: 44px; border-radius: 16px; cursor: grab; scrollbar-width: none; -ms-overflow-style: none; -webkit-overflow-scrolling: touch; }
-.marq::-webkit-scrollbar { display: none; }
-.marq.dragging { cursor: grabbing; }
-.marq-track { display: flex; gap: 16px; width: max-content; }
-.marq img { height: clamp(180px, 28vw, 340px); width: auto; border-radius: 14px; background: var(--dark2); pointer-events: none; }
-
-/* outcome, light */
+/* outcome */
 .outcome { padding: clamp(90px, 12vw, 180px) var(--pad) clamp(60px, 7vw, 100px); }
 .outcome h2 { font-size: clamp(32px, 3.6vw, 58px); font-weight: 700; letter-spacing: -.018em; max-width: 950px; }
 .outcome p { margin-top: 26px; font-size: 17px; line-height: 1.8; color: var(--gray); max-width: 740px; }
-.outcome .fig img { background: transparent; }
-.outcome .figcap { color: var(--soft); }
 .links { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 44px; }
 .lbtn { display: inline-block; padding: 12px 24px; border: 1px solid var(--black); border-radius: 100px; font-size: 15px; color: var(--black); text-decoration: none; transition: all .15s; }
 .lbtn:hover { background: var(--black); color: var(--bg); }
@@ -162,18 +155,14 @@ footer { display: flex; justify-content: space-between; padding: 30px var(--pad)
 @media(max-width: 860px){
   .mini-nav { font-size: 14px; }
   .case-hero img { border-radius: 18px; }
-  .bts-title { font-size: clamp(34px, 9vw, 48px); }
-  .split, .chap { grid-template-columns: 1fr; }
-  .chap-side { position: static; }
+  .split { grid-template-columns: 1fr; }
   .meta4 { grid-template-columns: 1fr 1fr; }
-  .stats { grid-template-columns: 1fr 1fr; gap: 34px; }
-  .dcards { grid-template-columns: 1fr; }
-  .bts { border-radius: 28px; margin: 0 6px; }
+  .nums { grid-template-columns: 1fr 1fr; gap: 26px; }
+  .trio, .two-up { grid-template-columns: 1fr; }
   .cverdict { margin-left: 0; }
-  .tier code { font-size: 13px; }
 }
 
-html.dark { --bg:#0f0f0f; --black:#f0f0ee; --gray:#b5b5b0; --soft:#7d7d78; --border:#2a2a2a; --square:#2e2e2e; }
+html.dark { --bg:#0f0f0f; --card:#171717; --panel:#1c1c1c; --black:#f0f0ee; --gray:#b5b5b0; --soft:#7d7d78; --border:#2a2a2a; --square:#2e2e2e; }
 html.dark body { background: var(--bg); }
 html.dark #dm-toggle { background:#171717; border-color:#2a2a2a; color:#f0f0ee; }
 </style>
@@ -205,7 +194,6 @@ html.dark #dm-toggle { background:#171717; border-color:#2a2a2a; color:#f0f0ee; 
     <hr class="meta-rule">
     <p class="plabel">(my role)</p>
     <p>I worked on this with my teammate Anahi. I researched the existing appliance apps, mapped the service flows, designed the screens, built the design system, and made the physical NFC tag prototype. We presented to Frontdoor at the final review, where it was selected as a recognized proposal.</p>
-    <div class="fig" style="margin-top:44px;"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/v1786368033/Screenshot_2026-08-09_at_10.23.22_PM_w3pe05.png" alt="Home Passport app screens" style="background:transparent;"></div>
   </div>
 </section>
 
@@ -226,199 +214,258 @@ html.dark #dm-toggle { background:#171717; border-color:#2a2a2a; color:#f0f0ee; 
   </div>
 </section>
 
-<section class="bts">
-  <span class="bts-pill">Home Passport</span>
-  <h2 class="bts-title">Behind the scenes...</h2>
-
-  <div class="chap">
-    <div class="chap-side"><span class="tick"></span><span class="lab">NFC onboarding</span></div>
-    <div class="chap-main">
-      <h3>Tap, confirm, done</h3>
-      <p>Registration had to cost nothing, so I designed it around a physical NFC tag on the appliance. Your phone touches the tag, the appliance identifies itself, and the home record updates before you open a form.</p>
-      <p>I storyboarded the cases that usually break this kind of flow, new appliances, second-hand ones, older machines with an unreadable label, so the same three steps work for all of them. The record belongs to the home rather than the owner, so it survives when the house is sold.</p>
-      <div class="dcards">
-        <div class="dcard"><h4>Tap</h4><p>the appliance identifies itself, no serial numbers</p></div>
-        <div class="dcard"><h4>Confirm</h4><p>one screen shows device, model, and warranty</p></div>
-        <div class="dcard"><h4>Done</h4><p>registered to the home, so the record survives owners</p></div>
-      </div>
-      <div class="stats" style="--n:3">
-        <div class="stat"><div class="n">~50%</div><div class="c">own a smart appliance</div></div>
-        <div class="stat"><div class="n">~10%</div><div class="c">ever connect it</div></div>
-        <div class="stat"><div class="n">12</div><div class="c">steps to book one repair, today</div></div>
-      </div>
-      <div class="fig">
-        <img src="https://res.cloudinary.com/df0tysd6u/image/upload/v1786368033/Screenshot_2026-08-09_at_10.22.16_PM_ttisg6.png" alt="NFC tap onboarding flow" loading="lazy">
-        <p class="figcap">Tap, confirm, done</p>
-      </div>
-      <div class="marq"><div class="marq-track"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024362/fd_06_case_study_xhkczh.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024360/AHS_App_sghnzs.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024362/LG_App_Experience_yohxgq.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024362/Samsung_SmartThings_2_cinrtk.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024362/fd_06_case_study_xhkczh.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024360/AHS_App_sghnzs.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024362/LG_App_Experience_yohxgq.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024362/Samsung_SmartThings_2_cinrtk.png" alt="" loading="lazy"></div></div>
+<!-- STEP 1 -->
+<section class="step">
+  <div class="step-in">
+    <p class="stepnum">(1)</p>
+    <h2>I studied the apps people already use</h2>
+    <p>I set up real appliances in three apps and wrote down everything that got in the way. Each app failed in its own way, and none of them gave anything back before something broke.</p>
+    <div class="trio">
+      <div class="tcard"><h4>LG ThinQ</h4><p>Registration looks optional until you need a repair, then it is required. Every request makes you pick brand, category, appliance, and problem again. The app remembers nothing about your home.</p></div>
+      <div class="tcard"><h4>Samsung SmartThings</h4><p>We tried a second-hand washer. The setup code was printed inside the machine and was smudged. The app then asked for original purchase dates a used owner does not have, so we typed in fake data just to finish.</p></div>
+      <div class="tcard"><h4>Current AHS app</h4><p>Records belong to an account, not a house. Sell the home and the history is wiped, so the new owner gets no repair log and no appliance ages. AHS only learns what is in a house after a claim is filed.</p></div>
     </div>
-  </div>
-
-  <div class="chap">
-    <div class="chap-side"><span class="tick"></span><span class="lab">The dashboard</span></div>
-    <div class="chap-main">
-      <h3>How is my home doing right now?</h3>
-      <p>Once registration is free, the app has something to give back. I built the dashboard around one question: how is my home doing right now? Health first, then age, last service, and efficiency for each device.</p>
-      <p>The alerts speak in money rather than error codes, your fridge coils are dusty, save $15 a month. Manuals and receipts go into a paperless drawer you can export when you sell.</p>
-      <p>Every card on this screen resizes from one component. The appliance card is built with auto layout and constraints so it holds at any width, and the status chip is a variant rather than a separate layer, so a device moving from healthy to overdue is a property change, not a redraw.</p>
-      <div class="dcards">
-        <div class="dcard"><h4>Health at a glance</h4><p>condition, age, and last service for every appliance</p></div>
-        <div class="dcard"><h4>Alerts before failure</h4><p>written in dollars saved</p></div>
-        <div class="dcard"><h4>Paperless drawer</h4><p>manuals and receipts, exportable</p></div>
-      </div>
-      <div class="fig">
-        <img src="https://res.cloudinary.com/df0tysd6u/image/upload/v1786368032/Screenshot_2026-08-09_at_10.21.08_PM_wtip6k.png" alt="Home Passport dashboard showing appliance health" loading="lazy">
-      </div>
-      <div class="marq"><div class="marq-track"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024360/fd_08_dashboard_yockx3.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024361/fd_10_proactive_alerts_jf7kcb.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024360/fd_11_paperless_drawer_qocfov.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024362/fd_roadmap_svjipz.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024360/fd_08_dashboard_yockx3.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024361/fd_10_proactive_alerts_jf7kcb.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024360/fd_11_paperless_drawer_qocfov.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024362/fd_roadmap_svjipz.png" alt="" loading="lazy"></div></div>
+    <div class="two-up">
+      <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024362/LG_App_Experience_yohxgq.png" alt="LG ThinQ research" loading="lazy">
+      <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024360/AHS_App_sghnzs.png" alt="Current AHS app" loading="lazy">
     </div>
+    <div class="big">
+      <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024362/fd_06_case_study_xhkczh.png" alt="Connecting a used smart washer, the QR code was smudged" loading="lazy">
+    </div>
+    <p class="big-cap">The used-washer test, a smudged QR code and no purchase details</p>
   </div>
+</section>
 
-  <div class="chap">
-    <div class="chap-side"><span class="tick"></span><span class="lab">The audit</span></div>
-    <div class="chap-main">
-      <h3>What the current app actually does</h3>
-      <p>Before rebuilding the design system I wanted to know what the current app actually does. I captured twenty screens of the live AHS app and logged every button, colour, and label in a spreadsheet, one row per element with its colour, size, and source screen.</p>
-      <p>Then I checked each colour pair against WCAG, text against its background, borders against their surface, labels against the buttons they sit on.</p>
-      <p>Seven primary buttons came back below the standard. The orange with a white label measures 3.77:1 and body text needs 4.5:1. Form borders measure 1.48:1 against a 3:1 requirement. The same primary button appears at four different widths across four screens, and six pairs of colours are close enough that nobody could tell them apart.</p>
-      <p>Values were typed screen by screen instead of coming from one source, so nothing kept them consistent and nothing caught the failures.</p>
-      <div class="cblock">
-        <div class="crow">
-          <div class="cwrap">
-            <div class="cbtn before">CONTINUE</div>
-            <div class="ccap">#F34113 · in the app today</div>
-          </div>
-          <div class="cratio bad">3.77 : 1</div>
-          <div class="cverdict">Needs 4.5 : 1</div>
+<!-- STEP: count the steps -->
+<section class="step">
+  <div class="step-in">
+    <p class="stepnum">(2)</p>
+    <h2>I counted what it takes to book one repair: 12 steps</h2>
+    <p>I walked through the real flow and wrote down every screen. Twelve steps to book a single repair, and the app starts from zero the next time you come back.</p>
+    <div class="trio">
+      <div class="tcard"><h4>Find help</h4><p>Open the app, tap Request Service, search for your brand</p></div>
+      <div class="tcard"><h4>Describe the problem</h4><p>Pick a category, pick the appliance, type the issue, enter the serial number</p></div>
+      <div class="tcard"><h4>Book the repair</h4><p>Confirm the address, choose a time slot, enter payment, then wait</p></div>
+    </div>
+    <p>The same four questions came back every single time. That is the real finding: the app has no memory of the home, so the work never gets easier.</p>
+  </div>
+</section>
+
+<!-- STEP: look outside the category -->
+<section class="step">
+  <div class="step-in">
+    <p class="stepnum">(3)</p>
+    <h2>I looked at who already makes signing up feel like nothing</h2>
+    <p>None of the appliance apps had an answer, so I looked at products people register without being asked. Three of them explained why.</p>
+    <div class="trio">
+      <div class="tcard"><h4>Apple Wallet</h4><p>Scan, feel the tap, the card is ready. One motion and you get something immediately. Onboarding that does not feel like onboarding.</p></div>
+      <div class="tcard"><h4>CARFAX</h4><p>Service history is worth money at resale, so people keep records because the record itself is valuable to them.</p></div>
+      <div class="tcard"><h4>Peloton</h4><p>Setup happens while you are unboxing, when you are most excited. Timing matters as much as the flow does.</p></div>
+    </div>
+    <p><b>The principle I designed against: the value has to arrive before the breakdown, not after it.</b> Stop asking people to fill in forms. Make it a tap, and give something back the same second.</p>
+  </div>
+</section>
+
+<!-- STEP 4 -->
+<section class="step">
+  <div class="step-in">
+    <p class="stepnum">(4)</p>
+    <h2>I designed registration around one tap</h2>
+    <p>Registration had to cost nothing, so I designed it around a physical NFC tag on the appliance. Your phone touches the tag, the appliance identifies itself, and the home record updates before you open a form. Tap, confirm, done, and the record belongs to the home rather than the owner, so it survives when the house is sold.</p>
+    <div class="trio">
+      <div class="tcard"><h4>Tap</h4><p>the appliance identifies itself, no serial numbers</p></div>
+      <div class="tcard"><h4>Confirm</h4><p>one screen shows device, model, and warranty</p></div>
+      <div class="tcard"><h4>Done</h4><p>registered to the home, so the record survives owners</p></div>
+    </div>
+    <div class="nums" style="--n:3">
+      <div class="num"><div class="n">~50%</div><div class="c">own a smart appliance</div></div>
+      <div class="num"><div class="n">~10%</div><div class="c">ever connect it</div></div>
+      <div class="num"><div class="n">12</div><div class="c">steps to book one repair, today</div></div>
+    </div>
+    <div class="big" style="max-width:340px;">
+      <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024362/fd_14_nfc_prototype_zrf2n3.png" alt="The physical NFC tag prototype" loading="lazy">
+    </div>
+    <p class="big-cap">The tag itself, tap to connect</p>
+  </div>
+</section>
+
+<!-- STEP 3 -->
+<section class="step">
+  <div class="step-in">
+    <p class="stepnum">(5)</p>
+    <h2>I designed the Home Passport dashboard</h2>
+    <p>Once registration is free, the app has something to give back. I built the dashboard around one question: how is my home doing right now? Health first, then age, last service, and efficiency for each device. The alerts speak in money rather than error codes, your fridge coils are dusty, save $15 a month. Manuals and receipts go into a paperless drawer you can export when you sell.</p>
+    <div class="trio">
+      <div class="tcard"><h4>Health at a glance</h4><p>condition, age, and last service for every appliance</p></div>
+      <div class="tcard"><h4>Alerts before failure</h4><p>written in dollars saved</p></div>
+      <div class="tcard"><h4>Paperless drawer</h4><p>manuals and receipts, exportable</p></div>
+    </div>
+    <div class="big">
+      <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024360/fd_08_dashboard_yockx3.png" alt="Home Passport dashboard, final screens" loading="lazy">
+    </div>
+    <p class="big-cap">The final dashboard, appliance health at a glance</p>
+    <div class="big">
+      <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024361/fd_10_proactive_alerts_jf7kcb.png" alt="Home maintenance map, proactive alerts" loading="lazy">
+    </div>
+    <p class="big-cap">The maintenance map, repairs needed by room</p>
+  </div>
+</section>
+
+<!-- STEP: THE AUDIT -->
+<section class="step">
+  <div class="step-in">
+    <p class="stepnum">(6)</p>
+    <h2>I audited what the current app actually does</h2>
+    <p>Before rebuilding the design system I wanted to know what the current app actually does. I captured twenty screens of the live AHS app and logged every button, colour, and label in a spreadsheet, one row per element with its colour, size, and source screen. Then I checked each colour pair against WCAG, text against its background, borders against their surface, labels against the buttons they sit on.</p>
+    <p>Seven primary buttons came back below the standard. The same primary button appears at four different widths across four screens, and values were typed screen by screen instead of coming from one source, so nothing kept them consistent.</p>
+    <div class="cblock">
+      <div class="crow">
+        <div class="cwrap">
+          <div class="cbtn before">CONTINUE</div>
+          <div class="ccap">#F34113 · in the app today</div>
         </div>
-        <div class="crow">
-          <div class="cwrap">
-            <div class="cbtn after">CONTINUE</div>
-            <div class="ccap">#DA3A11 · proposed</div>
-          </div>
-          <div class="cratio good">4.57 : 1</div>
-          <div class="cverdict">Passes</div>
+        <div class="cratio bad">3.77 : 1</div>
+        <div class="cverdict">Needs 4.5 : 1</div>
+      </div>
+      <div class="crow">
+        <div class="cwrap">
+          <div class="cbtn after">CONTINUE</div>
+          <div class="ccap">#DA3A11 · proposed</div>
         </div>
-      </div>
-      <div class="wbars">
-        <div class="wrow"><div class="wtrack"><div class="wbar" style="width:96.1%">NEXT · onboarding</div></div><div class="wval">408pt</div></div>
-        <div class="wrow"><div class="wtrack"><div class="wbar" style="width:89.3%">CONTINUE · notifications</div></div><div class="wval">346pt</div></div>
-        <div class="wrow"><div class="wtrack"><div class="wbar" style="width:96.6%">SCHEDULE APPOINTMENT</div></div><div class="wval">410pt</div></div>
-        <div class="wrow"><div class="wtrack"><div class="wbar" style="width:91.8%">BOOK NOW · discounts</div></div><div class="wval">368pt</div></div>
-      </div>
-      <div class="stats" style="--n:4">
-        <div class="stat"><div class="n">20</div><div class="c">screens audited</div></div>
-        <div class="stat"><div class="n">7</div><div class="c">buttons below AA</div></div>
-        <div class="stat"><div class="n">4</div><div class="c">widths for one button</div></div>
-        <div class="stat"><div class="n">3</div><div class="c">oranges</div></div>
+        <div class="cratio good">4.57 : 1</div>
+        <div class="cverdict">Passes</div>
       </div>
     </div>
-  </div>
-
-  <div class="chap">
-    <div class="chap-side"><span class="tick"></span><span class="lab">Colour</span></div>
-    <div class="chap-main">
-      <h3>Checked against the surface it sits on</h3>
-      <p>AHS is orange, and orange reads as urgency, the feeling of something breaking. A home-care app needs the opposite, so I moved the palette to blue. I made that decision before the audit, for what the colour communicates. The audit then showed the orange was failing contrast anyway.</p>
-      <p>Every new colour was checked against the surface it actually sits on rather than against white.</p>
-      <div class="fig">
-        <img src="https://res.cloudinary.com/df0tysd6u/image/upload/v1786368032/Screenshot_2026-08-09_at_10.20.52_PM_mkzkvg.png" alt="Blue palette with contrast ratios" loading="lazy">
-        <p class="figcap">Each value checked against its surface, not only against white</p>
-      </div>
-      <div class="tscroll">
-        <table>
-          <tr><th></th><th>Before</th><th>After</th><th>Contrast</th></tr>
-          <tr><td>Button</td><td><span class="sw sw--before"></span>#F34113</td><td><span class="sw sw--after"></span>#DA3A11</td><td>3.77 → 4.57</td></tr>
-          <tr><td>Field border</td><td><span class="sw sw--d4"></span>#D4D4D4</td><td><span class="sw sw--8f"></span>#8F8F8F</td><td>1.48 → 3.08</td></tr>
-          <tr><td>Small text</td><td><span class="sw sw--91"></span>#91877F</td><td><span class="sw sw--78"></span>#78706A</td><td>3.35 → 4.63</td></tr>
-          <tr><td>Second orange</td><td><span class="sw sw--e0"></span>#E0502B</td><td>removed</td><td>folded into the ramp</td></tr>
-        </table>
-      </div>
-      <div class="marq"><div class="marq-track"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024361/fd_12_brand_system_x2ul7z.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024361/fd_13_brand_spread_aurpvr.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024361/fd_11.2_Branding_iqbphp.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024362/fd_14_nfc_prototype_zrf2n3.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024361/fd_12_brand_system_x2ul7z.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024361/fd_13_brand_spread_aurpvr.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024361/fd_11.2_Branding_iqbphp.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024362/fd_14_nfc_prototype_zrf2n3.png" alt="" loading="lazy"></div></div>
+    <div class="wbars">
+      <div class="wrow"><div class="wtrack"><div class="wbar" style="width:96.1%">NEXT · onboarding</div></div><div class="wval">408pt</div></div>
+      <div class="wrow"><div class="wtrack"><div class="wbar" style="width:89.3%">CONTINUE · notifications</div></div><div class="wval">346pt</div></div>
+      <div class="wrow"><div class="wtrack"><div class="wbar" style="width:96.6%">SCHEDULE APPOINTMENT</div></div><div class="wval">410pt</div></div>
+      <div class="wrow"><div class="wtrack"><div class="wbar" style="width:91.8%">BOOK NOW · discounts</div></div><div class="wval">368pt</div></div>
     </div>
-  </div>
-
-  <div class="chap">
-    <div class="chap-side"><span class="tick"></span><span class="lab">Design tokens</span></div>
-    <div class="chap-main">
-      <h3>One value, named three times</h3>
-      <p>A token is a named value. Instead of typing a hex code on a screen, a button asks for <code>action.primary.bg</code> and gets its colour from one place.</p>
-      <p>I built it in three layers. The base layer holds the raw colours. The middle layer names them by job, action, surface, border. Components only ever ask the middle layer, never the raw colour. That middle layer is what makes theming possible: change it and every screen follows without touching a component.</p>
-      <p>In Figma the same structure runs on variables and modes, so light and dark are the same components reading a different mode rather than a duplicated page.</p>
-      <div class="tiers">
-        <div class="tier"><code>#DA3A11</code><span class="why">the raw colour</span></div>
-        <div class="tarr">↑</div>
-        <div class="tier"><code>base.color.blue.50</code><span class="why">named by value</span></div>
-        <div class="tarr">↑</div>
-        <div class="tier"><code>purp.color.action.primary.bg</code><span class="why">named by job</span></div>
-        <div class="tarr">↑</div>
-        <div class="tier"><code>comp.button.primary.bg</code><span class="why">what the button asks for</span></div>
-      </div>
-      <div class="fig">
-        <img src="https://res.cloudinary.com/df0tysd6u/image/upload/v1786368012/Screenshot_2026-08-09_at_10.20.23_PM_gz6nfv.png" alt="Token structure across base, purpose and component layers" loading="lazy">
-      </div>
+    <div class="nums" style="--n:4">
+      <div class="num"><div class="n">20</div><div class="c">screens audited</div></div>
+      <div class="num"><div class="n">7</div><div class="c">buttons below AA</div></div>
+      <div class="num"><div class="n">4</div><div class="c">widths for one button</div></div>
+      <div class="num"><div class="n">3</div><div class="c">oranges</div></div>
     </div>
-  </div>
-
-  <div class="chap">
-    <div class="chap-side"><span class="tick"></span><span class="lab">Components</span></div>
-    <div class="chap-main">
-      <h3>Properties, not copies</h3>
-      <p>Each component is one Figma component with properties rather than a page of copies. The button carries variant, size, and state as properties, with a boolean for the icon, so every combination comes from one master. Auto layout handles the padding and constraints handle the resize, which is why the same button works full width on a form and inline in a card.</p>
-      <p>I built them in code the same way. Variants are props, and the states are real CSS states rather than separate stories, hover is <code>:hover</code>, focus is <code>:focus-visible</code>, so you can tab to the ring instead of looking at a picture of one.</p>
-      <div class="dcards">
-        <div class="dcard"><h4>Properties, not copies</h4><p>variant, size, state and icon on one master</p></div>
-        <div class="dcard"><h4>Auto layout and constraints</h4><p>the same component holds at any width</p></div>
-        <div class="dcard"><h4>Real states in code</h4><p>hover, focus, active, disabled, loading</p></div>
-      </div>
+    <div class="big">
+      <img src="https://res.cloudinary.com/df0tysd6u/image/upload/v1786368033/Screenshot_2026-08-09_at_10.22.16_PM_ttisg6.png" alt="The audit spreadsheet, contrast matrix" loading="lazy">
     </div>
+    <p class="big-cap">The actual spreadsheet, every colour pair scored against WCAG</p>
   </div>
+</section>
 
-  <div class="chap">
-    <div class="chap-side"><span class="tick"></span><span class="lab">The build</span></div>
-    <div class="chap-main">
-      <h3>The build stops if a colour fails</h3>
-      <p>Figma pushes to GitHub. One file becomes CSS, Swift, and Android XML. Before anything ships, the system checks every colour pair against the accessibility standard and stops if one fails.</p>
-      <p>I put the old orange back to confirm it stops. It did, naming the exact colour and the exact ratio.</p>
-      <p>It also caught two colours I had approved myself. They cleared the standard against white but failed against the page background, I had checked one surface and assumed the other.</p>
-      <div class="pipe">
-        <div class="pnode"><div class="box">Figma variables</div></div>
-        <div class="parr"><span class="a">↓</span><span class="t">pushed to GitHub</span></div>
-        <div class="pnode"><div class="box">tokens</div><span class="why">one source</span></div>
-        <div class="parr"><span class="a">↓</span><span class="t">Style Dictionary</span></div>
-        <div class="pnode"><div class="box">CSS · Swift · Android XML</div></div>
-        <div class="parr"><span class="a">↓</span></div>
-        <div class="pnode"><div class="box">contrast check</div><span class="why">stops the build if one fails</span></div>
-        <div class="parr"><span class="a">↓</span></div>
-        <div class="pnode"><div class="box">Storybook</div></div>
-      </div>
-      <pre class="code"><span class="bad">FAIL  3.77:1  (needs 4.5)</span>
+<!-- STEP 5 -->
+<section class="step">
+  <div class="step-in">
+    <p class="stepnum">(7)</p>
+    <h2>I moved the brand from orange to blue</h2>
+    <p>AHS is orange, and orange reads as urgency, the feeling of something breaking. A home-care app needs the opposite, so I moved the palette to blue. I made that decision before the audit, for what the colour communicates. The audit then showed the orange was failing contrast anyway. Every new colour was checked against the surface it actually sits on rather than against white.</p>
+    <div class="tscroll">
+      <table>
+        <tr><th></th><th>Before</th><th>After</th><th>Contrast</th></tr>
+        <tr><td>Button</td><td><span class="sw sw--before"></span>#F34113</td><td><span class="sw sw--after"></span>#DA3A11</td><td>3.77 → 4.57</td></tr>
+        <tr><td>Field border</td><td><span class="sw sw--d4"></span>#D4D4D4</td><td><span class="sw sw--8f"></span>#8F8F8F</td><td>1.48 → 3.08</td></tr>
+        <tr><td>Small text</td><td><span class="sw sw--91"></span>#91877F</td><td><span class="sw sw--78"></span>#78706A</td><td>3.35 → 4.63</td></tr>
+        <tr><td>Second orange</td><td><span class="sw sw--e0"></span>#E0502B</td><td>removed</td><td>folded into the ramp</td></tr>
+      </table>
+    </div>
+    <div class="big">
+      <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024361/fd_12_brand_system_x2ul7z.png" alt="Blue design tokens in Figma variables" loading="lazy">
+    </div>
+    <p class="big-cap">The blue ramp, built as Figma variables</p>
+  </div>
+</section>
+
+<!-- STEP 6 -->
+<section class="step">
+  <div class="step-in">
+    <p class="stepnum">(8)</p>
+    <h2>I built it as design tokens, not hex codes</h2>
+    <p>A token is a named value. Instead of typing a hex code on a screen, a button asks for <code>action.primary.bg</code> and gets its colour from one place. I built it in three layers: base holds the raw colours, the middle layer names them by job, and components only ever ask that middle layer. Change it once and every screen follows.</p>
+    <div class="tiers">
+      <div class="tier"><code>#DA3A11</code><span class="why">the raw colour</span></div>
+      <div class="tarr">↑</div>
+      <div class="tier"><code>base.color.blue.50</code><span class="why">named by value</span></div>
+      <div class="tarr">↑</div>
+      <div class="tier"><code>purp.color.action.primary.bg</code><span class="why">named by job</span></div>
+      <div class="tarr">↑</div>
+      <div class="tier"><code>comp.button.primary.bg</code><span class="why">what the button asks for</span></div>
+    </div>
+    <div class="big">
+      <img src="https://res.cloudinary.com/df0tysd6u/image/upload/v1786368032/Screenshot_2026-08-09_at_10.21.08_PM_wtip6k.png" alt="Semantic token aliases bound to primitives" loading="lazy">
+    </div>
+    <p class="big-cap">The semantic layer, one alias per role</p>
+  </div>
+</section>
+
+<!-- STEP: COMPONENTS -->
+<section class="step">
+  <div class="step-in">
+    <p class="stepnum">(9)</p>
+    <h2>I built components with properties, not copies</h2>
+    <p>Each component is one Figma component with properties rather than a page of copies. The button carries variant, size, and state as properties, with a boolean for the icon, so every combination comes from one master. Auto layout handles the padding and constraints handle the resize, which is why the same button works full width on a form and inline in a card.</p>
+    <p>I built them in code the same way. Variants are props, and the states are real CSS states rather than separate stories, hover is <code>:hover</code>, focus is <code>:focus-visible</code>, so you can tab to the ring instead of looking at a picture of one.</p>
+    <div class="trio">
+      <div class="tcard"><h4>Properties, not copies</h4><p>variant, size, state and icon on one master</p></div>
+      <div class="tcard"><h4>Auto layout and constraints</h4><p>the same component holds at any width</p></div>
+      <div class="tcard"><h4>Real states in code</h4><p>hover, focus, active, disabled, loading</p></div>
+    </div>
+    <div class="big">
+      <img src="https://res.cloudinary.com/df0tysd6u/image/upload/v1786368012/Screenshot_2026-08-09_at_10.20.23_PM_gz6nfv.png" alt="Flow components extracted from the shipped screens" loading="lazy">
+    </div>
+    <p class="big-cap">Category cards, chips, search states, buttons, one master each</p>
+  </div>
+</section>
+
+<!-- STEP 8 -->
+<section class="step">
+  <div class="step-in">
+    <p class="stepnum">(10)</p>
+    <h2>I made the build stop when a colour fails</h2>
+    <p>Figma pushes to GitHub. One file becomes CSS, Swift, and Android XML. Before anything ships, the system checks every colour pair against the accessibility standard and stops if one fails. I put the old orange back to confirm it stops, it did, naming the exact colour and the exact ratio. It also caught two colours I had approved myself, they cleared white but failed against the page background.</p>
+    <div class="pipe">
+      <div class="pnode"><div class="box">Figma variables</div></div>
+      <div class="parr"><span class="a">↓</span><span class="t">pushed to GitHub</span></div>
+      <div class="pnode"><div class="box">tokens</div><span class="why">one source</span></div>
+      <div class="parr"><span class="a">↓</span><span class="t">Style Dictionary</span></div>
+      <div class="pnode"><div class="box">CSS · Swift · Android XML</div></div>
+      <div class="parr"><span class="a">↓</span></div>
+      <div class="pnode"><div class="box">contrast check</div><span class="why">stops the build if one fails</span></div>
+      <div class="parr"><span class="a">↓</span></div>
+      <div class="pnode"><div class="box">Storybook</div></div>
+    </div>
+    <pre class="code"><span class="bad">FAIL  3.77:1  (needs 4.5)</span>
 purp-color-action-primary-fg #ffffff
   on purp-color-action-primary-bg #f34113
 
 Contrast gate FAILED: 1 violation(s).</pre>
-    </div>
   </div>
+</section>
 
-  <div class="chap">
-    <div class="chap-side"><span class="tick"></span><span class="lab">Documentation</span></div>
-    <div class="chap-main">
-      <h3>Usage rules beside the live component</h3>
-      <p>The components run in Storybook, one page each, with every variant and state. The controls panel lets anyone switch variant, size, or state without opening the code, and the accessibility add-on runs a check on every story.</p>
-      <p>Storybook is embedded in Zeroheight, where the usage rules sit next to the live component, when to use it, when not to, and the accessibility notes. A colour change updates both.</p>
-      <div class="dcards">
-        <div class="dcard"><h4>Storybook</h4><p>every component, every state, running</p></div>
-        <div class="dcard"><h4>Zeroheight</h4><p>usage rules beside the live component</p></div>
-        <div class="dcard"><h4>Rules for changes</h4><p>how a request comes in, who decides, what gets turned down</p></div>
-      </div>
-      <div class="fig">
-        <img src="https://res.cloudinary.com/df0tysd6u/image/upload/v1786367995/Screenshot_2026-08-10_at_5.36.28_AM_vwe4wb.png" alt="Component library running in Storybook" loading="lazy">
-        <p class="figcap">The search bar in Storybook, every variant and state from one component</p>
-      </div>
-      <div class="fig">
-        <img src="https://res.cloudinary.com/df0tysd6u/image/upload/v1786367995/Screenshot_2026-08-10_at_6.20.16_AM_nthnoz.png" alt="Frontdoor Design System documentation in Zeroheight" loading="lazy">
-        <p class="figcap">Foundations documented in Zeroheight</p>
-      </div>
+<!-- STEP 9 -->
+<section class="step">
+  <div class="step-in">
+    <p class="stepnum">(11)</p>
+    <h2>I documented every component where it's used</h2>
+    <p>The components run in Storybook, one page each, with every variant and state. The controls panel lets anyone switch variant, size, or state without opening the code. Storybook is embedded in Zeroheight, where the usage rules sit next to the live component, when to use it, when not to, and the accessibility notes.</p>
+    <div class="trio">
+      <div class="tcard"><h4>Storybook</h4><p>every component, every state, running</p></div>
+      <div class="tcard"><h4>Zeroheight</h4><p>usage rules beside the live component</p></div>
+      <div class="tcard"><h4>Rules for changes</h4><p>how a request comes in, who decides, what gets turned down</p></div>
     </div>
+    <div class="big">
+      <img src="https://res.cloudinary.com/df0tysd6u/image/upload/v1786367995/Screenshot_2026-08-10_at_5.36.28_AM_vwe4wb.png" alt="Component library running in Storybook" loading="lazy">
+    </div>
+    <p class="big-cap">The search bar in Storybook, every variant and state from one component</p>
+    <div class="big">
+      <img src="https://res.cloudinary.com/df0tysd6u/image/upload/v1786367995/Screenshot_2026-08-10_at_6.20.16_AM_nthnoz.png" alt="Frontdoor Design System documentation in Zeroheight" loading="lazy">
+    </div>
+    <p class="big-cap">Foundations documented in Zeroheight</p>
+    <div class="big">
+      <img src="https://res.cloudinary.com/df0tysd6u/image/upload/v1786368032/Screenshot_2026-08-09_at_10.20.52_PM_mkzkvg.png" alt="Icon library, outline set" loading="lazy">
+    </div>
+    <p class="big-cap">460 icons, one outline library, recolored with text alias tokens</p>
   </div>
 </section>
 
@@ -426,9 +473,10 @@ Contrast gate FAILED: 1 violation(s).</pre>
   <p class="plabel">(the outcome)</p>
   <h2>Selected as a recognized proposal at the final review. Twelve steps became three taps.</h2>
   <p>What I took away: this was an incentive problem, not a UI problem. A good interface at the wrong moment still fails. Home services will not be won by who fixes things fastest, but by who knows your home best before anything breaks.</p>
-  <div class="fig" style="max-width:560px;">
-    <img src="https://res.cloudinary.com/df0tysd6u/image/upload/v1786368012/Screenshot_2026-08-09_at_10.20.04_PM_e4kpwz.png" alt="Home Passport final screens" loading="lazy">
+  <div class="big">
+    <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024360/fd_08_dashboard_yockx3.png" alt="Home Passport dashboard, the finished screen" loading="lazy">
   </div>
+  <p class="big-cap">The dashboard, where it all started and ended</p>
   <div class="links">
     <a class="lbtn" href="https://github.com/maitreyi-bhardwaj/frontdoor-design-system" target="_blank">Repository</a>
     <!-- Storybook → add Chromatic URL -->
@@ -444,21 +492,6 @@ Contrast gate FAILED: 1 violation(s).</pre>
 const _dmt = document.getElementById('dm-toggle');
 if(localStorage.getItem('dm')==='1'){document.documentElement.classList.add('dark');_dmt.textContent='☀';}
 _dmt.addEventListener('click',()=>{const on=document.documentElement.classList.toggle('dark');localStorage.setItem('dm',on?'1':'0');_dmt.textContent=on?'☀':'☾';});
-
-// image strips: auto-scroll, but the user can grab, drag, or wheel them anytime
-document.querySelectorAll('.marq').forEach(m=>{
-  const track=m.querySelector('.marq-track');
-  const half=()=>track.scrollWidth/2;
-  let auto=!matchMedia('(prefers-reduced-motion: reduce)').matches, resume;
-  function pause(){ auto=false; clearTimeout(resume); resume=setTimeout(()=>auto=true, 2200); }
-  (function step(){ if(auto){ m.scrollLeft+=0.7; } if(m.scrollLeft>=half()) m.scrollLeft-=half(); if(m.scrollLeft<0) m.scrollLeft+=half(); requestAnimationFrame(step); })();
-  m.addEventListener('wheel',pause,{passive:true});
-  m.addEventListener('touchstart',pause,{passive:true});
-  let down=false,sx=0,sl=0;
-  m.addEventListener('pointerdown',e=>{ down=true; sx=e.clientX; sl=m.scrollLeft; m.classList.add('dragging'); pause(); });
-  window.addEventListener('pointermove',e=>{ if(down){ m.scrollLeft=sl-(e.clientX-sx); pause(); } });
-  window.addEventListener('pointerup',()=>{ down=false; m.classList.remove('dragging'); });
-});
 </script>
 </body>
 </html>

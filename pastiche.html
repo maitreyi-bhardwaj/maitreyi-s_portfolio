@@ -10,8 +10,8 @@
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
-  --bg: #EFEEEA; --black: #1a1a1a; --gray: #4b4b48; --soft: #8b8b86;
-  --border: #dddcd6; --dark: #171717; --dark2: #242224; --dinklight: #cfcfcb;
+  --bg: #EFEEEA; --card: #ffffff; --panel: #F5F4F0; --black: #1a1a1a; --gray: #4b4b48; --soft: #8b8b86;
+  --border: #dddcd6;
   --f: 'Inter', -apple-system, sans-serif;
   --fd: 'Red Hat Display', 'Inter', sans-serif;
   --pad: clamp(20px, 4vw, 64px);
@@ -31,6 +31,7 @@ p { text-wrap: pretty; }
 @media (prefers-reduced-motion: reduce) { .case-hero img { animation: none; opacity: 1; transform: none; } }
 
 .split { display: grid; grid-template-columns: minmax(280px, 1fr) 1.35fr; gap: clamp(32px, 5vw, 100px); padding: clamp(80px, 11vw, 180px) var(--pad); align-items: start; }
+.split > div { min-width: 0; }
 .split h1 { font-size: clamp(38px, 4.2vw, 68px); font-weight: 700; letter-spacing: -.02em; line-height: 1.06; }
 .plabel { font-size: 17px; font-weight: 600; margin-bottom: 18px; }
 .split p, .prob p { font-size: 17px; line-height: 1.8; color: var(--gray); max-width: 720px; }
@@ -44,30 +45,43 @@ p { text-wrap: pretty; }
 .prob .plabel { margin-bottom: 24px; }
 .prob h2 { font-size: clamp(32px, 3.6vw, 58px); font-weight: 700; letter-spacing: -.018em; line-height: 1.1; margin-bottom: 28px; }
 
-.bts { background: var(--dark); color: #fff; border-radius: 44px; margin: 0 10px; padding: clamp(90px, 12vw, 190px) var(--pad) clamp(80px, 10vw, 150px); }
-.bts-pill { display: inline-block; border: 1px solid rgba(255,255,255,.45); border-radius: 100px; padding: 10px 20px; font-size: 14px; letter-spacing: .1em; text-transform: uppercase; color: #fff; }
-.bts-title { font-size: clamp(40px, 4.8vw, 78px); font-weight: 700; letter-spacing: -.015em; margin: 38px 0 0; }
-.chap { display: grid; grid-template-columns: minmax(240px, 1fr) 1.4fr; gap: clamp(32px, 5vw, 100px); padding-top: clamp(120px, 16vw, 240px); align-items: start; }
-.chap-side { position: sticky; top: 120px; display: flex; align-items: center; gap: 16px; }
-.chap-side .tick { width: 56px; height: 1px; background: rgba(255,255,255,.7); flex: none; }
-.chap-side .lab { font-size: 17px; color: #fff; }
-.chap-main h3 { font-size: clamp(30px, 3.4vw, 56px); font-weight: 700; letter-spacing: -.015em; line-height: 1.1; margin-bottom: 30px; }
-.chap-main > p { font-size: 17px; line-height: 1.85; color: var(--dinklight); max-width: 700px; }
-.chap-main > p + p { margin-top: 18px; }
-.dcards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 48px; max-width: 860px; }
-.dcard { background: var(--dark2); border-radius: 16px; padding: 26px 24px; }
-.dcard h4 { font-size: 17px; font-weight: 600; color: #fff; margin-bottom: 10px; }
-.dcard p { font-size: 14px; line-height: 1.65; color: var(--dinklight); }
-.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 64px; max-width: 780px; }
-.stat .n { font-family: var(--fd); font-size: clamp(46px, 4.8vw, 78px); font-weight: 500; line-height: 1; }
-.stat .c { margin-top: 14px; font-size: 15px; line-height: 1.55; color: var(--dinklight); }
+/* NUMBERED STEPS */
+.step { padding: clamp(70px, 9vw, 140px) var(--pad); }
+.step-in { max-width: 1200px; margin: 0 auto; }
+.stepnum { font-family: var(--fd); font-size: 15px; font-weight: 600; color: var(--soft); margin-bottom: 20px; }
+.step h2 { font-size: clamp(28px, 3.2vw, 46px); font-weight: 700; letter-spacing: -.016em; line-height: 1.16; max-width: 820px; margin-bottom: 22px; }
+.step p { font-size: 17px; line-height: 1.8; color: var(--gray); max-width: 680px; }
+.step p + p { margin-top: 14px; }
+.step:nth-child(even) { background: var(--panel); }
 
-/* image strip: auto-scrolls, and you can grab or scroll it yourself */
-.marq { overflow-x: auto; margin-top: clamp(64px, 8vw, 120px); border-radius: 18px; cursor: grab; scrollbar-width: none; -ms-overflow-style: none; -webkit-overflow-scrolling: touch; }
-.marq::-webkit-scrollbar { display: none; }
-.marq.dragging { cursor: grabbing; }
-.marq-track { display: flex; gap: 18px; width: max-content; }
-.marq img { height: clamp(180px, 32vw, 400px); width: auto; border-radius: 14px; background: var(--dark2); pointer-events: none; }
+.trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 44px; max-width: 900px; }
+.tcard { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px 22px; }
+.tcard h4 { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+.tcard p { font-size: 14px; line-height: 1.6; color: var(--gray); }
+
+.nums { display: grid; grid-template-columns: repeat(var(--n, 3), 1fr); gap: 28px; margin-top: 52px; max-width: 860px; }
+.num .n { font-family: var(--fd); font-size: clamp(38px, 4vw, 60px); font-weight: 700; line-height: 1; color: var(--black); }
+.num .c { margin-top: 12px; font-size: 14.5px; line-height: 1.5; color: var(--gray); }
+
+.big { margin-top: 48px; border-radius: 20px; overflow: hidden; background: var(--panel); }
+.big img { width: 100%; display: block; }
+.big-cap { margin-top: 14px; font-size: 14px; color: var(--soft); }
+
+/* what I solved + per-step result */
+.solved { margin-top: 36px; padding: 24px 28px; background: var(--card); border: 1px solid var(--border); border-radius: 16px; max-width: 760px; }
+.solved .sl { font-size: 12.5px; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--soft); margin-bottom: 10px; }
+.prob .solved p, .solved p { font-size: 18px; line-height: 1.6; color: var(--black); font-weight: 500; max-width: none; margin: 0; }
+.res { margin-top: 34px; padding-left: 20px; border-left: 2px solid var(--black); max-width: 700px; }
+.res .rl { font-size: 12.5px; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--soft); margin-bottom: 7px; }
+.step .res p, .res p { font-size: 16.5px; line-height: 1.7; color: var(--black); max-width: none; margin: 0; }
+.two-up { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 44px; }
+.two-up img { width: 100%; border-radius: 16px; display: block; }
+
+.links { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 44px; }
+.lbtn { display: inline-block; padding: 12px 24px; border: 1px solid var(--black); border-radius: 100px; font-size: 15px; color: var(--black); text-decoration: none; transition: all .15s; }
+.lbtn:hover { background: var(--black); color: var(--bg); }
+.lbtn.primary { background: var(--black); color: var(--bg); }
+.lbtn.primary:hover { opacity: .8; }
 
 .outcome { padding: clamp(90px, 12vw, 180px) var(--pad) clamp(60px, 7vw, 100px); }
 .outcome h2 { font-size: clamp(32px, 3.6vw, 58px); font-weight: 700; letter-spacing: -.018em; max-width: 950px; }
@@ -80,16 +94,13 @@ footer { display: flex; justify-content: space-between; padding: 30px var(--pad)
 @media(max-width: 860px){
   .mini-nav { font-size: 14px; }
   .case-hero img { border-radius: 18px; }
-  .bts-title { font-size: clamp(34px, 9vw, 48px); }
-  .split, .chap { grid-template-columns: 1fr; }
-  .chap-side { position: static; }
+  .split { grid-template-columns: 1fr; }
   .meta4 { grid-template-columns: 1fr 1fr; }
-  .stats { grid-template-columns: 1fr; gap: 38px; }
-  .dcards { grid-template-columns: 1fr; }
-  .bts { border-radius: 28px; margin: 0 6px; }
+  .nums { grid-template-columns: 1fr; gap: 26px; }
+  .trio, .two-up { grid-template-columns: 1fr; }
 }
 
-html.dark { --bg:#0f0f0f; --black:#f0f0ee; --gray:#b5b5b0; --soft:#7d7d78; --border:#2a2a2a; }
+html.dark { --bg:#0f0f0f; --card:#171717; --panel:#1c1c1c; --black:#f0f0ee; --gray:#b5b5b0; --soft:#7d7d78; --border:#2a2a2a; }
 html.dark body { background: var(--bg); }
 html.dark #dm-toggle { background:#171717; border-color:#2a2a2a; color:#f0f0ee; }
 </style>
@@ -130,30 +141,89 @@ html.dark #dm-toggle { background:#171717; border-color:#2a2a2a; color:#f0f0ee; 
   <p>Designers pick colors from scratch or from the same trending palettes everyone else uses. Meanwhile, museums hold thousands of open-access paintings where masters already solved color harmony, five hundred years ago. That knowledge just is not reachable from a design tool.</p>
 </section>
 
-<section class="bts">
-  <span class="bts-pill">Pastiche</span>
-  <h2 class="bts-title">Behind the scenes...</h2>
-  <div class="chap">
-    <div class="chap-side"><span class="tick"></span><span class="lab">Figma plugin</span></div>
-    <div class="chap-main"><h3>Museum color, one click away</h3><p>Pick any of 5,800 open-access artworks from the catalog. Pastiche runs k-means clustering on the painting, then assigns each extracted color a role, dominant, secondary, accent, based on how the painter actually used it.</p><p>The part I care most about: every swatch points back to where it lives in the painting. You do not just get a hex code, you see why Vermeer put that blue next to that ochre.</p><div class="dcards"><div class="dcard"><h4>Pick a painting</h4><p>5,800 open-access artworks, searchable by artist and era</p></div><div class="dcard"><h4>k-means extraction</h4><p>Colors clustered and ranked by how the painter used them</p></div><div class="dcard"><h4>See the source</h4><p>Every swatch mapped back to its place on the canvas</p></div></div><div class="stats"><div class="stat"><div class="n">5,800</div><div class="c">open-access artworks in the catalog</div></div><div class="stat"><div class="n">3s</div><div class="c">from painting to complete token generation</div></div><div class="stat"><div class="n">$0</div><div class="c">per month, it runs entirely on free tiers</div></div></div></div>
+<!-- STEP 1 -->
+<section class="step">
+  <div class="step-in">
+    <p class="stepnum">(1)</p>
+    <h2>I built a color-extraction engine</h2>
+    <p>Pick any of 5,800 open-access artworks from the catalog. Pastiche runs k-means clustering on the painting, then assigns each extracted color a role, dominant, secondary, accent, based on how the painter actually used it. Every swatch points back to where it lives in the painting, you don't just get a hex code, you see why Vermeer put that blue next to that ochre.</p>
+    <div class="trio">
+      <div class="tcard"><h4>Pick a painting</h4><p>5,800 open-access artworks, searchable by artist and era</p></div>
+      <div class="tcard"><h4>k-means extraction</h4><p>Colors clustered and ranked by how the painter used them</p></div>
+      <div class="tcard"><h4>See the source</h4><p>Every swatch mapped back to its place on the canvas</p></div>
+    </div>
+    <div class="nums" style="--n:3">
+      <div class="num"><div class="n">5,800</div><div class="c">open-access artworks in the catalog</div></div>
+      <div class="num"><div class="n">3s</div><div class="c">from painting to complete token generation</div></div>
+      <div class="num"><div class="n">$0</div><div class="c">per month, it runs entirely on free tiers</div></div>
+    </div>
+    <div class="big">
+      <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1780963087/pastiche_07_plugin_ui_ckstkh.png" alt="Pastiche plugin UI, final screens" loading="lazy">
+    </div>
+    <p class="big-cap">The final plugin panel, colors extracted live from the canvas</p>
+    <div class="two-up">
+      <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1780963087/pastiche_02_color_extraction_jvo4l0.png" alt="Color extraction from a painting" loading="lazy">
+      <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1780963086/pastiche_03_library_btqnsn.png" alt="Painting library, searchable by artist and era" loading="lazy">
+    </div>
   </div>
-<div class="marq"><div class="marq-track"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1780963087/pastiche_02_color_extraction_jvo4l0.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1780963086/pastiche_03_library_btqnsn.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1780963087/pastiche_07_plugin_ui_ckstkh.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1780963087/pastiche_02_color_extraction_jvo4l0.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1780963086/pastiche_03_library_btqnsn.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1780963087/pastiche_07_plugin_ui_ckstkh.png" alt="" loading="lazy"></div></div>
-  <div class="chap">
-    <div class="chap-side"><span class="tick"></span><span class="lab">Design tokens</span></div>
-    <div class="chap-main"><h3>Straight into your file as variables</h3><p>A palette that stays a moodboard is decoration. Pastiche writes real Figma variables into your file: primitive scales built from each extracted color, semantic roles on top, and text styles that pass contrast, so the painting becomes a working design-system foundation.</p><p>The whole pipeline, painting to tokens, runs in about three seconds, inside Figma, at zero running cost.</p></div>
+</section>
+
+<!-- STEP 2 -->
+<section class="step">
+  <div class="step-in">
+    <p class="stepnum">(2)</p>
+    <h2>I wrote the palette as real design tokens</h2>
+    <p>A palette that stays a moodboard is just decoration. Pastiche writes real Figma variables into your file: primitive scales built from each extracted color, semantic roles on top, and text styles that pass contrast. The painting becomes a working foundation you can actually build on.</p>
+    <p>You can also take it out of Figma. One click exports the same palette as JSON design tokens or as plain CSS custom properties, so a developer can use it without opening Figma at all. Painting to finished tokens takes about three seconds.</p>
+    <div class="trio">
+      <div class="tcard"><h4>Into your file</h4><p>Organised variable collections, written straight into Figma</p></div>
+      <div class="tcard"><h4>Out as JSON</h4><p>Standard design tokens any build system can read</p></div>
+      <div class="tcard"><h4>Out as CSS</h4><p>Native custom properties, ready to paste into a stylesheet</p></div>
+    </div>
+    <div class="big">
+      <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1780963087/pastiche_04_tokens_sex9ay.png" alt="Pastiche design tokens, final screens" loading="lazy">
+    </div>
+    <p class="big-cap">Primitive scales and semantic roles, written as variables</p>
+    <div class="two-up">
+      <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1780963086/pastiche_05_export_yspc6l.png" alt="Pastiche token export" loading="lazy">
+      <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1780963086/pastiche_06_example_lmfszf.png" alt="Pastiche applied example" loading="lazy">
+    </div>
   </div>
-<div class="marq"><div class="marq-track"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1780963087/pastiche_04_tokens_sex9ay.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1780963086/pastiche_05_export_yspc6l.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1780963086/pastiche_06_example_lmfszf.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1780963087/pastiche_04_tokens_sex9ay.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1780963086/pastiche_05_export_yspc6l.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1780963086/pastiche_06_example_lmfszf.png" alt="" loading="lazy"></div></div>
-  <div class="chap">
-    <div class="chap-side"><span class="tick"></span><span class="lab">Launch</span></div>
-    <div class="chap-main"><h3>Shipped, and written about</h3><p>Pastiche is live on the Figma Community for anyone to install. The story behind it, why your color palette has been waiting in a museum since 1665, became an article on Medium.</p><div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:34px;"><a href="https://www.figma.com/community/plugin/1641224136546421137" target="_blank" style="display:inline-block;padding:12px 24px;border-radius:100px;background:#fff;color:#1a1a1a;font-size:15px;font-weight:500;text-decoration:none;">Install on Figma Community</a><a href="https://medium.com/@mbhardw9/your-color-palette-has-been-waiting-in-a-museum-since-1665-0f70446fee85" target="_blank" style="display:inline-block;padding:12px 24px;border-radius:100px;border:1px solid rgba(255,255,255,.5);color:#fff;font-size:15px;font-weight:500;text-decoration:none;">Read the article</a></div></div>
+</section>
+
+<!-- STEP 3 -->
+<section class="step">
+  <div class="step-in">
+    <p class="stepnum">(3)</p>
+    <h2>I built it to run on nothing: no servers, no database</h2>
+    <p>I wanted this to stay free to run forever, so nothing that could happen in the browser was sent anywhere. All the heavy work, the clustering and the token writing, happens locally inside Figma. The only outside call is a small Cloudflare Worker that fetches museum images, because browsers block them otherwise.</p>
+    <div class="trio">
+      <div class="tcard"><h4>Runs locally</h4><p>Clustering, canvas work, and variable writing all happen inside Figma</p></div>
+      <div class="tcard"><h4>One worker</h4><p>A Cloudflare Worker fetches museum images the browser will not load directly</p></div>
+      <div class="tcard"><h4>Static catalog</h4><p>The 82MB painting catalog sits on GitHub, no database to maintain</p></div>
+    </div>
+    <p>That is the whole architecture. It costs $0 a month, has nothing to keep patched, and cannot go down because there is no server to go down.</p>
   </div>
-<div class="marq"><div class="marq-track"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1780963087/pastiche_01_hero_st6gjl.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1780963086/pastiche_06_example_lmfszf.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1780963087/pastiche_01_hero_st6gjl.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1780963086/pastiche_06_example_lmfszf.png" alt="" loading="lazy"></div></div>
+</section>
+
+<!-- STEP 4 -->
+<section class="step">
+  <div class="step-in">
+    <p class="stepnum">(4)</p>
+    <h2>I shipped it, and wrote about why</h2>
+    <p>Pastiche is live on the Figma Community for anyone to install. The story behind it, why your color palette has been waiting in a museum since 1665, became an article on Medium.</p>
+    <div class="links">
+      <a class="lbtn primary" href="https://www.figma.com/community/plugin/1641224136546421137" target="_blank">Install on Figma Community</a>
+      <a class="lbtn" href="https://medium.com/@mbhardw9/your-color-palette-has-been-waiting-in-a-museum-since-1665-0f70446fee85" target="_blank">Read the article</a>
+    </div>
+  </div>
 </section>
 
 <section class="outcome">
   <p class="plabel">(the outcome)</p>
-  <h2>Live on the Figma Community.</h2>
-  <p>Pastiche shipped as a real public plugin, and the story behind it became an article on Medium. Solo, end to end, at zero running cost.</p>
+  <h2>Approved by the Figma Community the next day.</h2>
+  <p>Pastiche shipped as a real public plugin and was approved within a day of submitting. Designers found it on their own, with no marketing behind it. Solo, end to end, at zero running cost.</p>
+  <p><b>What I learned: engineering discipline is a design skill.</b> The right architecture, not the most impressive one, is what lets one person ship something and keep it alive. And art history is an underused design resource: the masters solved colour problems we are still copying badly from Pinterest.</p>
   <a class="case-next" href="distill.html">Next project: Distill &rarr;</a>
 </section>
 
@@ -163,21 +233,6 @@ html.dark #dm-toggle { background:#171717; border-color:#2a2a2a; color:#f0f0ee; 
 const _dmt = document.getElementById('dm-toggle');
 if(localStorage.getItem('dm')==='1'){document.documentElement.classList.add('dark');_dmt.textContent='☀';}
 _dmt.addEventListener('click',()=>{const on=document.documentElement.classList.toggle('dark');localStorage.setItem('dm',on?'1':'0');_dmt.textContent=on?'☀':'☾';});
-
-// image strips: auto-scroll, but the user can grab, drag, or wheel them anytime
-document.querySelectorAll('.marq').forEach(m=>{
-  const track=m.querySelector('.marq-track');
-  const half=()=>track.scrollWidth/2;
-  let auto=!matchMedia('(prefers-reduced-motion: reduce)').matches, resume;
-  function pause(){ auto=false; clearTimeout(resume); resume=setTimeout(()=>auto=true, 2200); }
-  (function step(){ if(auto){ m.scrollLeft+=0.7; } if(m.scrollLeft>=half()) m.scrollLeft-=half(); if(m.scrollLeft<0) m.scrollLeft+=half(); requestAnimationFrame(step); })();
-  m.addEventListener('wheel',pause,{passive:true});
-  m.addEventListener('touchstart',pause,{passive:true});
-  let down=false,sx=0,sl=0;
-  m.addEventListener('pointerdown',e=>{ down=true; sx=e.clientX; sl=m.scrollLeft; m.classList.add('dragging'); pause(); });
-  window.addEventListener('pointermove',e=>{ if(down){ m.scrollLeft=sl-(e.clientX-sx); pause(); } });
-  window.addEventListener('pointerup',()=>{ down=false; m.classList.remove('dragging'); });
-});
 </script>
 </body>
 </html>

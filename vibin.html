@@ -10,8 +10,8 @@
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
-  --bg: #EFEEEA; --black: #1a1a1a; --gray: #4b4b48; --soft: #8b8b86;
-  --border: #dddcd6; --dark: #171717; --dark2: #242224; --dinklight: #cfcfcb;
+  --bg: #EFEEEA; --card: #ffffff; --panel: #F5F4F0; --black: #1a1a1a; --gray: #4b4b48; --soft: #8b8b86;
+  --border: #dddcd6;
   --f: 'Inter', -apple-system, sans-serif;
   --fd: 'Red Hat Display', 'Inter', sans-serif;
   --pad: clamp(20px, 4vw, 64px);
@@ -31,6 +31,7 @@ p { text-wrap: pretty; }
 @media (prefers-reduced-motion: reduce) { .case-hero img { animation: none; opacity: 1; transform: none; } }
 
 .split { display: grid; grid-template-columns: minmax(280px, 1fr) 1.35fr; gap: clamp(32px, 5vw, 100px); padding: clamp(80px, 11vw, 180px) var(--pad); align-items: start; }
+.split > div { min-width: 0; }
 .split h1 { font-size: clamp(38px, 4.2vw, 68px); font-weight: 700; letter-spacing: -.02em; line-height: 1.06; }
 .plabel { font-size: 17px; font-weight: 600; margin-bottom: 18px; }
 .split p, .prob p { font-size: 17px; line-height: 1.8; color: var(--gray); max-width: 720px; }
@@ -44,30 +45,39 @@ p { text-wrap: pretty; }
 .prob .plabel { margin-bottom: 24px; }
 .prob h2 { font-size: clamp(32px, 3.6vw, 58px); font-weight: 700; letter-spacing: -.018em; line-height: 1.1; margin-bottom: 28px; }
 
-.bts { background: var(--dark); color: #fff; border-radius: 44px; margin: 0 10px; padding: clamp(90px, 12vw, 190px) var(--pad) clamp(80px, 10vw, 150px); }
-.bts-pill { display: inline-block; border: 1px solid rgba(255,255,255,.45); border-radius: 100px; padding: 10px 20px; font-size: 14px; letter-spacing: .1em; text-transform: uppercase; color: #fff; }
-.bts-title { font-size: clamp(40px, 4.8vw, 78px); font-weight: 700; letter-spacing: -.015em; margin: 38px 0 0; }
-.chap { display: grid; grid-template-columns: minmax(240px, 1fr) 1.4fr; gap: clamp(32px, 5vw, 100px); padding-top: clamp(120px, 16vw, 240px); align-items: start; }
-.chap-side { position: sticky; top: 120px; display: flex; align-items: center; gap: 16px; }
-.chap-side .tick { width: 56px; height: 1px; background: rgba(255,255,255,.7); flex: none; }
-.chap-side .lab { font-size: 17px; color: #fff; }
-.chap-main h3 { font-size: clamp(30px, 3.4vw, 56px); font-weight: 700; letter-spacing: -.015em; line-height: 1.1; margin-bottom: 30px; }
-.chap-main > p { font-size: 17px; line-height: 1.85; color: var(--dinklight); max-width: 700px; }
-.chap-main > p + p { margin-top: 18px; }
-.dcards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 48px; max-width: 860px; }
-.dcard { background: var(--dark2); border-radius: 16px; padding: 26px 24px; }
-.dcard h4 { font-size: 17px; font-weight: 600; color: #fff; margin-bottom: 10px; }
-.dcard p { font-size: 14px; line-height: 1.65; color: var(--dinklight); }
-.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 64px; max-width: 780px; }
-.stat .n { font-family: var(--fd); font-size: clamp(46px, 4.8vw, 78px); font-weight: 500; line-height: 1; }
-.stat .c { margin-top: 14px; font-size: 15px; line-height: 1.55; color: var(--dinklight); }
+/* NUMBERED STEPS */
+.step { padding: clamp(70px, 9vw, 140px) var(--pad); }
+.step-in { max-width: 1200px; margin: 0 auto; }
+.stepnum { font-family: var(--fd); font-size: 15px; font-weight: 600; color: var(--soft); margin-bottom: 20px; }
+.step h2 { font-size: clamp(28px, 3.2vw, 46px); font-weight: 700; letter-spacing: -.016em; line-height: 1.16; max-width: 820px; margin-bottom: 22px; }
+.step p { font-size: 17px; line-height: 1.8; color: var(--gray); max-width: 680px; }
+.step p + p { margin-top: 14px; }
+.step:nth-child(even) { background: var(--panel); }
 
-/* image strip: auto-scrolls, and you can grab or scroll it yourself */
-.marq { overflow-x: auto; margin-top: clamp(64px, 8vw, 120px); border-radius: 18px; cursor: grab; scrollbar-width: none; -ms-overflow-style: none; -webkit-overflow-scrolling: touch; }
-.marq::-webkit-scrollbar { display: none; }
-.marq.dragging { cursor: grabbing; }
-.marq-track { display: flex; gap: 18px; width: max-content; }
-.marq img { height: clamp(180px, 32vw, 400px); width: auto; border-radius: 14px; background: var(--dark2); pointer-events: none; }
+.trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 44px; max-width: 900px; }
+.tcard { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px 22px; }
+.tcard h4 { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+.tcard p { font-size: 14px; line-height: 1.6; color: var(--gray); }
+
+.nums { display: grid; grid-template-columns: repeat(var(--n, 3), 1fr); gap: 28px; margin-top: 52px; max-width: 860px; }
+.num .n { font-family: var(--fd); font-size: clamp(38px, 4vw, 60px); font-weight: 700; line-height: 1; color: var(--black); }
+.num .c { margin-top: 12px; font-size: 14.5px; line-height: 1.5; color: var(--gray); }
+
+.big { margin-top: 48px; border-radius: 20px; overflow: hidden; background: var(--panel); }
+.big img { width: 100%; display: block; }
+.big-cap { margin-top: 14px; font-size: 14px; color: var(--soft); }
+
+/* what I solved + per-step result */
+.solved { margin-top: 36px; padding: 24px 28px; background: var(--card); border: 1px solid var(--border); border-radius: 16px; max-width: 760px; }
+.solved .sl { font-size: 12.5px; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--soft); margin-bottom: 10px; }
+.prob .solved p, .solved p { font-size: 18px; line-height: 1.6; color: var(--black); font-weight: 500; max-width: none; margin: 0; }
+.res { margin-top: 34px; padding-left: 20px; border-left: 2px solid var(--black); max-width: 700px; }
+.res .rl { font-size: 12.5px; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--soft); margin-bottom: 7px; }
+.step .res p, .res p { font-size: 16.5px; line-height: 1.7; color: var(--black); max-width: none; margin: 0; }
+.two-up { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 44px; }
+.two-up img { width: 100%; border-radius: 16px; display: block; }
+.three-up { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 44px; }
+.three-up img { width: 100%; border-radius: 16px; display: block; }
 
 .outcome { padding: clamp(90px, 12vw, 180px) var(--pad) clamp(60px, 7vw, 100px); }
 .outcome h2 { font-size: clamp(32px, 3.6vw, 58px); font-weight: 700; letter-spacing: -.018em; max-width: 950px; }
@@ -80,16 +90,13 @@ footer { display: flex; justify-content: space-between; padding: 30px var(--pad)
 @media(max-width: 860px){
   .mini-nav { font-size: 14px; }
   .case-hero img { border-radius: 18px; }
-  .bts-title { font-size: clamp(34px, 9vw, 48px); }
-  .split, .chap { grid-template-columns: 1fr; }
-  .chap-side { position: static; }
+  .split { grid-template-columns: 1fr; }
   .meta4 { grid-template-columns: 1fr 1fr; }
-  .stats { grid-template-columns: 1fr; gap: 38px; }
-  .dcards { grid-template-columns: 1fr; }
-  .bts { border-radius: 28px; margin: 0 6px; }
+  .nums { grid-template-columns: 1fr 1fr; gap: 26px; }
+  .trio, .two-up, .three-up { grid-template-columns: 1fr; }
 }
 
-html.dark { --bg:#0f0f0f; --black:#f0f0ee; --gray:#b5b5b0; --soft:#7d7d78; --border:#2a2a2a; }
+html.dark { --bg:#0f0f0f; --card:#171717; --panel:#1c1c1c; --black:#f0f0ee; --gray:#b5b5b0; --soft:#7d7d78; --border:#2a2a2a; }
 html.dark body { background: var(--bg); }
 html.dark #dm-toggle { background:#171717; border-color:#2a2a2a; color:#f0f0ee; }
 </style>
@@ -130,30 +137,95 @@ html.dark #dm-toggle { background:#171717; border-color:#2a2a2a; color:#f0f0ee; 
   <p>To decide where to go tonight, people check the map, Instagram, stories, reviews, and group chats, and still do not know what a place feels like right now. Photos are old, reviews are older. The one thing that matters, the live vibe, is nowhere. Our research showed the decision runs on FOMO and spontaneity, not on star ratings.</p>
 </section>
 
-<section class="bts">
-  <span class="bts-pill">Vibin</span>
-  <h2 class="bts-title">Behind the scenes...</h2>
-  <div class="chap">
-    <div class="chap-side"><span class="tick"></span><span class="lab">Live vibes</span></div>
-    <div class="chap-main"><h3>See what a place feels like right now</h3><p>The core loop had to be effortless on both ends. Posting a vibe takes seconds, one photo, one line, and GenAI does the heavy lifting: it classifies the atmosphere into structured data, so “packed rooftop, live music” becomes something you can search and filter.</p><p>I designed the map as the home screen, filtered by vibe rather than category, and gave every venue a live Vibe Report, a scorecard built from what people posted in the last hour, not last year.</p><div class="dcards"><div class="dcard"><h4>Post in seconds</h4><p>One photo and one line, GenAI handles the rest</p></div><div class="dcard"><h4>Browse by vibe</h4><p>Chill, party, eats, live, the map filters by feeling</p></div><div class="dcard"><h4>Vibe Report</h4><p>A live scorecard per venue, built from the last hour</p></div></div><div class="stats"><div class="stat"><div class="n">50+</div><div class="c">active users reached with zero paid promotion</div></div><div class="stat"><div class="n">0%</div><div class="c">commission, Posh charges 15%, Eventbrite 3.5% + $1.59</div></div><div class="stat"><div class="n">2</div><div class="c">sides of the marketplace get value from day one</div></div></div></div>
+<!-- STEP 1 -->
+<section class="step">
+  <div class="step-in">
+    <p class="stepnum">(1)</p>
+    <h2>I mapped the information architecture twice, then let users pick</h2>
+    <p>There were two honest ways to build this app, and arguing about them would have wasted weeks. So I built both structures out properly.</p>
+    <p>The first organised everything around <b>places</b>: you open a map, you browse venues, the people are a detail inside each one. The second organised everything around <b>people</b>: you open a feed of who is out tonight, and the venue is a detail attached to them.</p>
+    <p>I put both in front of real users and watched which one they could actually use. Places won, clearly. People opened the app asking "where is good right now", not "who is out". So the map became the home screen, and I filtered it by vibe instead of by category, because nobody was choosing a night out by the word "bar".</p>
+    <div class="two-up">
+      <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052635/vibin_03_ia_place_x4vifm.png" alt="Vibin IA around places" loading="lazy">
+      <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052635/vibin_04_ia_people_durqn8.png" alt="Vibin IA around people" loading="lazy">
+    </div>
+    <div class="big" style="margin-top:16px;">
+      <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052635/vibin_05_wireframes_e63ivd.png" alt="Vibin wireframes" loading="lazy">
+    </div>
+    <p class="big-cap">Early wireframes for the vibe-first map</p>
   </div>
-<div class="marq"><div class="marq-track"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052635/vibin_02_product_screens_w8wxsq.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052636/vibin_06_final_ui_gzr8sh.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052636/vibin_07_ui_final_hz5v6a.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052635/vibin_05_wireframes_e63ivd.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052635/vibin_02_product_screens_w8wxsq.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052636/vibin_06_final_ui_gzr8sh.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052636/vibin_07_ui_final_hz5v6a.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052635/vibin_05_wireframes_e63ivd.png" alt="" loading="lazy"></div></div>
-  <div class="chap">
-    <div class="chap-side"><span class="tick"></span><span class="lab">Brand & launch</span></div>
-    <div class="chap-main"><h3>A brand built for the streets</h3><p>Vibin had to feel like nightlife, not like software. I designed every asset in-house, event posters, vendor flyers, branded merch, social content, all pulling from the same gradient-and-glow system as the app, so a poster on a wall and a screen in your hand read as one brand.</p><p>Launch was scrappy on purpose: real events, real vendors, paper bags and posters instead of ad spend.</p></div>
+</section>
+
+<!-- STEP 2 -->
+<section class="step">
+  <div class="step-in">
+    <p class="stepnum">(2)</p>
+    <h2>I designed a loop that takes seconds to post</h2>
+    <p>Posting a vibe takes seconds, one photo, one line, and GenAI does the heavy lifting: it classifies the atmosphere into structured data, so "packed rooftop, live music" becomes something you can search and filter. Every venue gets a live Vibe Report, a scorecard built from what people posted in the last hour, not last year.</p>
+    <div class="trio">
+      <div class="tcard"><h4>Post in seconds</h4><p>One photo and one line, GenAI handles the rest</p></div>
+      <div class="tcard"><h4>Browse by vibe</h4><p>Chill, party, eats, live, the map filters by feeling</p></div>
+      <div class="tcard"><h4>Vibe Report</h4><p>A live scorecard per venue, built from the last hour</p></div>
+    </div>
+    <div class="nums" style="--n:3">
+      <div class="num"><div class="n">50+</div><div class="c">active users reached with zero paid promotion</div></div>
+      <div class="num"><div class="n">0%</div><div class="c">commission, Posh charges 15%, Eventbrite 3.5% + $1.59</div></div>
+      <div class="num"><div class="n">2</div><div class="c">sides of the marketplace get value from day one</div></div>
+    </div>
+    <div class="big">
+      <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052636/vibin_06_final_ui_gzr8sh.png" alt="Vibin final UI, live map" loading="lazy">
+    </div>
+    <p class="big-cap">The final map, live vibes filtered by feeling</p>
+    <div class="big" style="margin-top:16px;">
+      <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052636/vibin_07_ui_final_hz5v6a.png" alt="Vibin product screens, final" loading="lazy">
+    </div>
+    <p class="big-cap">Posting flow and the Vibe Report screen</p>
   </div>
-<div class="marq"><div class="marq-track"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052636/vibin_08_poster_2_gqpetu.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052636/vibin_09_marketing_flyer_ddxb8d.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/c_fill,g_auto,ar_2.4,f_auto,q_auto/v1781052637/vibin_10_event_poster_isktxj.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052637/vibin_10_paper_bag_mtzcxp.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781053394/vibin_12_traction_yzxejh.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052636/vibin_08_poster_2_gqpetu.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052636/vibin_09_marketing_flyer_ddxb8d.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/c_fill,g_auto,ar_2.4,f_auto,q_auto/v1781052637/vibin_10_event_poster_isktxj.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052637/vibin_10_paper_bag_mtzcxp.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781053394/vibin_12_traction_yzxejh.png" alt="" loading="lazy"></div></div>
-  <div class="chap">
-    <div class="chap-side"><span class="tick"></span><span class="lab">Marketplace</span></div>
-    <div class="chap-main"><h3>Value to both sides from day one</h3><p>Vendors get visibility and foot traffic, users get live vibes and exclusive deals. Eventbrite charges 3.5% + $1.59 per ticket, Posh takes 15% commission. Vibin charges neither side, the marketplace runs on presence, not fees.</p><p>I mapped the information architecture twice, once around places, once around people, tested both, and let real usage decide. Post-launch behavioral data invalidated three assumptions from our interviews, real usage beats what people say.</p><div class="dcards"><div class="dcard"><h4>For vendors</h4><p>Visibility and foot traffic without commission</p></div><div class="dcard"><h4>For users</h4><p>Live vibes and exclusive deals at the door</p></div><div class="dcard"><h4>For the product</h4><p>Every post makes the map smarter</p></div></div></div>
+</section>
+
+<!-- STEP 3 -->
+<section class="step">
+  <div class="step-in">
+    <p class="stepnum">(3)</p>
+    <h2>I built a brand for nightlife, not software</h2>
+    <p>Vibin had to feel like the streets, not like an app. I designed every asset in-house, event posters, vendor flyers, branded merch, social content, all pulling from the same gradient-and-glow system as the app itself, so a poster on a wall and a screen in your hand read as one brand.</p>
+    <div class="three-up">
+      <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052636/vibin_08_poster_2_gqpetu.png" alt="Vibin event poster" loading="lazy">
+      <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052636/vibin_09_marketing_flyer_ddxb8d.png" alt="Vibin marketing flyer" loading="lazy">
+      <img src="https://res.cloudinary.com/df0tysd6u/image/upload/c_fill,g_auto,ar_1.1,f_auto,q_auto/v1781052637/vibin_10_event_poster_isktxj.png" alt="Vibin event poster, second" loading="lazy">
+    </div>
+    <div class="two-up" style="margin-top:16px;">
+      <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052637/vibin_10_paper_bag_mtzcxp.png" alt="Vibin branded merch bag" loading="lazy">
+      <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052636/vibin_10_event_broucher_vdwjbq.png" alt="Vibin event brochure" loading="lazy">
+    </div>
   </div>
-<div class="marq"><div class="marq-track"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052637/vibin_11_2_sided_marketplace_js4j5n.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052635/vibin_03_ia_place_x4vifm.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052635/vibin_04_ia_people_durqn8.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052636/vibin_10_event_broucher_vdwjbq.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052637/vibin_11_2_sided_marketplace_js4j5n.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052635/vibin_03_ia_place_x4vifm.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052635/vibin_04_ia_people_durqn8.png" alt="" loading="lazy"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052636/vibin_10_event_broucher_vdwjbq.png" alt="" loading="lazy"></div></div>
+</section>
+
+<!-- STEP 4 -->
+<section class="step">
+  <div class="step-in">
+    <p class="stepnum">(4)</p>
+    <h2>I designed a marketplace that charges no one</h2>
+    <p>Vendors get visibility and foot traffic, users get live vibes and exclusive deals. Eventbrite charges 3.5% + $1.59 per ticket, Posh takes 15% commission. Vibin charges neither side, the marketplace runs on presence, not fees. Post-launch behavioral data invalidated three assumptions from our interviews, real usage beats what people say.</p>
+    <div class="trio">
+      <div class="tcard"><h4>For vendors</h4><p>Visibility and foot traffic without commission</p></div>
+      <div class="tcard"><h4>For users</h4><p>Live vibes and exclusive deals at the door</p></div>
+      <div class="tcard"><h4>For the product</h4><p>Every post makes the map smarter</p></div>
+    </div>
+    <div class="big">
+      <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781052637/vibin_11_2_sided_marketplace_js4j5n.png" alt="Vibin two-sided marketplace diagram" loading="lazy">
+    </div>
+    <div class="big" style="margin-top:16px;">
+      <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781053394/vibin_12_traction_yzxejh.png" alt="Vibin traction" loading="lazy">
+    </div>
+  </div>
 </section>
 
 <section class="outcome">
   <p class="plabel">(the outcome)</p>
   <h2>Live on the App Store.</h2>
-  <p>Vibin shipped as a real product with real users and a two-sided marketplace that charges neither side. The biggest lesson: launch early, because the data you get after shipping is worth more than another month of polish.</p>
+  <p>Vibin shipped as a real product with real users and a two-sided marketplace that charges neither side. I ran more than ten usability sessions after launch and used what people actually did, not what they told us, to decide each next change.</p>
+  <p><b>What I learned: ship early, because real behaviour beats opinions.</b> Post-launch data killed three assumptions we were confident about from our interviews. A month of extra polish would not have taught us any of that.</p>
   <a class="case-next" href="pastiche.html">Next project: Pastiche &rarr;</a>
 </section>
 
@@ -163,21 +235,6 @@ html.dark #dm-toggle { background:#171717; border-color:#2a2a2a; color:#f0f0ee; 
 const _dmt = document.getElementById('dm-toggle');
 if(localStorage.getItem('dm')==='1'){document.documentElement.classList.add('dark');_dmt.textContent='☀';}
 _dmt.addEventListener('click',()=>{const on=document.documentElement.classList.toggle('dark');localStorage.setItem('dm',on?'1':'0');_dmt.textContent=on?'☀':'☾';});
-
-// image strips: auto-scroll, but the user can grab, drag, or wheel them anytime
-document.querySelectorAll('.marq').forEach(m=>{
-  const track=m.querySelector('.marq-track');
-  const half=()=>track.scrollWidth/2;
-  let auto=!matchMedia('(prefers-reduced-motion: reduce)').matches, resume;
-  function pause(){ auto=false; clearTimeout(resume); resume=setTimeout(()=>auto=true, 2200); }
-  (function step(){ if(auto){ m.scrollLeft+=0.7; } if(m.scrollLeft>=half()) m.scrollLeft-=half(); if(m.scrollLeft<0) m.scrollLeft+=half(); requestAnimationFrame(step); })();
-  m.addEventListener('wheel',pause,{passive:true});
-  m.addEventListener('touchstart',pause,{passive:true});
-  let down=false,sx=0,sl=0;
-  m.addEventListener('pointerdown',e=>{ down=true; sx=e.clientX; sl=m.scrollLeft; m.classList.add('dragging'); pause(); });
-  window.addEventListener('pointermove',e=>{ if(down){ m.scrollLeft=sl-(e.clientX-sx); pause(); } });
-  window.addEventListener('pointerup',()=>{ down=false; m.classList.remove('dragging'); });
-});
 </script>
 </body>
 </html>
