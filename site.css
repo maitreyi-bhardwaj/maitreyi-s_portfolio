@@ -609,3 +609,26 @@ body .step:nth-of-type(even) .duo-txt > p {
   body .split .meta4 { text-align: left; }
 }
 body .split .meta4 + p { margin-top: clamp(32px, 4vw, 56px); }
+
+/* ---------- balance: use both sides of the page ----------
+   A section whose visual is a small block (a list, a chart, numbers) puts the
+   text on one side and the block on the other, swapping sides each time.
+   Sections with photographs keep the picture full width under the text. */
+@media (min-width: 861px) {
+  body .step-in.duo:not(:has(.zoom)) {
+    display: grid; grid-template-columns: 1fr 1fr; column-gap: clamp(40px, 6vw, 96px); align-items: center;
+  }
+  body .step-in.duo:not(:has(.zoom)) > .duo-txt { order: 0; }
+  body .step-in.duo:not(:has(.zoom)) > .duo-vis { order: -1; margin-top: 0; }
+  body .step-in.duo.duo--flip:not(:has(.zoom)) > .duo-vis { order: 1; }
+  body .step-in.duo:not(:has(.zoom)) .duo-txt > h2,
+  body .step-in.duo:not(:has(.zoom)) .duo-txt > p { width: auto; max-width: 30em; margin-left: 0; margin-right: 0; }
+  body .step-in.duo:not(:has(.zoom)) .duo-vis .shift { flex-direction: column; }
+  body .step-in.duo:not(:has(.zoom)) .duo-vis .shift > div { max-width: none; flex: none; }
+  body .step-in.duo:not(:has(.zoom)) .duo-vis > * { max-width: none; }
+  /* in stacked sections, a narrow chart sits on the same side as its text */
+  body .step:nth-of-type(even) .step-in > .bars,
+  body .step:nth-of-type(even) .step-in > .bars-note,
+  body .step:nth-of-type(even) .step-in > .asks { margin-left: auto; }
+  body .step:nth-of-type(even) .step-in > .bars-note { width: min(100%, 760px); max-width: 760px; }
+}
