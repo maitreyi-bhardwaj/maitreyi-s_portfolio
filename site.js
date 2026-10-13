@@ -30,6 +30,29 @@
       '</nav>';
   }
 
+  // Case studies: in every section, put the text on one side and its small
+  // blocks (cards, numbers, charts, lists) on the other, swapping sides each
+  // time. Photographs and screenshots stay full width below.
+  (function () {
+    const isText = el => el.matches('h2, h3, p:not(.big-cap):not(.bars-note), ul:not(.status):not(.asks), ol:not(.asks), .res, .solved, .links');
+    const hasImage = el => el.matches('.big, .two-up, .shots') || el.querySelector('img');
+    let n = 0;
+    document.querySelectorAll('.step-in:not(.duo)').forEach(sec => {
+      const kids = Array.from(sec.children);
+      const firstImg = kids.findIndex(hasImage);
+      const head = firstImg === -1 ? kids : kids.slice(0, firstImg);
+      const text = head.filter(isText), blocks = head.filter(el => !isText(el));
+      if (!text.length || !blocks.length) return;
+      const row = document.createElement('div'); row.className = 'duo-row' + (n++ % 2 ? ' flip' : '');
+      const t = document.createElement('div'); t.className = 'duo-txt';
+      const v = document.createElement('div'); v.className = 'duo-vis';
+      sec.insertBefore(row, sec.firstChild);
+      text.forEach(el => t.appendChild(el)); blocks.forEach(el => v.appendChild(el));
+      row.append(t, v);
+      sec.classList.add('has-row');
+    });
+  })();
+
   // Case studies: size each picture by its shape, so a tall phone screenshot or a
   // small low-resolution capture never fills the whole column.
   document.querySelectorAll('.step .big:not(.shot) img, .outcome .big img').forEach(img => {
@@ -49,7 +72,7 @@
   if (document.querySelector('.step, .split') && 'IntersectionObserver' in window &&
       !matchMedia('(prefers-reduced-motion: reduce)').matches) {
     const pieces = document.querySelectorAll(
-      '.case-hero > *, .split > h1, .split > div > *, .prob > *, .step-in > *, .outcome > *');
+      '.case-hero > *, .split > h1, .split > div > *, .prob > *, .step-in > *:not(.duo-row), .duo-row > *, .outcome > *');
     const io = new IntersectionObserver(entries => entries.forEach(e => {
       if (e.isIntersecting) { e.target.classList.add('seen'); io.unobserve(e.target); }
     }), { rootMargin: '0px 0px -10% 0px' });

@@ -632,3 +632,26 @@ body .split .meta4 + p { margin-top: clamp(32px, 4vw, 56px); }
   body .step:nth-of-type(even) .step-in > .asks { margin-left: auto; }
   body .step:nth-of-type(even) .step-in > .bars-note { width: min(100%, 760px); max-width: 760px; }
 }
+
+/* ---------- text beside its blocks, on every project page ---------- */
+body .duo-row { display: grid; grid-template-columns: 1fr 1fr; column-gap: clamp(40px, 6vw, 96px); align-items: start; margin: 0; max-width: none; }
+body .duo-row.flip > .duo-vis { order: -1; }
+body .duo-row > .duo-txt > *, body .duo-row > .duo-vis > * { width: auto; max-width: none; margin-left: 0; margin-right: 0; }
+body .duo-row > .duo-txt > p, body .duo-row > .duo-txt > h2 { max-width: 30em; }
+body .duo-row > .duo-txt > :first-child, body .duo-row > .duo-vis > :first-child { margin-top: 0; }
+body .duo-row > .duo-vis > * + * { margin-top: 24px; }
+body .duo-row .trio, body .duo-row .trio--4 { grid-template-columns: 1fr; gap: 8px; margin-top: 0; }
+body .duo-row .nums { grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 0; }
+body .duo-row .bars, body .duo-row .asks, body .duo-row .fixes { max-width: none; }
+body .duo-row .bar-row { grid-template-columns: minmax(90px, 170px) 1fr 4.4em; }
+body .duo-row .flow span { margin-bottom: 4px; }
+body .duo-row .shift { flex-direction: column; }
+body .duo-row .shift > div { max-width: none; flex: none; }
+body .duo-row + * { margin-top: 48px; }
+@media (max-width: 860px) {
+  body .duo-row { grid-template-columns: 1fr; row-gap: 28px; }
+  body .duo-row.flip > .duo-vis { order: 0; }
+}
+body .duo-row > .duo-vis > .trio + .nums, body .duo-row > .duo-vis > .nums + .trio { margin-top: 32px; }
+body .duo-row > .duo-vis > .nums { margin-top: 0; }
+body .duo-row > .duo-vis > * + .nums { margin-top: 32px; }
