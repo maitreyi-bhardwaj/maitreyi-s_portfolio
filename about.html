@@ -6,19 +6,25 @@
 <title>About, Maitreyi Bhardwaj</title>
 <meta name="description" content="About Maitreyi Bhardwaj: experience, education and how to get in touch.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link rel="stylesheet" href="site.css?v=1791901699">
+<link rel="stylesheet" href="site.css?v=1791901779">
 <style>
 *, *::before, *::after { box-sizing: border-box; }
 body { -webkit-font-smoothing: antialiased; }
 
 /* The About page is blue: white type on the site's blue, pills as soft white. */
-html:has(body.blue) { background: #1F3FD0; }
+html:has(body.blue) { background: #1A36B8; }
 body.blue {
-  --paper: #1F3FD0; --ink: #FFFFFF; --ink-soft: #C6D2FB; --pill: rgba(255, 255, 255, .14);
+  --paper: #1A36B8; --ink: #FFFFFF; --ink-soft: #D8E0FC; --pill: rgba(255, 255, 255, .14);
   background: var(--paper); color: var(--ink);
 }
 body.blue .me-links a:hover, body.blue .me-note a:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
 body.blue a:focus-visible { outline-color: #fff; }
+/* weight does the work colour does on the white pages */
+body.blue .me-note b { font-weight: 600; }
+body.blue .me-right h2 { color: #fff; font-weight: 600; font-size: 15px; }
+body.blue .me-list li { font-size: 14px; }
+body.blue .me-list .who { font-weight: 600; }
+body.blue .me-links a, body.blue .me-mail, body.blue .topbar a { font-weight: 500; }
 
 /* One screen: photo and note top left, contact bottom left, the lists bottom right. */
 .me {
@@ -66,10 +72,10 @@ body.blue a:focus-visible { outline-color: #fff; }
   <div class="me-left">
     <div>
       <img class="me-photo" src="media/maitreyi.jpg" alt="Maitreyi Bhardwaj laughing in a cafe booth">
-      <p class="me-note">Hi, I'm Maitreyi. I'm a designer, maker, and curious mind who loves figuring out how things work.</p>
-      <p class="me-note">I've always been drawn to making things, from imagining how a product could be better to figuring out how an idea could become something real. Over time, that curiosity has taken me from physical products to digital experiences, and now into code, data, and the systems behind them.</p>
+      <p class="me-note"><b>Hi, I'm Maitreyi. I'm a designer, maker, and curious mind who loves figuring out how things work.</b></p>
+      <p class="me-note">I've always been drawn to making things, from imagining how a product could be better to figuring out how an idea could become something real. <b>Over time, that curiosity has taken me from physical products to digital experiences, and now into code, data, and the systems behind them.</b></p>
       <p class="me-note">These days, I'm learning to build in new ways, following questions wherever they lead, and finding joy in being a beginner all over again.</p>
-      <p class="me-note">Current fascinations: Python, systems thinking, good food, dancing, and questions that send me down unexpected rabbit holes.</p>
+      <p class="me-note"><b>Current fascinations:</b> Python, systems thinking, good food, dancing, and questions that send me down unexpected rabbit holes.</p>
     </div>
     <div class="me-contact">
       <a class="me-mail" href="mailto:bhardwajmaitreyi6@gmail.com">bhardwajmaitreyi6@gmail.com</a>
@@ -99,6 +105,6 @@ body.blue a:focus-visible { outline-color: #fff; }
   </div>
 </main>
 
-<script src="site.js?v=1791901699"></script>
+<script src="site.js?v=1791901779"></script>
 </body>
 </html>
