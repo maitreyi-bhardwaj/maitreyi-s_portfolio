@@ -11,6 +11,15 @@
 *, *::before, *::after { box-sizing: border-box; }
 body { -webkit-font-smoothing: antialiased; }
 
+/* The About page is blue: white type on the site's blue, pills as soft white. */
+html:has(body.blue) { background: #1F3FD0; }
+body.blue {
+  --paper: #1F3FD0; --ink: #FFFFFF; --ink-soft: #C6D2FB; --pill: rgba(255, 255, 255, .14);
+  background: var(--paper); color: var(--ink);
+}
+body.blue .me-links a:hover, body.blue .me-note a:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+body.blue a:focus-visible { outline-color: #fff; }
+
 /* One screen: photo and note top left, contact bottom left, the lists bottom right. */
 .me {
   display: grid; grid-template-columns: 1fr 1fr; column-gap: 6px;
@@ -49,7 +58,7 @@ body { -webkit-font-smoothing: antialiased; }
 }
 </style>
 </head>
-<body>
+<body class="blue">
 
 <div data-topbar></div>
 
