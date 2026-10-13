@@ -42,6 +42,13 @@
       const firstImg = kids.findIndex(hasImage);
       const head = firstImg === -1 ? kids : kids.slice(0, firstImg);
       const text = head.filter(isText), blocks = head.filter(el => !isText(el));
+      // no cards or chart: pair the text with the section's first picture instead
+      // (the industrial design galleries keep their pictures large)
+      if (!blocks.length && firstImg !== -1 && !sec.closest('.step--gallery')) {
+        blocks.push(kids[firstImg]);
+        const cap = kids[firstImg + 1];
+        if (cap && cap.matches('.big-cap')) blocks.push(cap);
+      }
       if (!text.length || !blocks.length) return;
       const row = document.createElement('div'); row.className = 'duo-row' + (n++ % 2 ? ' flip' : '');
       const t = document.createElement('div'); t.className = 'duo-txt';

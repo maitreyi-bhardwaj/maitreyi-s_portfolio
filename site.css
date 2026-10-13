@@ -655,3 +655,22 @@ body .duo-row + * { margin-top: 48px; }
 body .duo-row > .duo-vis > .trio + .nums, body .duo-row > .duo-vis > .nums + .trio { margin-top: 32px; }
 body .duo-row > .duo-vis > .nums { margin-top: 0; }
 body .duo-row > .duo-vis > * + .nums { margin-top: 32px; }
+
+/* ---------- header back to the left; text and picture side by side below ---------- */
+body .split, body .split .meta4 { text-align: left; }
+body .split h1, body .split > div > p, body .split .tag { margin-inline: 0; }
+body .split > div > p { max-width: var(--measure); }
+body .split .meta4 { max-width: none; margin-inline: 0; }
+body .split .meta4 > div { padding-right: 20px; }
+@media (min-width: 861px) {
+  /* sections written as text + picture: one on each side, swapping */
+  body .step-in.duo:has(.zoom) { display: grid; grid-template-columns: 1fr 1fr; column-gap: clamp(40px, 6vw, 96px); align-items: center; }
+  body .step-in.duo:has(.zoom) > .duo-txt { order: 0; }
+  body .step-in.duo:has(.zoom) > .duo-vis { order: -1; margin-top: 0; }
+  body .step-in.duo.duo--flip:has(.zoom) > .duo-vis { order: 1; }
+  body .step-in.duo:has(.zoom) .duo-txt > h2, body .step-in.duo:has(.zoom) .duo-txt > p { width: auto; max-width: 30em; margin-left: 0; margin-right: 0; }
+}
+body .duo-row > .duo-vis > .big, body .duo-row > .duo-vis > a.big { max-width: none !important; aspect-ratio: auto; }
+body .duo-row > .duo-vis > .big img { height: auto; object-fit: initial; }
+body .duo-row > .duo-vis > .big + .big-cap { margin-top: 12px; }
+body .duo-row:has(.duo-vis > .big) { align-items: center; }
