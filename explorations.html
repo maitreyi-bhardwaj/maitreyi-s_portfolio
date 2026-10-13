@@ -6,7 +6,7 @@
 <title>Explorations, Maitreyi Bhardwaj</title>
 <meta name="description" content="Smaller things Maitreyi Bhardwaj has tried and built.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link rel="stylesheet" href="site.css?v=1791903058">
+<link rel="stylesheet" href="site.css?v=1791903107">
 <style>
 *, *::before, *::after { box-sizing: border-box; }
 /* A fully maroon page: a row of pictures on the left, an index of titles on the right.
@@ -18,7 +18,12 @@ body.maroon .topbar a { font-weight: 500; }
 
 .index { display: grid; grid-template-columns: 2.4fr 1fr; column-gap: clamp(32px, 5vw, 80px); align-items: stretch; padding: clamp(28px, 4vw, 56px) var(--gut) clamp(28px, 4vw, 56px); min-height: calc(100svh - 60px); }
 /* pictures on the left, each at its own proportions, uncropped */
-.pics { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; align-content: start; }
+.pics { display: grid; grid-template-columns: repeat(12, 1fr); gap: 12px; align-content: start; align-items: end; }
+/* a different size for each picture: wide, narrow, small, large, then repeat */
+.pics a:nth-child(4n+1) { grid-column: span 7; }
+.pics a:nth-child(4n+2) { grid-column: span 4; }
+.pics a:nth-child(4n+3) { grid-column: 2 / span 3; align-self: start; }
+.pics a:nth-child(4n+4) { grid-column: span 8; }
 .pics a { display: block; transition: opacity .25s ease; }
 .pics img { display: block; width: 100%; height: auto; }
 /* the index sits at the bottom right */
@@ -35,6 +40,7 @@ body.maroon .topbar a { font-weight: 500; }
 @media (max-width: 760px) {
   .index { grid-template-columns: 1fr; row-gap: 40px; }
   .pics { grid-template-columns: 1fr; }
+  .pics a:nth-child(n) { grid-column: auto; }
   .names { align-self: start; }
 }
 </style>
@@ -51,8 +57,8 @@ body.maroon .topbar a { font-weight: 500; }
 
 <div data-foot></div>
 
-<script src="projects.js?v=1791903058"></script>
-<script src="site.js?v=1791903058"></script>
+<script src="projects.js?v=1791903107"></script>
+<script src="site.js?v=1791903107"></script>
 <script>
 (function () {
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
