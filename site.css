@@ -689,3 +689,6 @@ body .outcome { padding-top: clamp(120px, 17vw, 260px); }
 body .step-in.duo.duo--full { display: flex; flex-direction: column; }
 body .step-in.duo.duo--full > .duo-txt { order: -1; }
 body .step-in.duo.duo--full > .duo-vis { order: 0; }
+
+/* one blue for filled surfaces everywhere: the About page blue */
+body .note--blue, body .cover--blue { background: #1A36B8; }
