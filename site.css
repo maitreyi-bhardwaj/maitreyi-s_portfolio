@@ -674,3 +674,18 @@ body .duo-row > .duo-vis > .big, body .duo-row > .duo-vis > a.big { max-width: n
 body .duo-row > .duo-vis > .big img { height: auto; object-fit: initial; }
 body .duo-row > .duo-vis > .big + .big-cap { margin-top: 12px; }
 body .duo-row:has(.duo-vis > .big) { align-items: center; }
+
+/* ---------- a section whose picture matters: text runs the full width, picture full width below ---------- */
+body .step-in.duo.duo--full { display: block; }
+body .step-in.duo.duo--full > .duo-txt > h2,
+body .step-in.duo.duo--full > .duo-txt > p { width: auto; max-width: none; margin-left: 0; margin-right: 0; }
+body .step-in.duo.duo--full > .duo-vis { margin-top: 40px; }
+body .step-in.duo.duo--full .zoom { aspect-ratio: auto; background: #E9E9E9; padding: clamp(16px, 3vw, 40px) 0; }
+body .step-in.duo.duo--full .zoom img { width: 100%; height: auto; object-fit: initial; }
+
+/* ---------- more room between sections, so one is finished before the next arrives ---------- */
+body .step, body .prob, body .step--gallery { padding-block: clamp(120px, 17vw, 260px); }
+body .outcome { padding-top: clamp(120px, 17vw, 260px); }
+body .step-in.duo.duo--full { display: flex; flex-direction: column; }
+body .step-in.duo.duo--full > .duo-txt { order: -1; }
+body .step-in.duo.duo--full > .duo-vis { order: 0; }

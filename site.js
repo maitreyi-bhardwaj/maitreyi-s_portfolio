@@ -82,7 +82,7 @@
       '.case-hero > *, .split > h1, .split > div > *, .prob > *, .step-in > *:not(.duo-row), .duo-row > *, .outcome > *');
     const io = new IntersectionObserver(entries => entries.forEach(e => {
       if (e.isIntersecting) { e.target.classList.add('seen'); io.unobserve(e.target); }
-    }), { rootMargin: '0px 0px -10% 0px' });
+    }), { rootMargin: '0px 0px -18% 0px' });
     pieces.forEach(el => { el.classList.add('rv'); io.observe(el); });
   }
 
