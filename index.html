@@ -134,20 +134,14 @@ a.card:hover .bar, a.card:focus-visible .bar { background: var(--ink); color: va
   .card--l .media { aspect-ratio: 1.25; }
 }
 @media (prefers-reduced-motion: reduce) { .front { transition: none; } }
-
-/* ---------- opening: a soft warm light drifting on white ---------- */
-.opening { position: relative; isolation: isolate; overflow: hidden; }
-#glow { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; filter: blur(30px);
-  -webkit-mask-image: linear-gradient(#000 55%, transparent 96%); mask-image: linear-gradient(#000 55%, transparent 96%); }
 </style>
-<link rel="stylesheet" href="site.css?v=1791903899">
+<link rel="stylesheet" href="site.css?v=1791903950">
 </head>
 <body>
 
 <div data-topbar></div>
 
 <header class="opening">
-  <canvas id="glow" aria-hidden="true"></canvas>
   <h1 id="say">Hi, I'm Maitreyi (my·TRAY·ee). I build products by connecting design, data, and technology.</h1>
   <p>Creative Engineering.</p>
 </header>
@@ -156,42 +150,9 @@ a.card:hover .bar, a.card:focus-visible .bar { background: var(--ink); color: va
 
 <div data-foot></div>
 
-<script src="projects.js?v=1791903899"></script>
-<script src="site.js?v=1791903899"></script>
+<script src="projects.js?v=1791903950"></script>
+<script src="site.js?v=1791903950"></script>
 <script>
-// The light behind the opening: soft warm glows drifting on white.
-// Drawn small and blurred, so it is cheap. It leans gently toward the pointer.
-(function () {
-  const cv = document.getElementById('glow'), box = cv.parentElement, ctx = cv.getContext('2d');
-  // cx, cy: home position (0-1). ax, ay: how far it drifts. s: speed. r: size. rgb and strength.
-  const GLOWS = [
-    { cx: .72, cy: .80, ax: .18, ay: .06, s: .043, p: 4.0, r: .34, rgb: '255,150,80', a: .30 },
-    { cx: .30, cy: .86, ax: .16, ay: .05, s: .031, p: 1.2, r: .26, rgb: '255,195,120', a: .24 },
-    { cx: .52, cy: .70, ax: .22, ay: .08, s: .037, p: 2.1, r: .22, rgb: '255,170,140', a: .16 }
-  ];
-  let w = 0, h = 0, mx = .72, my = .8, tx = mx, ty = my, on = true, raf = 0;
-  function size() { const r = cv.getBoundingClientRect(); w = cv.width = Math.max(40, Math.round(r.width / 7)); h = cv.height = Math.max(30, Math.round(r.height / 7)); }
-  function draw(t) {
-    mx += (tx - mx) * .03; my += (ty - my) * .03;
-    ctx.globalCompositeOperation = 'source-over';
-    ctx.fillStyle = '#FFFFFF'; ctx.fillRect(0, 0, w, h);
-    GLOWS.forEach((g, i) => {
-      let x = g.cx + g.ax * Math.sin(t * g.s * 6.283 + g.p), y = g.cy + g.ay * Math.cos(t * g.s * 5.1 + g.p * 1.7);
-      if (i === 0) { x += (mx - g.cx) * .35; y += (my - .8) * .10; }   // the warm one follows the pointer a little
-      const R = g.r * Math.max(w, h), grad = ctx.createRadialGradient(x * w, y * h, 0, x * w, y * h, R);
-      grad.addColorStop(0, 'rgba(' + g.rgb + ',' + g.a + ')'); grad.addColorStop(1, 'rgba(' + g.rgb + ',0)');
-      ctx.fillStyle = grad; ctx.fillRect(0, 0, w, h);
-    });
-  }
-  size(); draw(8);
-  addEventListener('resize', () => { size(); draw(performance.now() / 1000); });
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  const loop = ms => { draw(ms / 1000); raf = on ? requestAnimationFrame(loop) : 0; };
-  new IntersectionObserver(e => { on = e[0].isIntersecting; if (on && !raf) raf = requestAnimationFrame(loop); }).observe(box);
-  box.addEventListener('pointermove', e => { const r = box.getBoundingClientRect(); tx = (e.clientX - r.left) / r.width; ty = (e.clientY - r.top) / r.height; });
-  box.addEventListener('pointerleave', () => { tx = .72; ty = .8; });
-})();
-
 // The opening line, typed out as if Maitreyi is writing it. The name takes three
 // tries: two spellings people get wrong are typed, crossed out in red and erased,
 // then a yellow "oops", then the right one stays with how to say it.
