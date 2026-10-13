@@ -134,14 +134,36 @@ a.card:hover .bar, a.card:focus-visible .bar { background: var(--ink); color: va
   .card--l .media { aspect-ratio: 1.25; }
 }
 @media (prefers-reduced-motion: reduce) { .front { transition: none; } }
+
+/* ---------- opening: a slow, warm light moving through cyanotype blue ---------- */
+.opening {
+  position: relative; isolation: isolate; overflow: hidden;
+  margin: 20px var(--gut) clamp(80px, 11vw, 200px); border-radius: 4px;
+  padding: clamp(96px, 14vw, 280px) clamp(20px, 3vw, 48px) clamp(96px, 13vw, 250px);
+  background: #14298F; color: #fff;
+}
+#glow { position: absolute; inset: -60px; width: calc(100% + 120px); height: calc(100% + 120px); z-index: -2; filter: blur(28px); }
+.opening::after {   /* print grain */
+  content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: .5; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.opening h1, .opening p { text-shadow: 0 1px 18px rgba(12, 24, 90, .45); }
+.opening p { color: #D3DDFF; }
+#say .say-blue { color: #FFCFA8; }
+#say .say-brown { color: #EEF2FF; }
+#say .say-name.struck { color: #FFAB9F; }
+#say .say-name.oops { color: #FFDA6B; }
+#say .say-pron { color: #D3DDFF; }
+#say .caret::after { background: #FFCFA8; }
 </style>
-<link rel="stylesheet" href="site.css?v=1791902963">
+<link rel="stylesheet" href="site.css?v=1791903626">
 </head>
 <body>
 
 <div data-topbar></div>
 
 <header class="opening">
+  <canvas id="glow" aria-hidden="true"></canvas>
   <h1 id="say">Hi, I'm Maitreyi (my·TRAY·ee). I build products by connecting design, data, and technology.</h1>
   <p>Creative Engineering.</p>
 </header>
@@ -150,9 +172,45 @@ a.card:hover .bar, a.card:focus-visible .bar { background: var(--ink); color: va
 
 <div data-foot></div>
 
-<script src="projects.js?v=1791902963"></script>
-<script src="site.js?v=1791902963"></script>
+<script src="projects.js?v=1791903626"></script>
+<script src="site.js?v=1791903626"></script>
 <script>
+// The light behind the opening: soft glows drifting through blue, one of them warm.
+// Drawn small and blurred, so it is cheap. It leans gently toward the pointer.
+(function () {
+  const cv = document.getElementById('glow'), box = cv.parentElement, ctx = cv.getContext('2d');
+  // cx, cy: home position (0-1). ax, ay: how far it drifts. s: speed. r: size. rgb and strength.
+  const GLOWS = [
+    { cx: .20, cy: .22, ax: .20, ay: .14, s: .050, p: 0.0, r: .55, rgb: '110,150,255', a: .32 },
+    { cx: .80, cy: .18, ax: .16, ay: .12, s: .037, p: 2.1, r: .44, rgb: '170,200,255', a: .22 },
+    { cx: .72, cy: 1.02, ax: .18, ay: .05, s: .043, p: 4.0, r: .34, rgb: '255,138,52', a: .85, warm: true },
+    { cx: .30, cy: 1.08, ax: .16, ay: .04, s: .031, p: 1.2, r: .26, rgb: '255,186,96', a: .55, warm: true }
+  ];
+  let w = 0, h = 0, mx = .72, my = 1, tx = mx, ty = my, on = true, raf = 0;
+  function size() { const r = cv.getBoundingClientRect(); w = cv.width = Math.max(40, Math.round(r.width / 7)); h = cv.height = Math.max(30, Math.round(r.height / 7)); }
+  function draw(t) {
+    mx += (tx - mx) * .03; my += (ty - my) * .03;
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.fillStyle = '#14298F'; ctx.fillRect(0, 0, w, h);
+    GLOWS.forEach((g, i) => {
+      // blue light is added on top of the blue; the warm light is painted over it, so it stays amber
+      ctx.globalCompositeOperation = g.warm ? 'source-over' : 'screen';
+      let x = g.cx + g.ax * Math.sin(t * g.s * 6.283 + g.p), y = g.cy + g.ay * Math.cos(t * g.s * 5.1 + g.p * 1.7);
+      if (i === 2) { x += (mx - g.cx) * .35; y += (my - 1) * .10; }   // the warm one follows the pointer a little
+      const R = g.r * Math.max(w, h), grad = ctx.createRadialGradient(x * w, y * h, 0, x * w, y * h, R);
+      grad.addColorStop(0, 'rgba(' + g.rgb + ',' + g.a + ')'); grad.addColorStop(1, 'rgba(' + g.rgb + ',0)');
+      ctx.fillStyle = grad; ctx.fillRect(0, 0, w, h);
+    });
+  }
+  size(); draw(8);
+  addEventListener('resize', () => { size(); draw(performance.now() / 1000); });
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const loop = ms => { draw(ms / 1000); raf = on ? requestAnimationFrame(loop) : 0; };
+  new IntersectionObserver(e => { on = e[0].isIntersecting; if (on && !raf) raf = requestAnimationFrame(loop); }).observe(box);
+  box.addEventListener('pointermove', e => { const r = box.getBoundingClientRect(); tx = (e.clientX - r.left) / r.width; ty = (e.clientY - r.top) / r.height; });
+  box.addEventListener('pointerleave', () => { tx = .72; ty = 1; });
+})();
+
 // The opening line, typed out as if Maitreyi is writing it. The name takes three
 // tries: two spellings people get wrong are typed, crossed out in red and erased,
 // then a yellow "oops", then the right one stays with how to say it.
