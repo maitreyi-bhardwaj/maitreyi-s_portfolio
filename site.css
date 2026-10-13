@@ -580,3 +580,32 @@ body .trio--4 { grid-template-columns: repeat(4, 1fr); }
 body .step-in > .nums + .trio, body .step-in > .trio + .big, body .step-in > .asks + .big, body .step-in > .trio + .trio { margin-top: 36px; }
 body .step .asks li { font-size: 16px; }
 @media (max-width: 860px) { body .trio--4 { grid-template-columns: 1fr; } }
+
+/* ---------- text placement on case studies ----------
+   The title block is centred. After that the text of each section sits on
+   alternating sides (left, then right, then left), so the eye moves across
+   the page. Text inside a block still reads left to right; pictures stay full width. */
+body .split { text-align: center; }
+body .split h1, body .split > div > p { margin-inline: auto; }
+body .split > div > p { max-width: 34em; }
+body .split .meta4 { text-align: center; max-width: 880px; margin-inline: auto; }
+body .split .meta4 > div { padding-right: 0; }
+body .split .tag { margin-inline: auto; }
+
+body .step:nth-of-type(even) .step-in > h2,
+body .step:nth-of-type(even) .step-in > h3,
+body .step:nth-of-type(even) .step-in > p:not(.big-cap):not(.bars-note),
+body .step:nth-of-type(even) .step-in > ul:not(.status),
+body .step:nth-of-type(even) .step-in > ol:not(.asks),
+body .step:nth-of-type(even) .step-in > .res,
+body .step:nth-of-type(even) .step-in > .solved,
+body .step:nth-of-type(even) .step-in > .links,
+body .step:nth-of-type(even) .duo-txt > h2,
+body .step:nth-of-type(even) .duo-txt > p {
+  width: min(100%, var(--measure)); max-width: var(--measure); margin-left: auto; margin-right: 0;
+}
+@media (max-width: 860px) {
+  body .split { text-align: left; }
+  body .split .meta4 { text-align: left; }
+}
+body .split .meta4 + p { margin-top: clamp(32px, 4vw, 56px); }
