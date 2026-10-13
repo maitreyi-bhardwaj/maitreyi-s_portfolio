@@ -6,14 +6,14 @@
 <title>Explorations, Maitreyi Bhardwaj</title>
 <meta name="description" content="Smaller things Maitreyi Bhardwaj has tried and built.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link rel="stylesheet" href="site.css?v=1791903227">
+<link rel="stylesheet" href="site.css?v=1791903668">
 <style>
 *, *::before, *::after { box-sizing: border-box; }
-/* A fully maroon page: a row of pictures on the left, an index of titles on the right.
+/* A fully blue page, the same blue as About: a row of pictures on the left, an index of titles on the right.
    Pointing at a title or a picture lights up its partner. */
-html:has(body.maroon) { background: #6B1620; }
-body.maroon { --paper: #6B1620; --ink: #FFFFFF; --ink-soft: #F0D9DB; --pill: rgba(255, 255, 255, .14); background: var(--paper); color: #fff; -webkit-font-smoothing: antialiased; }
-body.maroon .topbar a { font-weight: 500; }
+html:has(body.blue) { background: #1A36B8; }
+body.blue { --paper: #1A36B8; --ink: #FFFFFF; --ink-soft: #D8E0FC; --pill: rgba(255, 255, 255, .14); background: var(--paper); color: #fff; -webkit-font-smoothing: antialiased; }
+body.blue .topbar a { font-weight: 500; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
 
 .index { display: grid; grid-template-columns: 2.4fr 1fr; column-gap: clamp(32px, 5vw, 80px); align-items: stretch; padding: 24px var(--gut) 24px; height: calc(100svh - 58px); min-height: 420px; }
@@ -28,7 +28,7 @@ body.maroon .topbar a { font-weight: 500; }
 .names li { margin-bottom: 14px; }
 .names li:last-child { margin-bottom: 0; }
 .names li.gap { margin-top: 30px; }
-.names a, .names span.row { color: #F0D9DB; text-decoration: none; transition: color .2s ease; }
+.names a, .names span.row { color: #D8E0FC; text-decoration: none; transition: color .2s ease; }
 .names small { font-size: inherit; opacity: .8; }
 .names .on, .names a:hover, .names a:focus-visible { color: #fff; font-weight: 600; }
 .index.is-pointing .pics a:not(.on) { opacity: .35; }
@@ -41,7 +41,7 @@ body.maroon .topbar a { font-weight: 500; }
 }
 </style>
 </head>
-<body class="maroon">
+<body class="blue">
 
 <div data-topbar></div>
 
@@ -53,8 +53,8 @@ body.maroon .topbar a { font-weight: 500; }
 
 <div data-foot></div>
 
-<script src="projects.js?v=1791903227"></script>
-<script src="site.js?v=1791903227"></script>
+<script src="projects.js?v=1791903668"></script>
+<script src="site.js?v=1791903668"></script>
 <script>
 (function () {
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
