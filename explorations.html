@@ -6,14 +6,14 @@
 <title>Explorations, Maitreyi Bhardwaj</title>
 <meta name="description" content="Smaller things Maitreyi Bhardwaj has tried and built.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link rel="stylesheet" href="site.css?v=1791903668">
+<link rel="stylesheet" href="site.css?v=1791903704">
 <style>
 *, *::before, *::after { box-sizing: border-box; }
-/* A fully blue page, the same blue as About: a row of pictures on the left, an index of titles on the right.
+/* A white page with blue text: a row of pictures on the left, an index of titles on the right.
    Pointing at a title or a picture lights up its partner. */
-html:has(body.blue) { background: #1A36B8; }
-body.blue { --paper: #1A36B8; --ink: #FFFFFF; --ink-soft: #D8E0FC; --pill: rgba(255, 255, 255, .14); background: var(--paper); color: #fff; -webkit-font-smoothing: antialiased; }
+body.blue { --ink: #1A36B8; --ink-soft: #4A62C8; --pill: #E8ECFA; background: #fff; color: #1A36B8; -webkit-font-smoothing: antialiased; }
 body.blue .topbar a { font-weight: 500; }
+body.blue .topbar a:hover, body.blue .topbar a[aria-current="page"] { background: #1A36B8; color: #fff; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
 
 .index { display: grid; grid-template-columns: 2.4fr 1fr; column-gap: clamp(32px, 5vw, 80px); align-items: stretch; padding: 24px var(--gut) 24px; height: calc(100svh - 58px); min-height: 420px; }
@@ -28,9 +28,9 @@ body.blue .topbar a { font-weight: 500; }
 .names li { margin-bottom: 14px; }
 .names li:last-child { margin-bottom: 0; }
 .names li.gap { margin-top: 30px; }
-.names a, .names span.row { color: #D8E0FC; text-decoration: none; transition: color .2s ease; }
+.names a, .names span.row { color: #1A36B8; text-decoration: none; transition: color .2s ease; }
 .names small { font-size: inherit; opacity: .8; }
-.names .on, .names a:hover, .names a:focus-visible { color: #fff; font-weight: 600; }
+.names .on, .names a:hover, .names a:focus-visible { color: #0F2380; font-weight: 600; }
 .index.is-pointing .pics a:not(.on) { opacity: .35; }
 
 @media (max-width: 760px) {
@@ -53,8 +53,8 @@ body.blue .topbar a { font-weight: 500; }
 
 <div data-foot></div>
 
-<script src="projects.js?v=1791903668"></script>
-<script src="site.js?v=1791903668"></script>
+<script src="projects.js?v=1791903704"></script>
+<script src="site.js?v=1791903704"></script>
 <script>
 (function () {
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
