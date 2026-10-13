@@ -1,0 +1,582 @@
+/* Shared look for every page: palette, type, top bar, footer, butterfly.
+   Linked AFTER each page's inline <style> so these tokens win. */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Caveat:wght@400;500&display=swap');
+
+:root {
+  --paper: #FFFFFF;
+  --pill: #EEF0F4;
+  --ink: #2B1B11;
+  --ink-soft: #7C6C60;
+  --blue: #2B55D4;
+  --blue-pale: #D9E3FA;
+  --cocoa: #24160D;
+  --cocoa-line: #3A2819;
+  --cocoa-text: #B5A292;
+
+  /* older per-page tokens, remapped to the new palette */
+  --bg: var(--paper);
+  --black: var(--ink);
+  --gray: #5C4D42;
+  --soft: var(--ink-soft);
+  --light: var(--pill);
+  --border: #DADDE5;
+  --f: 'Inter', -apple-system, 'Helvetica Neue', sans-serif;
+  --fd: var(--f);
+  --fh: var(--fd);
+  --gut: clamp(16px, 4.6vw, 72px);
+  --panel: #FFFFFF;
+  --card: #FFFFFF;
+  --pad: var(--gut); /* case-study pages use the same side margin as the top bar */
+}
+
+html { background: var(--paper); }
+body { background: var(--paper); color: var(--ink); font-family: var(--f); margin: 0; }
+h1, h2, h3, h4 { font-family: var(--fd); }
+
+/* the byMaitreyi mark */
+.mb-logo { height: 1em; width: auto; display: inline-block; vertical-align: -.14em; fill: currentColor; flex: none; }
+.topbar .topbar-name { display: flex; align-items: center; gap: 8px; }
+.topbar-name .mb-logo { height: 15px; }
+
+a:focus-visible, button:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 6px; }
+
+/* dot picture: a 10-wide grid, lit dots in pale blue on brown */
+.dots { display: grid; grid-template-columns: repeat(10, 1fr); gap: 7%; aspect-ratio: 1; }
+.dots i { border-radius: 50%; background: #4A3523; }
+.dots i.on { background: #9DB6FF; }
+
+/* ---------- top bar ---------- */
+.topbar {
+  display: grid;
+  grid-template-columns: 3fr 1fr 1fr 1fr;
+  gap: 6px;
+  padding: 20px var(--gut) 0;
+  font-size: 13px;
+}
+.topbar a {
+  display: block;
+  padding: 7px 12px;
+  border-radius: 8px;
+  background: var(--pill);
+  color: var(--ink);
+  text-decoration: none;
+  transition: background .15s, color .15s;
+}
+.topbar a:hover, .topbar a[aria-current="page"] { background: var(--ink); color: var(--paper); }
+@media (max-width: 640px) {
+  .topbar { grid-template-columns: 1fr 1fr 1fr; }
+  .topbar a:first-child { grid-column: 1 / -1; }
+}
+
+/* ---------- footer ---------- */
+/* footer.foot (not just .foot) so older per-page `footer { … }` rules cannot leak in */
+footer.foot {
+  display: block;
+  background: var(--cocoa);
+  color: var(--cocoa-text);
+  margin-top: clamp(80px, 12vw, 180px);
+  padding: 34px var(--gut) 28px;
+  font-size: 13px;
+}
+.foot-links { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 6px 28px; align-items: start; }
+.foot-col h2 { font-family: var(--f); font-size: 13px; font-weight: 400; color: #F3ECE4; margin: 0 0 8px 12px; }
+.foot-row {
+  display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  padding: 7px 12px; margin-bottom: 4px;
+  border-radius: 8px; background: var(--cocoa-line);
+  color: #F3ECE4; text-decoration: none;
+  font: inherit; border: 0; width: 100%; text-align: left; cursor: pointer;
+}
+.foot-row span:last-child { color: var(--cocoa-text); }
+.foot-row:hover { background: #4A3523; }
+.foot-row:focus-visible { outline-color: #9DB6FF; }
+
+.foot-main { padding: clamp(56px, 8vw, 120px) 0 clamp(32px, 5vw, 72px); }
+.foot-words { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: end; }
+.foot-say { font-size: clamp(18px, 1.9vw, 26px); line-height: 1.35; color: #F3ECE4; max-width: 24em; margin: 0; }
+.foot-name { margin: 0; line-height: 0; }
+.foot-name a { display: inline-block; color: #F3ECE4; }
+.foot-name .mb-logo { height: clamp(56px, 7vw, 104px); vertical-align: bottom; }
+.foot-fine { display: flex; justify-content: space-between; color: var(--cocoa-text); }
+
+@media (max-width: 760px) {
+  .foot-links { grid-template-columns: 1fr; gap: 18px; }
+  .foot-words { grid-template-columns: 1fr; }
+}
+
+/* key lines in case-study text: a reader who only reads these still gets the story */
+.split p b, .prob p b, .step p b, .step li b, .outcome p b { color: var(--ink); font-weight: 600; }
+
+/* ---------- case-study rhythm ----------
+   Every section is white. A hairline the width of the content marks where one
+   ends and the next begins, and everything shares one left edge. */
+body .step, body .step:nth-child(even), body .step--tint { background: none; padding-top: 0; padding-bottom: 0; }
+body .step-in { max-width: none; margin: 0; border-top: 1px solid var(--border); padding: clamp(56px, 7vw, 104px) 0; }
+body .outcome { position: relative; padding-top: clamp(56px, 7vw, 104px); }
+body .outcome::before { content: ''; position: absolute; top: 0; left: var(--pad); right: var(--pad); border-top: 1px solid var(--border); }
+body .prob { padding-bottom: clamp(56px, 7vw, 104px); }
+
+/* one spacing scale inside a section: 20 after a heading, 16 between
+   paragraphs, 40 around any block (cards, images, charts) */
+body .step h2 { margin-bottom: 20px; }
+body .step h3 { margin: 48px 0 12px; }
+body .step p + p { margin-top: 16px; }
+body .step-in > div, body .step-in > ul, body .step-in > ol, body .step-in > figure { margin-top: 40px; }
+body .step-in > div + p, body .step-in > ul + p, body .step-in > ol + p { margin-top: 40px; }
+body .step-in > .big + .big-cap, body .step-in > div + .big-cap, body .step-in > div + .bars-note { margin-top: 14px; }
+body .step-in > h3 + div { margin-top: 20px; }
+body .step-in > :first-child { margin-top: 0; }
+
+/* ---------- case-study type and alignment ---------- */
+/* headings carry by size, not weight */
+body .split h1, body .prob h2, body .step h2, body .outcome h2 { font-weight: 500; letter-spacing: -.022em; }
+body .step h3, body .tcard h4, body .num .n, body .shift .vals { font-weight: 500; }
+/* the title sits close under the hero image */
+body .split { padding-top: clamp(36px, 4.5vw, 64px); padding-bottom: clamp(56px, 7vw, 104px); }
+/* cards, images and charts all run to the same right edge */
+body .trio, body .nums, body .two-up, body .big { max-width: none; }
+/* images keep their own proportions (grid rows were stretching them) */
+body .two-up { align-items: start; }
+body .two-up img, body .big img, body .case-hero img { height: auto; }
+
+/* ---------- case-study header ----------
+   Same two halves as the top bar: the title sits under the name pill, the
+   summary starts under "Work". The facts row runs the full width beneath, in
+   four equal columns, so its third column starts on that same halfway line. */
+body .split {
+  display: grid; grid-template-columns: 1fr 1fr; column-gap: 6px; row-gap: 0;
+  align-items: start;
+  padding: clamp(36px, 4.5vw, 64px) var(--pad) clamp(64px, 8vw, 120px);
+}
+body .split > div { display: contents; }
+body .split h1 {
+  grid-column: 1; grid-row: 1 / span 2;
+  font-size: clamp(32px, 3.5vw, 60px); line-height: 1.05; font-weight: 500;
+  max-width: 11em; padding-right: 24px;
+}
+body .split > div > p {
+  grid-column: 2; margin: 0; max-width: 34em;
+  font-size: clamp(17px, 1.35vw, 21px); line-height: 1.5;
+}
+body .split > div > p:first-of-type { grid-row: 1; }
+body .split > div > p:not(:first-of-type) { grid-row: 2; margin-top: 16px; }
+body .split .meta-rule { display: none; }
+body .split .meta4 {
+  grid-column: 1 / -1; grid-row: 3;
+  display: grid; grid-template-columns: repeat(4, 1fr); column-gap: 6px;
+  margin-top: clamp(40px, 5vw, 72px); padding: 18px 0;
+  border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+}
+body .split .meta4 > div { padding-right: 20px; }
+body .split .meta4 .ml { font-size: 13px; color: var(--soft); margin-bottom: 6px; }
+body .split .meta4 .mv { font-size: 15px; font-weight: 400; line-height: 1.4; color: var(--ink); }
+body .split .tag { grid-column: 1; }
+@media (max-width: 860px) {
+  body .split { grid-template-columns: 1fr; }
+  body .split h1, body .split > div > p, body .split > div > p:first-of-type, body .split > div > p:not(:first-of-type) { grid-column: 1; grid-row: auto; }
+  body .split > div > p:first-of-type { margin-top: 20px; }
+  body .split > div > p:not(:first-of-type) { margin-top: 24px; }
+  body .split .meta4 { grid-row: auto; grid-template-columns: 1fr 1fr; row-gap: 18px; }
+}
+
+/* ---------- no divider lines: sections are separated by space alone ---------- */
+body .step-in { border-top: 0; padding: 0 0 clamp(96px, 11vw, 176px); }
+body .prob { padding-bottom: clamp(96px, 11vw, 176px); }
+body .outcome { padding-top: 0; }
+body .outcome::before { display: none; }
+body .split .meta4 { border: 0; padding: 0; }
+/* one corner radius for every picture in a case study */
+body .case-hero img, body .dothero, body .big, body .two-up img { border-radius: 12px; }
+body .big, body .two-up img, body .case-hero img { border: 0; }
+
+/* ---------- about page, on the same grid as everything else ---------- */
+body .ahead {
+  grid-template-columns: 1fr 1fr; column-gap: 6px;
+  padding: clamp(48px, 6vw, 96px) var(--gut) clamp(72px, 9vw, 140px);
+}
+body .abio p { font-size: clamp(17px, 1.35vw, 21px); line-height: 1.5; max-width: 30em; color: var(--ink); }
+body .aphoto { position: relative; justify-self: end; width: clamp(220px, 24vw, 360px); border-radius: 12px; overflow: hidden; }
+body .aphoto img { border-radius: 0; }
+/* a warm brown wash, then film grain over it */
+body .aphoto::after {
+  content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay; opacity: .9; filter: contrast(1.6);
+}
+body .cats { padding: 0 var(--gut) 28px; }
+body .cat { font-weight: 400; letter-spacing: -.025em; }
+/* experience as pill rows, like the top bar and the timeline */
+body .ptable { border: 0; padding: 0 var(--gut); display: grid; gap: 6px; margin-bottom: 0; }
+body .prow { border: 0; background: var(--pill); border-radius: 8px; padding: 9px 12px; align-items: center; grid-template-columns: 3fr 2fr 1fr; column-gap: 6px; }
+body .prow .pc, body .prow .pd, body .prow .ps { font-size: 14px; font-weight: 400; color: var(--ink); }
+body .prow .pc { grid-column: 1; }
+body .prow .ps { color: var(--ink-soft); }
+body a.prow:hover { background: var(--ink); }
+body a.prow:hover span { color: var(--paper); }
+@media (max-width: 900px) {
+  body .ahead { grid-template-columns: 1fr; }
+  body .aphoto { justify-self: start; }
+  body .prow { grid-template-columns: 1fr; }
+}
+
+/* ---------- sections use both halves ----------
+   Heading on the left half, text on the right half (the same halfway line as
+   the top bar and the page header). Cards, images and charts span the full
+   width underneath. Nothing hugs the left with an empty right. */
+body .step-in, body .prob, body .outcome {
+  display: grid; grid-template-columns: 1fr 1fr; column-gap: 6px; align-items: start;
+  max-width: none;
+}
+body .step-in > *, body .prob > *, body .outcome > * { grid-column: 1 / -1; min-width: 0; }
+body .step-in > h2, body .prob > h2, body .outcome > h2 { grid-column: 1; margin-bottom: 0; padding-right: 32px; max-width: 16em; }
+body .step-in > p, body .step-in > ul, body .step-in > ol, body .step-in > h3,
+body .step-in > .res, body .step-in > .solved, body .step-in > .links,
+body .prob > p, body .prob > .solved, body .prob > div,
+body .outcome > p, body .outcome > a { grid-column: 2; max-width: 34em; }
+body .outcome > a { justify-self: start; }
+/* captions stay under the picture they describe */
+body .step-in > p.big-cap, body .step-in > p.bars-note { grid-column: 1 / -1; max-width: 46em; }
+body .step p, body .prob p, body .outcome p { font-size: 17px; line-height: 1.6; }
+
+/* two pieces of evidence side by side, one per half */
+body .pair { display: grid; grid-template-columns: 1fr 1fr; column-gap: 6px; align-items: start; }
+body .pair > * { margin-top: 0; max-width: none; }
+body .pair > :first-child { padding-right: clamp(24px, 4vw, 72px); }
+body .wtrack { background: var(--pill); }
+
+@media (max-width: 860px) {
+  body .step-in, body .prob, body .outcome, body .pair { grid-template-columns: 1fr; }
+  body .step-in > *, body .prob > *, body .outcome > * { grid-column: 1; }
+  body .step-in > h2, body .prob > h2 { margin-bottom: 20px; }
+  body .pair > * + * { margin-top: 40px; }
+}
+
+/* ---------- picture sizes ----------
+   Finished screens run full width. Working screenshots (spreadsheets, Figma
+   variables, Storybook) are evidence, so they sit small: one in the right half,
+   or three in a row, cropped to the same 16:10 window. Clicking opens the full image. */
+body .step-in > .big.shot { grid-column: 2; display: block; aspect-ratio: 16 / 10; overflow: hidden; background: var(--pill); }
+body .big.shot img, body .shots img { width: 100%; height: 100%; object-fit: cover; object-position: top left; display: block; }
+body .step-in > p.big-cap.shot-cap { grid-column: 2; }
+body .shots { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+body .shots figure { margin: 0; }
+body .shots a { display: block; aspect-ratio: 16 / 10; overflow: hidden; border-radius: 12px; background: var(--pill); }
+body .shots figcaption { margin-top: 12px; font-size: 14px; line-height: 1.45; color: var(--soft); padding-right: 16px; }
+@media (max-width: 860px) {
+  body .step-in > .big.shot, body .step-in > p.big-cap.shot-cap { grid-column: 1; }
+  body .shots { grid-template-columns: 1fr; gap: 24px; }
+}
+
+/* ---------- one calm type scale for case studies ----------
+   title 36 / section heading 26 / lead 18 / body 16 / small 14.
+   Headings are labels for their section, not posters. */
+body .split h1 { font-size: clamp(26px, 2.5vw, 36px); line-height: 1.12; letter-spacing: -.02em; }
+body .prob > h2, body .step-in > h2, body .outcome > h2, body .step h2, body .prob h2, body .outcome h2 {
+  font-size: clamp(20px, 1.8vw, 26px); line-height: 1.22; letter-spacing: -.015em; font-weight: 500; max-width: 18em;
+}
+body .step h3 { font-size: 17px; line-height: 1.35; margin: 32px 0 8px; }
+body .split > div > p { font-size: clamp(16px, 1.25vw, 18px); line-height: 1.55; }
+body .step p, body .prob p, body .outcome p, body .step li { font-size: 16px; line-height: 1.6; }
+body .tcard h4 { font-size: 15px; }
+body .tcard p { font-size: 14px; line-height: 1.5; }
+body .num .n { font-size: clamp(26px, 2.4vw, 36px); }
+body .num .c, body .big-cap, body .bars-note, body .shots figcaption { font-size: 14px; line-height: 1.45; }
+body .shift .vals { font-size: clamp(22px, 2vw, 28px); }
+body .dothero-n { font-size: clamp(44px, 7vw, 104px); }
+body .dothero-t { font-size: clamp(16px, 1.5vw, 21px); }
+/* tighter, even gaps between sections */
+body .split { padding-bottom: clamp(56px, 6vw, 88px); }
+body .split .meta4 { margin-top: clamp(32px, 4vw, 56px); }
+body .prob, body .step-in { padding-bottom: clamp(72px, 8vw, 120px); }
+body .step-in > div, body .step-in > ul, body .step-in > ol, body .step-in > figure, body .step-in > a.big,
+body .step-in > div + p, body .step-in > ul + p { margin-top: 32px; }
+body .step-in > .big + .big-cap, body .step-in > div + .big-cap, body .step-in > a.big + .big-cap, body .step-in > div + .bars-note { margin-top: 12px; }
+
+/* a heading with nothing beside it spans the row, so the content sits right under it */
+body .step-in > h2:has(+ div), body .step-in > h2:has(+ .big) { grid-column: 1 / -1; margin-bottom: 20px; }
+body .step-in > h2 + div { margin-top: 0; }
+body .shift > div { flex: 1 1 280px; max-width: 420px; }
+body .shift .who { line-height: 1.4; }
+
+/* =====================================================================
+   Case studies read like a book: one centred column with wide margins,
+   one thing per screen, each piece arriving as you scroll to it.
+   (This replaces the two-halves layout above.)
+   ===================================================================== */
+:root { --col: min(100% - 2 * var(--gut), 960px); --measure: 620px; }
+
+body .case-hero { width: var(--col); margin: clamp(24px, 4vh, 48px) auto 0; padding: 0; }
+body .case-hero img, body .dothero { width: 100%; }
+
+body .split, body .prob, body .outcome, body .step-in {
+  display: block; width: var(--col); max-width: none; margin-inline: auto; padding: 0; border: 0;
+}
+body .split > div { display: block; }
+body .step { padding: 0; }
+
+/* one thing per screen: short sections sit in the middle of the window */
+body .split, body .prob, body .step, body .outcome {
+  min-height: 82svh; display: flex; flex-direction: column; justify-content: center;
+  padding-block: clamp(56px, 9vh, 120px);
+}
+body .split { min-height: 64svh; }
+body .outcome { min-height: 40svh; }
+
+/* text stays in a narrow reading column; pictures use the full column */
+body .split h1 { font-size: clamp(30px, 3vw, 44px); line-height: 1.1; max-width: none; padding: 0; margin: 0 0 24px; }
+body .split > div > p { font-size: clamp(18px, 1.5vw, 21px); line-height: 1.55; max-width: var(--measure); margin: 0; }
+body .split > div > p + p { margin-top: 14px; }
+body .split .meta4 { margin-top: clamp(36px, 5vh, 56px); grid-template-columns: repeat(4, 1fr); column-gap: 24px; }
+
+body .prob > h2, body .step-in > h2, body .outcome > h2, body .step h2, body .prob h2, body .outcome h2 {
+  font-size: clamp(22px, 2.1vw, 30px); line-height: 1.2; max-width: 20em; margin: 0 0 18px; padding: 0;
+}
+body .step-in > h2:has(+ div), body .step-in > h2:has(+ .big) { margin-bottom: 28px; }
+body .step p, body .prob p, body .outcome p, body .step li { font-size: 17px; line-height: 1.65; }
+body .step-in > p, body .step-in > ul, body .step-in > ol, body .step-in > h3,
+body .step-in > .res, body .step-in > .solved, body .step-in > .links,
+body .prob > p, body .prob > .solved, body .prob > div, body .outcome > p { max-width: var(--measure); }
+body .step-in > .big.shot { max-width: var(--measure); }
+body .step-in > p.big-cap, body .step-in > p.bars-note { max-width: var(--measure); }
+body .bars { max-width: 760px; }
+
+/* pieces arrive as you reach them */
+.rv { opacity: 0; transform: translateY(26px); transition: opacity 1.1s ease, transform 1.2s cubic-bezier(.16, 1, .3, 1); }
+.rv.seen { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { .rv { opacity: 1; transform: none; transition: none; } }
+
+@media (max-width: 860px) {
+  body .split, body .prob, body .step, body .outcome { min-height: 0; }
+  body .split .meta4 { grid-template-columns: 1fr 1fr; row-gap: 18px; }
+}
+
+/* ---------- picture-and-text rows: visual on one side, words on the other, alternating ---------- */
+body.wide { --col: min(100% - 2 * var(--gut), 1120px); }
+body .step-in.duo { display: grid; grid-template-columns: 1fr 1fr; column-gap: clamp(40px, 6vw, 96px); align-items: center; }
+body .step-in.duo > div { margin-top: 0; min-width: 0; grid-column: auto; max-width: none; }
+body .duo--flip > .duo-vis { order: 2; }
+body .duo-vis > :first-child { margin-top: 0; }
+body .duo-txt p { max-width: 30em; }
+body .duo-txt p + p { margin-top: 16px; }
+body .duo-vis .zoom { display: block; border-radius: 12px; overflow: hidden; background: var(--pill); }
+body .duo-vis .zoom img { width: 100%; height: auto; display: block; }
+body .duo-vis .big-cap { margin-top: 12px; }
+body .duo-vis .nums { margin-top: 0; gap: 24px; }
+body .duo-vis .bars { max-width: none; }
+body .duo-vis .bar-row { grid-template-columns: minmax(96px, 190px) 1fr 4.4em; }
+body .duo-vis .shift { flex-direction: column; }
+body .duo-vis .shift > div { max-width: none; flex: none; }
+.vis-label { font-size: 14px; color: var(--ink-soft); margin: 0 0 14px; }
+/* the questions the page answers */
+.asks { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; counter-reset: ask; }
+.asks li { counter-increment: ask; display: grid; grid-template-columns: 2.2em 1fr; padding: 12px 14px; border-radius: 8px; background: var(--pill); font-size: 16px; line-height: 1.4; color: var(--ink); }
+.asks li::before { content: counter(ask); color: var(--blue); font-variant-numeric: tabular-nums; }
+/* before -> after rows */
+.fixes { display: grid; gap: 6px; }
+.fixes > div { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.fixes span { padding: 12px 14px; border-radius: 8px; font-size: 15px; line-height: 1.4; }
+.fixes span:first-child { background: var(--pill); color: var(--ink-soft); }
+.fixes span:last-child { background: var(--blue-pale); color: var(--ink); }
+@media (max-width: 860px) {
+  body .step-in.duo { grid-template-columns: 1fr; row-gap: 32px; }
+  body .step-in.duo > div { grid-column: 1; }
+  body .duo--flip > .duo-vis { order: 0; }
+}
+
+/* a wide screenshot shown as a closer crop inside a half-width column */
+body .duo-vis .zoom--crop { aspect-ratio: 16 / 10; }
+body .duo-vis .zoom--crop img { height: 100%; object-fit: cover; object-position: 40% 50%; }
+
+/* ---------- about: résumé lists ----------
+   Three levels only: section heading (24, medium), entry title (17, medium),
+   detail (15, regular, softer). */
+.cv { display: grid; grid-template-columns: 1fr 1fr; column-gap: 6px; padding: 0 var(--gut); }
+.cv > div { padding-right: clamp(24px, 5vw, 80px); }
+.cv section { margin-bottom: clamp(56px, 7vw, 96px); }
+.cv h2 { font-size: 24px; font-weight: 500; letter-spacing: -.015em; margin: 0 0 28px; }
+.cv-item { margin-bottom: 26px; }
+.cv-item h3 { font-size: 17px; font-weight: 500; line-height: 1.35; margin: 0; }
+.cv-item h3 a { color: inherit; text-decoration: none; border-bottom: 1px solid var(--border); }
+.cv-item h3 a:hover { border-color: var(--ink); }
+.cv-item p { font-size: 15px; color: var(--ink-soft); margin: 3px 0 0; }
+.cv-line, .cv-list { font-size: 17px; line-height: 1.5; color: var(--ink); margin: 0 0 16px; }
+.cv-list { line-height: 1.75; }
+body .cats { padding-bottom: clamp(48px, 6vw, 80px); }
+@media (max-width: 760px) { .cv { grid-template-columns: 1fr; } }
+
+/* about: photo on the left under the name pill, text on the right under "Work";
+   the photo uses the same 4px corner as the project cards on the home page */
+body .aphoto { order: -1; justify-self: start; border-radius: 4px; }
+
+/* ---------- about: the path so far, a winding line with a stop for each chapter ---------- */
+.path { position: relative; width: min(100% - 2 * var(--gut), 1000px); aspect-ratio: 1000 / 860; margin: 0 auto clamp(72px, 9vw, 140px); }
+.path svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.path path { fill: none; stroke: var(--ink-soft); stroke-width: 1.4; vector-effect: non-scaling-stroke; }
+.path ol { list-style: none; margin: 0; padding: 0; }
+.path li { position: absolute; width: 230px; transition: opacity .9s ease; }
+.path li::before { content: ''; position: absolute; left: -6px; top: -6px; width: 10px; height: 10px; border-radius: 50%; border: 1.4px solid var(--ink); background: var(--paper); }
+.path li.is-start::before { background: var(--ink); }
+.path li.is-now::before { background: var(--blue); border-color: var(--blue); }
+.path li b, .path li span { display: block; }
+.path li b { font-size: 19px; font-weight: 500; letter-spacing: -.01em; }
+.path li span { font-size: 14px; line-height: 1.4; color: var(--ink-soft); margin-top: 2px; }
+.path li[data-side="right"] { padding-left: 18px; transform: translateY(-12px); }
+.path li[data-side="left"] { padding-right: 18px; text-align: right; transform: translate(-100%, -12px); }
+.path li[data-side="left"]::before { left: auto; right: -6px; top: 6px; }
+.path li[data-side="right"]::before { top: 6px; }
+.path.is-waiting li { opacity: 0; }
+.path li:nth-child(2) { transition-delay: .5s; } .path li:nth-child(3) { transition-delay: 1s; }
+.path li:nth-child(4) { transition-delay: 1.4s; } .path li:nth-child(5) { transition-delay: 1.8s; }
+.path li:nth-child(6) { transition-delay: 2.3s; } .path li:nth-child(7) { transition-delay: 2.8s; }
+/* on phones the line straightens into a simple vertical list */
+@media (max-width: 760px) {
+  .path { aspect-ratio: auto; }
+  .path svg { display: none; }
+  .path ol { border-left: 1.4px solid var(--ink-soft); margin-left: 6px; }
+  .path li, .path li[data-side="left"], .path li[data-side="right"] { position: relative; left: auto !important; top: auto !important; width: auto; transform: none; text-align: left; padding: 0 0 28px 20px; }
+  .path li::before, .path li[data-side="left"]::before { left: -6px; right: auto; top: 6px; }
+}
+
+/* a stop on a flat stretch of the line carries its label underneath, clear of the stroke */
+.path li[data-side="below"] { padding: 0; transform: translate(-2px, 18px); }
+.path li[data-side="below"]::before { left: -3px; top: -23px; }
+@media (max-width: 760px) { .path li[data-side="below"] { padding: 0 0 28px 20px; transform: none; } .path li[data-side="below"]::before { left: -6px; top: 6px; } }
+
+/* about, top: photo and bio on the left, the path on the right (now at the top, the start at the bottom) */
+body .ahead { padding-top: 20px; align-items: start; }
+body .aleft { display: flex; flex-direction: column; gap: 28px; min-width: 0; }
+body .aleft .aphoto { order: -1; }
+body .ahead .path { width: 100%; margin: 0; aspect-ratio: 1000 / 1250; }
+body .ahead .path li { width: 190px; }
+body .ahead .path li b { font-size: 17px; }
+@media (max-width: 900px) { body .ahead .path { aspect-ratio: 1000 / 1250; margin-top: 40px; } }
+@media (max-width: 760px) { body .ahead .path { aspect-ratio: auto; } }
+
+body .ahead .path li { width: 240px; }
+@media (max-width: 760px) { body .ahead .path li { width: auto; } }
+
+/* ---------- about: one line for education and experience, with a doodle at every stop ---------- */
+body .ahead .path { aspect-ratio: 540 / 1500; }
+body .aleft { position: sticky; top: 20px; align-self: start; }
+body .ahead .path li { width: min(320px, 62%); padding-left: 20px; transform: translateY(-13px); }
+body .ahead .path li::before { top: 7px; }
+body .ahead .path li b { font-size: 17px; line-height: 1.3; }
+body .ahead .path li b a { color: inherit; text-decoration: none; border-bottom: 1px solid var(--border); }
+body .ahead .path li span { font-size: 14px; margin-top: 4px; }
+.doodle { position: absolute; right: calc(100% + 34px); top: -22px; width: 70px; height: 70px; overflow: visible; }
+.doodle * { fill: none; stroke: var(--ink-soft); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.doodle .acc { fill: var(--blue); stroke: var(--blue); }
+@media (max-width: 900px) { body .aleft { position: static; } body .ahead .path { aspect-ratio: 540 / 1500; } }
+@media (max-width: 760px) {
+  body .ahead .path { aspect-ratio: auto; }
+  body .ahead .path li { width: auto; transform: none; padding: 0 0 28px 20px; }
+  .doodle { display: none; }
+}
+
+.path .doodle { inset: auto; right: calc(100% + 34px); top: -22px; left: auto; bottom: auto; width: 70px; height: 70px; }
+
+/* about: a personal note after the line, in the same two halves as the home page opening */
+.hello { display: grid; grid-template-columns: 1fr 1fr; column-gap: 6px; padding: clamp(72px, 9vw, 140px) var(--gut); align-items: start; }
+.hello h2 { font-size: clamp(28px, 3.5vw, 60px); font-weight: 400; letter-spacing: -.025em; line-height: 1.06; margin: 0; }
+.hello p { font-size: clamp(17px, 1.5vw, 21px); line-height: 1.5; color: var(--ink); max-width: 28em; margin: 0 0 14px; }
+.hello-mail { display: inline-block; margin-top: 14px; padding: 9px 16px; border-radius: 8px; background: var(--ink); color: var(--paper); font-size: 14px; text-decoration: none; }
+.hello-mail:hover { background: var(--blue); }
+@media (max-width: 760px) { .hello { grid-template-columns: 1fr; row-gap: 20px; } }
+
+body .ahead .path { aspect-ratio: 540 / 1350; }
+@media (max-width: 760px) { body .ahead .path { aspect-ratio: auto; } }
+/* lighter film grain on the photo */
+body .aphoto::after { opacity: .3; filter: none; }
+
+/* closing block on every case study: what I learned, and how I'll use it next */
+body .learn { display: grid; grid-template-columns: 1fr 1fr; gap: 32px clamp(32px, 5vw, 80px); margin: clamp(40px, 6vh, 72px) 0; max-width: none; }
+body .learn h3 { font-size: 17px; font-weight: 500; margin: 0 0 14px; }
+body .learn ul { list-style: none; margin: 0; padding: 0; }
+body .learn li { font-size: 16px; line-height: 1.5; color: var(--ink); padding: 0 0 14px; max-width: 26em; }
+@media (max-width: 760px) { body .learn { grid-template-columns: 1fr; } }
+
+/* one corner for every card: text cards match the 4px image cards */
+body .note { border-radius: 4px; }
+
+/* ---------- about: one quiet centred column — name, photo, a short note, then the line ---------- */
+body .ahead { display: block; padding: clamp(56px, 9vh, 120px) var(--gut) 0; }
+body .aleft { position: static; display: block; width: min(100%, 300px); margin: 0 auto; }
+body .aname { font-size: 13px; letter-spacing: .08em; margin: 0 0 12px; color: var(--ink); }
+body .aleft .aphoto { width: 100%; justify-self: auto; border-radius: 0; }
+body .aleft .aphoto img { aspect-ratio: 1; object-fit: cover; object-position: 50% 22%; }
+body .abio { margin-top: 28px; }
+body .abio p { font-size: 13px; line-height: 1.6; max-width: none; color: var(--ink); margin: 0; }
+body .abio p + p { margin-top: 12px; }
+body .abio a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+body .ahead .path { width: min(100%, 520px); margin: clamp(72px, 11vh, 140px) auto 0; }
+body .cv { width: min(100% - 2 * var(--gut), 640px); margin: clamp(72px, 11vh, 140px) auto 0; padding: 0; }
+body .cv h2 { font-size: 17px; margin-bottom: 16px; }
+body .cv-line, body .cv-list { font-size: 14px; }
+@media (max-width: 900px) { body .ahead .path { margin-top: 72px; } }
+
+/* ---------- about: photo in the middle, a caption at the left, a drifting strip of work at the right ---------- */
+body .ahead { padding-top: 0; }
+body .astage { position: relative; min-height: calc(100svh - 56px); display: flex; align-items: center; justify-content: center; padding: 56px 0; }
+body .acap { position: absolute; left: 0; bottom: 22%; margin: 0; font-size: 13px; letter-spacing: .04em; color: var(--ink); }
+body .acap span { display: block; margin-top: 4px; letter-spacing: 0; color: var(--ink-soft); }
+body .aleft { width: min(100%, 320px); margin: 0; }
+body .aleft .aphoto img { aspect-ratio: 4 / 5; object-position: 50% 30%; }
+/* the note under the photo, in handwriting */
+body .abio { margin-top: 22px; }
+body .abio p { font-family: 'Caveat', cursive; font-size: 22px; line-height: 1.25; color: var(--ink); }
+body .abio p + p { margin-top: 10px; }
+body .astrip { position: absolute; top: 0; bottom: 0; right: clamp(0px, 7vw, 120px); width: 158px; overflow: hidden; }
+body .astrip-in { display: flex; flex-direction: column; gap: 4px; }
+body .astrip-in.is-moving { animation: drift 46s linear infinite; }
+body .astrip:hover .astrip-in { animation-play-state: paused; }
+@keyframes drift { to { transform: translateY(calc(-50% - 2px)); } }
+body .astrip a { display: block; }
+body .astrip img { display: block; width: 100%; aspect-ratio: 3 / 2; object-fit: cover; filter: grayscale(1); transition: filter .3s ease; }
+body .astrip a:hover img, body .astrip a:focus-visible img { filter: none; }
+@media (max-width: 760px) {
+  body .astage { display: block; min-height: 0; padding: 32px 0 0; }
+  body .acap { position: static; margin-bottom: 14px; }
+  body .aleft { margin: 0 auto; }
+  body .astrip { position: static; width: auto; margin-top: 40px; overflow-x: auto; }
+  body .astrip-in { flex-direction: row; }
+  body .astrip a { flex: 0 0 150px; }
+}
+
+/* ---------- gallery sections (industrial design pages): text, then large pictures ---------- */
+body .step--gallery { min-height: 0; display: block; padding-block: clamp(56px, 8vw, 110px); }
+body .step--gallery .step-in > .big, body .step--gallery .step-in > .two-up { margin-top: 24px; max-width: none !important; }
+body .step--gallery .step-in > p + .big, body .step--gallery .step-in > p + .two-up { margin-top: 36px; }
+body .step--gallery .two-up { gap: 12px; }
+body .step--gallery .big img, body .step--gallery .two-up img { width: 100%; height: auto; }
+
+/* =====================================================================
+   One layout for every case study: a heading, a few lines of text, then
+   the pictures large underneath. (Side-by-side rows stack the same way.)
+   ===================================================================== */
+body .step, body .prob { min-height: 0; display: block; padding-block: clamp(56px, 8vw, 110px); }
+body .step-in.duo { display: flex; flex-direction: column; row-gap: 0; }
+body .step-in.duo > .duo-txt { order: -1; }
+body .step-in.duo > .duo-vis { margin-top: 36px; width: 100%; }
+body .duo-txt p { max-width: var(--measure); }
+body .duo-vis .zoom, body .duo-vis .zoom--crop { aspect-ratio: auto; }
+body .duo-vis .zoom img, body .duo-vis .zoom--crop img { height: auto; object-fit: initial; }
+body .duo-vis .bars { max-width: 760px; }
+body .duo-vis .shift { flex-direction: row; flex-wrap: wrap; }
+body .duo-vis .shift > div { flex: 1 1 260px; max-width: 420px; }
+body .duo-vis .nums { max-width: 760px; margin-bottom: 32px; }
+body .asks, body .fixes { max-width: 760px; }
+body .duo-txt .zoom { display: block; margin-top: 24px; border-radius: 12px; overflow: hidden; }
+body .step-in.duo { align-items: stretch; }
+body .step-in.duo > .duo-txt, body .step-in.duo > .duo-vis { align-self: stretch; }
+body .step .asks { margin: 0; padding: 0; }
+
+/* ---------- breathing room between sections, on every case study ----------
+   Each section gets a generous gap above and below, so the next one arrives
+   (and fades in) as you scroll to it. */
+body .step, body .prob, body .step--gallery { padding-block: clamp(90px, 13vw, 190px); }
+body .split { padding-bottom: clamp(60px, 8vw, 110px); }
+body .outcome { padding-top: clamp(90px, 13vw, 190px); }
+body .trio--4 { grid-template-columns: repeat(4, 1fr); }
+body .step-in > .nums + .trio, body .step-in > .trio + .big, body .step-in > .asks + .big, body .step-in > .trio + .trio { margin-top: 36px; }
+body .step .asks li { font-size: 16px; }
+@media (max-width: 860px) { body .trio--4 { grid-template-columns: 1fr; } }

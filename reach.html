@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reach, India vaccination outreach, Maitreyi Bhardwaj</title>
+<meta name="description" content="Using India's national health survey to find where children are missing routine vaccines, and a tool that helps people plan outreach there.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="stylesheet" href="case.css">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+
+<div data-topbar></div>
+
+<div class="case-hero">
+  <div class="dothero">
+    <div>
+      <p class="dothero-n">23 in 100</p>
+      <p class="dothero-t">children aged 12 to 23 months in India are missing at least one basic vaccine.</p>
+    </div>
+    <div data-dots="23/100"></div>
+  </div>
+</div>
+
+<section class="split">
+  <h1>Reach</h1>
+  <div>
+    <p>Reach uses India's national health survey to find where children are missing routine vaccines. <b>It drafts outreach for those areas, and a person approves it before anything is sent.</b></p>
+    <p>A solo project, in progress. It runs on my laptop and is not public yet.</p>
+    <div class="meta4">
+      <div><div class="ml">Company</div><div class="mv">Solo project</div></div>
+      <div><div class="ml">Tools</div><div class="mv">Python, pandas, scikit-learn, FastAPI</div></div>
+      <div><div class="ml">Role</div><div class="mv">Analyst + Engineer</div></div>
+      <div><div class="ml">Year</div><div class="mv">2026, in progress</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="step">
+  <div class="step-in">
+    <h2>Why I built it</h2>
+    <p>I wanted to learn how to work with real survey data, so I picked India's national health survey, NFHS-5. I started with questions about women's education and work.</p>
+    <p>Then I reached the vaccination records. <b>Out of every 100 children aged 12 to 23 months, 23 were missing at least one basic vaccine.</b></p>
+    <p>I didn't want to stop at a chart. <b>I wanted a tool that helps someone act on it.</b></p>
+  </div>
+</section>
+
+<section class="step">
+  <div class="step-in">
+    <h2>How I defined it</h2>
+    <p><b>A child counts as fully vaccinated with BCG, three doses of DPT or pentavalent, three of polio and a first measles dose.</b> Missing any one counts as not fully vaccinated.</p>
+    <p>I only count living children aged 12 to 23 months. Younger children may not be due for every dose yet, and would be counted as missing vaccines by mistake.</p>
+    <p>A dose counts if the vaccination card shows it or the mother reports it. "Don't know" counts as not received. Every figure here comes from my own run of the data, not from a published report.</p>
+    <div class="nums" style="--n:4">
+      <div class="num"><div class="n">43,436</div><div class="c">children aged 12 to 23 months in the data</div></div>
+      <div class="num"><div class="n">93%</div><div class="c">got a first DPT dose</div></div>
+      <div class="num"><div class="n">7%</div><div class="c">of those did not get the third</div></div>
+      <div class="num"><div class="n">86%</div><div class="c">had a vaccination card seen</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="step">
+  <div class="step-in">
+    <h2>What the survey shows</h2>
+    <p>Where the problem is depends on how you count. By rate, it is the northeast: in Nagaland, 41% of children are not fully vaccinated.</p>
+    <p><b>By number of children, it is two large states. Uttar Pradesh and Bihar hold about four in ten.</b></p>
+    <p>A high rate and a large number are different reasons to prioritise an area, so Reach ranks 36 states and 694 districts using both.</p>
+    <div class="bars" role="img" aria-label="Share of India's under-vaccinated children by state. Uttar Pradesh 24.9% and Bihar 16.6% together hold about four in ten.">
+      <div class="bar-row is-key"><span class="bl">Uttar Pradesh</span><span class="bt"><i style="width:100%"></i></span><span class="bv">24.9%</span></div>
+      <div class="bar-row is-key"><span class="bl">Bihar</span><span class="bt"><i style="width:66.7%"></i></span><span class="bv">16.6%</span></div>
+      <div class="bar-row"><span class="bl">Maharashtra</span><span class="bt"><i style="width:37.1%"></i></span><span class="bv">9.2%</span></div>
+      <div class="bar-row"><span class="bl">Madhya Pradesh</span><span class="bt"><i style="width:24%"></i></span><span class="bv">6.0%</span></div>
+      <div class="bar-row"><span class="bl">Rajasthan</span><span class="bt"><i style="width:20.2%"></i></span><span class="bv">5.0%</span></div>
+    </div>
+    <p class="bars-note">Share of India's under-vaccinated children, by state.</p>
+  </div>
+</section>
+
+<section class="step">
+  <div class="step-in">
+    <h2>An honest model</h2>
+    <p>I built a model to explain which characteristics go with missed vaccines. <b>It is not very strong.</b> Given one under-vaccinated child and one vaccinated child, it picks the right one 61% of the time. A coin flip gets 50%.</p>
+    <p>That is enough to compare districts and not enough to judge a family. <b>So the model only ever describes areas, and never shows a prediction for one child.</b></p>
+    <p>Religion, caste and the child's sex are never used to choose where outreach goes.</p>
+  </div>
+</section>
+
+<section class="step">
+  <div class="step-in">
+    <h2>How it works</h2>
+    <p>Reach finds the priority areas and drafts outreach material for them. <b>Then it waits. Nothing is sent until a named person reads it and approves it.</b></p>
+    <p>The drafts can only use health statements from a checked list with sources. Local details, like clinic days, stay blank for a health worker to fill in.</p>
+    <p>Only group-level results are shown, because DHS terms do not allow sharing individual records.</p>
+    <div class="flow" aria-label="How Reach works, step by step">
+      <span>Survey data</span><span>Patterns</span><span>Priority areas</span><span>AI drafts</span><span class="flow-key">A person approves</span><span class="flow-key">A person sends</span>
+    </div>
+  </div>
+</section>
+
+<section class="step">
+  <div class="step-in">
+    <h2>Where it stands</h2>
+    <p><b>The analysis, the model and the website are built, and it all runs on my laptop.</b></p>
+    <p>It is not public yet, and nobody who does outreach has tried it. That is the next step.</p>
+  </div>
+</section>
+
+<section class="outcome">
+  <a class="lbtn" href="https://github.com/maitreyi-bhardwaj/india-dhs-project" target="_blank" rel="noopener">View the code on GitHub</a>
+  <div class="learn">
+    <div><h3>What I learned</h3><ul><li>A weak model can still be useful if you are honest about what it can't do.</li><li>Survey weights decide whether a claim about a population is fair.</li><li>People trust an AI tool more when a person has the final say.</li></ul></div>
+    <div><h3>How I'll use it next</h3><ul><li>Put Reach online and test it with people who plan outreach.</li><li>State the limits of the model on the screen in any AI tool I design.</li></ul></div>
+  </div>
+  <a class="case-next" href="powerbi.html">Next project: Capital Program Dashboard &rarr;</a>
+</section>
+
+<div data-foot></div>
+
+<script src="site.js"></script>
+</body>
+</html>
