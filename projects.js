@@ -167,9 +167,33 @@ window.TIMELINE = [
   }
 ];
 
-// Explorations: smaller things tried and built. Same fields as a text card,
-// plus an optional image or video.
+// Explorations: smaller things tried and built. A tile has a title and either
+// an image with a short caption, or a coloured note. href makes it a link.
 window.EXPLORATIONS = [
+  {
+    title: 'A Story Passed Down',
+    href: 'https://www.behance.net/gallery/254811507/A-Story-Passed-Down',
+    image: 'media/explorations/story.jpg',
+    caption: 'An illustrated story about a 300-year-old murti of Bhuvaneshwari Mata.'
+  },
+  {
+    title: 'Onam Fest: illustration and lino printing',
+    href: 'https://www.behance.net/gallery/254809147/Onam-Fest-Illustration-Lino-Printing',
+    image: 'media/explorations/onam.jpg',
+    caption: 'A hand-carved lino print.'
+  },
+  {
+    title: 'Model construction: industrial tape dispenser',
+    href: 'https://www.behance.net/gallery/190143385/Model-Construction-Industrial-Tape-Dispenser',
+    image: 'media/explorations/tape.jpg',
+    caption: 'A hand-built model of an industrial tape dispenser.'
+  },
+  {
+    title: 'Materials and processes, NID',
+    href: 'https://www.behance.net/gallery/183037995/Materials-And-Processes-NID-AP',
+    image: 'media/explorations/materials.jpg',
+    caption: 'A wooden tray with a mosaic inlay, from a materials course at NID.'
+  },
   {
     title: 'Maitreyi Flow', tone: 'blue',
     note: 'A voice-to-text tool for macOS. Hold a key, speak, release, and cleaned-up English lands in whatever app you are typing in.'
@@ -178,9 +202,5 @@ window.EXPLORATIONS = [
     title: 'LeetCode journey', tone: 'paper',
     href: 'https://github.com/maitreyi-bhardwaj/leetcode-journey',
     note: 'Daily Python, data structures and algorithms practice, kept in public.'
-  },
-  {
-    title: 'Fruit lamps', tone: 'brown',
-    note: '3D-printed lamp forms modelled on açaí, breadfruit, cacao pod and baobab.'
   }
 ];
