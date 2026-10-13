@@ -6,39 +6,33 @@
 <title>Explorations, Maitreyi Bhardwaj</title>
 <meta name="description" content="Smaller things Maitreyi Bhardwaj has tried and built.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link rel="stylesheet" href="site.css?v=1791902652">
+<link rel="stylesheet" href="site.css?v=1791902872">
 <style>
 *, *::before, *::after { box-sizing: border-box; }
-/* A fully maroon page; the pieces are scattered across it, with white labels. */
+/* A fully maroon page: a row of pictures on the left, an index of titles on the right.
+   Pointing at a title or a picture lights up its partner. */
 html:has(body.maroon) { background: #6B1620; }
-body.maroon { --paper: #6B1620; --ink: #FFFFFF; --ink-soft: #F0D9DB; --pill: rgba(255, 255, 255, .14); background: var(--paper); -webkit-font-smoothing: antialiased; }
+body.maroon { --paper: #6B1620; --ink: #FFFFFF; --ink-soft: #F0D9DB; --pill: rgba(255, 255, 255, .14); background: var(--paper); color: #fff; -webkit-font-smoothing: antialiased; }
 body.maroon .topbar a { font-weight: 500; }
-
-.sheet {
-  position: relative; margin: 20px var(--gut) 0; background: none; color: #fff;
-  min-height: max(620px, calc(100svh - 110px)); border-radius: 4px;
-  font-size: 11px; letter-spacing: .08em; text-transform: uppercase; line-height: 1.45;
-}
-.sheet-top, .sheet-bottom { position: absolute; left: 18px; right: 18px; display: flex; justify-content: space-between; gap: 16px; }
-.sheet-top { top: 14px; } .sheet-bottom { bottom: 14px; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
-.target { position: absolute; left: 50%; top: 50%; width: 46px; height: 46px; margin: -23px 0 0 -23px; border: 1px solid rgba(255, 255, 255, .45); border-radius: 50%; }
-.target::after { content: '+'; position: absolute; inset: 0; display: grid; place-items: center; color: #fff; font-size: 13px; letter-spacing: 0; }
 
-.piece { position: absolute; display: flex; gap: 12px; align-items: flex-start; color: inherit; text-decoration: none; }
-.piece.flip { flex-direction: row-reverse; }
-.piece span { max-width: 9.5em; }
-.piece img, .piece .block { display: block; width: var(--w, 150px); transition: transform .35s cubic-bezier(.16, 1, .3, 1); }
-.piece .block { aspect-ratio: 808 / 632; background: rgba(255, 255, 255, .14); color: #fff; display: grid; place-items: center; text-align: center; padding: 10px; }
-a.piece:hover img, a.piece:hover .block, a.piece:focus-visible img { transform: scale(1.06); }
-a.piece:hover span { text-decoration: underline; text-underline-offset: 3px; }
-.piece span { font-weight: 500; }
+.index { display: grid; grid-template-columns: 2fr 1fr; column-gap: clamp(32px, 5vw, 80px); align-items: start; padding: clamp(56px, 9vw, 130px) var(--gut) 0; min-height: calc(100svh - 60px); }
+.pics { display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-start; }
+.pics a { display: block; flex: 0 1 calc((100% - 36px) / 4); transition: opacity .25s ease; }
+.pics a:first-child { flex-basis: calc((100% - 36px) / 4 * .82); }
+.pics img { display: block; width: 100%; aspect-ratio: 1; object-fit: cover; }
+.pics a:first-child img { object-position: 12% 50%; }
+.names { list-style: none; margin: 0; padding: 0; font-size: 14px; line-height: 1.3; }
+.names li { margin-bottom: 14px; }
+.names li.gap { margin-top: 30px; }
+.names a, .names span.row { color: #F0D9DB; text-decoration: none; transition: color .2s ease; }
+.names small { font-size: inherit; opacity: .8; }
+.names .on, .names a:hover, .names a:focus-visible { color: #fff; font-weight: 600; }
+.index.is-pointing .pics a:not(.on) { opacity: .35; }
 
-@media (max-width: 860px) {
-  .sheet { min-height: 0; padding: 56px 18px 56px; display: grid; grid-template-columns: 1fr 1fr; gap: 28px 16px; }
-  .target { display: none; }
-  .piece, .piece.flip { position: static; flex-direction: column; gap: 8px; }
-  .piece img, .piece .block { width: 100%; }
+@media (max-width: 760px) {
+  .index { grid-template-columns: 1fr; row-gap: 40px; }
+  .pics a, .pics a:first-child { flex-basis: calc(50% - 6px); }
 }
 </style>
 </head>
@@ -46,33 +40,38 @@ a.piece:hover span { text-decoration: underline; text-underline-offset: 3px; }
 
 <div data-topbar></div>
 
-<main class="sheet" id="sheet">
+<main class="index" id="index">
   <h1 class="sr-only">Explorations</h1>
-  <div class="target" aria-hidden="true"></div>
-  <div class="sheet-bottom"><span>Maitreyi Bhardwaj</span><span>Select a piece to open it</span></div>
+  <div class="pics" id="pics"></div>
+  <ul class="names" id="names"></ul>
 </main>
 
 <div data-foot></div>
 
-<script src="projects.js?v=1791902652"></script>
-<script src="site.js?v=1791902652"></script>
+<script src="projects.js?v=1791902872"></script>
+<script src="site.js?v=1791902872"></script>
 <script>
-// Where each piece sits on the sheet: [left %, top %, image width px, label on the right?]
 (function () {
-  const SPOTS = [[5, 12, 190, 0], [43, 21, 120, 0], [72, 11, 150, 1], [9, 47, 150, 0], [60, 46, 130, 1], [28, 72, 170, 0], [74, 70, 150, 0], [48, 60, 110, 1]];
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-  const sheet = document.getElementById('sheet');
-  const items = window.EXPLORATIONS;
-  items.forEach((x, i) => {
-    const s = SPOTS[i % SPOTS.length];
-    const el = document.createElement(x.href ? 'a' : 'div');
-    el.className = 'piece' + (s[3] ? ' flip' : '');
-    if (x.href) { el.href = x.href; el.target = '_blank'; el.rel = 'noopener'; }
-    el.style.cssText = 'left:' + s[0] + '%;top:' + s[1] + '%;--w:' + s[2] + 'px';
-    if (x.note || x.caption) el.title = x.caption || x.note;
-    el.innerHTML = '<span>' + esc(x.title) + '</span>' +
-      (x.image ? '<img src="' + esc(x.image) + '" alt="' + esc(x.caption || x.title) + '">' : '<div class="block">' + esc(x.title) + '</div>');
-    sheet.appendChild(el);
+  const wrap = document.getElementById('index'), pics = document.getElementById('pics'), names = document.getElementById('names');
+  const link = x => x.href ? ' href="' + esc(x.href) + '" target="_blank" rel="noopener"' : '';
+  let lastHadImage = true;
+  window.EXPLORATIONS.forEach((x, i) => {
+    if (x.image) pics.insertAdjacentHTML('beforeend', '<a data-i="' + i + '"' + link(x) + '><img src="' + esc(x.image) + '" alt="' + esc(x.caption || x.title) + '"></a>');
+    const gap = lastHadImage && !x.image ? ' class="gap"' : '';
+    lastHadImage = !!x.image;
+    const label = esc(x.title) + ' <small>{ ' + esc(x.kind || 'Personal') + ' }</small>';
+    names.insertAdjacentHTML('beforeend', '<li' + gap + '>' + (x.href ? '<a data-i="' + i + '"' + link(x) + '>' + label + '</a>' : '<span class="row" data-i="' + i + '">' + label + '</span>') + '</li>');
+  });
+  const point = i => {
+    wrap.classList.toggle('is-pointing', i !== null && !!pics.querySelector('[data-i="' + i + '"]'));
+    wrap.querySelectorAll('[data-i]').forEach(el => el.classList.toggle('on', el.dataset.i === String(i)));
+  };
+  wrap.querySelectorAll('[data-i]').forEach(el => {
+    el.addEventListener('mouseenter', () => point(el.dataset.i));
+    el.addEventListener('focus', () => point(el.dataset.i));
+    el.addEventListener('mouseleave', () => point(null));
+    el.addEventListener('blur', () => point(null));
   });
 })();
 </script>

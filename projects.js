@@ -171,35 +171,35 @@ window.TIMELINE = [
 // an image with a short caption, or a coloured note. href makes it a link.
 window.EXPLORATIONS = [
   {
-    title: 'A Story Passed Down',
+    title: 'A Story Passed Down', kind: 'Illustration',
     href: 'https://www.behance.net/gallery/254811507/A-Story-Passed-Down',
     image: 'media/explorations/story.jpg',
     caption: 'An illustrated story about a 300-year-old murti of Bhuvaneshwari Mata.'
   },
   {
-    title: 'Onam Fest: illustration and lino printing',
+    title: 'Onam Fest', kind: 'Illustration, Print',
     href: 'https://www.behance.net/gallery/254809147/Onam-Fest-Illustration-Lino-Printing',
     image: 'media/explorations/onam.jpg',
     caption: 'A hand-carved lino print.'
   },
   {
-    title: 'Model construction: industrial tape dispenser',
+    title: 'Industrial tape dispenser', kind: 'Model making',
     href: 'https://www.behance.net/gallery/190143385/Model-Construction-Industrial-Tape-Dispenser',
     image: 'media/explorations/tape.jpg',
     caption: 'A hand-built model of an industrial tape dispenser.'
   },
   {
-    title: 'Materials and processes, NID',
+    title: 'Materials and processes, NID', kind: 'Craft',
     href: 'https://www.behance.net/gallery/183037995/Materials-And-Processes-NID-AP',
     image: 'media/explorations/materials.jpg',
     caption: 'A wooden tray with a mosaic inlay, from a materials course at NID.'
   },
   {
-    title: 'Maitreyi Flow', tone: 'blue',
+    title: 'Maitreyi Flow', tone: 'blue', kind: 'Code',
     note: 'A voice-to-text tool for macOS. Hold a key, speak, release, and cleaned-up English lands in whatever app you are typing in.'
   },
   {
-    title: 'LeetCode journey', tone: 'paper',
+    title: 'LeetCode journey', tone: 'paper', kind: 'Code',
     href: 'https://github.com/maitreyi-bhardwaj/leetcode-journey',
     note: 'Daily Python, data structures and algorithms practice, kept in public.'
   }
