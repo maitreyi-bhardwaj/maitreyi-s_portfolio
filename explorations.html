@@ -6,33 +6,33 @@
 <title>Explorations, Maitreyi Bhardwaj</title>
 <meta name="description" content="Smaller things Maitreyi Bhardwaj has tried and built.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link rel="stylesheet" href="site.css?v=1791902457">
+<link rel="stylesheet" href="site.css?v=1791902652">
 <style>
 *, *::before, *::after { box-sizing: border-box; }
-/* A maroon page with one cream sheet on it; the pieces are scattered across the sheet. */
+/* A fully maroon page; the pieces are scattered across it, with white labels. */
 html:has(body.maroon) { background: #6B1620; }
 body.maroon { --paper: #6B1620; --ink: #FFFFFF; --ink-soft: #F0D9DB; --pill: rgba(255, 255, 255, .14); background: var(--paper); -webkit-font-smoothing: antialiased; }
 body.maroon .topbar a { font-weight: 500; }
 
 .sheet {
-  --ink: #2B1B11; --ink-soft: #7C6C60;
-  position: relative; margin: 20px var(--gut) 0; background: #EFEBE0; color: var(--ink);
+  position: relative; margin: 20px var(--gut) 0; background: none; color: #fff;
   min-height: max(620px, calc(100svh - 110px)); border-radius: 4px;
   font-size: 11px; letter-spacing: .08em; text-transform: uppercase; line-height: 1.45;
 }
 .sheet-top, .sheet-bottom { position: absolute; left: 18px; right: 18px; display: flex; justify-content: space-between; gap: 16px; }
 .sheet-top { top: 14px; } .sheet-bottom { bottom: 14px; }
-.sheet h1 { font: inherit; letter-spacing: inherit; margin: 0; }
-.target { position: absolute; left: 50%; top: 50%; width: 46px; height: 46px; margin: -23px 0 0 -23px; border: 1px solid #C9A7A9; border-radius: 50%; }
-.target::after { content: '+'; position: absolute; inset: 0; display: grid; place-items: center; color: #6B1620; font-size: 13px; letter-spacing: 0; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.target { position: absolute; left: 50%; top: 50%; width: 46px; height: 46px; margin: -23px 0 0 -23px; border: 1px solid rgba(255, 255, 255, .45); border-radius: 50%; }
+.target::after { content: '+'; position: absolute; inset: 0; display: grid; place-items: center; color: #fff; font-size: 13px; letter-spacing: 0; }
 
 .piece { position: absolute; display: flex; gap: 12px; align-items: flex-start; color: inherit; text-decoration: none; }
 .piece.flip { flex-direction: row-reverse; }
 .piece span { max-width: 9.5em; }
 .piece img, .piece .block { display: block; width: var(--w, 150px); transition: transform .35s cubic-bezier(.16, 1, .3, 1); }
-.piece .block { aspect-ratio: 808 / 632; background: #6B1620; color: #fff; display: grid; place-items: center; text-align: center; padding: 10px; }
+.piece .block { aspect-ratio: 808 / 632; background: rgba(255, 255, 255, .14); color: #fff; display: grid; place-items: center; text-align: center; padding: 10px; }
 a.piece:hover img, a.piece:hover .block, a.piece:focus-visible img { transform: scale(1.06); }
-a.piece:hover span { color: #6B1620; }
+a.piece:hover span { text-decoration: underline; text-underline-offset: 3px; }
+.piece span { font-weight: 500; }
 
 @media (max-width: 860px) {
   .sheet { min-height: 0; padding: 56px 18px 56px; display: grid; grid-template-columns: 1fr 1fr; gap: 28px 16px; }
@@ -47,15 +47,15 @@ a.piece:hover span { color: #6B1620; }
 <div data-topbar></div>
 
 <main class="sheet" id="sheet">
-  <div class="sheet-top"><h1>Explorations</h1><span>Smaller things I try and build</span><span id="count"></span></div>
+  <h1 class="sr-only">Explorations</h1>
   <div class="target" aria-hidden="true"></div>
   <div class="sheet-bottom"><span>Maitreyi Bhardwaj</span><span>Select a piece to open it</span></div>
 </main>
 
 <div data-foot></div>
 
-<script src="projects.js?v=1791902457"></script>
-<script src="site.js?v=1791902457"></script>
+<script src="projects.js?v=1791902652"></script>
+<script src="site.js?v=1791902652"></script>
 <script>
 // Where each piece sits on the sheet: [left %, top %, image width px, label on the right?]
 (function () {
@@ -63,7 +63,6 @@ a.piece:hover span { color: #6B1620; }
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   const sheet = document.getElementById('sheet');
   const items = window.EXPLORATIONS;
-  document.getElementById('count').textContent = 'Gallery (' + items.length + ')';
   items.forEach((x, i) => {
     const s = SPOTS[i % SPOTS.length];
     const el = document.createElement(x.href ? 'a' : 'div');
