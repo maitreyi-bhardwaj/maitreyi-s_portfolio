@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<script>if(localStorage.getItem("dm")==="1")document.documentElement.classList.add("dark");</script>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -100,24 +99,18 @@ html.dark { --bg:#0f0f0f; --card:#171717; --panel:#1c1c1c; --black:#f0f0ee; --gr
 html.dark body { background: var(--bg); }
 html.dark #dm-toggle { background:#171717; border-color:#2a2a2a; color:#f0f0ee; }
 </style>
+<link rel="stylesheet" href="site.css">
 </head>
 <body>
 
-<header class="mini-nav">
-  <a href="index.html">Works</a>
-  <a href="about.html">About me</a>
-  <a href="resume.pdf" target="_blank">Resume</a>
-  <a href="mailto:bhardwajmaitreyi6@gmail.com">Say Hello</a>
-</header>
-<button id="dm-toggle" style="position:fixed;bottom:28px;right:28px;z-index:200;width:42px;height:42px;border-radius:50%;border:1px solid var(--border);background:var(--bg);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;">☾</button>
+<div data-topbar></div>
 
 <div class="case-hero"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781041541/distill_01_hero_m9wn4n.png" alt="Distill hero"></div>
 
 <section class="split">
   <h1>Distill</h1>
   <div>
-    <p class="plabel">(brief)</p>
-    <p>Distill is a Chrome extension that listens to your active tab, translates the audio into 16 languages at once, and streams live ASL visual cards on top of any site. Built in 36 hours at HackAZona, it won the Microsoft Track.</p>
+    <p>Distill is a Chrome extension that listens to your active tab, <b>translates the audio into 16 languages at once, and streams live ASL visual cards on top of any site</b>. Built in 36 hours at HackAZona, <b>it won the Microsoft Track</b>.</p>
     <hr class="meta-rule">
     <div class="meta4">
       <div><div class="ml">Company</div><div class="mv">HackAZona (Microsoft Track)</div></div>
@@ -126,24 +119,21 @@ html.dark #dm-toggle { background:#171717; border-color:#2a2a2a; color:#f0f0ee; 
       <div><div class="ml">Year</div><div class="mv">2026</div></div>
     </div>
     <hr class="meta-rule">
-    <p class="plabel">(my role)</p>
-    <p>I designed the whole interface in the 36-hour window: the extension panel, the language tokens, the toggles, the floating captions, and the ASL card system, then tested it live on real lectures while my three teammates built the Azure pipeline.</p>
+    <p><b>I designed the whole interface in the 36-hour window</b>: the extension panel, the language tokens, the toggles, the floating captions, and the ASL card system, then tested it live on real lectures while my three teammates built the Azure pipeline.</p>
   </div>
 </section>
 
 <section class="prob">
-  <p class="plabel">(the problem)</p>
   <h2>Live audio locks people out.</h2>
-  <p>Lectures, meetings, and videos happen in real time. If you are deaf, hard of hearing, or still learning the language, you are behind from the first sentence. Captions, when they exist at all, come in one language and never in ASL.</p>
-  <p>Accessibility tools only matter if they keep pace with real speech. Most live-caption extensions treat the interface as an afterthought: they clutter the screen, cover the video, and break the page underneath. For Distill, the layout is the product.</p>
+  <p>Lectures, meetings, and videos happen in real time. If you are deaf, hard of hearing, or still learning the language, you are behind from the first sentence. <b>Captions, when they exist at all, come in one language and never in ASL.</b></p>
+  <p>Accessibility tools only matter if they keep pace with real speech. Most live-caption extensions treat the interface as an afterthought: they clutter the screen, cover the video, and break the page underneath. <b>For Distill, the layout is the product.</b></p>
 </section>
 
 <!-- STEP 1 -->
 <section class="step">
   <div class="step-in">
-    <p class="stepnum">(1)</p>
     <h2>I started with the hardest constraint: this thing lives on someone else's page</h2>
-    <p>A Chrome extension does not get its own screen. It sits on top of a page somebody else designed. One wrong layout decision and it covers the video, hides the controls, or pushes the whole page sideways.</p>
+    <p>A Chrome extension does not get its own screen. <b>It sits on top of a page somebody else designed.</b> One wrong layout decision and it covers the video, hides the controls, or pushes the whole page sideways.</p>
     <p>So before drawing a single screen, I mapped the four places people actually watch and meet, and worked out where the panel could sit on each one without getting in the way.</p>
     <div class="trio">
       <div class="tcard"><h4>YouTube</h4><p>Anchors below the player so it never covers the video or the controls</p></div>
@@ -157,10 +147,9 @@ html.dark #dm-toggle { background:#171717; border-color:#2a2a2a; color:#f0f0ee; 
 <!-- STEP 2 -->
 <section class="step">
   <div class="step-in">
-    <p class="stepnum">(2)</p>
     <h2>I designed a panel with almost no room to spare</h2>
-    <p>With the space settled, every component had to earn its place. Input language is one clear button group. Outputs are multi-select tokens, color-coded per language, each with a quick remove. Speaker diarization and floating captions are plain on/off toggles. One blue button starts everything.</p>
-    <p>I set the type size, contrast, and spacing for reading at speed, because people use this while someone is still talking. Panels have fixed heights so the layout never jumps as new text arrives.</p>
+    <p>With the space settled, every component had to earn its place. Input language is one clear button group. Outputs are multi-select tokens, color-coded per language, each with a quick remove. Speaker diarization and floating captions are plain on/off toggles. <b>One blue button starts everything.</b></p>
+    <p>I set the type size, contrast, and spacing for reading at speed, because people use this while someone is still talking. <b>Panels have fixed heights so the layout never jumps as new text arrives.</b></p>
     <div class="trio">
       <div class="tcard"><h4>Language tokens</h4><p>Multi-select outputs, color-coded so you can scan at a glance</p></div>
       <div class="tcard"><h4>Floating captions</h4><p>Ride on top of any site without breaking its layout</p></div>
@@ -185,16 +174,15 @@ html.dark #dm-toggle { background:#171717; border-color:#2a2a2a; color:#f0f0ee; 
 <!-- STEP 3 -->
 <section class="step">
   <div class="step-in">
-    <p class="stepnum">(3)</p>
     <h2>I mapped the path from tab audio to ASL cards</h2>
-    <p>Sound goes in one end and signing comes out the other. Four steps, in order, all happening while the speaker keeps talking. A signing user and a translating user can watch the same lecture together, each getting what they need.</p>
+    <p><b>Sound goes in one end and signing comes out the other.</b> Four steps, in order, all happening while the speaker keeps talking. A signing user and a translating user can watch the same lecture together, each getting what they need.</p>
     <div class="trio">
       <div class="tcard"><h4>1. Tab audio</h4><p>Live sound captured straight from the active browser tab</p></div>
       <div class="tcard"><h4>2. Azure AI</h4><p>Speech and Translator turn it into text in 16 languages</p></div>
       <div class="tcard"><h4>3. Supermemory</h4><p>Keeps the conversation history so context stays accurate</p></div>
       <div class="tcard"><h4>4. Panel update</h4><p>Tokens sync and ASL cards populate in real time</p></div>
     </div>
-    <p>We tested it during the hackathon on a live Chinese lecture, to prove the multilingual output holds up on real speech and not just on a clean demo recording.</p>
+    <p><b>We tested it during the hackathon on a live Chinese lecture</b>, to prove the multilingual output holds up on real speech and not just on a clean demo recording.</p>
     <div class="big">
       <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781041541/distill_05_how_it_works_ygndkk.png" alt="How Distill works, pipeline diagram" loading="lazy">
     </div>
@@ -209,7 +197,6 @@ html.dark #dm-toggle { background:#171717; border-color:#2a2a2a; color:#f0f0ee; 
 <!-- STEP 4 -->
 <section class="step">
   <div class="step-in">
-    <p class="stepnum">(4)</p>
     <h2>I tested it live in front of the judges</h2>
     <p>No slides, no recording. We ran the extension on a real lecture in the room, with translation and ASL cards populating as the speaker talked.</p>
     <div class="video-big">
@@ -219,22 +206,20 @@ html.dark #dm-toggle { background:#171717; border-color:#2a2a2a; color:#f0f0ee; 
 </section>
 
 <section class="outcome">
-  <p class="plabel">(the outcome)</p>
   <h2>$2,000 Microsoft Track Prize. Built in 36 hours.</h2>
   <p>A full interface system and a working backend, in one weekend. Every voice heard, every language understood.</p>
-  <p><b>What I learned: accessibility and good design are not in conflict.</b> Assistive products do not have to look clinical or dated. The tight space of an extension made the design better, not worse: less clutter, tighter hierarchy, cleaner states. A 36-hour sprint with one clear constraint produced sharper work than an open brief with unlimited time would have.</p>
   <div class="big">
     <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781041542/distill_06_end_ntluo5.png" alt="Every voice heard, Distill closing screen" loading="lazy">
+  </div>
+  <div class="learn">
+    <div><h3>What I learned</h3><ul><li>Accessibility and good design are not in conflict.</li><li>One clear constraint produces sharper work than an open brief.</li></ul></div>
+    <div><h3>How I'll use it next</h3><ul><li>Design for accessibility from the first screen, not as a later pass.</li><li>Set one hard constraint at the start of open projects.</li></ul></div>
   </div>
   <a class="case-next" href="frontdoor.html">Next project: Home Passport &rarr;</a>
 </section>
 
-<footer><span>&copy; 2026 Maitreyi Bhardwaj</span><span>byMaitreyi</span></footer>
+<div data-foot></div>
 
-<script>
-const _dmt = document.getElementById('dm-toggle');
-if(localStorage.getItem('dm')==='1'){document.documentElement.classList.add('dark');_dmt.textContent='☀';}
-_dmt.addEventListener('click',()=>{const on=document.documentElement.classList.toggle('dark');localStorage.setItem('dm',on?'1':'0');_dmt.textContent=on?'☀':'☾';});
-</script>
+<script src="site.js"></script>
 </body>
 </html>

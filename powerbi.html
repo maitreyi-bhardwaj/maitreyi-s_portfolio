@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Capital Program Dashboard, Maitreyi Bhardwaj</title>
+<meta name="description" content="A Power BI dashboard that shows whether 12 electric transmission projects are on budget, on schedule, safe and staffed.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="stylesheet" href="case.css">
+<link rel="stylesheet" href="site.css">
+</head>
+<body class="wide">
+
+<div data-topbar></div>
+
+<div class="case-hero"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto:best/v1791840381/Screenshot_2026-10-12_at_2.25.54_PM_htgbej.png" alt="The Peachtree Grid Capital Program Health dashboard: six KPI cards, a colour-coded project table, staffing, safety and risk charts"></div>
+
+<section class="split">
+  <h1>Capital Program Dashboard</h1>
+  <div>
+    <p>I'm a designer, and I wanted to understand how big construction programs are tracked. <b>So I built the dashboard a program leader would open every month, for a made-up utility with 12 projects.</b></p>
+    <p>It is a solo learning project. The data is synthetic.</p>
+    <div class="meta4">
+      <div><div class="ml">Company</div><div class="mv">Solo project</div></div>
+      <div><div class="ml">Tools</div><div class="mv">Power BI, Power Query, DAX</div></div>
+      <div><div class="ml">Role</div><div class="mv">Analyst + Designer</div></div>
+      <div><div class="ml">Year</div><div class="mv">2026</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="step">
+  <div class="step-in duo">
+    <div class="duo-vis">
+      <p class="vis-label">Cost: for every $1.00 spent</p>
+      <div class="bars">
+        <div class="bar-row"><span class="bl">Spent</span><span class="bt"><i style="width:100%"></i></span><span class="bv">$1.00</span></div>
+        <div class="bar-row is-key"><span class="bl">Work done</span><span class="bt"><i style="width:94%"></i></span><span class="bv">$0.94</span></div>
+      </div>
+      <p class="vis-label" style="margin-top:36px">Schedule: for every $1.00 of work planned by now</p>
+      <div class="bars">
+        <div class="bar-row"><span class="bl">Planned</span><span class="bt"><i style="width:100%"></i></span><span class="bv">$1.00</span></div>
+        <div class="bar-row is-key"><span class="bl">Work done</span><span class="bt"><i style="width:91%"></i></span><span class="bv">$0.91</span></div>
+      </div>
+    </div>
+    <div class="duo-txt">
+      <h2>First, what project controls is</h2>
+      <p><b>Project controls is the job of knowing whether a project is on budget and on schedule while there is still time to act.</b></p>
+      <p>It runs on three numbers: the work you planned to have done by now, the work actually done, and what you have spent. Compare work done with money spent and you get the cost index. Compare it with the plan and you get the schedule index.</p>
+      <p><b>Below 1.0 means trouble.</b> This program scores 0.94 on cost and 0.91 on schedule.</p>
+    </div>
+  </div>
+</section>
+
+<section class="step">
+  <div class="step-in duo duo--flip">
+    <div class="duo-vis">
+      <ul class="asks">
+        <li>Which projects are over budget?</li>
+        <li>Which are behind schedule?</li>
+        <li>What will it all cost at the end?</li>
+        <li>Where is the biggest risk, and is safety improving?</li>
+        <li>How many people have no project?</li>
+      </ul>
+    </div>
+    <div class="duo-txt">
+      <h2>Why I built it</h2>
+      <p>Someone who works in project controls told me which skills their teams rely on: cleaning data in Power Query, building a data model, and writing DAX measures. <b>I learn by making things, so I made the real thing.</b></p>
+      <p>A program leader asks the same five questions every month. <b>I designed one page that answers all five.</b></p>
+      <p>I work on a Mac and Power BI's desktop app is Windows only, so I built all of it in the browser version.</p>
+    </div>
+  </div>
+</section>
+
+<section class="step">
+  <div class="step-in duo">
+    <div class="duo-vis">
+      <div class="fixes">
+        <div><span>Duplicate rows</span><span>removed</span></div>
+        <div><span>"60%" stored as text</span><span>0.60 as a number</span></div>
+        <div><span>"03/04/2026" read as March 4</span><span>3 April 2026</span></div>
+        <div><span>Region names with stray spaces and mixed capitals</span><span>one spelling each</span></div>
+      </div>
+    </div>
+    <div class="duo-txt">
+      <h2>Cleaning the data</h2>
+      <p>The six tables were messy on purpose, the way real project data is. <b>Before any chart, I fixed the data in Power Query.</b></p>
+      <p>Power Query records each fix as a step. <b>When new data arrives, every step runs again on its own</b>, so the cleanup is done once and not every month.</p>
+      <p><b>Two data-type errors failed without any warning.</b> Dates read in the wrong order, day for month, became different dates. And a whole-number setting rounded 60% up to 1.</p>
+    </div>
+  </div>
+</section>
+
+<section class="step">
+  <div class="step-in duo duo--flip">
+    <div class="duo-vis">
+      <a class="zoom zoom--crop" href="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto:best/v1791840380/Screenshot_2026-10-12_at_2.25.07_PM_w57u6j.png" target="_blank" rel="noopener"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto:best/v1791840380/Screenshot_2026-10-12_at_2.25.07_PM_w57u6j.png" alt="The data model: LaborHours, MonthlyProgress, Projects, RiskRegister, SafetyLog, Staffing and Date tables joined by one-to-many relationships" loading="lazy"></a>
+      <p class="big-cap">Part of the model view in Power BI. Click to see all seven tables.</p>
+    </div>
+    <div class="duo-txt">
+      <h2>The data model</h2>
+      <p><b>I built a star schema: the Projects table and a Date table sit in the middle, joined to the other tables by 10 one-to-many relationships.</b></p>
+      <p>That is what makes the page work as one thing. Pick a project, a month or a region, and every number and chart changes together.</p>
+      <p>On top of the model I wrote the measures in DAX: <b>CPI</b> (cost index), <b>SPI</b> (schedule index), <b>EAC</b> (forecast final cost), <b>VAC</b> (forecast overrun), <b>risk exposure</b> (chance of each open risk times its cost) and <b>TRIR</b> (recordable safety incidents per 200,000 hours worked).</p>
+    </div>
+  </div>
+</section>
+
+<section class="step">
+  <div class="step-in duo">
+    <div class="duo-vis">
+      <div class="nums" style="--n:2">
+        <div class="num"><div class="n">$18.7M</div><div class="c">forecast overrun on a $312M budget</div></div>
+        <div class="num"><div class="n">$12.3M</div><div class="c">of it from one project, Columbus West</div></div>
+      </div>
+      <div class="bars" role="img" aria-label="Forecast overrun by project. Columbus West 500kV is $12.3M, far ahead of the others.">
+        <div class="bar-row is-key" title="Columbus West 500kV: $12.3M over"><span class="bl">Columbus West 500kV</span><span class="bt"><i style="width:100%"></i></span><span class="bv">$12.3M</span></div>
+        <div class="bar-row" title="Macon-Perry 115kV: $3.4M over"><span class="bl">Macon-Perry 115kV</span><span class="bt"><i style="width:27.6%"></i></span><span class="bv">$3.4M</span></div>
+        <div class="bar-row" title="Gwinnett Data Center: $2.7M over"><span class="bl">Gwinnett Data Center</span><span class="bt"><i style="width:22%"></i></span><span class="bv">$2.7M</span></div>
+        <div class="bar-row" title="Brunswick Storm Hardening: $1.5M over"><span class="bl">Brunswick Storm Hardening</span><span class="bt"><i style="width:12.2%"></i></span><span class="bv">$1.5M</span></div>
+      </div>
+    </div>
+    <div class="duo-txt">
+      <h2>What the dashboard showed</h2>
+      <p><b>The program is forecast to finish $18.7M over budget, and one project causes two thirds of that.</b></p>
+      <p>That changes what a leader does next. The program does not need fixing everywhere. Columbus West needs attention first.</p>
+      <p><b>Safety is not improving.</b> Recordable incidents trended upward through 2026, and the rate stands at 3.96.</p>
+      <p>The largest open risk is losing the windows when power lines can be switched off for work, at $5.6M. About 17 of 61 staff had no project in a typical month.</p>
+    </div>
+  </div>
+</section>
+
+<section class="step">
+  <div class="step-in duo duo--flip">
+    <div class="duo-vis">
+      <div class="shift">
+        <div><div class="who">Fayette cost index</div><div class="vals"><span class="was">1.05</span><span class="to">is really</span><span>0.97</span></div></div>
+        <div><div class="who">Staff without a project</div><div class="vals"><span class="was">354</span><span class="to">is really</span><span>17</span></div></div>
+        <div><div class="who">Example: two projects, one earning $1M on $2M spent, one $99M on $100M. Averaged cost index</div><div class="vals"><span class="was">0.75</span><span class="to">is really</span><span>0.98</span></div></div>
+      </div>
+    </div>
+    <div class="duo-txt">
+      <h2>Three numbers I had to get right</h2>
+      <p>Three months had work recorded but no cost. I counted them, and it made projects look cheaper than they were. <b>Once I left those months out, Fayette went from under budget to over.</b></p>
+      <p>Then I added up monthly headcount and got 354 people without a project, out of 61 staff. <b>Headcount is a snapshot, so the right figure is the monthly average: 17.</b></p>
+      <p><b>The cost index is worked out for the whole program from totals, not by averaging the projects.</b> Averaging would count a $3.6M project the same as a $78M one.</p>
+      <p>The wrong numbers all looked fine on the page. So I checked every figure against a separate calculation in Python.</p>
+    </div>
+  </div>
+</section>
+
+<section class="step">
+  <div class="step-in duo">
+    <div class="duo-vis">
+      <a class="zoom" href="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto:best/v1791840380/Screenshot_2026-10-12_at_2.24.06_PM_wmtlr2.png" target="_blank" rel="noopener"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto:best/v1791840380/Screenshot_2026-10-12_at_2.24.06_PM_wmtlr2.png" alt="The dashboard filtered to the Coastal region" loading="lazy"></a>
+      <p class="big-cap">The same page filtered to the Coastal region.</p>
+    </div>
+    <div class="duo-txt">
+      <h2>What is still unfinished</h2>
+      <p><b>It is not finished.</b> The staffing chart still labels unassigned staff as "(Blank)", and I have not published the report yet.</p>
+    </div>
+  </div>
+</section>
+
+<section class="outcome">
+  <p>All data is synthetic and does not describe any real utility or company.</p>
+  <div class="learn">
+    <div><h3>What I learned</h3><ul><li>A dashboard is a design problem as much as a data problem.</li><li>The hard part is the data underneath, not the charts.</li><li>A number can look right on the page and still be wrong.</li></ul></div>
+    <div><h3>How I'll use it next</h3><ul><li>Check every figure I put on a screen against its source, in design work too.</li><li>Use the same data modelling in Reach and in future analysis projects.</li></ul></div>
+  </div>
+  <a class="case-next" href="reach.html">Next project: Reach &rarr;</a>
+</section>
+
+<div data-foot></div>
+
+<script src="site.js"></script>
+</body>
+</html>

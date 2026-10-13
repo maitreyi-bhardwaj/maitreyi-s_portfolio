@@ -166,24 +166,18 @@ html.dark { --bg:#0f0f0f; --card:#171717; --panel:#1c1c1c; --black:#f0f0ee; --gr
 html.dark body { background: var(--bg); }
 html.dark #dm-toggle { background:#171717; border-color:#2a2a2a; color:#f0f0ee; }
 </style>
+<link rel="stylesheet" href="site.css">
 </head>
 <body>
 
-<header class="mini-nav">
-  <a href="index.html">Works</a>
-  <a href="about.html">About me</a>
-  <a href="resume.pdf" target="_blank">Resume</a>
-  <a href="mailto:bhardwajmaitreyi6@gmail.com">Say Hello</a>
-</header>
-<button id="dm-toggle" style="position:fixed;bottom:28px;right:28px;z-index:200;width:42px;height:42px;border-radius:50%;border:1px solid var(--border);background:var(--bg);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;">☾</button>
+<div data-topbar></div>
 
 <div class="case-hero"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024360/fd_01_hero_hlcjsk.png" alt="Home Passport hero"></div>
 
 <section class="split">
   <h1>Home Passport</h1>
   <div>
-    <p class="plabel">(the story)</p>
-    <p>Home Passport is an app concept for Frontdoor and American Home Shield. It keeps every appliance, warranty, and repair in one place, and registers a new device with a single NFC tap.</p>
+    <p>Home Passport is an app concept for Frontdoor and American Home Shield. <b>It keeps every appliance, warranty, and repair in one place, and registers a new device with a single NFC tap.</b></p>
     <hr class="meta-rule">
     <div class="meta4">
       <div><div class="ml">Company</div><div class="mv">Frontdoor × ASU</div></div>
@@ -192,15 +186,13 @@ html.dark #dm-toggle { background:#171717; border-color:#2a2a2a; color:#f0f0ee; 
       <div><div class="ml">Year</div><div class="mv">2026</div></div>
     </div>
     <hr class="meta-rule">
-    <p class="plabel">(my role)</p>
-    <p>I worked on this with my teammate Anahi. I researched the existing appliance apps, mapped the service flows, designed the screens, built the design system, and made the physical NFC tag prototype. We presented to Frontdoor at the final review, where it was selected as a recognized proposal.</p>
+    <p>I worked on this with my teammate Anahi. I researched the existing appliance apps, mapped the service flows, designed the screens, built the design system, and made the physical NFC tag prototype. <b>We presented to Frontdoor at the final review, where it was selected as a recognized proposal.</b></p>
   </div>
 </section>
 
 <section class="prob">
-  <p class="plabel">(the problem)</p>
   <h2>There was no reason to register in the first place.</h2>
-  <p>Half of U.S. homes own a smart appliance, but only about 1 in 10 ever connect it to its app. I tested LG ThinQ, Samsung SmartThings, and the current AHS app to understand why. All three ask for long forms, serial numbers, and purchase details before giving anything back. Booking one repair takes 12 steps, and the app remembers none of it next time.</p>
+  <p><b>Half of U.S. homes own a smart appliance, but only about 1 in 10 ever connect it to its app.</b> I tested LG ThinQ, Samsung SmartThings, and the current AHS app to understand why. All three ask for long forms, serial numbers, and purchase details before giving anything back. <b>Booking one repair takes 12 steps, and the app remembers none of it next time.</b></p>
   <p>The interface was never the real problem.</p>
   <div class="flow">
     <div class="flow-row">
@@ -222,13 +214,12 @@ html.dark #dm-toggle { background:#171717; border-color:#2a2a2a; color:#f0f0ee; 
 <!-- STEP 1 -->
 <section class="step">
   <div class="step-in">
-    <p class="stepnum">(1)</p>
     <h2>I studied the apps people already use</h2>
     <p>I set up real appliances in three apps and wrote down everything that got in the way. Each app failed in its own way, and none of them gave anything back before something broke.</p>
     <div class="trio">
-      <div class="tcard"><h4>LG ThinQ</h4><p>Registration looks optional until you need a repair, then it is required. Every request makes you pick brand, category, appliance, and problem again. The app remembers nothing about your home.</p></div>
+      <div class="tcard"><h4>LG ThinQ</h4><p>Registration looks optional until you need a repair, then it is required. Every request makes you pick brand, category, appliance, and problem again. <b>The app remembers nothing about your home.</b></p></div>
       <div class="tcard"><h4>Samsung SmartThings</h4><p>We tried a second-hand washer. The setup code was printed inside the machine and was smudged. The app then asked for original purchase dates a used owner does not have, so we typed in fake data just to finish.</p></div>
-      <div class="tcard"><h4>Current AHS app</h4><p>Records belong to an account, not a house. Sell the home and the history is wiped, so the new owner gets no repair log and no appliance ages. AHS only learns what is in a house after a claim is filed.</p></div>
+      <div class="tcard"><h4>Current AHS app</h4><p><b>Records belong to an account, not a house.</b> Sell the home and the history is wiped, so the new owner gets no repair log and no appliance ages. AHS only learns what is in a house after a claim is filed.</p></div>
     </div>
     <div class="two-up">
       <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024362/LG_App_Experience_yohxgq.png" alt="LG ThinQ research" loading="lazy">
@@ -249,7 +240,6 @@ html.dark #dm-toggle { background:#171717; border-color:#2a2a2a; color:#f0f0ee; 
 <!-- STEP: count the steps -->
 <section class="step">
   <div class="step-in">
-    <p class="stepnum">(2)</p>
     <h2>I counted what it takes to book one repair: 12 steps</h2>
     <p>I walked through the real flow and wrote down every screen. Twelve steps to book a single repair, and the app starts from zero the next time you come back.</p>
     <div class="trio">
@@ -269,7 +259,6 @@ html.dark #dm-toggle { background:#171717; border-color:#2a2a2a; color:#f0f0ee; 
 <!-- STEP: look outside the category -->
 <section class="step">
   <div class="step-in">
-    <p class="stepnum">(3)</p>
     <h2>I looked at who already makes signing up feel like nothing</h2>
     <p>None of the appliance apps had an answer, so I looked at products people register without being asked. Three of them explained why.</p>
     <div class="trio">
@@ -278,10 +267,6 @@ html.dark #dm-toggle { background:#171717; border-color:#2a2a2a; color:#f0f0ee; 
       <div class="tcard"><h4>Peloton</h4><p>Setup happens while you are unboxing, when you are most excited. Timing matters as much as the flow does.</p></div>
     </div>
     <p><b>The principle I designed against: the value has to arrive before the breakdown, not after it.</b> Stop asking people to fill in forms. Make it a tap, and give something back the same second.</p>
-    <div class="res">
-      <div class="rl">Result</div>
-      <p>A principle to design against: the value has to arrive before the breakdown, not after it.</p>
-    </div>
 
   </div>
 </section>
@@ -289,9 +274,8 @@ html.dark #dm-toggle { background:#171717; border-color:#2a2a2a; color:#f0f0ee; 
 <!-- STEP 4 -->
 <section class="step">
   <div class="step-in">
-    <p class="stepnum">(4)</p>
     <h2>I designed registration around one tap</h2>
-    <p>Registration had to cost nothing, so I designed it around a physical NFC tag on the appliance. Your phone touches the tag, the appliance identifies itself, and the home record updates before you open a form. Tap, confirm, done, and the record belongs to the home rather than the owner, so it survives when the house is sold.</p>
+    <p><b>Registration had to cost nothing, so I designed it around a physical NFC tag on the appliance.</b> Your phone touches the tag, the appliance identifies itself, and the home record updates before you open a form. Tap, confirm, done, and the record belongs to the home rather than the owner, so it survives when the house is sold.</p>
     <div class="trio">
       <div class="tcard"><h4>Tap</h4><p>the appliance identifies itself, no serial numbers</p></div>
       <div class="tcard"><h4>Confirm</h4><p>one screen shows device, model, and warranty</p></div>
@@ -317,9 +301,8 @@ html.dark #dm-toggle { background:#171717; border-color:#2a2a2a; color:#f0f0ee; 
 <!-- STEP 3 -->
 <section class="step">
   <div class="step-in">
-    <p class="stepnum">(5)</p>
     <h2>I designed the Home Passport dashboard</h2>
-    <p>Once registration is free, the app has something to give back. I built the dashboard around one question: how is my home doing right now? Health first, then age, last service, and efficiency for each device. The alerts speak in money rather than error codes, your fridge coils are dusty, save $15 a month. Manuals and receipts go into a paperless drawer you can export when you sell.</p>
+    <p>Once registration is free, the app has something to give back. <b>I built the dashboard around one question: how is my home doing right now?</b> Health first, then age, last service, and efficiency for each device. The alerts speak in money rather than error codes, your fridge coils are dusty, save $15 a month. Manuals and receipts go into a paperless drawer you can export when you sell.</p>
     <div class="trio">
       <div class="tcard"><h4>Health at a glance</h4><p>condition, age, and last service for every appliance</p></div>
       <div class="tcard"><h4>Alerts before failure</h4><p>written in dollars saved</p></div>
@@ -344,10 +327,10 @@ html.dark #dm-toggle { background:#171717; border-color:#2a2a2a; color:#f0f0ee; 
 <!-- STEP: THE AUDIT -->
 <section class="step">
   <div class="step-in">
-    <p class="stepnum">(6)</p>
     <h2>I audited what the current app actually does</h2>
     <p>Before rebuilding the design system I wanted to know what the current app actually does. I captured twenty screens of the live AHS app and logged every button, colour, and label in a spreadsheet, one row per element with its colour, size, and source screen. Then I checked each colour pair against WCAG, text against its background, borders against their surface, labels against the buttons they sit on.</p>
-    <p>Seven primary buttons came back below the standard. The same primary button appears at four different widths across four screens, and values were typed screen by screen instead of coming from one source, so nothing kept them consistent.</p>
+    <p><b>Seven primary buttons came back below the standard.</b> The same primary button appears at four different widths across four screens, and values were typed screen by screen instead of coming from one source, so nothing kept them consistent.</p>
+    <div class="pair">
     <div class="cblock">
       <div class="crow">
         <div class="cwrap">
@@ -372,16 +355,15 @@ html.dark #dm-toggle { background:#171717; border-color:#2a2a2a; color:#f0f0ee; 
       <div class="wrow"><div class="wtrack"><div class="wbar" style="width:96.6%">SCHEDULE APPOINTMENT</div></div><div class="wval">410pt</div></div>
       <div class="wrow"><div class="wtrack"><div class="wbar" style="width:91.8%">BOOK NOW · discounts</div></div><div class="wval">368pt</div></div>
     </div>
+    </div>
     <div class="nums" style="--n:4">
       <div class="num"><div class="n">20</div><div class="c">screens audited</div></div>
       <div class="num"><div class="n">7</div><div class="c">buttons below AA</div></div>
       <div class="num"><div class="n">4</div><div class="c">widths for one button</div></div>
       <div class="num"><div class="n">3</div><div class="c">oranges</div></div>
     </div>
-    <div class="big">
-      <img src="https://res.cloudinary.com/df0tysd6u/image/upload/v1786368033/Screenshot_2026-08-09_at_10.22.16_PM_ttisg6.png" alt="The audit spreadsheet, contrast matrix" loading="lazy">
-    </div>
-    <p class="big-cap">The actual spreadsheet, every colour pair scored against WCAG</p>
+    <a class="big shot" href="https://res.cloudinary.com/df0tysd6u/image/upload/v1786368033/Screenshot_2026-08-09_at_10.22.16_PM_ttisg6.png" target="_blank" rel="noopener"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/v1786368033/Screenshot_2026-08-09_at_10.22.16_PM_ttisg6.png" alt="The audit spreadsheet, contrast matrix" loading="lazy"></a>
+    <p class="big-cap shot-cap">The actual spreadsheet, every colour pair scored against WCAG</p>
     <div class="res">
       <div class="rl">Result</div>
       <p>Twenty screens audited: seven buttons below the contrast standard, and one button appearing at four different widths.</p>
@@ -393,9 +375,8 @@ html.dark #dm-toggle { background:#171717; border-color:#2a2a2a; color:#f0f0ee; 
 <!-- STEP 5 -->
 <section class="step">
   <div class="step-in">
-    <p class="stepnum">(7)</p>
     <h2>I moved the brand from orange to blue</h2>
-    <p>AHS is orange, and orange reads as urgency, the feeling of something breaking. A home-care app needs the opposite, so I moved the palette to blue. I made that decision before the audit, for what the colour communicates. The audit then showed the orange was failing contrast anyway. Every new colour was checked against the surface it actually sits on rather than against white.</p>
+    <p>AHS is orange, and orange reads as urgency, the feeling of something breaking. <b>A home-care app needs the opposite, so I moved the palette to blue.</b> I made that decision before the audit, for what the colour communicates. The audit then showed the orange was failing contrast anyway. Every new colour was checked against the surface it actually sits on rather than against white.</p>
     <div class="tscroll">
       <table>
         <tr><th></th><th>Before</th><th>After</th><th>Contrast</th></tr>
@@ -405,10 +386,8 @@ html.dark #dm-toggle { background:#171717; border-color:#2a2a2a; color:#f0f0ee; 
         <tr><td>Second orange</td><td><span class="sw sw--e0"></span>#E0502B</td><td>removed</td><td>folded into the ramp</td></tr>
       </table>
     </div>
-    <div class="big">
-      <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024361/fd_12_brand_system_x2ul7z.png" alt="Blue design tokens in Figma variables" loading="lazy">
-    </div>
-    <p class="big-cap">The blue ramp, built as Figma variables</p>
+    <a class="big shot" href="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024361/fd_12_brand_system_x2ul7z.png" target="_blank" rel="noopener"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024361/fd_12_brand_system_x2ul7z.png" alt="Blue design tokens in Figma variables" loading="lazy"></a>
+    <p class="big-cap shot-cap">The blue ramp, built as Figma variables</p>
     <div class="res">
       <div class="rl">Result</div>
       <p>A palette that reads as trust instead of urgency, with every pair passing contrast against the surface it actually sits on.</p>
@@ -420,9 +399,8 @@ html.dark #dm-toggle { background:#171717; border-color:#2a2a2a; color:#f0f0ee; 
 <!-- STEP 6 -->
 <section class="step">
   <div class="step-in">
-    <p class="stepnum">(8)</p>
     <h2>I built it as design tokens, not hex codes</h2>
-    <p>A token is a named value. Instead of typing a hex code on a screen, a button asks for <code>action.primary.bg</code> and gets its colour from one place. I built it in three layers: base holds the raw colours, the middle layer names them by job, and components only ever ask that middle layer. Change it once and every screen follows.</p>
+    <p>A token is a named value. Instead of typing a hex code on a screen, a button asks for <code>action.primary.bg</code> and gets its colour from one place. I built it in three layers: base holds the raw colours, the middle layer names them by job, and components only ever ask that middle layer. <b>Change it once and every screen follows.</b></p>
     <div class="tiers">
       <div class="tier"><code>#DA3A11</code><span class="why">the raw colour</span></div>
       <div class="tarr">↑</div>
@@ -432,10 +410,8 @@ html.dark #dm-toggle { background:#171717; border-color:#2a2a2a; color:#f0f0ee; 
       <div class="tarr">↑</div>
       <div class="tier"><code>comp.button.primary.bg</code><span class="why">what the button asks for</span></div>
     </div>
-    <div class="big">
-      <img src="https://res.cloudinary.com/df0tysd6u/image/upload/v1786368032/Screenshot_2026-08-09_at_10.21.08_PM_wtip6k.png" alt="Semantic token aliases bound to primitives" loading="lazy">
-    </div>
-    <p class="big-cap">The semantic layer, one alias per role</p>
+    <a class="big shot" href="https://res.cloudinary.com/df0tysd6u/image/upload/v1786368032/Screenshot_2026-08-09_at_10.21.08_PM_wtip6k.png" target="_blank" rel="noopener"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/v1786368032/Screenshot_2026-08-09_at_10.21.08_PM_wtip6k.png" alt="Semantic token aliases bound to primitives" loading="lazy"></a>
+    <p class="big-cap shot-cap">The semantic layer, one alias per role</p>
     <div class="res">
       <div class="rl">Result</div>
       <p>One value changes everywhere, because a component asks for a role instead of a hex code.</p>
@@ -447,7 +423,6 @@ html.dark #dm-toggle { background:#171717; border-color:#2a2a2a; color:#f0f0ee; 
 <!-- STEP: COMPONENTS -->
 <section class="step">
   <div class="step-in">
-    <p class="stepnum">(9)</p>
     <h2>I built components with properties, not copies</h2>
     <p>Each component is one Figma component with properties rather than a page of copies. The button carries variant, size, and state as properties, with a boolean for the icon, so every combination comes from one master. Auto layout handles the padding and constraints handle the resize, which is why the same button works full width on a form and inline in a card.</p>
     <p>I built them in code the same way. Variants are props, and the states are real CSS states rather than separate stories, hover is <code>:hover</code>, focus is <code>:focus-visible</code>, so you can tab to the ring instead of looking at a picture of one.</p>
@@ -456,10 +431,8 @@ html.dark #dm-toggle { background:#171717; border-color:#2a2a2a; color:#f0f0ee; 
       <div class="tcard"><h4>Auto layout and constraints</h4><p>the same component holds at any width</p></div>
       <div class="tcard"><h4>Real states in code</h4><p>hover, focus, active, disabled, loading</p></div>
     </div>
-    <div class="big">
-      <img src="https://res.cloudinary.com/df0tysd6u/image/upload/v1786368012/Screenshot_2026-08-09_at_10.20.23_PM_gz6nfv.png" alt="Flow components extracted from the shipped screens" loading="lazy">
-    </div>
-    <p class="big-cap">Category cards, chips, search states, buttons, one master each</p>
+    <a class="big shot" href="https://res.cloudinary.com/df0tysd6u/image/upload/v1786368012/Screenshot_2026-08-09_at_10.20.23_PM_gz6nfv.png" target="_blank" rel="noopener"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/v1786368012/Screenshot_2026-08-09_at_10.20.23_PM_gz6nfv.png" alt="Flow components extracted from the shipped screens" loading="lazy"></a>
+    <p class="big-cap shot-cap">Category cards, chips, search states, buttons, one master each</p>
     <div class="res">
       <div class="rl">Result</div>
       <p>One master per component, so the same button works full width on a form and inline in a card.</p>
@@ -471,9 +444,8 @@ html.dark #dm-toggle { background:#171717; border-color:#2a2a2a; color:#f0f0ee; 
 <!-- STEP 8 -->
 <section class="step">
   <div class="step-in">
-    <p class="stepnum">(10)</p>
     <h2>I made the build stop when a colour fails</h2>
-    <p>Figma pushes to GitHub. One file becomes CSS, Swift, and Android XML. Before anything ships, the system checks every colour pair against the accessibility standard and stops if one fails. I put the old orange back to confirm it stops, it did, naming the exact colour and the exact ratio. It also caught two colours I had approved myself, they cleared white but failed against the page background.</p>
+    <p>Figma pushes to GitHub. One file becomes CSS, Swift, and Android XML. <b>Before anything ships, the system checks every colour pair against the accessibility standard and stops if one fails.</b> I put the old orange back to confirm it stops, it did, naming the exact colour and the exact ratio. It also caught two colours I had approved myself, they cleared white but failed against the page background.</p>
     <div class="pipe">
       <div class="pnode"><div class="box">Figma variables</div></div>
       <div class="parr"><span class="a">↓</span><span class="t">pushed to GitHub</span></div>
@@ -501,7 +473,6 @@ Contrast gate FAILED: 1 violation(s).</pre>
 <!-- STEP 9 -->
 <section class="step">
   <div class="step-in">
-    <p class="stepnum">(11)</p>
     <h2>I documented every component where it's used</h2>
     <p>The components run in Storybook, one page each, with every variant and state. The controls panel lets anyone switch variant, size, or state without opening the code. Storybook is embedded in Zeroheight, where the usage rules sit next to the live component, when to use it, when not to, and the accessibility notes.</p>
     <div class="trio">
@@ -509,18 +480,11 @@ Contrast gate FAILED: 1 violation(s).</pre>
       <div class="tcard"><h4>Zeroheight</h4><p>usage rules beside the live component</p></div>
       <div class="tcard"><h4>Rules for changes</h4><p>how a request comes in, who decides, what gets turned down</p></div>
     </div>
-    <div class="big">
-      <img src="https://res.cloudinary.com/df0tysd6u/image/upload/v1786367995/Screenshot_2026-08-10_at_5.36.28_AM_vwe4wb.png" alt="Component library running in Storybook" loading="lazy">
+    <div class="shots">
+      <figure><a href="https://res.cloudinary.com/df0tysd6u/image/upload/v1786367995/Screenshot_2026-08-10_at_5.36.28_AM_vwe4wb.png" target="_blank" rel="noopener"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/v1786367995/Screenshot_2026-08-10_at_5.36.28_AM_vwe4wb.png" alt="Component library running in Storybook" loading="lazy"></a><figcaption>The search bar in Storybook, every variant and state from one component</figcaption></figure>
+      <figure><a href="https://res.cloudinary.com/df0tysd6u/image/upload/v1786367995/Screenshot_2026-08-10_at_6.20.16_AM_nthnoz.png" target="_blank" rel="noopener"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/v1786367995/Screenshot_2026-08-10_at_6.20.16_AM_nthnoz.png" alt="Frontdoor Design System documentation in Zeroheight" loading="lazy"></a><figcaption>Foundations documented in Zeroheight</figcaption></figure>
+      <figure><a href="https://res.cloudinary.com/df0tysd6u/image/upload/v1786368032/Screenshot_2026-08-09_at_10.20.52_PM_mkzkvg.png" target="_blank" rel="noopener"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/v1786368032/Screenshot_2026-08-09_at_10.20.52_PM_mkzkvg.png" alt="Icon library, outline set" loading="lazy"></a><figcaption>460 icons, one outline library, recolored with text alias tokens</figcaption></figure>
     </div>
-    <p class="big-cap">The search bar in Storybook, every variant and state from one component</p>
-    <div class="big">
-      <img src="https://res.cloudinary.com/df0tysd6u/image/upload/v1786367995/Screenshot_2026-08-10_at_6.20.16_AM_nthnoz.png" alt="Frontdoor Design System documentation in Zeroheight" loading="lazy">
-    </div>
-    <p class="big-cap">Foundations documented in Zeroheight</p>
-    <div class="big">
-      <img src="https://res.cloudinary.com/df0tysd6u/image/upload/v1786368032/Screenshot_2026-08-09_at_10.20.52_PM_mkzkvg.png" alt="Icon library, outline set" loading="lazy">
-    </div>
-    <p class="big-cap">460 icons, one outline library, recolored with text alias tokens</p>
     <div class="res">
       <div class="rl">Result</div>
       <p>Every component running in Storybook, with its usage rules sitting right beside it in Zeroheight.</p>
@@ -532,7 +496,6 @@ Contrast gate FAILED: 1 violation(s).</pre>
 <!-- STEP 12: THE REDESIGN -->
 <section class="step">
   <div class="step-in">
-    <p class="stepnum">(12)</p>
     <h2>I redesigned the screens people actually touch</h2>
     <p>A design system is only worth building if it changes what people see. So I took the flows that get used most, booking a repair and finding an expert, and rebuilt them on the new foundation.</p>
     <p>Here is the app as it stands today. Booking starts with a wall of text you have to read before you can do anything, the background is a warm cream that competes with the content, and the orange button is the only thing pulling your eye. Nothing on the screen tells you how many steps are left.</p>
@@ -540,7 +503,7 @@ Contrast gate FAILED: 1 violation(s).</pre>
       <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1786368033/Screenshot_2026-08-09_at_10.23.22_PM_w3pe05.png" alt="The current Frontdoor app: What to expect modal, expert profile, and a protection plan screen" loading="lazy">
     </div>
     <p class="big-cap">The app today: long modals, a cream background, and one orange button doing all the work</p>
-    <p>In the redesign I broke the same task into numbered steps with a progress bar at the top, so you always know where you are and how much is left. Choosing what needs fixing became a grid of photo cards and appliance icons instead of a list to read through. The background moved to a light neutral so the single orange action is the only saturated thing on screen, and type carries the hierarchy instead of colour.</p>
+    <p><b>In the redesign I broke the same task into numbered steps with a progress bar at the top</b>, so you always know where you are and how much is left. Choosing what needs fixing became a grid of photo cards and appliance icons instead of a list to read through. The background moved to a light neutral so the single orange action is the only saturated thing on screen, and type carries the hierarchy instead of colour.</p>
     <div class="big">
       <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024361/fd_13_brand_spread_aurpvr.png" alt="The redesigned Frontdoor screens: video chat with an expert, brand search, category grid, and appliance selection" loading="lazy">
     </div>
@@ -562,9 +525,7 @@ Contrast gate FAILED: 1 violation(s).</pre>
 </section>
 
 <section class="outcome">
-  <p class="plabel">(the outcome)</p>
   <h2>Selected as a recognized proposal at the final review. Twelve steps became three taps.</h2>
-  <p>What I took away: this was an incentive problem, not a UI problem. A good interface at the wrong moment still fails. Home services will not be won by who fixes things fastest, but by who knows your home best before anything breaks.</p>
   <div class="big">
     <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781024360/fd_08_dashboard_yockx3.png" alt="Home Passport dashboard, the finished screen" loading="lazy">
   </div>
@@ -575,15 +536,15 @@ Contrast gate FAILED: 1 violation(s).</pre>
     <!-- Documentation → add Zeroheight URL -->
   </div>
   <p class="limits">Independent concept, not commissioned by Frontdoor, Inc. Audit covers iOS only, no Android, no web, and none of Frontdoor's other brands. Type sizes estimated from cap height at roughly ±1pt. Recognized at final review; I have no visibility into what happened after.</p>
+  <div class="learn">
+    <div><h3>What I learned</h3><ul><li>This was an incentive problem, not a UI problem.</li><li>A good interface at the wrong moment still fails.</li><li>The value has to arrive before the ask.</li></ul></div>
+    <div><h3>How I'll use it next</h3><ul><li>Ask what the person gets back before I design any sign-up.</li><li>Build an automatic contrast check into every design system I work on.</li></ul></div>
+  </div>
   <a class="case-next" href="vibin.html">Next project: Vibin &rarr;</a>
 </section>
 
-<footer><span>&copy; 2026 Maitreyi Bhardwaj</span><span>byMaitreyi</span></footer>
+<div data-foot></div>
 
-<script>
-const _dmt = document.getElementById('dm-toggle');
-if(localStorage.getItem('dm')==='1'){document.documentElement.classList.add('dark');_dmt.textContent='☀';}
-_dmt.addEventListener('click',()=>{const on=document.documentElement.classList.toggle('dark');localStorage.setItem('dm',on?'1':'0');_dmt.textContent=on?'☀':'☾';});
-</script>
+<script src="site.js"></script>
 </body>
 </html>
