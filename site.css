@@ -692,3 +692,11 @@ body .step-in.duo.duo--full > .duo-vis { order: 0; }
 
 /* one blue for filled surfaces everywhere: the About page blue */
 body .note--blue, body .cover--blue { background: #1A36B8; }
+
+/* gallery sections (text above full-width pictures): the text always starts on
+   the same left edge as the pictures under it */
+body .step--gallery .step-in > h2,
+body .step--gallery .step-in > h3,
+body .step--gallery .step-in > p:not(.big-cap):not(.bars-note),
+body .step--gallery .step-in > ul:not(.status),
+body .step--gallery .step-in > ol:not(.asks) { margin-left: 0; margin-right: auto; }
