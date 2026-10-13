@@ -67,19 +67,20 @@ body { -webkit-font-smoothing: antialiased; overflow-x: clip; }
 a.card:hover .bar, a.card:focus-visible .bar { background: var(--ink); color: var(--paper); }
 
 /* the visual sits in front; the type is behind it */
-.media { position: relative; overflow: hidden; border-radius: 4px; background: var(--blue-pale); }
+.media { position: relative; overflow: hidden; border-radius: 4px; background: #1A36B8; }  /* the same blue as the About page */
 .card--l .media { aspect-ratio: 1.9; }
 .card--m .media { aspect-ratio: 1; }
 .behind {
   position: absolute; inset: 0;
   display: flex; flex-direction: column; justify-content: space-between; gap: 16px;
   padding: clamp(16px, 1.8vw, 28px);
-  color: var(--ink);
+  color: #fff;
 }
 .behind p { font-size: clamp(14px, 1.25vw, 19px); line-height: 1.35; letter-spacing: -.005em; max-width: 34em; text-wrap: pretty; }
 .card--m .behind p { font-size: 14px; }
 .behind dl { display: grid; grid-template-columns: auto 1fr; gap: 3px 14px; font-size: 13px; }
-.behind dt { color: var(--blue); }
+.behind dt { color: #D8E0FC; }
+.behind p { font-weight: 500; }
 .front {
   position: absolute; inset: 0;
   clip-path: inset(0 0 0 0);
@@ -134,7 +135,7 @@ a.card:hover .bar, a.card:focus-visible .bar { background: var(--ink); color: va
 }
 @media (prefers-reduced-motion: reduce) { .front { transition: none; } }
 </style>
-<link rel="stylesheet" href="site.css?v=1791901779">
+<link rel="stylesheet" href="site.css?v=1791901833">
 </head>
 <body>
 
@@ -149,8 +150,8 @@ a.card:hover .bar, a.card:focus-visible .bar { background: var(--ink); color: va
 
 <div data-foot></div>
 
-<script src="projects.js?v=1791901779"></script>
-<script src="site.js?v=1791901779"></script>
+<script src="projects.js?v=1791901833"></script>
+<script src="site.js?v=1791901833"></script>
 <script>
 // The opening line, typed out as if Maitreyi is writing it. The name takes three
 // tries: two spellings people get wrong are typed, crossed out in red and erased,
