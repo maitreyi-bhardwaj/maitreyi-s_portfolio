@@ -699,4 +699,4 @@ body .step--gallery .step-in > h2,
 body .step--gallery .step-in > h3,
 body .step--gallery .step-in > p:not(.big-cap):not(.bars-note),
 body .step--gallery .step-in > ul:not(.status),
-body .step--gallery .step-in > ol:not(.asks) { margin-left: 0; margin-right: auto; }
+body .step--gallery .step-in > ol:not(.asks) { margin-left: 0 !important; margin-right: auto !important; }
