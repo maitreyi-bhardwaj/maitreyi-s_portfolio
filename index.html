@@ -187,7 +187,7 @@ body:not(.chosen) #work, body:not(.chosen) footer.foot, body:not(.chosen) .page-
 .opening.is-light .fields button { background: rgba(43, 27, 17, .08); color: #2B1B11; }
 .opening.is-light .fields button[aria-pressed="true"], .opening.is-light .fields button:hover { background: #2B1B11; color: #fff; }
 </style>
-<link rel="stylesheet" href="site.css?v=1792589745">
+<link rel="stylesheet" href="site.css?v=1792592264">
 </head>
 <body>
 
@@ -195,7 +195,7 @@ body:not(.chosen) #work, body:not(.chosen) footer.foot, body:not(.chosen) .page-
 <div data-topbar></div>
 
 <header class="opening">
-  <canvas data-lace aria-hidden="true"></canvas>
+  <canvas data-figma-lace aria-hidden="true"></canvas>
   <h1 id="say">Hi, I'm Maitreyi (my·TRAY·ee). I build products by connecting design, data, and technology.</h1>
   <p>Creative Engineering.</p>
   <div class="fields" role="group" aria-label="Choose the kind of work to see">
@@ -208,9 +208,10 @@ body:not(.chosen) #work, body:not(.chosen) footer.foot, body:not(.chosen) .page-
 
 <div data-foot></div>
 
-<script src="projects.js?v=1792589745"></script>
-<script src="lace.js?v=1792589745"></script>
-<script src="site.js?v=1792589745"></script>
+<script src="projects.js?v=1792592264"></script>
+<script src="lace.js?v=1792592264"></script>
+<script src="figma-lace.js?v=1792592264"></script>
+<script src="site.js?v=1792592264"></script>
 <script>
 // The opening line, typed out as if Maitreyi is writing it. The name takes three
 // tries: two spellings people get wrong are typed, crossed out in red and erased,
@@ -330,7 +331,7 @@ body:not(.chosen) #work, body:not(.chosen) footer.foot, body:not(.chosen) .page-
   // The opening screen shows only the intro and two choices. Choosing one reveals the
   // timeline filtered to that kind of work (industrial design also washes the lace light).
   (function () {
-    const intro = document.querySelector('.opening'), lace = intro.querySelector('canvas[data-lace]');
+    const intro = document.querySelector('.opening'), lace = null;
     const buttons = intro.querySelectorAll('.fields button');
     const show = (f, jump) => {
       document.body.classList.add('chosen');
@@ -338,7 +339,6 @@ body:not(.chosen) #work, body:not(.chosen) footer.foot, body:not(.chosen) .page-
       document.querySelectorAll('#work .card').forEach(c => { c.hidden = !(f === 'all' || c.dataset.field === 'all' || c.dataset.field === f); });
       document.querySelectorAll('#work .row').forEach(r => { r.hidden = !r.querySelector('.card:not([hidden])'); });
       if (lace && lace.setMode) lace.setMode(f === 'id' ? 'light' : 'dark');
-      intro.classList.toggle('is-light', f === 'id');
     };
     const open = f => { show(f); requestAnimationFrame(() => document.getElementById('work').scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' })); };
     buttons.forEach(b => b.addEventListener('click', () => { history.replaceState(null, '', '#' + b.dataset.field); open(b.dataset.field); }));
