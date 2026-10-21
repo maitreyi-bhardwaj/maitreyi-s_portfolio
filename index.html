@@ -135,44 +135,57 @@ a.card:hover .bar, a.card:focus-visible .bar { background: var(--ink); color: va
 }
 @media (prefers-reduced-motion: reduce) { .front { transition: none; } }
 
-/* ---------- opening: a light lavender haze (haze.js); the page behind has drifting dots ---------- */
+/* ---------- opening: the mauve lace, edge to edge (lace.js); the page behind is white lace in pale dots ---------- */
 .page-dots { position: fixed; inset: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none; }
 body:has(.page-dots) > *:not(.page-dots):not(script) { position: relative; z-index: 1; }
 .page-dots canvas { display: block; width: 100%; height: 100%; }
 .opening {
   position: relative; isolation: isolate; overflow: hidden;
-  margin: 20px var(--gut) clamp(80px, 11vw, 200px); border-radius: 14px;
-  padding: clamp(96px, 14vw, 280px) clamp(20px, 3vw, 48px) clamp(96px, 13vw, 250px);
-  background: #E4E1FA; color: #15122E;
-  box-shadow: 0 24px 60px -30px rgba(70, 60, 160, .45);
+  margin: 0 0 clamp(80px, 11vw, 200px);
+  padding: clamp(110px, 15vw, 300px) var(--gut) clamp(96px, 13vw, 250px);
+  background: #6E3F78; color: #fff;
 }
-.opening canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; display: block; }
-.opening p { color: #4A4670; }
-#say { color: #15122E; }
-#say .say-blue { color: #1A36B8; }
-#say .say-brown { color: #2E2A55; }
-#say .say-name.struck { color: #C2342B; }
-#say .say-name.oops { color: #9A6A00; }
-#say .say-pron { color: #4A4670; }
-#say .caret::after { background: #1A36B8; }
+.opening canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -2; display: block; }
+.opening::after { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: linear-gradient(100deg, rgba(38, 20, 44, .62) 0%, rgba(38, 20, 44, .38) 55%, rgba(38, 20, 44, .14) 100%); }
+.opening h1, .opening p { text-shadow: 0 1px 14px rgba(38, 20, 44, .9); }
+.opening p { color: #F1E9EE; }
+#say { color: #fff; }
+#say .say-blue { color: #FFC896; }
+#say .say-brown { color: #F6F0F4; }
+#say .say-name.struck { color: #FFA493; }
+#say .say-name.oops { color: #FFD866; }
+#say .say-pron { color: #F1E9EE; }
+#say .caret::after { background: #FFC896; }
+/* the top bar sits on the lace */
+body:has(.opening) > nav.topbar { position: absolute !important; top: 0; left: 0; right: 0; z-index: 3 !important; }
+body:has(.opening) > .topbar a { background: rgba(255, 255, 255, .16); color: #fff; backdrop-filter: blur(6px); }
+body:has(.opening) > .topbar a[aria-current="page"], body:has(.opening) > .topbar a:hover { background: #fff; color: #2B1B11; }
 
 /* field switch, at the bottom of the intro */
-.fields { position: absolute; left: clamp(20px, 3vw, 48px); bottom: clamp(20px, 3vw, 40px); display: flex; gap: 6px; flex-wrap: wrap; }
-.fields button { font: inherit; font-size: 14px; padding: 8px 14px; border-radius: 100px; border: 1px solid rgba(21, 18, 46, .25); background: rgba(255, 255, 255, .55); color: #15122E; cursor: pointer; transition: background .2s, color .2s; }
-.fields button:hover { background: #fff; }
-.fields button[aria-pressed="true"] { background: #15122E; color: #fff; border-color: #15122E; }
-.fields button:focus-visible { outline: 2px solid #1A36B8; outline-offset: 2px; }
+.fields { position: absolute; left: var(--gut); bottom: clamp(24px, 3vw, 44px); display: flex; gap: 6px; flex-wrap: wrap; }
+.fields button { font: inherit; font-size: 14px; padding: 8px 14px; border-radius: 100px; border: 1px solid rgba(255, 255, 255, .55); background: rgba(38, 20, 44, .35); color: #fff; cursor: pointer; transition: background .2s, color .2s; }
+.fields button:hover { background: rgba(255, 255, 255, .18); }
+.fields button[aria-pressed="true"] { background: #fff; color: #2B1B11; border-color: #fff; }
+.fields button:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
 #work .row[hidden], #work .card[hidden] { display: none; }
+.opening.is-light::after { opacity: 0; }
+.opening.is-light h1, .opening.is-light p { text-shadow: none; }
+.opening.is-light #say, .opening.is-light #say .say-brown { color: #2B1B11; }
+.opening.is-light #say .say-blue { color: #1A36B8; }
+.opening.is-light p, .opening.is-light #say .say-pron { color: #7C6C60; }
+.opening.is-light .fields button { border-color: #CFC6BC; background: rgba(255, 255, 255, .7); color: #2B1B11; }
+.opening.is-light .fields button[aria-pressed="true"] { background: #2B1B11; color: #fff; }
 </style>
-<link rel="stylesheet" href="site.css?v=1792588377">
+<link rel="stylesheet" href="site.css?v=1792588638">
 </head>
 <body>
 
-<div class="page-dots" aria-hidden="true"><canvas data-pagedots></canvas></div>
+<div class="page-dots" aria-hidden="true"><canvas data-lace="page"></canvas></div>
 <div data-topbar></div>
 
 <header class="opening">
-  <canvas data-haze aria-hidden="true"></canvas>
+  <canvas data-lace aria-hidden="true"></canvas>
   <h1 id="say">Hi, I'm Maitreyi (my·TRAY·ee). I build products by connecting design, data, and technology.</h1>
   <p>Creative Engineering.</p>
   <div class="fields" role="group" aria-label="Show work by field">
@@ -186,9 +199,9 @@ body:has(.page-dots) > *:not(.page-dots):not(script) { position: relative; z-ind
 
 <div data-foot></div>
 
-<script src="projects.js?v=1792588377"></script>
-<script src="haze.js?v=1792588377"></script>
-<script src="site.js?v=1792588377"></script>
+<script src="projects.js?v=1792588638"></script>
+<script src="lace.js?v=1792588638"></script>
+<script src="site.js?v=1792588638"></script>
 <script>
 // The opening line, typed out as if Maitreyi is writing it. The name takes three
 // tries: two spellings people get wrong are typed, crossed out in red and erased,
@@ -306,15 +319,16 @@ body:has(.page-dots) > *:not(.page-dots):not(script) { position: relative; z-ind
     '<div class="cards">' + r.cards.map(card).join('') + '</div></section>').join('');
 
   // The field switch in the intro: filters the timeline, and changes the intro background
-  // (all and UI/UX: lavender haze; industrial design: the same haze in warm paper tones).
+  // (all and UI/UX: the mauve lace; industrial design: the lace washed light).
   (function () {
-    const intro = document.querySelector('.opening'), haze = intro.querySelector('canvas[data-haze]');
+    const intro = document.querySelector('.opening'), lace = intro.querySelector('canvas[data-lace]');
     const buttons = intro.querySelectorAll('.fields button');
     const show = f => {
       buttons.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.field === f)));
       document.querySelectorAll('#work .card').forEach(c => { c.hidden = !(f === 'all' || c.dataset.field === 'all' || c.dataset.field === f); });
       document.querySelectorAll('#work .row').forEach(r => { r.hidden = !r.querySelector('.card:not([hidden])'); });
-      if (haze && haze.setMode) haze.setMode(f === 'id' ? 'warm' : 'cool');
+      if (lace && lace.setMode) lace.setMode(f === 'id' ? 'light' : 'dark');
+      intro.classList.toggle('is-light', f === 'id');
     };
     buttons.forEach(b => b.addEventListener('click', () => show(b.dataset.field)));
   })();
