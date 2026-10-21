@@ -94,7 +94,7 @@ void main(){
   }
 
   const page = document.querySelector('.page-dots');
-  if (page) { page.innerHTML = ''; const cv = document.createElement('canvas'); page.appendChild(cv); start(cv, 0, true); }
+  if (page && !page.querySelector('canvas')) { const cv = document.createElement('canvas'); page.appendChild(cv); start(cv, 0, true); }
   const foot = document.querySelector('footer.foot');
   if (foot) { const cv = document.createElement('canvas'); cv.className = 'foot-lace'; cv.setAttribute('aria-hidden', 'true'); foot.prepend(cv); start(cv, 1, false); }
 })();
