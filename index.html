@@ -154,8 +154,29 @@ a.card:hover .bar, a.card:focus-visible .bar { background: var(--ink); color: va
 #say .say-name.oops { color: #FFD866; }
 #say .say-pron { color: #E9E4DA; }
 #say .caret::after { background: #FFC896; }
+
+/* field switch, at the bottom of the intro */
+.fields { position: absolute; left: clamp(20px, 3vw, 48px); bottom: clamp(20px, 3vw, 40px); display: flex; gap: 6px; flex-wrap: wrap; }
+.fields button { font: inherit; font-size: 14px; padding: 8px 14px; border-radius: 100px; border: 1px solid rgba(255, 255, 255, .55); background: rgba(38, 20, 44, .35); color: #fff; cursor: pointer; transition: background .2s, color .2s, border-color .2s; }
+.fields button:hover { background: rgba(255, 255, 255, .18); }
+.fields button[aria-pressed="true"] { background: #fff; color: #2B1B11; border-color: #fff; }
+.fields button:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+#work .row[hidden], #work .card[hidden] { display: none; }
+/* light version of the intro (industrial design) */
+.opening { transition: background-color .6s ease; }
+.opening::after { transition: opacity .6s ease; }
+.opening.is-light { background: #FBF8F4; }
+.opening.is-light::after { opacity: 0; }
+.opening.is-light h1, .opening.is-light p { text-shadow: none; }
+.opening.is-light p { color: #7C6C60; }
+.opening.is-light #say { color: #2B1B11; }
+.opening.is-light #say .say-blue { color: #1A36B8; }
+.opening.is-light #say .say-brown { color: #8A5A3C; }
+.opening.is-light #say .say-pron { color: #7C6C60; }
+.opening.is-light .fields button { border-color: #CFC6BC; background: rgba(255, 255, 255, .6); color: #2B1B11; }
+.opening.is-light .fields button[aria-pressed="true"] { background: #2B1B11; color: #fff; border-color: #2B1B11; }
 </style>
-<link rel="stylesheet" href="site.css?v=1792587791">
+<link rel="stylesheet" href="site.css?v=1792587960">
 </head>
 <body>
 
@@ -165,15 +186,20 @@ a.card:hover .bar, a.card:focus-visible .bar { background: var(--ink); color: va
   <canvas data-lace aria-hidden="true"></canvas>
   <h1 id="say">Hi, I'm Maitreyi (my·TRAY·ee). I build products by connecting design, data, and technology.</h1>
   <p>Creative Engineering.</p>
+  <div class="fields" role="group" aria-label="Show work by field">
+    <button type="button" data-field="all" aria-pressed="true">All work</button>
+    <button type="button" data-field="ux" aria-pressed="false">UI/UX</button>
+    <button type="button" data-field="id" aria-pressed="false">Industrial design</button>
+  </div>
 </header>
 
 <main class="feed" id="work"></main>
 
 <div data-foot></div>
 
-<script src="projects.js?v=1792587791"></script>
-<script src="lace.js?v=1792587791"></script>
-<script src="site.js?v=1792587791"></script>
+<script src="projects.js?v=1792587960"></script>
+<script src="lace.js?v=1792587960"></script>
+<script src="site.js?v=1792587960"></script>
 <script>
 // The opening line, typed out as if Maitreyi is writing it. The name takes three
 // tries: two spellings people get wrong are typed, crossed out in red and erased,
@@ -280,13 +306,30 @@ a.card:hover .bar, a.card:focus-visible .bar { background: var(--ink); color: va
     }
     if (c.badge && BADGES[c.badge]) inner += '<div class="badge">' + BADGES[c.badge] + '</div>';
     const focusable = !c.href && !c.note ? ' tabindex="0"' : '';
-    return '<' + tag + ' class="card card--' + (c.size || 'm') + (c.badge ? ' card--stretch' : '') + '"' + link + focusable + '>' +
+    // which field the card belongs to: industrial design pages, everything else UI/UX, notes in both
+    const field = c.field || (c.note ? 'all' : /(strata|kith|pitboss)\.html/.test(c.href || '') ? 'id' : 'ux');
+    return '<' + tag + ' class="card card--' + (c.size || 'm') + (c.badge ? ' card--stretch' : '') + '" data-field="' + field + '"' + link + focusable + '>' +
       '<div class="bar"><span>' + esc(c.title) + '</span>' + arrow + '</div>' + inner + '</' + tag + '>';
   }
 
   document.getElementById('work').innerHTML = window.TIMELINE.map(r =>
     '<section class="row"><div class="date">' + esc(r.date) + '</div>' +
     '<div class="cards">' + r.cards.map(card).join('') + '</div></section>').join('');
+
+  // The field switch in the intro: filters the timeline, and changes the intro background
+  // (all and UI/UX: the pink lace; industrial design: the light, mouse-moved version).
+  (function () {
+    const intro = document.querySelector('.opening'), lace = intro.querySelector('canvas[data-lace]');
+    const buttons = intro.querySelectorAll('.fields button');
+    const show = f => {
+      buttons.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.field === f)));
+      document.querySelectorAll('#work .card').forEach(c => { c.hidden = !(f === 'all' || c.dataset.field === 'all' || c.dataset.field === f); });
+      document.querySelectorAll('#work .row').forEach(r => { r.hidden = !r.querySelector('.card:not([hidden])'); });
+      intro.classList.toggle('is-light', f === 'id');
+      if (lace && lace.setMode) lace.setMode(f === 'id' ? 'light' : 'dark');
+    };
+    buttons.forEach(b => b.addEventListener('click', () => show(b.dataset.field)));
+  })();
 
   // Touch screens have no hover: the first tap shows the type, the second follows the link.
   if (matchMedia('(hover: none)').matches) {
