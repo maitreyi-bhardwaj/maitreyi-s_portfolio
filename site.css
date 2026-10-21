@@ -700,3 +700,7 @@ body .step--gallery .step-in > h3,
 body .step--gallery .step-in > p:not(.big-cap):not(.bars-note),
 body .step--gallery .step-in > ul:not(.status),
 body .step--gallery .step-in > ol:not(.asks) { margin-left: 0 !important; margin-right: auto !important; }
+
+/* the dotted lace sits behind the footer's content */
+footer.foot { position: relative; isolation: isolate; overflow: hidden; }
+footer.foot > .foot-lace { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; display: block; }

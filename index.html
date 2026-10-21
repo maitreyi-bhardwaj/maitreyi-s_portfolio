@@ -162,36 +162,45 @@ body:has(.opening) > nav.topbar { position: absolute !important; top: 0; left: 0
 body:has(.opening) > .topbar a { background: rgba(255, 255, 255, .16); color: #fff; backdrop-filter: blur(6px); }
 body:has(.opening) > .topbar a[aria-current="page"], body:has(.opening) > .topbar a:hover { background: #fff; color: #2B1B11; }
 
-/* field switch, at the bottom of the intro */
-.fields { position: absolute; left: var(--gut); bottom: clamp(24px, 3vw, 44px); display: flex; gap: 6px; flex-wrap: wrap; }
-.fields button { font: inherit; font-size: 14px; padding: 8px 14px; border-radius: 100px; border: 1px solid rgba(255, 255, 255, .55); background: rgba(38, 20, 44, .35); color: #fff; cursor: pointer; transition: background .2s, color .2s; }
-.fields button:hover { background: rgba(255, 255, 255, .18); }
-.fields button[aria-pressed="true"] { background: #fff; color: #2B1B11; border-color: #fff; }
-.fields button:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+/* the two big choices at the bottom of the opening screen; same look as the top bar pills */
+.opening { min-height: 100svh; display: grid; grid-template-columns: 1fr 1fr; column-gap: 6px; align-content: center; }
+.opening h1 { grid-column: 1; } .opening > p { grid-column: 2; }
+.fields { position: absolute; left: var(--gut); right: var(--gut); bottom: clamp(24px, 4vh, 48px); display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.fields button {
+  font: inherit; font-size: clamp(18px, 1.6vw, 24px); letter-spacing: -.01em; text-align: left; cursor: pointer;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: clamp(18px, 2.2vw, 28px) clamp(16px, 1.6vw, 24px); border-radius: 8px; border: 0;
+  background: rgba(255, 255, 255, .16); color: #fff; backdrop-filter: blur(6px);
+  transition: background .2s, color .2s;
+}
+.fields button:hover, .fields button[aria-pressed="true"] { background: #fff; color: #2B1B11; }
+.fields button:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+/* before a choice, only the opening screen shows */
+body:not(.chosen) #work, body:not(.chosen) footer.foot, body:not(.chosen) .page-dots { display: none; }
+@media (max-width: 760px) { .opening { grid-template-columns: 1fr; } .opening > p { grid-column: 1; } .fields { grid-template-columns: 1fr; } }
 #work .row[hidden], #work .card[hidden] { display: none; }
 .opening.is-light::after { opacity: 0; }
 .opening.is-light h1, .opening.is-light p { text-shadow: none; }
 .opening.is-light #say, .opening.is-light #say .say-brown { color: #2B1B11; }
 .opening.is-light #say .say-blue { color: #1A36B8; }
 .opening.is-light p, .opening.is-light #say .say-pron { color: #7C6C60; }
-.opening.is-light .fields button { border-color: #CFC6BC; background: rgba(255, 255, 255, .7); color: #2B1B11; }
-.opening.is-light .fields button[aria-pressed="true"] { background: #2B1B11; color: #fff; }
+.opening.is-light .fields button { background: rgba(43, 27, 17, .08); color: #2B1B11; }
+.opening.is-light .fields button[aria-pressed="true"], .opening.is-light .fields button:hover { background: #2B1B11; color: #fff; }
 </style>
-<link rel="stylesheet" href="site.css?v=1792589226">
+<link rel="stylesheet" href="site.css?v=1792589424">
 </head>
 <body>
 
-<div class="page-dots" aria-hidden="true"><canvas data-lace="page"></canvas></div>
+<div class="page-dots" aria-hidden="true"></div>
 <div data-topbar></div>
 
 <header class="opening">
   <canvas data-lace aria-hidden="true"></canvas>
   <h1 id="say">Hi, I'm Maitreyi (my·TRAY·ee). I build products by connecting design, data, and technology.</h1>
   <p>Creative Engineering.</p>
-  <div class="fields" role="group" aria-label="Show work by field">
-    <button type="button" data-field="all" aria-pressed="true">All work</button>
-    <button type="button" data-field="ux" aria-pressed="false">UI/UX</button>
-    <button type="button" data-field="id" aria-pressed="false">Industrial design</button>
+  <div class="fields" role="group" aria-label="Choose the kind of work to see">
+    <button type="button" data-field="ux" aria-pressed="false"><span>UI/UX</span><span aria-hidden="true">↓</span></button>
+    <button type="button" data-field="id" aria-pressed="false"><span>Industrial design</span><span aria-hidden="true">↓</span></button>
   </div>
 </header>
 
@@ -199,9 +208,9 @@ body:has(.opening) > .topbar a[aria-current="page"], body:has(.opening) > .topba
 
 <div data-foot></div>
 
-<script src="projects.js?v=1792589226"></script>
-<script src="lace.js?v=1792589226"></script>
-<script src="site.js?v=1792589226"></script>
+<script src="projects.js?v=1792589424"></script>
+<script src="lace.js?v=1792589424"></script>
+<script src="site.js?v=1792589424"></script>
 <script>
 // The opening line, typed out as if Maitreyi is writing it. The name takes three
 // tries: two spellings people get wrong are typed, crossed out in red and erased,
@@ -318,19 +327,24 @@ body:has(.opening) > .topbar a[aria-current="page"], body:has(.opening) > .topba
     '<section class="row"><div class="date">' + esc(r.date) + '</div>' +
     '<div class="cards">' + r.cards.map(card).join('') + '</div></section>').join('');
 
-  // The field switch in the intro: filters the timeline, and changes the intro background
-  // (all and UI/UX: the mauve lace; industrial design: the lace washed light).
+  // The opening screen shows only the intro and two choices. Choosing one reveals the
+  // timeline filtered to that kind of work (industrial design also washes the lace light).
   (function () {
     const intro = document.querySelector('.opening'), lace = intro.querySelector('canvas[data-lace]');
     const buttons = intro.querySelectorAll('.fields button');
-    const show = f => {
+    const show = (f, jump) => {
+      document.body.classList.add('chosen');
       buttons.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.field === f)));
       document.querySelectorAll('#work .card').forEach(c => { c.hidden = !(f === 'all' || c.dataset.field === 'all' || c.dataset.field === f); });
       document.querySelectorAll('#work .row').forEach(r => { r.hidden = !r.querySelector('.card:not([hidden])'); });
       if (lace && lace.setMode) lace.setMode(f === 'id' ? 'light' : 'dark');
       intro.classList.toggle('is-light', f === 'id');
     };
-    buttons.forEach(b => b.addEventListener('click', () => show(b.dataset.field)));
+    const open = f => { show(f); requestAnimationFrame(() => document.getElementById('work').scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' })); };
+    buttons.forEach(b => b.addEventListener('click', () => { history.replaceState(null, '', '#' + b.dataset.field); open(b.dataset.field); }));
+    // links back to the work (index.html#work from a project page) open everything
+    const hash = location.hash.slice(1);
+    if (hash === 'ux' || hash === 'id') open(hash); else if (hash === 'work') open('all');
   })();
 
   // Touch screens have no hover: the first tap shows the type, the second follows the link.

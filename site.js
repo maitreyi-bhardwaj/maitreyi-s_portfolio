@@ -111,6 +111,11 @@
       '<div class="foot-fine"><span>© 2026 Maitreyi Bhardwaj</span><span>byMaitreyi</span></div>' +
     '</footer>';
 
+  // the dotted lace on the footer (and on the home page background)
+  const pat = document.createElement('script');
+  pat.src = 'pattern.js?v=' + (document.querySelector('script[src*="site.js"]').src.split('v=')[1] || '1');
+  document.body.appendChild(pat);
+
   const copyBtn = document.querySelector('[data-copy]');
   copyBtn.addEventListener('click', () => {
     const label = copyBtn.querySelector('[data-copy-label]');
