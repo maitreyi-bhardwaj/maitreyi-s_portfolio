@@ -1,7 +1,7 @@
 // "Floral lace garden" — Maitreyi's Figma shader (frame "Yourname-vertical"),
 // ported line for line from its WGSL source to WebGL so it runs in every browser.
-// The animation is the frame's own timeline: eleven settings ease from their
-// start to end values over the first 4.008 s of a 15 s loop (cubic-bezier .5,0,.5,1).
+// The animation is the frame's own keyframes: eleven settings ease from their start
+// to end values over 4.008 s (cubic-bezier .5,0,.5,1), then ease back, looping without a jump.
 // Usage: <canvas data-figma-lace></canvas>
 (function () {
   const FRAG = `
@@ -151,7 +151,7 @@ void main(){
     meshSize: [12.1, 10.6], density: [0.81, 0.71], glow: [0.52, 0.06], clouds: [0.25, 0.31]
   };
   const FIXED = { seed: 7, patternStyle: 0, irregularity: 0.84 };
-  const RAMP = 4.008, LOOP = 15;
+  const RAMP = 4.008;
   // cubic-bezier(.5, 0, .5, 1)
   const bez = x => { let t = x; for (let i = 0; i < 8; i++) { const cx = 3 * .5 * t * (1 - t) * (1 - t) + 3 * .5 * t * t * (1 - t) + t * t * t - x;
     const dx = 3 * .5 * (1 - t) * (1 - t) + 6 * (0.5 - .5) * t * (1 - t) + 3 * (1 - .5) * t * t; if (Math.abs(cx) < 1e-5) break; t -= cx / Math.max(dx, 1e-4); t = Math.min(1, Math.max(0, t)); }
@@ -183,11 +183,19 @@ void main(){
     size(); draw(0);
     addEventListener('resize', () => { size(); draw(k); });
     if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    // Only redraw while the settings are changing (the first 4 s of each 15 s loop).
+    // A seamless loop: ease from start to end over 4.008 s (the Figma ramp), hold a moment,
+    // ease back the same way, hold, repeat — so there is never a jump.
+    const HOLD = 1.5, CYCLE = 2 * (RAMP + HOLD);
     let start = performance.now(), visible = true, raf = 0;
     const loop = now => {
-      const s = ((now - start) / 1000) % LOOP;
-      if (s <= RAMP + 0.05) { k = bez(Math.min(1, s / RAMP)); draw(k); }
+      const s = ((now - start) / 1000) % CYCLE;
+      let x;
+      if (s < RAMP) x = s / RAMP;                                  // forward
+      else if (s < RAMP + HOLD) x = 1;                             // hold at the end
+      else if (s < 2 * RAMP + HOLD) x = 1 - (s - RAMP - HOLD) / RAMP;  // back
+      else x = 0;                                                  // hold at the start
+      const nk = bez(x);
+      if (Math.abs(nk - k) > 1e-4) { k = nk; draw(k); }
       raf = visible ? requestAnimationFrame(loop) : 0;
     };
     new IntersectionObserver(e => { visible = e[0].isIntersecting; if (visible && !raf) raf = requestAnimationFrame(loop); }).observe(cv);
