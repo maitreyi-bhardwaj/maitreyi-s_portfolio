@@ -44,7 +44,7 @@
       const text = head.filter(isText), blocks = head.filter(el => !isText(el));
       // no cards or chart: pair the text with the section's first picture instead
       // (the industrial design galleries keep their pictures large)
-      if (!blocks.length && firstImg !== -1 && !sec.closest('.step--gallery') && !kids[firstImg].matches('.row3')) {
+      if (!blocks.length && firstImg !== -1 && !sec.closest('.step--gallery')) {
         blocks.push(kids[firstImg]);
         const cap = kids[firstImg + 1];
         if (cap && cap.matches('.big-cap')) blocks.push(cap);

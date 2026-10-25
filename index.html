@@ -187,7 +187,7 @@ body:not(.chosen) #work, body:not(.chosen) footer.foot, body:not(.chosen) .page-
 .opening.is-light .fields button { background: rgba(43, 27, 17, .08); color: #2B1B11; }
 .opening.is-light .fields button[aria-pressed="true"], .opening.is-light .fields button:hover { background: #2B1B11; color: #fff; }
 </style>
-<link rel="stylesheet" href="site.css?v=1792953780">
+<link rel="stylesheet" href="site.css?v=1792622206">
 </head>
 <body>
 
@@ -208,10 +208,10 @@ body:not(.chosen) #work, body:not(.chosen) footer.foot, body:not(.chosen) .page-
 
 <div data-foot></div>
 
-<script src="projects.js?v=1792953780"></script>
-<script src="lace.js?v=1792953780"></script>
-<script src="figma-lace.js?v=1792953780"></script>
-<script src="site.js?v=1792953780"></script>
+<script src="projects.js?v=1792622206"></script>
+<script src="lace.js?v=1792622206"></script>
+<script src="figma-lace.js?v=1792622206"></script>
+<script src="site.js?v=1792622206"></script>
 <script>
 // The opening line, typed out as if Maitreyi is writing it. The name takes three
 // tries: two spellings people get wrong are typed, crossed out in red and erased,
@@ -319,7 +319,7 @@ body:not(.chosen) #work, body:not(.chosen) footer.foot, body:not(.chosen) .page-
     if (c.badge && BADGES[c.badge]) inner += '<div class="badge">' + BADGES[c.badge] + '</div>';
     const focusable = !c.href && !c.note ? ' tabindex="0"' : '';
     // which field the card belongs to: industrial design pages, everything else UI/UX, notes in both
-    const field = c.field || (c.note ? 'all' : /(strata|kith|pitboss|khai|epipals|lex)\.html/.test(c.href || '') ? 'id' : 'ux');
+    const field = c.field || (c.note ? 'all' : /(strata|kith|pitboss)\.html/.test(c.href || '') ? 'id' : 'ux');
     return '<' + tag + ' class="card card--' + (c.size || 'm') + (c.badge ? ' card--stretch' : '') + '" data-field="' + field + '"' + link + focusable + '>' +
       '<div class="bar"><span>' + esc(c.title) + '</span>' + arrow + '</div>' + inner + '</' + tag + '>';
   }
