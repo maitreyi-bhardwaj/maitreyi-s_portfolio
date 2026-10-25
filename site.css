@@ -704,3 +704,7 @@ body .step--gallery .step-in > ol:not(.asks) { margin-left: 0 !important; margin
 /* the dotted lace sits behind the footer's content */
 footer.foot { position: relative; isolation: isolate; overflow: hidden; }
 footer.foot > .foot-lace { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; display: block; }
+
+/* the first image on every project page spans the same edges as the top bar */
+body .case-hero { width: auto; max-width: none; margin: 20px var(--gut) 0; padding: 0; }
+body .case-hero img, body .case-hero .dothero { width: 100%; max-width: none; }
