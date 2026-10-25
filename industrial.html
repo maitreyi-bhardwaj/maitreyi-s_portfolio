@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Industrial design, Maitreyi Bhardwaj</title>
+<meta name="description" content="Industrial design projects by Maitreyi Bhardwaj: products, furniture, lighting, wearables and retail.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="stylesheet" href="site.css?v=1792954226">
+<style>
+/* a white index: a short intro row, a quiet gap, then square tiles in a grid of three */
+body { background: #fff; -webkit-font-smoothing: antialiased; }
+.ix-intro { display: grid; grid-template-columns: 2fr 1fr 1fr; column-gap: 6px; padding: clamp(48px, 7vw, 96px) var(--gut) 0; font-size: 14px; line-height: 1.45; }
+.ix-intro h1 { font: inherit; margin: 0; }
+.ix-intro p, .ix-intro ul { margin: 0; color: var(--ink-soft); }
+.ix-intro ul { list-style: none; padding: 0; }
+.ix-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px 12px; padding: clamp(120px, 18vw, 260px) var(--gut) 0; }
+.ix-tile { display: block; color: inherit; text-decoration: none; }
+.ix-tile .pic { aspect-ratio: 1; overflow: hidden; background: #F2F2F0; }
+.ix-tile img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .9s cubic-bezier(.2, .7, .2, 1); }
+a.ix-tile:hover img { transform: scale(1.04); }
+.ix-tile .name { display: flex; justify-content: space-between; gap: 12px; margin-top: 12px; font-size: 14px; }
+.ix-tile .name span:last-child { color: var(--ink-soft); }
+@media (max-width: 860px) { .ix-intro { grid-template-columns: 1fr; row-gap: 14px; } .ix-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 520px) { .ix-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<div data-topbar></div>
+
+<header class="ix-intro">
+  <h1>Industrial design</h1>
+  <ul><li>Products</li><li>Lighting</li><li>Wearables</li><li>Retail</li></ul>
+  <p>Objects I have sketched, modelled and made, from clay and cardboard to 3D prints and renders.</p>
+</header>
+
+<main class="ix-grid">
+  <a class="ix-tile" href="strata.html"><div class="pic"><img src="media/strata/hero.jpg" alt="Strata, the thinking mat" style="object-position: 100% 50%"></div><div class="name"><span>Strata</span><span>2026</span></div></a>
+  <a class="ix-tile" href="kith.html"><div class="pic"><img src="media/kith/full-lamp.jpg" alt="Kith pendant lamp, lit"></div><div class="name"><span>Kith</span><span>2025</span></div></a>
+  <a class="ix-tile" href="pitboss.html"><div class="pic"><img src="media/pitboss/p14.jpg" alt="Pit Boss in-store display render"></div><div class="name"><span>Pit Boss</span><span>2024</span></div></a>
+  <div class="ix-tile"><div class="pic"><img src="media/industrial/epipals.jpg" alt="Epi Pals watch on a child at a playground" style="object-position: 100% 50%"></div><div class="name"><span>Epi Pals</span><span>2025</span></div></div>
+  <div class="ix-tile"><div class="pic"><img src="media/industrial/khai.jpg" alt="KHAI car interior from above"></div><div class="name"><span>KHAI</span><span>2025</span></div></div>
+  <div class="ix-tile"><div class="pic"><img src="media/industrial/lex.jpg" alt="LEX jogging stroller render"></div><div class="name"><span>LEX</span><span>2025</span></div></div>
+</main>
+
+<div data-foot></div>
+<script src="site.js?v=1792954226"></script>
+</body>
+</html>
