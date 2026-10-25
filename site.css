@@ -713,3 +713,7 @@ body .case-hero img, body .case-hero .dothero { width: 100%; max-width: none; }
 body .step-in > .big.big--wide { position: relative; left: 50%; transform: translateX(-50%); width: calc(100vw - 2 * var(--gut)); max-width: none !important; margin-top: 12px; border-radius: 6px; }
 body .step-in > .big.big--wide img { width: 100%; height: auto; display: block; }
 body .step-in > p + .big.big--wide, body .step-in > div:not(.big--wide) + .big.big--wide { margin-top: 40px; }
+
+/* a project intro can be a video: same edges and corners as the hero image */
+body .case-hero .hero-video { display: block; width: 100%; height: auto; max-height: 84vh; object-fit: cover; border-radius: 20px; background: #F2F2F0; }
+@media (prefers-reduced-motion: reduce) { body .case-hero .hero-video { animation: none; } }

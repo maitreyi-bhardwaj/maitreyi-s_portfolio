@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UI/UX, Maitreyi Bhardwaj</title>
+<meta name="description" content="UI/UX and product design projects by Maitreyi Bhardwaj: apps, design systems, plugins and data tools.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="stylesheet" href="site.css?v=1792961844">
+<style>
+/* a white index: a short intro row, a quiet gap, then square tiles in a grid of three */
+body { background: #fff; -webkit-font-smoothing: antialiased; }
+.ix-intro { display: grid; grid-template-columns: 2fr 1fr 1fr; column-gap: 6px; padding: clamp(48px, 7vw, 96px) var(--gut) 0; font-size: 14px; line-height: 1.45; }
+.ix-intro h1 { font: inherit; margin: 0; }
+.ix-intro p, .ix-intro ul { margin: 0; color: var(--ink-soft); }
+.ix-intro ul { list-style: none; padding: 0; }
+.ix-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px 12px; padding: clamp(120px, 18vw, 260px) var(--gut) 0; }
+.ix-tile { display: block; color: inherit; text-decoration: none; }
+.ix-tile .pic { aspect-ratio: 1; overflow: hidden; background: #F2F2F0; }
+.ix-tile img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .9s cubic-bezier(.2, .7, .2, 1); }
+a.ix-tile:hover img { transform: scale(1.04); }
+.ix-tile .name { display: flex; justify-content: space-between; gap: 12px; margin-top: 12px; font-size: 14px; }
+.ix-tile .name span:last-child { color: var(--ink-soft); }
+.dotpic { height: 100%; background: #24160D; color: #F3ECE4; display: flex; flex-direction: column; justify-content: space-between; padding: 22px; }
+.dotpic b { font-weight: 500; font-size: clamp(32px, 4vw, 60px); letter-spacing: -.03em; }
+.dotpic .dots { width: 55%; align-self: flex-end; }
+.ix-tile video, .ix-tile iframe { display: block; width: 100%; height: 100%; object-fit: cover; border: 0; }
+.ix-tile .pic iframe { width: 178%; height: 100%; margin-left: -39%; pointer-events: none; }   /* fill a square with a 16:9 player */
+@media (max-width: 860px) { .ix-intro { grid-template-columns: 1fr; row-gap: 14px; } .ix-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 520px) { .ix-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<div data-topbar></div>
+
+<header class="ix-intro">
+  <h1>UI/UX</h1>
+  <ul><li>Apps</li><li>Design systems</li><li>Plugins and extensions</li><li>Data tools</li></ul>
+  <p>Interfaces I have researched, designed and often built, from design tokens to shipped apps.</p>
+</header>
+
+<main class="ix-grid">
+  <a class="ix-tile" href="reach.html"><div class="pic"><div class="dotpic"><b>23 in 100</b><div data-dots="23/100"></div></div></div><div class="name"><span>Reach</span><span>2026</span></div></a>
+  <a class="ix-tile" href="powerbi.html"><div class="pic"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto:best/v1791840381/Screenshot_2026-10-12_at_2.25.54_PM_htgbej.png" alt="Capital program dashboard" loading="lazy"></div><div class="name"><span>Capital program dashboard</span><span>2026</span></div></a>
+  <a class="ix-tile" href="ripe.html"><div class="pic"><img src="media/ripe/hero.jpg" alt="Ripe" loading="lazy"></div><div class="name"><span>Ripe</span><span>2026</span></div></a>
+  <a class="ix-tile" href="pastiche.html"><div class="pic"><video src="media/video/pastiche.mp4" poster="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto:best/v1780963087/pastiche_07_plugin_ui_ckstkh.png" muted loop playsinline preload="metadata" aria-label="Pastiche plugin demo"></video></div><div class="name"><span>Pastiche</span><span>2026</span></div></a>
+  <a class="ix-tile" href="distill.html"><div class="pic"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto:best/v1781041541/distill_02_UI_bnkfsj.png" alt="Distill" loading="lazy"></div><div class="name"><span>Distill</span><span>2026</span></div></a>
+  <a class="ix-tile" href="frontdoor.html"><div class="pic"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto:best/v1781024360/fd_08_dashboard_yockx3.png" alt="Frontdoor: Home Passport" loading="lazy"></div><div class="name"><span>Frontdoor: Home Passport</span><span>2026</span></div></a>
+  <a class="ix-tile" href="vibin.html"><div class="pic"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto:best/v1781052636/vibin_07_ui_final_hz5v6a.png" alt="Vibin" loading="lazy"></div><div class="name"><span>Vibin</span><span>2025</span></div></a>
+</main>
+
+<div data-foot></div>
+<script>
+// videos in tiles play only while they are on screen
+(function () {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const io = new IntersectionObserver(en => en.forEach(x => x.isIntersecting ? x.target.play().catch(() => {}) : x.target.pause()), { threshold: .3 });
+  document.querySelectorAll('.ix-tile video').forEach(v => io.observe(v));
+})();
+</script>
+<script src="site.js?v=1792961844"></script>
+</body>
+</html>
