@@ -78,7 +78,7 @@ window.TIMELINE = [
       {
         title: 'Strata: the thinking mat', size: 'l', ratio: 1.777,
         href: 'strata.html',
-        image: 'media/strata/hero.jpg',
+        image: 'media/id/strata/p052.jpg',
         about: 'A concept for a floor mat that reads your body and adjusts under your head, neck and back so you can rest.',
         role: 'Industrial Designer',
         tools: 'Sketching, clay, 3D modelling, rendering'
@@ -127,6 +127,32 @@ window.TIMELINE = [
     ]
   },
   {
+    date: '10.25',
+    cards: [
+      {
+        title: 'Epi Pals: confidence for children with epilepsy', size: 'l', ratio: 1.777,
+        href: 'epipals.html',
+        image: 'media/id/epipals/p110.jpg',
+        about: 'A wearable that helps children with epilepsy feel confident and independent while reassuring their parents.',
+        role: 'Industrial Designer',
+        tools: 'Sketching, CAD, rendering, haptics'
+      }
+    ]
+  },
+  {
+    date: '05.25',
+    cards: [
+      {
+        title: 'KHAI: drive into your future', size: 'l', ratio: 1.777,
+        href: 'khai.html',
+        image: 'media/id/khai/p086.jpg',
+        about: 'A car concept for women working in the city, with a cabin that becomes an office, lounge or place to rest. Design Excellence Award, Franznick Family Scholarship.',
+        role: 'Industrial Designer, team of three',
+        tools: 'Sketching, CAD, rendering'
+      }
+    ]
+  },
+  {
     date: '2025',
     cards: [
       {
@@ -145,10 +171,18 @@ window.TIMELINE = [
       {
         title: 'Kith: 3D-printed lamps', size: 'l', ratio: 1.777,
         href: 'kith.html',
-        image: 'media/kith/p66.jpg',
+        image: 'media/id/kith/p067.jpg',
         about: 'A pendant lamp for the dining table. Each shade takes its form from a fruit that a community gathers and shares.',
         role: 'Industrial Designer',
         tools: 'Rhino, Grasshopper, 3D printing'
+      },
+      {
+        title: 'LEX: soft goods for a jogging stroller', size: 'l', ratio: 1.777,
+        href: 'lex.html',
+        image: 'media/id/lex/p020.jpg',
+        about: 'A quilted textile canopy and seat for an urban jogging stroller.',
+        role: 'Industrial Designer',
+        tools: 'Sketching, CAD, rendering'
       }
     ]
   },
@@ -158,7 +192,7 @@ window.TIMELINE = [
       {
         title: 'Pit Boss: in-store display', size: 'l', ratio: 1.777,
         href: 'pitboss.html',
-        image: 'media/pitboss/p02.jpg',
+        image: 'media/id/pitboss/p014.jpg',
         about: 'An in-store display for Pit Boss grills that explains the grill where people buy it. Design Excellence Award, Fall 2024.',
         role: 'Industrial Design student',
         tools: 'Sketching, cardboard models, 3D rendering'
