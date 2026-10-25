@@ -708,3 +708,8 @@ footer.foot > .foot-lace { position: absolute; inset: 0; width: 100%; height: 10
 /* the first image on every project page spans the same edges as the top bar */
 body .case-hero { width: auto; max-width: none; margin: 20px var(--gut) 0; padding: 0; }
 body .case-hero img, body .case-hero .dothero { width: 100%; max-width: none; }
+
+/* industrial design: product photographs run the full width of the page */
+body .step-in > .big.big--wide { position: relative; left: 50%; transform: translateX(-50%); width: calc(100vw - 2 * var(--gut)); max-width: none !important; margin-top: 12px; border-radius: 6px; }
+body .step-in > .big.big--wide img { width: 100%; height: auto; display: block; }
+body .step-in > p + .big.big--wide, body .step-in > div:not(.big--wide) + .big.big--wide { margin-top: 40px; }

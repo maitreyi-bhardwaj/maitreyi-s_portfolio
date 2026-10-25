@@ -62,7 +62,7 @@
 
   // Case studies: size each picture by its shape, so a tall phone screenshot or a
   // small low-resolution capture never fills the whole column.
-  document.querySelectorAll('.step .big:not(.shot) img, .outcome .big img').forEach(img => {
+  document.querySelectorAll('.step .big:not(.shot):not(.big--wide) img, .outcome .big img').forEach(img => {
     const fit = () => {
       if (!img.naturalWidth) return;
       const box = img.closest('.big');
