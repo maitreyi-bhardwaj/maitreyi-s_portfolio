@@ -6,7 +6,7 @@
 <title>Explorations, Maitreyi Bhardwaj</title>
 <meta name="description" content="A space to wander through Maitreyi Bhardwaj's explorations: photography, animation, craft, models and code.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link rel="stylesheet" href="site.css?v=1793037898">
+<link rel="stylesheet" href="site.css?v=1793038105">
 <style>
 /* A white 3D space. Pieces float at different depths; scrolling moves you through them,
    the mouse tilts the view, and clicking a piece opens it with a short description. */
@@ -90,8 +90,8 @@ body.space > nav.topbar { position: fixed !important; top: 0; left: 0; right: 0;
   <p class="hintback">Click anywhere outside to go back</p>
 </div>
 
-<script src="space-data.js?v=1793037898"></script>
-<script src="site.js?v=1793037898"></script>
+<script src="space-data.js?v=1793038105"></script>
+<script src="site.js?v=1793038105"></script>
 <script>
 (function () {
   const esc = s => String(s || '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -102,20 +102,20 @@ body.space > nav.topbar { position: fixed !important; top: 0; left: 0; right: 0;
   // a seeded random, so the layout is the same on every visit
   let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
 
-  const GAP = 340;                          // depth between one piece and the next
+  const GAP = 460;                          // depth between one piece and the next
   const LEN = Math.max(items.length, 1) * GAP; // the space loops after this
   const pieces = items.map((it, i) => {
     const b = document.createElement('button');
     b.className = 'piece'; b.type = 'button';
     b.setAttribute('aria-label', it.title + (it.kind ? ', ' + it.kind : ''));
-    const w = Math.round(110 + rnd() * 150);
+    const w = Math.round(230 + rnd() * 170);
     b.style.width = w + 'px';
     if (it.images && !it.image) it.image = it.images[0];
     const media = it.video
       ? '<video data-src="' + esc(it.video) + '" muted loop playsinline preload="none"' + (it.image ? ' poster="' + esc(it.image) + '"' : '') + '></video>'
       : it.image ? '<img src="' + esc(it.image) + '" alt="" loading="lazy" decoding="async">'
       : '<div class="note"><span>' + esc(it.text) + '</span><small>' + esc(it.kind) + '</small></div>';
-    b.innerHTML = media + (it.images && it.images.length > 1 ? '<span class="many">' + it.images.length + '</span>' : '') + '<span class="cap">' + esc(it.title) + '<span>' + esc(it.kind) + '</span></span>';
+    b.innerHTML = media + '<span class="cap">' + esc(it.title) + '<span>' + esc(it.kind) + '</span></span>';
     world.appendChild(b);
     // spread across the view, keeping the very centre a little clearer
     let x, y;
