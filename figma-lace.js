@@ -141,10 +141,10 @@ void main(){
   color = mix(color,ink,max(stripe,stripe2)*0.82*smoothstep(0.0,0.18,growth));
   color = mix(color,vec3(0.93,0.94,0.88),clamp(cloud*(0.95+glow*0.6)+glow*halo*0.10,0.0,0.88));
   if (veil > 0.5) {
-    // On a project card: pink lace on a white ground.
+    // On a project card: muted pink lace on a white ground.
     float flower = smoothstep(0.35,0.95,ornament);
-    vec3 rose = mix(vec3(0.89,0.42,0.64),vec3(0.97,0.64,0.79),noiseL(pixelP/300.0));
-    vec3 vc = mix(vec3(1.0),vec3(0.98,0.84,0.90),net*0.85);
+    vec3 rose = mix(vec3(0.80,0.56,0.66),vec3(0.89,0.71,0.78),noiseL(pixelP/300.0));
+    vec3 vc = mix(vec3(1.0),vec3(0.95,0.88,0.90),net*0.85);
     vc = mix(vc,rose,flower*stitch);
     vc = mix(vc,vec3(1.0),cloud*0.55);
     vc = mix(vc,rose,max(stripe,stripe2)*0.8*smoothstep(0.0,0.18,growth));

@@ -3,11 +3,11 @@
 // cloud passes the dots light up, elsewhere they fade to the background, so
 // the pattern keeps changing. The mouse lights up the area around it.
 //   .page-dots placeholder (home page): very faint pink dots on white
-//   footer.foot (every page): pink dots on the brown footer
+//   footer.foot (every page): small dots on the brown footer, shifting colour as you scroll
 (function () {
   const FRAG = `
 precision mediump float;
-uniform vec2 res; uniform float t; uniform vec2 m; uniform float cell; uniform float mode; uniform float scroll;
+uniform vec2 res; uniform float t; uniform vec2 m; uniform float cell; uniform float mode; uniform float scroll; uniform float hue;
 float h(vec2 p){ return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
 float n(vec2 p){ vec2 i = floor(p), f = fract(p); f = f*f*(3.0-2.0*f);
   return mix(mix(h(i), h(i+vec2(1,0)), f.x), mix(h(i+vec2(0,1)), h(i+vec2(1,1)), f.x), f.y); }
@@ -57,7 +57,13 @@ void main(){
   } else {            // footer: brown with pink lace, a soft pink glow where lit
     vec3 brown = vec3(0.141, 0.086, 0.051);
     col = mix(brown, vec3(0.35, 0.17, 0.20), 0.45 * smoothstep(0.5, 0.85, cloud));
-    col = mix(col, vec3(0.94, 0.66, 0.82), dotShape * on * (0.10 + 0.55 * lit));
+    // the dots drift through soft pinks, lilacs, peaches and mints as the page scrolls
+    float p = fract(cloud * 0.9 + (id.x + id.y) / 160.0 + hue) * 4.0;
+    vec3 c0 = vec3(0.94, 0.66, 0.82), c1 = vec3(0.78, 0.70, 0.96), c2 = vec3(0.98, 0.76, 0.64), c3 = vec3(0.68, 0.88, 0.80);
+    vec3 tint = p < 1.0 ? mix(c0, c1, smoothstep(0.0, 1.0, p)) : p < 2.0 ? mix(c1, c2, smoothstep(1.0, 2.0, p))
+              : p < 3.0 ? mix(c2, c3, smoothstep(2.0, 3.0, p)) : mix(c3, c0, smoothstep(3.0, 4.0, p));
+    float small = smoothstep(0.33, 0.26, r);
+    col = mix(col, tint, small * on * (0.24 + 0.70 * lit));
   }
   gl_FragColor = vec4(col, 1.0);
 }`;
@@ -76,13 +82,13 @@ void main(){
     gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
     const loc = gl.getAttribLocation(pr, 'p'); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
-    const U = k => gl.getUniformLocation(pr, k), uRes = U('res'), uT = U('t'), uM = U('m'), uCell = U('cell'), uMode = U('mode'), uScroll = U('scroll');
+    const U = k => gl.getUniformLocation(pr, k), uRes = U('res'), uT = U('t'), uM = U('m'), uCell = U('cell'), uMode = U('mode'), uScroll = U('scroll'), uHue = U('hue');
     let d = 1, fx = -9999, fy = -9999, on = true, raf = 0;
     const size = () => { const r = cv.getBoundingClientRect(); d = Math.min(devicePixelRatio || 1, 2); cv.width = Math.max(1, r.width * d); cv.height = Math.max(1, r.height * d); gl.viewport(0, 0, cv.width, cv.height); };
     const draw = s => {
       const r = cv.getBoundingClientRect();
       fx += (mouseX - fx) * .08; fy += (mouseY - fy) * .08;
-      gl.uniform2f(uRes, cv.width, cv.height); gl.uniform1f(uT, s); gl.uniform1f(uCell, (mode ? 9 : 8) * d); gl.uniform1f(uMode, mode);
+      gl.uniform2f(uRes, cv.width, cv.height); gl.uniform1f(uT, s); gl.uniform1f(uCell, (mode ? 6 : 8) * d); gl.uniform1f(uHue, scrollY * 0.0009 + s * 0.02); gl.uniform1f(uMode, mode);
       gl.uniform2f(uM, (fx - r.left) * d, (r.bottom - fy) * d);
       gl.uniform1f(uScroll, fixed ? -scrollY * d : 0);
       gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
