@@ -2,16 +2,16 @@
 // the screen goes from near-black to white to pink while an ink bloom reveals her
 // logo (the hair turns from deep maroon through blush to white), the eyebrows
 // trace in from left to right and the whole mark drifts up and left.
-// It plays once per browser, then fades into the page. window.mbIntro resolves
+// It plays each time the site is opened (once per tab), then fades into the page. window.mbIntro resolves
 // when the page should start its own animations. Click or press a key to skip.
 // Add ?intro to the address to see it again.
 (function () {
   // ?intro replays it; ?intro=2.5 holds it still at that second (for checking a frame)
   const q = new URLSearchParams(location.search).get('intro');
   let seen = q === null ? false : null;
-  if (seen === false) try { seen = localStorage.getItem('mb-intro-seen') === '1'; } catch (e) {}
+  if (seen === false) try { seen = sessionStorage.getItem('mb-intro-seen') === '1'; } catch (e) {}
   if (seen || matchMedia('(prefers-reduced-motion: reduce)').matches) { window.mbIntro = Promise.resolve(); return; }
-  try { localStorage.setItem('mb-intro-seen', '1'); } catch (e) {}
+  try { sessionStorage.setItem('mb-intro-seen', '1'); } catch (e) {}
 
   const D = '3.6s';
   const IN = 'cubic-bezier(.5,0,.5,1)', REVEAL = 'cubic-bezier(.45,0,.2,1)', DRIFT = 'cubic-bezier(.22,1,.36,1)';
