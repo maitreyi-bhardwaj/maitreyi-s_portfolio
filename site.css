@@ -769,3 +769,8 @@ html body .split h1, html body .prob > h2, html body .step-in > h2, html body .s
 html body .step-in > .bars, html body .step-in.duo > .duo-vis > .bars { grid-column: 1 / -1 !important; width: 100%; max-width: 760px; margin-left: 0 !important; justify-self: start; }
 html body .outcome > .learn { grid-column: 2 / -1 !important; grid-template-columns: 1fr 1fr; column-gap: 6px; }
 @media (max-width: 860px) { html body .outcome > .learn { grid-column: 1 !important; grid-template-columns: 1fr; } }
+
+/* project squares: the Figma lace plays over the picture, in white and pink, on hover */
+.ix-tile .pic { position: relative; }
+.card-lace { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; transition: opacity .5s ease; pointer-events: none; z-index: 2; }
+.card-lace.on { opacity: 1; }

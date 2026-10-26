@@ -2,11 +2,13 @@
 // ported line for line from its WGSL source to WebGL so it runs in every browser.
 // The animation is the frame's own keyframes: eleven settings ease from their start
 // to end values over 4.008 s (cubic-bezier .5,0,.5,1), then ease back, looping without a jump.
-// Usage: <canvas data-figma-lace></canvas>
+// Usage: <canvas data-figma-lace></canvas> for the home intro. On pages with project
+// squares (.ix-tile .pic), the same lace plays over a card in white and pink on hover.
 (function () {
   const FRAG = `
 precision highp float;
 uniform vec2 dims;
+uniform float veil;
 uniform float flowerSize, spacing, patternStyle, growth, meshSize, threadThickness, edgeSoftness,
               seed, density, rotation, irregularity, clouds, glow, grain;
 float hashL(vec2 p){ return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
@@ -138,6 +140,20 @@ void main(){
   float stripe2 = 1.0-smoothstep(0.002,0.005,abs(borderX-0.92));
   color = mix(color,ink,max(stripe,stripe2)*0.82*smoothstep(0.0,0.18,growth));
   color = mix(color,vec3(0.93,0.94,0.88),clamp(cloud*(0.95+glow*0.6)+glow*halo*0.10,0.0,0.88));
+  if (veil > 0.5) {
+    // On a project card: a white and pink lace laid over the picture.
+    // Threads are white, flowers pink, with a soft blush between them.
+    float flower = smoothstep(0.35,0.95,ornament);
+    vec3 rose = mix(vec3(0.91,0.47,0.68),vec3(0.98,0.70,0.83),noiseL(pixelP/300.0));
+    vec3 thread = mix(vec3(1.0),rose,flower);
+    vec3 blush = vec3(0.99,0.84,0.91);
+    float lacework = max(net*0.5,ornament*stitch);
+    vec3 vc = mix(blush,thread,lacework);
+    vc = mix(vc,vec3(1.0,0.97,0.98),cloud*0.6);
+    float va = clamp(mix(0.14,0.94,lacework)+cloud*0.30,0.0,0.96);
+    gl_FragColor = vec4(vc*va,va);
+    return;
+  }
   float fiberNoise = (hashL(floor(pixelP*1.7)+seed)-0.5)*grain*0.22;
   color = clamp(color+vec3(fiberNoise),vec3(0.0),vec3(1.0));
   gl_FragColor = vec4(color,1.0);
@@ -157,9 +173,12 @@ void main(){
     const dx = 3 * .5 * (1 - t) * (1 - t) + 6 * (0.5 - .5) * t * (1 - t) + 3 * (1 - .5) * t * t; if (Math.abs(cx) < 1e-5) break; t -= cx / Math.max(dx, 1e-4); t = Math.min(1, Math.max(0, t)); }
     return 3 * t * t * (1 - t) + t * t * t; };
 
-  document.querySelectorAll('canvas[data-figma-lace]').forEach(cv => {
-    const gl = cv.getContext('webgl', { antialias: false, alpha: false });
-    if (!gl) return;
+  // Sets up the shader on one canvas. opts.veil draws the white and pink card lace;
+  // opts.scale shrinks the pattern (pattern pixels per screen pixel).
+  function lace(cv, opts) {
+    opts = opts || {};
+    const gl = cv.getContext('webgl', { antialias: false, alpha: !!opts.veil, premultipliedAlpha: true });
+    if (!gl) return null;
     const sh = (type, src) => { const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s);
       if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) console.error(gl.getShaderInfoLog(s)); return s; };
     const pr = gl.createProgram();
@@ -168,36 +187,87 @@ void main(){
     gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
     const loc = gl.getAttribLocation(pr, 'p'); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
-    const U = {}; ['dims', 'canvasPx'].concat(Object.keys(TRACKS), Object.keys(FIXED)).forEach(k => U[k] = gl.getUniformLocation(pr, k));
-    let w = 1, h = 1;
+    const U = {}; ['dims', 'canvasPx', 'veil'].concat(Object.keys(TRACKS), Object.keys(FIXED)).forEach(k => U[k] = gl.getUniformLocation(pr, k));
+    const scale = opts.scale || 1;
+    let w = 1, h = 1, k = 0;
     // sizes are in CSS pixels (Figma points); render at up to 1.25x for crisp threads without overworking the GPU
     const size = () => { const r = cv.getBoundingClientRect(), d = Math.min(devicePixelRatio || 1, 1.25); w = r.width; h = r.height;
       cv.width = Math.max(1, Math.round(w * d)); cv.height = Math.max(1, Math.round(h * d)); gl.viewport(0, 0, cv.width, cv.height); };
-    const draw = k => {
-      gl.uniform2f(U.dims, w, h); gl.uniform2f(U.canvasPx, cv.width, cv.height);
+    const draw = nk => {
+      k = nk;
+      gl.uniform2f(U.dims, w / scale, h / scale); gl.uniform2f(U.canvasPx, cv.width, cv.height); gl.uniform1f(U.veil, opts.veil ? 1 : 0);
       for (const n in TRACKS) gl.uniform1f(U[n], TRACKS[n][0] + (TRACKS[n][1] - TRACKS[n][0]) * k);
       for (const n in FIXED) gl.uniform1f(U[n], FIXED[n]);
       gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
     };
-    let k = 0;
-    size(); draw(0);
-    addEventListener('resize', () => { size(); draw(k); });
-    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     // A seamless loop: ease from start to end over 4.008 s (the Figma ramp), hold a moment,
     // ease back the same way, hold, repeat — so there is never a jump.
     const HOLD = 1.5, CYCLE = 2 * (RAMP + HOLD);
-    let start = performance.now(), visible = true, raf = 0;
+    let t0 = 0, raf = 0;
     const loop = now => {
-      const s = ((now - start) / 1000) % CYCLE;
+      const s = ((now - t0) / 1000) % CYCLE;
       let x;
       if (s < RAMP) x = s / RAMP;                                  // forward
       else if (s < RAMP + HOLD) x = 1;                             // hold at the end
       else if (s < 2 * RAMP + HOLD) x = 1 - (s - RAMP - HOLD) / RAMP;  // back
       else x = 0;                                                  // hold at the start
       const nk = bez(x);
-      if (Math.abs(nk - k) > 1e-4) { k = nk; draw(k); }
-      raf = visible ? requestAnimationFrame(loop) : 0;
+      if (Math.abs(nk - k) > 1e-4) draw(nk);
+      raf = requestAnimationFrame(loop);
     };
-    new IntersectionObserver(e => { visible = e[0].isIntersecting; if (visible && !raf) raf = requestAnimationFrame(loop); }).observe(cv);
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    return {
+      size, draw: () => draw(k),
+      play(fromStart) { if (reduced) return; if (fromStart) { t0 = performance.now(); draw(0); } if (!raf) raf = requestAnimationFrame(loop); },
+      stop() { cancelAnimationFrame(raf); raf = 0; }
+    };
+  }
+
+  // The home intro: full colour, always looping while on screen.
+  document.querySelectorAll('canvas[data-figma-lace]').forEach(cv => {
+    const L = lace(cv);
+    if (!L) return;
+    L.size(); L.draw();
+    addEventListener('resize', () => { L.size(); L.draw(); });
+    let started = false;
+    new IntersectionObserver(e => {
+      if (e[0].isIntersecting) { L.play(!started); started = true; } else L.stop();
+    }).observe(cv);
   });
+
+  // Project cards: one shared canvas moves to the card under the pointer
+  // (or, on touch screens, the card in the middle of the screen) and plays the lace there.
+  const cards = document.querySelectorAll('.ix-tile .pic');
+  if (!cards.length) return;
+  const cv = document.createElement('canvas');
+  cv.className = 'card-lace'; cv.setAttribute('aria-hidden', 'true');
+  const L = lace(cv, { veil: true, scale: 0.62 });
+  if (!L) return;
+  let current = null, hideT = 0;
+  const show = pic => {
+    clearTimeout(hideT);
+    if (current !== pic) { pic.appendChild(cv); current = pic; L.size(); L.play(true); }
+    else L.play(false);
+    requestAnimationFrame(() => cv.classList.add('on'));
+  };
+  const hide = pic => {
+    if (current !== pic) return;
+    cv.classList.remove('on');
+    hideT = setTimeout(() => { L.stop(); }, 600);
+  };
+  addEventListener('resize', () => { if (current) L.size(); });
+  if (matchMedia('(hover: hover)').matches) {
+    cards.forEach(pic => {
+      const tile = pic.closest('.ix-tile') || pic;
+      tile.addEventListener('pointerenter', () => show(pic));
+      tile.addEventListener('pointerleave', () => hide(pic));
+      tile.addEventListener('focus', () => show(pic));
+      tile.addEventListener('blur', () => hide(pic));
+    });
+  } else {
+    // touch: the card crossing the middle of the screen gets the lace
+    const io = new IntersectionObserver(es => es.forEach(e => e.isIntersecting ? show(e.target) : hide(e.target)),
+      { rootMargin: '-45% 0px -45% 0px' });
+    cards.forEach(pic => io.observe(pic));
+  }
 })();
