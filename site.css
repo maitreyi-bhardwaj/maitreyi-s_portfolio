@@ -776,5 +776,5 @@ html body .outcome > .learn { grid-column: 2 / -1 !important; grid-template-colu
 .card-lace { position: absolute; left: 0; right: 0; top: -22%; width: 100%; height: 122%; opacity: 0; transition: opacity .5s ease; pointer-events: none; z-index: 2; }
 .card-lace.on { opacity: 1; }
 
-/* footer: clear space between the Contact, Resume and Links columns */
-footer.foot .foot-links { column-gap: clamp(24px, 3vw, 48px); }
+/* footer: a wide white gap above it, so it doesn't crowd the page */
+footer.foot { margin-top: clamp(160px, 18vw, 300px) !important; }
