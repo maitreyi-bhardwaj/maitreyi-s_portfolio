@@ -6,7 +6,7 @@
 <title>Explorations, Maitreyi Bhardwaj</title>
 <meta name="description" content="A space to wander through Maitreyi Bhardwaj's explorations: photography, animation, craft, models and code.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link rel="stylesheet" href="site.css?v=1793038888">
+<link rel="stylesheet" href="site.css?v=1793039051">
 <style>
 /* A white 3D space. Pieces float at different depths; scrolling moves you through them,
    the mouse tilts the view, and clicking a piece opens it with a short description. */
@@ -32,39 +32,36 @@ body.space > nav.topbar { position: fixed !important; top: 0; left: 0; right: 0;
 .count { position: fixed; right: var(--gut); bottom: 22px; z-index: 5; font-size: 13px; color: #8C827B; font-variant-numeric: tabular-nums; }
 
 /* the open piece */
-.panel { position: fixed; inset: 0; z-index: 30; display: grid; place-items: center; padding: clamp(70px, 9vh, 100px) var(--gut) clamp(28px, 5vh, 48px);
+.panel { position: fixed; inset: 0; z-index: 30; display: grid; place-items: center; overflow-y: auto; padding: clamp(70px, 9vh, 100px) var(--gut) clamp(28px, 5vh, 48px);
   background: radial-gradient(120% 90% at 70% 80%, rgba(196, 176, 150, .55), rgba(22, 20, 18, .88) 60%); backdrop-filter: blur(16px);
   opacity: 0; pointer-events: none; transition: opacity .4s ease; cursor: zoom-out; }
 .panel.on { opacity: 1; pointer-events: auto; }
-/* the sheet: warm paper with a fine black border just inside its edge */
-.sheet { position: relative; display: flex; align-items: stretch; cursor: default; max-width: min(1180px, 100%);
-  background: #fff; padding: 22px; border: 1px solid #E59BBE; box-shadow: 0 60px 120px -50px rgba(0, 0, 0, .7), 0 2px 0 rgba(255,255,255,.4) inset;
-  transform: translateY(14px) rotate(-.4deg); transition: transform .5s cubic-bezier(.2,.7,.2,1); }
+/* the sheet: a white card with a thin pink edge. The picture sits on top,
+   the text runs below it in columns, each with a label over a fine rule */
+.sheet { position: relative; display: flex; flex-direction: column; cursor: default; width: min(980px, 100%); max-height: 100%;
+  background: #fff; padding: 22px; border: 1px solid #E59BBE; box-shadow: 0 60px 120px -50px rgba(0, 0, 0, .7);
+  transform: translateY(14px); transition: transform .5s cubic-bezier(.2,.7,.2,1); }
+.sheet.tall { width: min(640px, 100%); }
 .panel.on .sheet { transform: none; }
-.sheet-pic { display: flex; flex-direction: column; gap: 12px; flex: none; }
-.sheet-pic .shot { position: relative; line-height: 0; background: #1a1714; }
-.sheet-pic img, .sheet-pic video { display: block; height: min(70vh, 700px); width: auto; max-width: 50vw; object-fit: cover; }
-.sheet.land .sheet-pic img, .sheet.land .sheet-pic video { height: auto; width: min(56vw, 760px); max-width: none; max-height: 70vh; }
-.sheet-pic .shot { cursor: pointer; }
-.sheet-dots { display: flex; gap: 7px; justify-content: flex-start; padding: 0 2px; }
+.sheet-pic { display: flex; flex-direction: column; gap: 10px; flex: none; }
+.sheet-pic .shot { position: relative; line-height: 0; background: #1a1714; cursor: pointer; }
+.sheet-pic img, .sheet-pic video { display: block; width: 100%; height: auto; max-height: 56vh; object-fit: cover; }
+.sheet.tall .sheet-pic img, .sheet.tall .sheet-pic video { height: 56vh; }
+.sheet-dots { display: flex; gap: 7px; padding: 0 1px; }
 .sheet-dots button { width: 7px; height: 7px; padding: 0; border-radius: 50%; border: 1px solid #2B2621; background: transparent; cursor: pointer; }
 .sheet-dots button[aria-current="true"] { background: #2B2621; }
-.sheet-text { width: clamp(240px, 23vw, 320px); padding: 30px 18px 10px 38px; display: flex; flex-direction: column; color: #2B2621; }
-.sheet-text .kind { margin: 0 0 4px; font-size: 15px; line-height: 1.45; color: #8A8178; }
-.sheet-text h2 { margin: 0 0 30px; font-size: 15px; font-weight: 400; line-height: 1.45; letter-spacing: 0; color: #111; }
-.sheet-text section { margin-bottom: 34px; }
-.sheet-text h3 { margin: 0; font-size: 10px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; line-height: 1.3; color: #111; }
-.sheet-text h3::after { content: ''; display: block; height: 1px; background: rgba(17, 17, 17, .5); margin: 9px 0 12px; }
+.sheet-text { display: flex; flex-direction: column; padding: 22px 4px 2px; color: #111; }
+#psecs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+.sheet-text h3 { margin: 0; font-size: 13px; font-weight: 600; line-height: 1.3; color: #111; }
+.sheet-text h3::after { content: ''; display: block; height: 1px; background: rgba(17, 17, 17, .5); margin: 9px 0 11px; }
 .sheet-text p { margin: 0; font-size: 12px; line-height: 1.7; color: #555; }
 .sheet-text p.empty { color: #A69D94; font-style: italic; }
-.sheet-text .foot { margin-top: auto; display: flex; justify-content: flex-end; gap: 18px; padding-top: 18px; font-size: 10px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: #111; }
-.sheet-text .foot button, .sheet-text .foot a { font: inherit; letter-spacing: inherit; text-transform: inherit; color: #1C1916; background: none; border: 0; padding: 0; cursor: pointer; text-decoration: none; border-bottom: 1px solid currentColor; }
+.sheet-text .foot { display: flex; justify-content: flex-end; gap: 18px; padding-top: 16px; font-size: 12px; color: #111; }
+.sheet-text .foot button, .sheet-text .foot a { font: inherit; color: #111; background: none; border: 0; padding: 0; cursor: pointer; text-decoration: none; border-bottom: 1px solid currentColor; }
 .panel .close { position: absolute; top: clamp(66px, 8vh, 84px); right: var(--gut); width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(255,255,255,.5); background: transparent; color: #fff; font-size: 18px; line-height: 1; cursor: pointer; }
 @media (max-width: 760px) {
   .panel { place-items: start center; overflow-y: auto; }
-  .sheet { flex-direction: column; width: 100%; }
-  .sheet-pic img, .sheet-pic video, .sheet.land .sheet-pic img, .sheet.land .sheet-pic video { width: 100%; height: auto; max-width: none; max-height: 60svh; }
-  .sheet-text { width: auto; padding: 26px 12px 8px; }
+  #psecs { grid-template-columns: 1fr; gap: 20px; }
 }
 .piece .many { position: absolute; top: 6px; right: 6px; min-width: 20px; padding: 2px 6px; border-radius: 10px; background: rgba(255,255,255,.9); font-size: 11px; color: #2B1B11; text-align: center; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
@@ -88,8 +85,8 @@ body.space > nav.topbar { position: fixed !important; top: 0; left: 0; right: 0;
   </article>
 </div>
 
-<script src="space-data.js?v=1793038888"></script>
-<script src="site.js?v=1793038888"></script>
+<script src="space-data.js?v=1793039051"></script>
+<script src="site.js?v=1793039051"></script>
 <script>
 (function () {
   const esc = s => String(s || '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -200,7 +197,7 @@ body.space > nav.topbar { position: fixed !important; top: 0; left: 0; right: 0;
   const shot = document.getElementById('pshot'), dots = document.getElementById('pdots'), sheet = document.getElementById('sheet');
   let slides = [], at = 0;
   // landscape pictures get a wider column, portrait ones stand tall
-  const orient = el => { const w = el.naturalWidth || el.videoWidth, hh = el.naturalHeight || el.videoHeight; if (w) sheet.classList.toggle('land', w > hh * 1.08); };
+  const orient = el => { const w = el.naturalWidth || el.videoWidth, hh = el.naturalHeight || el.videoHeight; if (w) sheet.classList.toggle('tall', hh > w * 1.05); };
   function show(k) {
     at = (k + slides.length) % slides.length;
     const s = slides[at];
@@ -217,7 +214,7 @@ body.space > nav.topbar { position: fixed !important; top: 0; left: 0; right: 0;
     const it = items[i]; current = i; lastFocus = document.activeElement;
     slides = slidesFor(it).filter(s => s.src || s.video);
     dots.innerHTML = slides.length > 1 ? slides.map((_, n) => '<button data-n="' + n + '" aria-label="Picture ' + (n + 1) + '"></button>').join('') : '';
-    sheet.classList.remove('land');
+    sheet.classList.remove('tall');
     show(0);
     document.getElementById('psecs').innerHTML = section(it.title, it.text) + section('The place', it.place) + section('The story', it.story);
     const a = document.getElementById('popen');
