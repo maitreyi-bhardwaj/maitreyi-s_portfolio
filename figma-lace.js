@@ -8,7 +8,7 @@
   const FRAG = `
 precision highp float;
 uniform vec2 dims;
-uniform float veil;
+uniform float veil, fine;
 uniform float flowerSize, spacing, patternStyle, growth, meshSize, threadThickness, edgeSoftness,
               seed, density, rotation, irregularity, clouds, glow, grain;
 float hashL(vec2 p){ return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
@@ -54,7 +54,7 @@ void main(){
   // uv as in the WGSL vertex quad: (0,0) top-left, (1,1) bottom-right
   vec2 uv = vec2(gl_FragCoord.x / canvasPx.x, 1.0 - gl_FragCoord.y / canvasPx.y);
   float aa = max(0.35,edgeSoftness+0.25);
-  float pitch = meshSize;
+  float pitch = meshSize*fine;
   vec2 pixelP = uv*dims;
   vec2 cellP = (floor(pixelP/pitch)+0.5)*pitch;
   vec2 p = rotateL(cellP-dims*0.5,-rotation*0.0174532925);
@@ -125,8 +125,8 @@ void main(){
   }
   vec2 gridD = abs(fract(pixelP/pitch)-0.5)*pitch;
   float strandD = min(gridD.x,gridD.y);
-  float strandWidth = min(threadThickness,pitch*0.70);
-  float net = 1.0-smoothstep(strandWidth*0.5,strandWidth*0.5+aa*0.65,strandD);
+  float strandWidth = min(threadThickness*fine,pitch*0.70);
+  float net = 1.0-smoothstep(strandWidth*0.5,strandWidth*0.5+aa*0.65*fine,strandD);
   float stitch = 0.89+0.11*cos(pixelP.x*2.8)*cos(pixelP.y*2.8);
   float textile = max(net*0.77,ornament*stitch);
   float n = noiseL(pixelP/180.0+seed)*0.56+noiseL(pixelP/70.0+seed*0.31)*0.28+noiseL(pixelP/29.0)*0.16;
@@ -141,17 +141,13 @@ void main(){
   color = mix(color,ink,max(stripe,stripe2)*0.82*smoothstep(0.0,0.18,growth));
   color = mix(color,vec3(0.93,0.94,0.88),clamp(cloud*(0.95+glow*0.6)+glow*halo*0.10,0.0,0.88));
   if (veil > 0.5) {
-    // On a project card: a white and pink lace laid over the picture.
-    // Threads are white, flowers pink, with a soft blush between them.
+    // On a project card: pink lace on a white ground.
     float flower = smoothstep(0.35,0.95,ornament);
-    vec3 rose = mix(vec3(0.91,0.47,0.68),vec3(0.98,0.70,0.83),noiseL(pixelP/300.0));
-    vec3 thread = mix(vec3(1.0),rose,flower);
-    vec3 blush = vec3(0.99,0.84,0.91);
-    float lacework = max(net*0.5,ornament*stitch);
-    vec3 vc = mix(blush,thread,lacework);
-    vc = mix(vc,vec3(1.0,0.97,0.98),cloud*0.6);
-    float va = clamp(mix(0.14,0.94,lacework)+cloud*0.30,0.0,0.96);
-    gl_FragColor = vec4(vc*va,va);
+    vec3 rose = mix(vec3(0.89,0.42,0.64),vec3(0.97,0.64,0.79),noiseL(pixelP/300.0));
+    vec3 vc = mix(vec3(1.0),vec3(0.98,0.84,0.90),net*0.85);
+    vc = mix(vc,rose,flower*stitch);
+    vc = mix(vc,vec3(1.0),cloud*0.55);
+    gl_FragColor = vec4(vc,1.0);
     return;
   }
   float fiberNoise = (hashL(floor(pixelP*1.7)+seed)-0.5)*grain*0.22;
@@ -174,7 +170,8 @@ void main(){
     return 3 * t * t * (1 - t) + t * t * t; };
 
   // Sets up the shader on one canvas. opts.veil draws the white and pink card lace;
-  // opts.scale shrinks the pattern (pattern pixels per screen pixel).
+  // opts.scale shrinks the pattern (pattern pixels per screen pixel); opts.fine shrinks only the
+  // mesh cells, for smaller pixels; opts.maxDpr caps the render resolution.
   function lace(cv, opts) {
     opts = opts || {};
     const gl = cv.getContext('webgl', { antialias: false, alpha: !!opts.veil, premultipliedAlpha: true });
@@ -187,15 +184,15 @@ void main(){
     gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
     const loc = gl.getAttribLocation(pr, 'p'); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
-    const U = {}; ['dims', 'canvasPx', 'veil'].concat(Object.keys(TRACKS), Object.keys(FIXED)).forEach(k => U[k] = gl.getUniformLocation(pr, k));
+    const U = {}; ['dims', 'canvasPx', 'veil', 'fine'].concat(Object.keys(TRACKS), Object.keys(FIXED)).forEach(k => U[k] = gl.getUniformLocation(pr, k));
     const scale = opts.scale || 1;
     let w = 1, h = 1, k = 0;
     // sizes are in CSS pixels (Figma points); render at up to 1.25x for crisp threads without overworking the GPU
-    const size = () => { const r = cv.getBoundingClientRect(), d = Math.min(devicePixelRatio || 1, 1.25); w = r.width; h = r.height;
+    const size = () => { const r = cv.getBoundingClientRect(), d = Math.min(devicePixelRatio || 1, opts.maxDpr || 1.25); w = r.width; h = r.height;
       cv.width = Math.max(1, Math.round(w * d)); cv.height = Math.max(1, Math.round(h * d)); gl.viewport(0, 0, cv.width, cv.height); };
     const draw = nk => {
       k = nk;
-      gl.uniform2f(U.dims, w / scale, h / scale); gl.uniform2f(U.canvasPx, cv.width, cv.height); gl.uniform1f(U.veil, opts.veil ? 1 : 0);
+      gl.uniform2f(U.dims, w / scale, h / scale); gl.uniform2f(U.canvasPx, cv.width, cv.height); gl.uniform1f(U.veil, opts.veil ? 1 : 0); gl.uniform1f(U.fine, opts.fine || 1);
       for (const n in TRACKS) gl.uniform1f(U[n], TRACKS[n][0] + (TRACKS[n][1] - TRACKS[n][0]) * k);
       for (const n in FIXED) gl.uniform1f(U[n], FIXED[n]);
       gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
@@ -241,7 +238,7 @@ void main(){
   if (!cards.length) return;
   const cv = document.createElement('canvas');
   cv.className = 'card-lace'; cv.setAttribute('aria-hidden', 'true');
-  const L = lace(cv, { veil: true, scale: 0.62 });
+  const L = lace(cv, { veil: true, scale: 0.8, fine: 0.36, maxDpr: 2 });
   if (!L) return;
   let current = null, hideT = 0;
   const show = pic => {
