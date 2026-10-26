@@ -104,17 +104,12 @@
       '</div>' +
       '<div class="foot-main">' +
         '<div class="foot-words">' +
-          '<p class="foot-name"><a href="index.html" aria-label="Maitreyi Bhardwaj, home">' + LOGO + '</a></p>' +
           '<p class="foot-say">Currently cooking, sketching, coding and reading.</p>' +
         '</div>' +
       '</div>' +
       '<div class="foot-fine"><span>© 2026 Maitreyi Bhardwaj</span><span>byMaitreyi</span></div>' +
     '</footer>';
 
-  // the dotted lace on the footer (and on the home page background)
-  const pat = document.createElement('script');
-  pat.src = 'pattern.js?v=' + (document.querySelector('script[src*="site.js"]').src.split('v=')[1] || '1');
-  document.body.appendChild(pat);
 
   const copyBtn = document.querySelector('[data-copy]');
   copyBtn.addEventListener('click', () => {
