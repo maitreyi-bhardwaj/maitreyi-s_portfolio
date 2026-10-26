@@ -4,9 +4,12 @@
 // trace in from left to right and the whole mark drifts up and left.
 // It plays once per browser, then fades into the page. window.mbIntro resolves
 // when the page should start its own animations. Click or press a key to skip.
+// Add ?intro to the address to see it again.
 (function () {
-  let seen = false;
-  try { seen = localStorage.getItem('mb-intro-seen') === '1'; } catch (e) {}
+  // ?intro replays it; ?intro=2.5 holds it still at that second (for checking a frame)
+  const q = new URLSearchParams(location.search).get('intro');
+  let seen = q === null ? false : null;
+  if (seen === false) try { seen = localStorage.getItem('mb-intro-seen') === '1'; } catch (e) {}
   if (seen || matchMedia('(prefers-reduced-motion: reduce)').matches) { window.mbIntro = Promise.resolve(); return; }
   try { localStorage.setItem('mb-intro-seen', '1'); } catch (e) {}
 
@@ -66,6 +69,12 @@ body > .mbi.out { opacity: 0; pointer-events: none; }
   };
   fit(); addEventListener('resize', fit);
 
+  if (q) {
+    wrap.querySelectorAll('.mbi, .mbi *').forEach(e => { e.style.animationDelay = (-q) + 's'; e.style.animationPlayState = 'paused'; });
+    wrap.style.animationDelay = (-q) + 's'; wrap.style.animationPlayState = 'paused';
+    window.mbIntro = new Promise(() => {});
+    return;
+  }
   let done;
   window.mbIntro = new Promise(r => { done = r; });
   let ended = false;
