@@ -187,7 +187,7 @@ body:not(.chosen) #work, body:not(.chosen) footer.foot, body:not(.chosen) .page-
 .opening.is-light .fields button { background: rgba(43, 27, 17, .08); color: #2B1B11; }
 .opening.is-light .fields button[aria-pressed="true"], .opening.is-light .fields button:hover { background: #2B1B11; color: #fff; }
 </style>
-<link rel="stylesheet" href="site.css?v=1792981138">
+<link rel="stylesheet" href="site.css?v=1792988020">
 </head>
 <body>
 
@@ -208,10 +208,10 @@ body:not(.chosen) #work, body:not(.chosen) footer.foot, body:not(.chosen) .page-
 
 <div data-foot></div>
 
-<script src="projects.js?v=1792981138"></script>
-<script src="lace.js?v=1792981138"></script>
-<script src="figma-lace.js?v=1792981138"></script>
-<script src="site.js?v=1792981138"></script>
+<script src="projects.js?v=1792988020"></script>
+<script src="lace.js?v=1792988020"></script>
+<script src="figma-lace.js?v=1792988020"></script>
+<script src="site.js?v=1792988020"></script>
 <script>
 // The opening line, typed out as if Maitreyi is writing it. The name takes three
 // tries: two spellings people get wrong are typed, crossed out in red and erased,
@@ -306,7 +306,7 @@ body:not(.chosen) #work, body:not(.chosen) footer.foot, body:not(.chosen) .page-
         (c.cta ? '<small>' + esc(c.cta) + '</small>' : '') + '</div>';
     } else {
       const visual = c.video
-        ? '<video muted loop playsinline preload="none" poster="' + esc(c.image || '') + '" src="' + esc(c.video) + '"></video>'
+        ? '<video autoplay muted loop playsinline preload="metadata" poster="' + esc(c.image || '') + '" src="' + esc(c.video) + '"></video>'
         : c.image ? '<img src="' + esc(c.image) + '" alt="" loading="lazy"' + (c.focus ? ' style="object-position:' + esc(c.focus) + '"' : '') + '>'
         : '<div class="cover' + (c.tone === 'blue' ? ' cover--blue' : '') + '"><div class="cover-words"><strong>' + esc(c.cover || c.title) + '</strong><span>' + esc(c.coverNote || '') + '</span></div>' +
           (c.dots ? window.mbDots(c.dots[0], c.dots[1]) : '') + '</div>';
