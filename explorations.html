@@ -6,7 +6,7 @@
 <title>Explorations, Maitreyi Bhardwaj</title>
 <meta name="description" content="A space to wander through Maitreyi Bhardwaj's explorations: photography, animation, craft, models and code.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link rel="stylesheet" href="site.css?v=1793039304">
+<link rel="stylesheet" href="site.css?v=1793039477">
 <style>
 /* A white 3D space. Pieces float at different depths; scrolling moves you through them,
    the mouse tilts the view, and clicking a piece opens it with a short description. */
@@ -39,34 +39,37 @@ body.space > nav.topbar { position: fixed !important; top: 0; left: 0; right: 0;
 /* the sheet: a white card with a thin pink edge. Picture on the left; on the right, sections
    stacked one under another, each a label over a fine rule with the text beneath, set in the
    home page's type (Inter, 15px). */
-.sheet { position: relative; display: flex; align-items: stretch; cursor: default; max-width: min(1180px, 100%); max-height: 100%;
+.sheet { position: relative; display: flex; align-items: stretch; cursor: default; max-width: min(1400px, 100%); max-height: 100%;
   background: #fff; padding: 22px; border: 1px solid #E59BBE; box-shadow: 0 60px 120px -50px rgba(0, 0, 0, .7);
   transform: translateY(14px); transition: transform .5s cubic-bezier(.2,.7,.2,1); }
 .panel.on .sheet { transform: none; }
 .sheet-pic { display: flex; flex-direction: column; gap: 10px; flex: none; }
 .sheet-pic .shot { position: relative; line-height: 0; background: #1a1714; cursor: pointer; }
-.sheet-pic img, .sheet-pic video { display: block; height: min(72vh, 720px); width: auto; max-width: 52vw; object-fit: cover; }
-.sheet.land .sheet-pic img, .sheet.land .sheet-pic video { height: auto; width: min(54vw, 740px); max-width: none; max-height: 72vh; }
+.sheet-pic img, .sheet-pic video { display: block; height: min(78vh, 820px); width: auto; max-width: 50vw; object-fit: cover; }
+.sheet.land .sheet-pic img, .sheet.land .sheet-pic video { height: auto; width: min(52vw, 820px); max-width: none; max-height: 78vh; }
 .sheet-dots { display: flex; gap: 7px; padding: 0 1px; }
 .sheet-dots button { width: 7px; height: 7px; padding: 0; border-radius: 50%; border: 1px solid #2B2621; background: transparent; cursor: pointer; }
 .sheet-dots button[aria-current="true"] { background: #2B2621; }
-.sheet-text { width: clamp(260px, 26vw, 360px); padding: 8px 8px 0 40px; display: flex; flex-direction: column; font-family: var(--f); color: #111; }
+.sheet-text { width: clamp(380px, 36vw, 540px); padding: 8px 8px 0 48px; display: flex; flex-direction: column; font-family: var(--f); color: #111; }
 /* the top of the column stays blank; the sections sit in the lower part, as in the printed sheet */
 #psecs { display: flex; flex-direction: column; gap: 40px; margin-top: auto; }
 .sheet-text h3 { margin: 0; font-size: 15px; font-weight: 500; line-height: 1.45; color: #111; }
-/* each section: a fine line first, the heading just under it, then the explanation */
-.sheet-text section { border-top: 1px solid rgba(17, 17, 17, .6); padding-top: 12px; }
-.sheet-text h3 + p { margin-top: 18px; }
+/* each section: a fine line; the heading tucked under its left end; the explanation set lower and
+   to the right, ending with the line, like the printed sheet */
+.sheet-text section { border-top: 1px solid rgba(17, 17, 17, .6); padding-top: 12px; display: grid; grid-template-columns: 1fr 1.7fr; column-gap: 24px; }
+.sheet-text h3 { grid-column: 1; grid-row: 1; }
+.sheet-text section p { grid-column: 2; grid-row: 2; margin-top: 22px; }
 .sheet-text p { margin: 0; font-size: 15px; line-height: 1.45; color: #111; }
 .sheet-text p.empty { color: #9A938C; }
 .sheet-text .foot { display: flex; justify-content: flex-end; padding-top: 24px; font-size: 15px; line-height: 1.45; }
 .sheet-text .foot button, .sheet-text .foot a { font: inherit; color: #111; background: none; border: 0; padding: 0; cursor: pointer; text-decoration: none; border-bottom: 1px solid currentColor; margin-left: 18px; }
-.panel .close { position: absolute; top: clamp(66px, 8vh, 84px); right: var(--gut); width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(255,255,255,.5); background: transparent; color: #fff; font-size: 18px; line-height: 1; cursor: pointer; }
+.panel .close { position: absolute; top: 18px; right: var(--gut); width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(255,255,255,.5); background: transparent; color: #fff; font-size: 18px; line-height: 1; cursor: pointer; }
 @media (max-width: 760px) {
   .panel { place-items: start center; }
   .sheet { flex-direction: column; width: 100%; }
   .sheet-pic img, .sheet-pic video, .sheet.land .sheet-pic img, .sheet.land .sheet-pic video { width: 100%; height: auto; max-width: none; max-height: 60svh; }
   .sheet-text { width: auto; padding: 24px 4px 0; }
+  .sheet-text section { grid-template-columns: 1fr; } .sheet-text section p { grid-column: 1; }
   #psecs { gap: 28px; }
 }
 .piece .many { position: absolute; top: 6px; right: 6px; min-width: 20px; padding: 2px 6px; border-radius: 10px; background: rgba(255,255,255,.9); font-size: 11px; color: #2B1B11; text-align: center; }
@@ -91,8 +94,8 @@ body.space > nav.topbar { position: fixed !important; top: 0; left: 0; right: 0;
   </article>
 </div>
 
-<script src="space-data.js?v=1793039304"></script>
-<script src="site.js?v=1793039304"></script>
+<script src="space-data.js?v=1793039477"></script>
+<script src="site.js?v=1793039477"></script>
 <script>
 (function () {
   const esc = s => String(s || '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
