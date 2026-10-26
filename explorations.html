@@ -6,7 +6,7 @@
 <title>Explorations, Maitreyi Bhardwaj</title>
 <meta name="description" content="Smaller things Maitreyi Bhardwaj has tried and built.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link rel="stylesheet" href="site.css?v=1792974967">
+<link rel="stylesheet" href="site.css?v=1792978716">
 <style>
 *, *::before, *::after { box-sizing: border-box; }
 /* A white page with blue text: a row of pictures on the left, an index of titles on the right.
@@ -53,8 +53,8 @@ body.blue .topbar a:hover, body.blue .topbar a[aria-current="page"] { background
 
 <div data-foot></div>
 
-<script src="projects.js?v=1792974967"></script>
-<script src="site.js?v=1792974967"></script>
+<script src="projects.js?v=1792978716"></script>
+<script src="site.js?v=1792978716"></script>
 <script>
 (function () {
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -81,7 +81,7 @@ body.blue .topbar a:hover, body.blue .topbar a[aria-current="page"] { background
     // widest row at this height; shrink if it would overflow the column
     const rowW = r => {
       const big = links[r * 2 + (r % 2 ? 1 : 0)], small = links[r * 2 + (r % 2 ? 0 : 1)];
-      return rowH * ratio(big) + (small ? GAP + rowH * SMALL[r % 2] * ratio(small) : 0) + (r % 2 ? rowH * 0.18 : 0);
+      return rowH * ratio(big) + (small ? GAP + rowH * SMALL[r % 2] * ratio(small) : 0) ;
     };
     let widest = 0; for (let r = 0; r < rows; r++) widest = Math.max(widest, rowW(r));
     if (widest > W) rowH *= W / widest;
@@ -89,9 +89,9 @@ body.blue .topbar a:hover, body.blue .topbar a[aria-current="page"] { background
       const y = r * (rowH + GAP), odd = r % 2 === 1;
       const first = links[r * 2], second = links[r * 2 + 1];
       // even rows: large then small (small sits on the row's bottom edge)
-      // odd rows: indented small (on the top edge) then large
+      // odd rows: small (on the top edge) then large
       const hFirst = odd ? rowH * SMALL[1] : rowH, hSecond = odd ? rowH : rowH * SMALL[0];
-      let x = odd ? rowH * 0.18 : 0;
+      let x = 0;
       const put = (a, h, top) => { const w = h * ratio(a); a.style.cssText = 'left:' + x + 'px;top:' + top + 'px;width:' + w + 'px;height:' + h + 'px'; x += w + GAP; };
       put(first, hFirst, y);
       if (second) put(second, hSecond, odd ? y : y + rowH - hSecond);

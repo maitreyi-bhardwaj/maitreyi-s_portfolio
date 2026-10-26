@@ -79,7 +79,7 @@ footer.foot {
   font-size: 13px;
 }
 .foot-links { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 6px 28px; align-items: start; }
-.foot-col h2 { font-family: var(--f); font-size: 13px; font-weight: 400; color: #F3ECE4; margin: 0 0 8px 12px; }
+.foot-col h2 { font-family: var(--f); font-size: 13px; font-weight: 400; color: #F3ECE4; margin: 0 0 8px 0; }
 .foot-row {
   display: flex; justify-content: space-between; align-items: center; gap: 12px;
   padding: 7px 12px; margin-bottom: 4px;
