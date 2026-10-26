@@ -6,7 +6,7 @@
 <title>Explorations, Maitreyi Bhardwaj</title>
 <meta name="description" content="A space to wander through Maitreyi Bhardwaj's explorations: photography, animation, craft, models and code.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link rel="stylesheet" href="site.css?v=1793039051">
+<link rel="stylesheet" href="site.css?v=1793039215">
 <style>
 /* A white 3D space. Pieces float at different depths; scrolling moves you through them,
    the mouse tilts the view, and clicking a piece opens it with a short description. */
@@ -36,32 +36,35 @@ body.space > nav.topbar { position: fixed !important; top: 0; left: 0; right: 0;
   background: radial-gradient(120% 90% at 70% 80%, rgba(196, 176, 150, .55), rgba(22, 20, 18, .88) 60%); backdrop-filter: blur(16px);
   opacity: 0; pointer-events: none; transition: opacity .4s ease; cursor: zoom-out; }
 .panel.on { opacity: 1; pointer-events: auto; }
-/* the sheet: a white card with a thin pink edge. The picture sits on top,
-   the text runs below it in columns, each with a label over a fine rule */
-.sheet { position: relative; display: flex; flex-direction: column; cursor: default; width: min(980px, 100%); max-height: 100%;
+/* the sheet: a white card with a thin pink edge. Picture on the left; on the right, sections
+   stacked one under another, each a label over a fine rule with the text beneath, set in the
+   home page's type (Inter, 15px). */
+.sheet { position: relative; display: flex; align-items: stretch; cursor: default; max-width: min(1180px, 100%); max-height: 100%;
   background: #fff; padding: 22px; border: 1px solid #E59BBE; box-shadow: 0 60px 120px -50px rgba(0, 0, 0, .7);
   transform: translateY(14px); transition: transform .5s cubic-bezier(.2,.7,.2,1); }
-.sheet.tall { width: min(640px, 100%); }
 .panel.on .sheet { transform: none; }
 .sheet-pic { display: flex; flex-direction: column; gap: 10px; flex: none; }
 .sheet-pic .shot { position: relative; line-height: 0; background: #1a1714; cursor: pointer; }
-.sheet-pic img, .sheet-pic video { display: block; width: 100%; height: auto; max-height: 56vh; object-fit: cover; }
-.sheet.tall .sheet-pic img, .sheet.tall .sheet-pic video { height: 56vh; }
+.sheet-pic img, .sheet-pic video { display: block; height: min(72vh, 720px); width: auto; max-width: 52vw; object-fit: cover; }
+.sheet.land .sheet-pic img, .sheet.land .sheet-pic video { height: auto; width: min(54vw, 740px); max-width: none; max-height: 72vh; }
 .sheet-dots { display: flex; gap: 7px; padding: 0 1px; }
 .sheet-dots button { width: 7px; height: 7px; padding: 0; border-radius: 50%; border: 1px solid #2B2621; background: transparent; cursor: pointer; }
 .sheet-dots button[aria-current="true"] { background: #2B2621; }
-.sheet-text { display: flex; flex-direction: column; padding: 22px 4px 2px; color: #111; }
-#psecs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
-.sheet-text h3 { margin: 0; font-size: 13px; font-weight: 600; line-height: 1.3; color: #111; }
-.sheet-text h3::after { content: ''; display: block; height: 1px; background: rgba(17, 17, 17, .5); margin: 9px 0 11px; }
-.sheet-text p { margin: 0; font-size: 12px; line-height: 1.7; color: #555; }
-.sheet-text p.empty { color: #A69D94; font-style: italic; }
-.sheet-text .foot { display: flex; justify-content: flex-end; gap: 18px; padding-top: 16px; font-size: 12px; color: #111; }
-.sheet-text .foot button, .sheet-text .foot a { font: inherit; color: #111; background: none; border: 0; padding: 0; cursor: pointer; text-decoration: none; border-bottom: 1px solid currentColor; }
+.sheet-text { width: clamp(260px, 26vw, 360px); padding: 8px 8px 0 40px; display: flex; flex-direction: column; font-family: var(--f); color: #111; }
+#psecs { display: flex; flex-direction: column; gap: 44px; }
+.sheet-text h3 { margin: 0; font-size: 15px; font-weight: 500; line-height: 1.45; color: #111; }
+.sheet-text h3::after { content: ''; display: block; height: 1px; background: #111; opacity: .6; margin: 10px 0 14px; }
+.sheet-text p { margin: 0; font-size: 15px; line-height: 1.45; color: #111; }
+.sheet-text p.empty { color: #9A938C; }
+.sheet-text .foot { margin-top: auto; display: flex; justify-content: flex-end; padding-top: 24px; font-size: 15px; line-height: 1.45; }
+.sheet-text .foot button, .sheet-text .foot a { font: inherit; color: #111; background: none; border: 0; padding: 0; cursor: pointer; text-decoration: none; border-bottom: 1px solid currentColor; margin-left: 18px; }
 .panel .close { position: absolute; top: clamp(66px, 8vh, 84px); right: var(--gut); width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(255,255,255,.5); background: transparent; color: #fff; font-size: 18px; line-height: 1; cursor: pointer; }
 @media (max-width: 760px) {
-  .panel { place-items: start center; overflow-y: auto; }
-  #psecs { grid-template-columns: 1fr; gap: 20px; }
+  .panel { place-items: start center; }
+  .sheet { flex-direction: column; width: 100%; }
+  .sheet-pic img, .sheet-pic video, .sheet.land .sheet-pic img, .sheet.land .sheet-pic video { width: 100%; height: auto; max-width: none; max-height: 60svh; }
+  .sheet-text { width: auto; padding: 24px 4px 0; }
+  #psecs { gap: 28px; }
 }
 .piece .many { position: absolute; top: 6px; right: 6px; min-width: 20px; padding: 2px 6px; border-radius: 10px; background: rgba(255,255,255,.9); font-size: 11px; color: #2B1B11; text-align: center; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
@@ -85,8 +88,8 @@ body.space > nav.topbar { position: fixed !important; top: 0; left: 0; right: 0;
   </article>
 </div>
 
-<script src="space-data.js?v=1793039051"></script>
-<script src="site.js?v=1793039051"></script>
+<script src="space-data.js?v=1793039215"></script>
+<script src="site.js?v=1793039215"></script>
 <script>
 (function () {
   const esc = s => String(s || '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -197,7 +200,7 @@ body.space > nav.topbar { position: fixed !important; top: 0; left: 0; right: 0;
   const shot = document.getElementById('pshot'), dots = document.getElementById('pdots'), sheet = document.getElementById('sheet');
   let slides = [], at = 0;
   // landscape pictures get a wider column, portrait ones stand tall
-  const orient = el => { const w = el.naturalWidth || el.videoWidth, hh = el.naturalHeight || el.videoHeight; if (w) sheet.classList.toggle('tall', hh > w * 1.05); };
+  const orient = el => { const w = el.naturalWidth || el.videoWidth, hh = el.naturalHeight || el.videoHeight; if (w) sheet.classList.toggle('land', w > hh * 1.08); };
   function show(k) {
     at = (k + slides.length) % slides.length;
     const s = slides[at];
@@ -214,7 +217,7 @@ body.space > nav.topbar { position: fixed !important; top: 0; left: 0; right: 0;
     const it = items[i]; current = i; lastFocus = document.activeElement;
     slides = slidesFor(it).filter(s => s.src || s.video);
     dots.innerHTML = slides.length > 1 ? slides.map((_, n) => '<button data-n="' + n + '" aria-label="Picture ' + (n + 1) + '"></button>').join('') : '';
-    sheet.classList.remove('tall');
+    sheet.classList.remove('land');
     show(0);
     document.getElementById('psecs').innerHTML = section(it.title, it.text) + section('The place', it.place) + section('The story', it.story);
     const a = document.getElementById('popen');
