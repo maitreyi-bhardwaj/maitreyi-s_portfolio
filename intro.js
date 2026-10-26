@@ -10,6 +10,7 @@
   const q = new URLSearchParams(location.search).get('intro');
   let seen = q === null ? false : null;
   if (seen === false) try { seen = sessionStorage.getItem('mb-intro-seen') === '1'; } catch (e) {}
+  if (location.hash === '#work') seen = true;   // arriving from the Work link: go straight to the choices
   if (seen || matchMedia('(prefers-reduced-motion: reduce)').matches) { window.mbIntro = Promise.resolve(); return; }
   try { sessionStorage.setItem('mb-intro-seen', '1'); } catch (e) {}
 
