@@ -4,112 +4,196 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Explorations, Maitreyi Bhardwaj</title>
-<meta name="description" content="Smaller things Maitreyi Bhardwaj has tried and built.">
+<meta name="description" content="A space to wander through Maitreyi Bhardwaj's explorations: photography, animation, craft, models and code.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link rel="stylesheet" href="site.css?v=1793036532">
+<link rel="stylesheet" href="site.css?v=1793036800">
 <style>
-*, *::before, *::after { box-sizing: border-box; }
-/* A white page with blue text: a row of pictures on the left, an index of titles on the right.
-   Pointing at a title or a picture lights up its partner. */
-body.blue { --ink: #1A36B8; --ink-soft: #4A62C8; --pill: #E8ECFA; background: #fff; color: #1A36B8; -webkit-font-smoothing: antialiased; }
-body.blue .topbar a { font-weight: 500; }
-body.blue .topbar a:hover, body.blue .topbar a[aria-current="page"] { background: #1A36B8; color: #fff; }
-.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+/* A white 3D space. Pieces float at different depths; scrolling moves you through them,
+   the mouse tilts the view, and clicking a piece opens it with a short description. */
+html, body { height: 100%; }
+body.space { background: #fff; overflow: hidden; overscroll-behavior: none; }
+body.space > nav.topbar { position: fixed !important; top: 0; left: 0; right: 0; z-index: 20 !important; }
+.stage { position: fixed; inset: 0; perspective: 900px; perspective-origin: 50% 50%; overflow: hidden; cursor: grab; touch-action: none; }
+.stage.dragging { cursor: grabbing; }
+.world { position: absolute; left: 50%; top: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+.piece { position: absolute; left: 0; top: 0; transform-style: preserve-3d; cursor: pointer; will-change: transform, opacity;
+  background: none; border: 0; padding: 0; font: inherit; color: inherit; text-align: left; }
+.piece img, .piece video { display: block; width: 100%; height: auto; background: #F3F1EE; box-shadow: 0 30px 60px -36px rgba(40, 20, 30, .35); }
+.piece .note { width: 100%; aspect-ratio: 4 / 3; padding: 18px; display: flex; flex-direction: column; justify-content: space-between;
+  background: #F7E6EE; color: #5A2840; font-size: 15px; line-height: 1.35; }
+.piece .note small { font-size: 12px; opacity: .7; }
+.piece .cap { position: absolute; left: 0; top: 100%; margin-top: 8px; font-size: 12px; white-space: nowrap; color: #2B1B11;
+  opacity: 0; transition: opacity .25s ease; }
+.piece .cap span { color: #9A8A80; margin-left: 6px; }
+.piece:hover .cap, .piece:focus-visible .cap { opacity: 1; }
+.piece:focus-visible { outline: 2px solid #CF6B9B; outline-offset: 4px; }
 
-.index { display: grid; grid-template-columns: 2.4fr 1fr; column-gap: clamp(32px, 5vw, 80px); align-items: stretch; padding: 24px var(--gut) 24px; height: calc(100svh - 58px); min-height: 420px; }
-/* The pictures fill the height of the window in two rows, so the whole page
-   fits one screen. Each picture keeps its own shape and gets a different size. */
-.pics { position: relative; min-height: 0; }
-.pics a { position: absolute; display: block; transition: opacity .25s ease; }
-.pics img { display: block; width: 100%; height: 100%; }
-/* the index sits at the bottom right */
-.names { align-self: end; }
-.names { list-style: none; margin: 0; padding: 0; font-size: 14px; line-height: 1.3; }
-.names li { margin-bottom: 14px; }
-.names li:last-child { margin-bottom: 0; }
-.names li.gap { margin-top: 30px; }
-.names a, .names span.row { color: #1A36B8; text-decoration: none; transition: color .2s ease; }
-.names small { font-size: inherit; opacity: .8; }
-.names .on, .names a:hover, .names a:focus-visible { color: #0F2380; font-weight: 600; }
-.index.is-pointing .pics a:not(.on) { opacity: .35; }
+.hint { position: fixed; left: var(--gut); bottom: 22px; z-index: 5; font-size: 13px; color: #8C827B; pointer-events: none; }
+.count { position: fixed; right: var(--gut); bottom: 22px; z-index: 5; font-size: 13px; color: #8C827B; font-variant-numeric: tabular-nums; }
 
+/* the open piece */
+.panel { position: fixed; inset: 0; z-index: 30; display: grid; grid-template-columns: 1.4fr 1fr; gap: clamp(20px, 3vw, 48px); align-items: center;
+  padding: clamp(80px, 9vh, 110px) var(--gut) clamp(32px, 5vh, 56px); background: rgba(255, 255, 255, .94); backdrop-filter: blur(10px);
+  opacity: 0; pointer-events: none; transition: opacity .35s ease; }
+.panel.on { opacity: 1; pointer-events: auto; }
+.panel .media { height: 100%; max-height: calc(100svh - 190px); display: flex; align-items: center; justify-content: center; min-height: 0; }
+.panel .media img { max-width: 100%; max-height: 100%; object-fit: contain; display: block; }
+.panel .media video { width: 100%; height: 100%; object-fit: contain; display: block; background: #F3F1EE; }
+.panel .media .note { width: min(100%, 520px); aspect-ratio: 4/3; padding: 32px; background: #F7E6EE; color: #5A2840; font-size: 22px; line-height: 1.3; }
+.panel .words { max-width: 30em; }
+.panel .kind { font-size: 13px; color: #9A8A80; margin: 0 0 10px; }
+.panel h2 { margin: 0 0 16px; font-size: clamp(26px, 2.6vw, 40px); font-weight: 400; letter-spacing: -.02em; line-height: 1.05; color: #1F1712; }
+.panel p { margin: 0; font-size: 16px; line-height: 1.6; color: #6F6258; }
+.panel .acts { display: flex; gap: 8px; margin-top: 28px; flex-wrap: wrap; }
+.panel .acts a, .panel .acts button { font: inherit; font-size: 14px; padding: 10px 16px; border-radius: 8px; border: 0; cursor: pointer; text-decoration: none; }
+.panel .acts a { background: #2B1B11; color: #fff; }
+.panel .acts button { background: #F1EEEC; color: #2B1B11; }
+.panel .close { position: absolute; top: clamp(70px, 8vh, 90px); right: var(--gut); font: inherit; font-size: 14px; background: #F1EEEC; border: 0; border-radius: 8px; padding: 8px 14px; cursor: pointer; }
 @media (max-width: 760px) {
-  .index { grid-template-columns: 1fr; row-gap: 40px; height: auto; }
-  .pics a { position: static; width: auto !important; height: auto !important; margin-bottom: 12px; }
-  .pics img { height: auto; }
-  .names { align-self: start; }
+  .panel { grid-template-columns: 1fr; align-content: start; overflow-y: auto; }
+  .panel .media { max-height: 50svh; }
 }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
 </style>
 </head>
-<body class="blue">
+<body class="space">
 
 <div data-topbar></div>
+<h1 class="sr-only">Explorations</h1>
 
-<main class="index" id="index">
-  <h1 class="sr-only">Explorations</h1>
-  <div class="pics" id="pics"></div>
-  <ul class="names" id="names"></ul>
-</main>
+<div class="stage" id="stage"><div class="world" id="world"></div></div>
+<p class="hint" id="hint">Scroll to drift through. Click anything to open it.</p>
+<p class="count" id="count"></p>
 
-<div data-foot></div>
+<div class="panel" id="panel" role="dialog" aria-modal="true" aria-labelledby="ptitle">
+  <button class="close" id="pclose">Close</button>
+  <div class="media" id="pmedia"></div>
+  <div class="words">
+    <p class="kind" id="pkind"></p>
+    <h2 id="ptitle"></h2>
+    <p id="ptext"></p>
+    <div class="acts"><a id="popen" href="#">Open</a><button id="pnext">Somewhere else &rarr;</button></div>
+  </div>
+</div>
 
-<script src="projects.js?v=1793036532"></script>
-<script src="site.js?v=1793036532"></script>
+<script src="space-data.js?v=1793036800"></script>
+<script src="site.js?v=1793036800"></script>
 <script>
 (function () {
-  const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-  const wrap = document.getElementById('index'), pics = document.getElementById('pics'), names = document.getElementById('names');
-  const link = x => x.href ? ' href="' + esc(x.href) + '" target="_blank" rel="noopener"' : '';
-  let lastHadImage = true;
-  window.EXPLORATIONS.forEach((x, i) => {
-    if (x.image) pics.insertAdjacentHTML('beforeend', '<a data-i="' + i + '"' + link(x) + '><img src="' + esc(x.image) + '" alt="' + esc(x.caption || x.title) + '"></a>');
-    const gap = lastHadImage && !x.image ? ' class="gap"' : '';
-    lastHadImage = !!x.image;
-    const label = esc(x.title) + ' <small>{ ' + esc(x.kind || 'Personal') + ' }</small>';
-    names.insertAdjacentHTML('beforeend', '<li' + gap + '>' + (x.href ? '<a data-i="' + i + '"' + link(x) + '>' + label + '</a>' : '<span class="row" data-i="' + i + '">' + label + '</span>') + '</li>');
-  });
-  // Lay the pictures out in rows of two with the same 12px gap everywhere.
-  // In each row one picture is full height and the other smaller, so sizes vary,
-  // and everything is scaled to fit the height of the window.
-  const GAP = 12, SMALL = [0.62, 0.58];
-  function layout() {
-    const links = Array.from(pics.children);
-    if (matchMedia('(max-width: 760px)').matches) { links.forEach(a => a.removeAttribute('style')); return; }
-    const W = pics.clientWidth, H = pics.clientHeight, rows = Math.ceil(links.length / 2);
-    const ratio = a => { const im = a.querySelector('img'); return im.naturalWidth ? im.naturalWidth / im.naturalHeight : 1.28; };
-    let rowH = (H - GAP * (rows - 1)) / rows;
-    // widest row at this height; shrink if it would overflow the column
-    const rowW = r => {
-      const big = links[r * 2 + (r % 2 ? 1 : 0)], small = links[r * 2 + (r % 2 ? 0 : 1)];
-      return rowH * ratio(big) + (small ? GAP + rowH * SMALL[r % 2] * ratio(small) : 0) ;
-    };
-    let widest = 0; for (let r = 0; r < rows; r++) widest = Math.max(widest, rowW(r));
-    if (widest > W) rowH *= W / widest;
-    for (let r = 0; r < rows; r++) {
-      const y = r * (rowH + GAP), odd = r % 2 === 1;
-      const first = links[r * 2], second = links[r * 2 + 1];
-      // even rows: large then small (small sits on the row's bottom edge)
-      // odd rows: small (on the top edge) then large
-      const hFirst = odd ? rowH * SMALL[1] : rowH, hSecond = odd ? rowH : rowH * SMALL[0];
-      let x = 0;
-      const put = (a, h, top) => { const w = h * ratio(a); a.style.cssText = 'left:' + x + 'px;top:' + top + 'px;width:' + w + 'px;height:' + h + 'px'; x += w + GAP; };
-      put(first, hFirst, y);
-      if (second) put(second, hSecond, odd ? y : y + rowH - hSecond);
-    }
-  }
-  pics.querySelectorAll('img').forEach(im => im.addEventListener('load', layout));
-  addEventListener('resize', layout);
-  layout();
+  const esc = s => String(s || '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const items = window.SPACE || [];
+  const stage = document.getElementById('stage'), world = document.getElementById('world');
+  const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  const point = i => {
-    wrap.classList.toggle('is-pointing', i !== null && !!pics.querySelector('[data-i="' + i + '"]'));
-    wrap.querySelectorAll('[data-i]').forEach(el => el.classList.toggle('on', el.dataset.i === String(i)));
-  };
-  wrap.querySelectorAll('[data-i]').forEach(el => {
-    el.addEventListener('mouseenter', () => point(el.dataset.i));
-    el.addEventListener('focus', () => point(el.dataset.i));
-    el.addEventListener('mouseleave', () => point(null));
-    el.addEventListener('blur', () => point(null));
+  // a seeded random, so the layout is the same on every visit
+  let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+
+  const GAP = 340;                          // depth between one piece and the next
+  const LEN = Math.max(items.length, 1) * GAP; // the space loops after this
+  const pieces = items.map((it, i) => {
+    const b = document.createElement('button');
+    b.className = 'piece'; b.type = 'button';
+    b.setAttribute('aria-label', it.title + (it.kind ? ', ' + it.kind : ''));
+    const w = Math.round(110 + rnd() * 150);
+    b.style.width = w + 'px';
+    const media = it.video
+      ? '<video data-src="' + esc(it.video) + '" muted loop playsinline preload="none"' + (it.image ? ' poster="' + esc(it.image) + '"' : '') + '></video>'
+      : it.image ? '<img src="' + esc(it.image) + '" alt="" loading="lazy" decoding="async">'
+      : '<div class="note"><span>' + esc(it.text) + '</span><small>' + esc(it.kind) + '</small></div>';
+    b.innerHTML = media + '<span class="cap">' + esc(it.title) + '<span>' + esc(it.kind) + '</span></span>';
+    world.appendChild(b);
+    // spread across the view, keeping the very centre a little clearer
+    let x, y;
+    do { x = (rnd() * 2 - 1); y = (rnd() * 2 - 1); } while (Math.abs(x) < .18 && Math.abs(y) < .18);
+    const p = { el: b, it, i, w, x, y, z0: -i * GAP - rnd() * GAP * .5, vid: b.querySelector('video') };
+    b.addEventListener('click', () => { if (!moved) open(i); });
+    return p;
+  });
+
+  // camera: z moves through the space, the mouse tilts it
+  let z = 0, vz = still ? 0 : 0.35, target = 0, mx = 0, my = 0, tx = 0, ty = 0, W = innerWidth, H = innerHeight;
+  addEventListener('resize', () => { W = innerWidth; H = innerHeight; });
+  stage.addEventListener('wheel', e => { e.preventDefault(); target += e.deltaY * 1.2; }, { passive: false });
+  addEventListener('keydown', e => {
+    if (panel.classList.contains('on')) { if (e.key === 'Escape') close(); return; }
+    if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') target += 400;
+    if (e.key === 'ArrowUp' || e.key === 'PageUp') target -= 400;
+  });
+  addEventListener('pointermove', e => { mx = e.clientX / W - .5; my = e.clientY / H - .5; }, { passive: true });
+
+  // drag (and touch) to move: up/down moves through, sideways pans
+  let down = null, moved = false, panX = 0, panY = 0, pX = 0, pY = 0;
+  stage.addEventListener('pointerdown', e => { down = { x: e.clientX, y: e.clientY, px: pX, py: pY, t: target }; moved = false; });
+  addEventListener('pointermove', e => {
+    if (!down) return;
+    const dx = e.clientX - down.x, dy = e.clientY - down.y;
+    if (Math.hypot(dx, dy) > 6) { moved = true; stage.classList.add('dragging'); }
+    target = down.t - dy * 3; pX = down.px + dx * .8;
+  });
+  addEventListener('pointerup', () => { down = null; stage.classList.remove('dragging'); setTimeout(() => { moved = false; }, 0); });
+
+  const wrap = v => ((v % LEN) + LEN) % LEN;
+  const count = document.getElementById('count');
+  function frame() {
+    if (!panel.classList.contains('on')) {
+      target += vz; // a slow drift forward, so the space always feels alive
+      z += (target - z) * .08;
+      tx += (mx - tx) * .05; ty += (my - ty) * .05;
+      panX += (pX - panX) * .1;
+    }
+    world.style.transform = 'rotateY(' + (tx * 8) + 'deg) rotateX(' + (-ty * 6) + 'deg) translateX(' + panX + 'px)';
+    let nearest = null, nd = 1e9;
+    for (const p of pieces) {
+      // depth relative to the camera, looped so the space never ends
+      let d = wrap(p.z0 + z + 260) - LEN + 260;   // from -LEN+260 (far) to 260 (just passed)
+      const far = -LEN + 260;
+      const fadeIn = Math.min(1, (d - far) / 700);       // emerge from the white
+      const fadeOut = d > 0 ? Math.max(0, 1 - d / 260) : 1; // dissolve as it passes you
+      const op = Math.max(0, Math.min(fadeIn, fadeOut));
+      // spread grows with distance so far pieces still reach the edges of the screen
+      const spread = 1 + Math.max(0, -d) / 900 * .85;
+      const sx = p.x * (W * .46) * spread, sy = p.y * (H * .40) * spread;
+      p.el.style.transform = 'translate3d(' + (sx - p.w / 2) + 'px,' + (sy - p.w * .4) + 'px,' + d + 'px)';
+      p.el.style.opacity = op.toFixed(3);
+      p.el.style.visibility = op < .02 ? 'hidden' : 'visible';
+      p.el.style.pointerEvents = op < .3 ? 'none' : 'auto';
+      if (p.vid) {
+        const near = op > .15 && d > -1800;
+        if (op > .02 && !p.vid.src) { p.vid.preload = 'auto'; p.vid.src = p.vid.dataset.src; }
+        if (near && p.vid.paused) p.vid.play().catch(() => {});
+        if (!near && !p.vid.paused) p.vid.pause();
+      }
+      if (d < 0 && -d < nd) { nd = -d; nearest = p; }
+    }
+    if (nearest) count.textContent = String(nearest.i + 1).padStart(2, '0') + ' / ' + String(pieces.length).padStart(2, '0');
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+  setTimeout(() => { const h = document.getElementById('hint'); if (h) h.style.transition = 'opacity 1s', h.style.opacity = '.0'; }, 9000);
+
+  // the open piece
+  const panel = document.getElementById('panel'), pmedia = document.getElementById('pmedia');
+  let current = -1, lastFocus = null;
+  function open(i) {
+    const it = items[i]; current = i; lastFocus = document.activeElement;
+    pmedia.innerHTML = it.video ? '<video src="' + esc(it.video) + '"' + (it.image ? ' poster="' + esc(it.image) + '"' : '') + ' autoplay muted loop playsinline controls></video>'
+      : it.image ? '<img src="' + esc(it.image) + '" alt="' + esc(it.title) + '">'
+      : '<div class="note">' + esc(it.text) + '</div>';
+    document.getElementById('pkind').textContent = it.kind || '';
+    document.getElementById('ptitle').textContent = it.title;
+    document.getElementById('ptext').textContent = it.text || '';
+    const a = document.getElementById('popen');
+    if (it.href) { a.hidden = false; a.href = it.href; const ext = /^https?:/.test(it.href); a.target = ext ? '_blank' : ''; a.rel = ext ? 'noopener' : ''; a.textContent = ext ? 'Open ↗' : 'See the project →'; }
+    else a.hidden = true;
+    panel.classList.add('on');
+    document.getElementById('pclose').focus();
+  }
+  function close() { panel.classList.remove('on'); pmedia.innerHTML = ''; if (lastFocus) lastFocus.focus(); }
+  document.getElementById('pclose').addEventListener('click', close);
+  panel.addEventListener('click', e => { if (e.target === panel) close(); });
+  document.getElementById('pnext').addEventListener('click', () => {
+    let n; do { n = Math.floor(Math.random() * items.length); } while (items.length > 1 && n === current);
+    open(n);
   });
 })();
 </script>
