@@ -203,7 +203,8 @@ body:has(.opening) > .topbar a[aria-current="page"], body:has(.opening) > .topba
 .w-blurb .caret::after { content: ''; position: absolute; left: .04em; top: .12em; bottom: .1em; width: .08em; background: #CF6B9B; animation: blink 1s steps(1) infinite; }
 .w-blurb .say-brown { display: inline; margin: 0; color: inherit; }
 /* the two choices: a coloured panel beside a picture, each half the width; colours shift as you scroll */
-.choices { display: grid; }
+.choices { display: grid; gap: 6px; margin: 0 var(--gut); }   /* same side margin as every project page */
+.choice { border-radius: 6px; overflow: hidden; }
 .choice { --bg: #000; --fg: #fff; display: grid; grid-template-columns: 1fr 1fr; min-height: min(78vh, 760px); color: inherit; text-decoration: none; }
 .choice--flip .c-panel { order: 2; }
 .c-panel { background: var(--bg); color: var(--fg); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding: 40px; text-align: center; }
@@ -221,10 +222,10 @@ body:not(.chosen) #work, body:not(.chosen) .page-dots { display: none; }
 .welcome #say { color: #111; text-shadow: none; } .welcome #say .say-pron { color: #8C8C8C; }
 body:has(.welcome) > nav.topbar { position: absolute !important; top: 0; left: 0; right: 0; z-index: 3 !important; }
 </style>
-<link rel="stylesheet" href="site.css?v=1792992644">
+<link rel="stylesheet" href="site.css?v=1792993290">
 </head>
 <body>
-<script src="intro.js?v=1792992644"></script>
+<script src="intro.js?v=1792993290"></script>
 
 <div class="page-dots" aria-hidden="true"><canvas data-lace="page"></canvas></div>
 <div data-topbar></div>
@@ -253,10 +254,10 @@ body:has(.welcome) > nav.topbar { position: absolute !important; top: 0; left: 0
 
 <div data-foot></div>
 
-<script src="projects.js?v=1792992644"></script>
-<script src="lace.js?v=1792992644"></script>
-<script src="figma-lace.js?v=1792992644"></script>
-<script src="site.js?v=1792992644"></script>
+<script src="projects.js?v=1792993290"></script>
+<script src="lace.js?v=1792993290"></script>
+<script src="figma-lace.js?v=1792993290"></script>
+<script src="site.js?v=1792993290"></script>
 <script>
 // The opening line, typed out as if Maitreyi is writing it. The name takes three
 // tries: two spellings people get wrong are typed, crossed out in red and erased,
