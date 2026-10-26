@@ -147,6 +147,7 @@ void main(){
     vec3 vc = mix(vec3(1.0),vec3(0.98,0.84,0.90),net*0.85);
     vc = mix(vc,rose,flower*stitch);
     vc = mix(vc,vec3(1.0),cloud*0.55);
+    vc = mix(vc,rose,max(stripe,stripe2)*0.8*smoothstep(0.0,0.18,growth));
     gl_FragColor = vec4(vc,1.0);
     return;
   }
@@ -171,7 +172,8 @@ void main(){
 
   // Sets up the shader on one canvas. opts.veil draws the white and pink card lace;
   // opts.scale shrinks the pattern (pattern pixels per screen pixel); opts.fine shrinks only the
-  // mesh cells, for smaller pixels; opts.maxDpr caps the render resolution.
+  // mesh cells, for smaller pixels; opts.maxDpr caps the render resolution;
+  // opts.fit shows that many pattern pixels across the canvas, so a small card holds the whole composition.
   function lace(cv, opts) {
     opts = opts || {};
     const gl = cv.getContext('webgl', { antialias: false, alpha: !!opts.veil, premultipliedAlpha: true });
@@ -185,10 +187,10 @@ void main(){
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
     const loc = gl.getAttribLocation(pr, 'p'); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
     const U = {}; ['dims', 'canvasPx', 'veil', 'fine'].concat(Object.keys(TRACKS), Object.keys(FIXED)).forEach(k => U[k] = gl.getUniformLocation(pr, k));
-    const scale = opts.scale || 1;
+    let scale = opts.scale || 1;
     let w = 1, h = 1, k = 0;
     // sizes are in CSS pixels (Figma points); render at up to 1.25x for crisp threads without overworking the GPU
-    const size = () => { const r = cv.getBoundingClientRect(), d = Math.min(devicePixelRatio || 1, opts.maxDpr || 1.25); w = r.width; h = r.height;
+    const size = () => { const r = cv.getBoundingClientRect(), d = Math.min(devicePixelRatio || 1, opts.maxDpr || 1.25); w = r.width; h = r.height; if (opts.fit) scale = w / opts.fit;
       cv.width = Math.max(1, Math.round(w * d)); cv.height = Math.max(1, Math.round(h * d)); gl.viewport(0, 0, cv.width, cv.height); };
     const draw = nk => {
       k = nk;
@@ -238,7 +240,7 @@ void main(){
   if (!cards.length) return;
   const cv = document.createElement('canvas');
   cv.className = 'card-lace'; cv.setAttribute('aria-hidden', 'true');
-  const L = lace(cv, { veil: true, scale: 0.8, fine: 0.36, maxDpr: 2 });
+  const L = lace(cv, { veil: true, fit: 1280, fine: 0.42, maxDpr: 2 });
   if (!L) return;
   let current = null, hideT = 0;
   const show = pic => {
