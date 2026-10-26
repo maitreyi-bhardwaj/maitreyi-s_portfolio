@@ -176,7 +176,7 @@ body:has(.opening) > .topbar a[aria-current="page"], body:has(.opening) > .topba
 .fields button:hover, .fields button[aria-pressed="true"] { background: #fff; color: #2B1B11; }
 .fields button:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
 /* before a choice, only the opening screen shows */
-body:not(.chosen) #work, body:not(.chosen) footer.foot, body:not(.chosen) .page-dots { display: none; }
+
 @media (max-width: 760px) { .opening { grid-template-columns: 1fr; } .opening > p { grid-column: 1; } .fields { grid-template-columns: 1fr; } }
 #work .row[hidden], #work .card[hidden] { display: none; }
 .opening.is-light::after { opacity: 0; }
@@ -186,6 +186,42 @@ body:not(.chosen) #work, body:not(.chosen) footer.foot, body:not(.chosen) .page-
 .opening.is-light p, .opening.is-light #say .say-pron { color: #7C6C60; }
 .opening.is-light .fields button { background: rgba(43, 27, 17, .08); color: #2B1B11; }
 .opening.is-light .fields button[aria-pressed="true"], .opening.is-light .fields button:hover { background: #2B1B11; color: #fff; }
+
+/* ---------- welcome screen (after the intro): white, name on the right, two big choices below ---------- */
+.welcome { min-height: 100svh; display: grid; grid-template-columns: 1fr 1fr; column-gap: 6px;
+  padding: clamp(120px, 16vh, 200px) var(--gut) clamp(40px, 7vh, 80px); background: #fff; color: #111; }
+.w-hello { grid-column: 1; align-self: end; font-size: 14px; color: #111; }
+.w-title { grid-column: 2; display: flex; flex-direction: column; min-height: 100%; }
+.welcome h1, .w-role { font-family: var(--f); font-size: clamp(34px, 4.4vw, 76px); font-weight: 500; line-height: 1.02; letter-spacing: -.035em; color: #111; }
+.w-blurb { margin-top: auto; padding-top: 48px; max-width: 24em; font-size: 15px; line-height: 1.45; color: #111; }
+#say .say-blue { color: #CF6B9B; }
+#say .say-name.struck { text-decoration: line-through; text-decoration-thickness: .07em; color: #D33A2C; }
+#say .say-name.oops { color: #E0A800; }
+#say .caret::after { background: #CF6B9B; }
+.w-blurb .ch { opacity: 0; } .w-blurb .ch.on { opacity: 1; }
+.w-blurb .caret { position: relative; }
+.w-blurb .caret::after { content: ''; position: absolute; left: .04em; top: .12em; bottom: .1em; width: .08em; background: #CF6B9B; animation: blink 1s steps(1) infinite; }
+.w-blurb .say-brown { display: inline; margin: 0; color: inherit; }
+/* the two choices: a coloured panel beside a picture, each half the width; colours shift as you scroll */
+.choices { display: grid; }
+.choice { --bg: #000; --fg: #fff; display: grid; grid-template-columns: 1fr 1fr; min-height: min(78vh, 760px); color: inherit; text-decoration: none; }
+.choice--flip .c-panel { order: 2; }
+.c-panel { background: var(--bg); color: var(--fg); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding: 40px; text-align: center; }
+.c-word { font-size: clamp(20px, 1.8vw, 28px); letter-spacing: -.01em; }
+.c-sub { font-size: 13px; opacity: .65; }
+.c-word::after { content: ' \2192'; display: inline-block; opacity: 0; transform: translateX(-6px); transition: opacity .3s, transform .3s; }
+.choice:hover .c-word::after, .choice:focus-visible .c-word::after { opacity: 1; transform: none; }
+.c-pic { position: relative; overflow: hidden; background: #E9E9EC; }
+.c-pic img, .c-pic video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s cubic-bezier(.2,.7,.2,1); }
+.choice:hover .c-pic img, .choice:hover .c-pic video { transform: scale(1.04); }
+@media (max-width: 760px) {
+  .welcome { grid-template-columns: 1fr; } .w-title { grid-column: 1; grid-row: 1; } .w-hello { grid-row: 2; margin-top: 40px; }
+  .choice { grid-template-columns: 1fr; min-height: 0; } .choice--flip .c-panel { order: 0; }
+  .c-panel { min-height: 42vh; } .c-pic { min-height: 56vh; }
+}
+body:not(.chosen) #work, body:not(.chosen) .page-dots { display: none; }
+.welcome #say { color: #111; text-shadow: none; } .welcome #say .say-pron { color: #8C8C8C; }
+body:has(.welcome) > nav.topbar { position: absolute !important; top: 0; left: 0; right: 0; z-index: 3 !important; }
 </style>
 <link rel="stylesheet" href="site.css?v=1792991162">
 </head>
@@ -195,15 +231,25 @@ body:not(.chosen) #work, body:not(.chosen) footer.foot, body:not(.chosen) .page-
 <div class="page-dots" aria-hidden="true"><canvas data-lace="page"></canvas></div>
 <div data-topbar></div>
 
-<header class="opening">
-  <canvas data-figma-lace aria-hidden="true"></canvas>
-  <h1 id="say">Hi, I'm Maitreyi (my·TRAY·ee). I build products by connecting design, data, and technology.</h1>
-  <p>Creative Engineering.</p>
-  <div class="fields" role="group" aria-label="Choose the kind of work to see">
-    <button type="button" data-field="ux" aria-pressed="false"><span>UI/UX</span><span aria-hidden="true">↓</span></button>
-    <button type="button" data-field="id" aria-pressed="false"><span>Industrial design</span><span aria-hidden="true">↓</span></button>
+<header class="welcome">
+  <p class="w-hello">Welcome:</p>
+  <div class="w-title">
+    <h1 id="say">Hi, I'm Maitreyi (my·TRAY·ee). I build products by connecting design, data, and technology.</h1>
+    <p class="w-role">Creative Engineer</p>
+    <p class="w-blurb" id="blurb"></p>
   </div>
 </header>
+
+<nav class="choices" aria-label="Choose the kind of work to see">
+  <a class="choice" href="industrial.html">
+    <span class="c-panel"><span class="c-word">Industrial design</span><span class="c-sub">Products, lighting, wearables, models</span></span>
+    <span class="c-pic"><img src="media/kith/full-lamp.jpg" alt="The Kith pendant lamp, lit"></span>
+  </a>
+  <a class="choice choice--flip" href="ui.html">
+    <span class="c-panel"><span class="c-word">Digital design</span><span class="c-sub">Interfaces, plugins, data and AI tools</span></span>
+    <span class="c-pic"><video src="media/video/pastiche.mp4" autoplay muted loop playsinline aria-label="Pastiche, a Figma plugin, running"></video></span>
+  </a>
+</nav>
 
 <main class="feed" id="work"></main>
 
@@ -241,7 +287,8 @@ body:not(.chosen) #work, body:not(.chosen) footer.foot, body:not(.chosen) .page-
   const name = el('span', 'say-blue say-name');
   const pron = el('span', 'say-pron', '(my\u00b7TRAY\u00b7ee) :)');
   const rest = el('span', 'say-brown'); const restSteps = letters(rest, AFTER);
-  h1.append(hi, ' ', name, pron, rest);
+  h1.append(hi, ' ', name, pron);
+  document.getElementById('blurb').append(rest);
 
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
     [...hiSteps, ...restSteps].forEach(s => s.classList.add('on'));
@@ -330,27 +377,42 @@ body:not(.chosen) #work, body:not(.chosen) footer.foot, body:not(.chosen) .page-
     '<section class="row"><div class="date">' + esc(r.date) + '</div>' +
     '<div class="cards">' + r.cards.map(card).join('') + '</div></section>').join('');
 
-  // The opening screen shows only the intro and two choices. Choosing one reveals the
-  // timeline filtered to that kind of work (industrial design also washes the lace light).
+  // The welcome screen leads to the two field pages; index.html#work shows the whole timeline.
   (function () {
-    const intro = document.querySelector('.opening'), lace = null;
-    const buttons = intro.querySelectorAll('.fields button');
-    const show = (f, jump) => {
-      document.body.classList.add('chosen');
-      buttons.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.field === f)));
-      document.querySelectorAll('#work .card').forEach(c => { c.hidden = !(f === 'all' || c.dataset.field === 'all' || c.dataset.field === f); });
-      document.querySelectorAll('#work .row').forEach(r => { r.hidden = !r.querySelector('.card:not([hidden])'); });
-      if (lace && lace.setMode) lace.setMode(f === 'id' ? 'light' : 'dark');
-    };
-    const open = f => { show(f); requestAnimationFrame(() => document.getElementById('work').scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' })); };
-    buttons.forEach(b => b.addEventListener('click', () => {
-      if (b.dataset.field === 'id') { location.href = 'industrial.html'; return; }   // each field has its own index page
-      if (b.dataset.field === 'ux') { location.href = 'ui.html'; return; }
-      history.replaceState(null, '', '#' + b.dataset.field); open(b.dataset.field);
-    }));
-    // links back to the work (index.html#work from a project page) open everything
     const hash = location.hash.slice(1);
-    if (hash === 'ux') open(hash); else if (hash === 'id') location.replace('industrial.html'); else if (hash === 'work') open('all');
+    if (hash === 'id') { location.replace('industrial.html'); return; }
+    if (hash === 'ux') { location.replace('ui.html'); return; }
+    if (hash === 'work') {
+      document.body.classList.add('chosen');
+      requestAnimationFrame(() => document.getElementById('work').scrollIntoView());
+    }
+  })();
+
+  // The two choices change colour as they scroll through the window:
+  // black, then pink, then white (with the words turning dark), and back.
+  (function () {
+    const choices = document.querySelectorAll('.choice');
+    if (!choices.length) return;
+    const STOPS = [[0, 0, 0], [207, 107, 155], [255, 255, 255]];
+    const mix = (a, b, t) => a.map((v, i) => Math.round(v + (b[i] - v) * t));
+    const colourAt = p => {   // p from 0 to 1 walks black → pink → white
+      const x = Math.min(Math.max(p, 0), 1) * (STOPS.length - 1), i = Math.min(Math.floor(x), STOPS.length - 2);
+      return mix(STOPS[i], STOPS[i + 1], x - i);
+    };
+    const paint = () => {
+      const vh = innerHeight;
+      choices.forEach((c, k) => {
+        const r = c.getBoundingClientRect();
+        let p = 1 - (r.top + r.height / 2) / (vh + r.height / 2);   // 0 as it enters at the bottom, about 1 as it leaves at the top
+        if (k % 2) p = 1 - p;                                        // the second one runs the other way
+        const [R, G, B] = colourAt(p);
+        c.style.setProperty('--bg', 'rgb(' + R + ',' + G + ',' + B + ')');
+        c.style.setProperty('--fg', (R * .299 + G * .587 + B * .114) > 170 ? '#111' : '#fff');
+      });
+    };
+    paint();
+    addEventListener('scroll', paint, { passive: true });
+    addEventListener('resize', paint);
   })();
 
   // Touch screens have no hover: the first tap shows the type, the second follows the link.
