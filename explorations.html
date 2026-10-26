@@ -6,7 +6,7 @@
 <title>Explorations, Maitreyi Bhardwaj</title>
 <meta name="description" content="A space to wander through Maitreyi Bhardwaj's explorations: photography, animation, craft, models and code.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link rel="stylesheet" href="site.css?v=1793037297">
+<link rel="stylesheet" href="site.css?v=1793037898">
 <style>
 /* A white 3D space. Pieces float at different depths; scrolling moves you through them,
    the mouse tilts the view, and clicking a piece opens it with a short description. */
@@ -32,30 +32,39 @@ body.space > nav.topbar { position: fixed !important; top: 0; left: 0; right: 0;
 .count { position: fixed; right: var(--gut); bottom: 22px; z-index: 5; font-size: 13px; color: #8C827B; font-variant-numeric: tabular-nums; }
 
 /* the open piece */
-.panel { position: fixed; inset: 0; z-index: 30; display: grid; grid-template-columns: 1.4fr 1fr; gap: clamp(20px, 3vw, 48px); align-items: center;
-  padding: clamp(80px, 9vh, 110px) var(--gut) clamp(32px, 5vh, 56px); background: rgba(255, 255, 255, .94); backdrop-filter: blur(10px);
-  opacity: 0; pointer-events: none; transition: opacity .35s ease; }
+.panel { position: fixed; inset: 0; z-index: 30; display: grid; grid-template-columns: 1.5fr 1fr; gap: clamp(20px, 3vw, 48px); align-items: center;
+  padding: clamp(80px, 9vh, 110px) var(--gut) clamp(32px, 5vh, 56px); background: rgba(255, 255, 255, .62); backdrop-filter: blur(14px);
+  opacity: 0; pointer-events: none; transition: opacity .35s ease; cursor: zoom-out; }
 .panel.on { opacity: 1; pointer-events: auto; }
-.panel .media { height: 100%; max-height: calc(100svh - 190px); display: flex; align-items: center; justify-content: center; min-height: 0; }
-.panel .media img { max-width: 100%; max-height: 100%; object-fit: contain; display: block; }
-.panel .media video { width: 100%; height: 100%; object-fit: contain; display: block; background: #F3F1EE; }
-.piece .many { position: absolute; top: 6px; right: 6px; min-width: 20px; padding: 2px 6px; border-radius: 10px; background: rgba(255,255,255,.9); font-size: 11px; color: #2B1B11; text-align: center; }
-.panel .media .strip { display: flex; gap: 12px; height: 100%; width: 100%; overflow-x: auto; scroll-snap-type: x mandatory; align-items: center; scrollbar-width: thin; }
-.panel .media .strip img { flex: 0 0 auto; height: 100%; max-height: 100%; max-width: 92%; width: auto; object-fit: contain; scroll-snap-align: center; }
-.panel .media .note { width: min(100%, 520px); aspect-ratio: 4/3; padding: 32px; background: #F7E6EE; color: #5A2840; font-size: 22px; line-height: 1.3; }
-.panel .words { max-width: 30em; }
+.panel .media { height: 100%; max-height: calc(100svh - 170px); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; min-height: 0; }
+.panel .shot { position: relative; flex: 1; min-height: 0; width: 100%; display: flex; align-items: center; justify-content: center; }
+.panel .shot img, .panel .shot video { max-width: 100%; max-height: 100%; object-fit: contain; display: block; cursor: default;
+  box-shadow: 0 40px 80px -40px rgba(40, 20, 30, .45); transition: opacity .25s ease; }
+.panel .shot .note { width: min(100%, 520px); aspect-ratio: 4/3; padding: 32px; background: #F7E6EE; color: #5A2840; font-size: 22px; line-height: 1.3; cursor: default; }
+.panel .shot .arrow { position: absolute; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; border-radius: 50%; border: 0;
+  background: rgba(255,255,255,.9); color: #2B1B11; font-size: 18px; cursor: pointer; box-shadow: 0 6px 20px -8px rgba(0,0,0,.3); }
+.panel .shot .arrow.l { left: 10px; } .panel .shot .arrow.r { right: 10px; }
+.panel .dots { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; cursor: default; }
+.panel .dots button { width: 9px; height: 9px; padding: 0; border-radius: 50%; border: 0; background: #D9CFCA; cursor: pointer; transition: background .2s, transform .2s; }
+.panel .dots button[aria-current="true"] { background: #CF6B9B; transform: scale(1.3); }
+.panel .words { background: #fff; border-radius: 10px; padding: clamp(24px, 2.6vw, 40px); max-width: 32em; cursor: default;
+  box-shadow: 0 30px 70px -40px rgba(40, 20, 30, .35); }
 .panel .kind { font-size: 13px; color: #9A8A80; margin: 0 0 10px; }
 .panel h2 { margin: 0 0 16px; font-size: clamp(26px, 2.6vw, 40px); font-weight: 400; letter-spacing: -.02em; line-height: 1.05; color: #1F1712; }
 .panel p { margin: 0; font-size: 16px; line-height: 1.6; color: #6F6258; }
-.panel .acts { display: flex; gap: 8px; margin-top: 28px; flex-wrap: wrap; }
+.panel .sub { margin-top: 18px; padding-top: 14px; border-top: 1px solid #F0EAE6; font-size: 14px; color: #8C827B; }
+.panel .sub:empty { display: none; }
+.panel .acts { display: flex; gap: 8px; margin-top: 24px; flex-wrap: wrap; }
 .panel .acts a, .panel .acts button { font: inherit; font-size: 14px; padding: 10px 16px; border-radius: 8px; border: 0; cursor: pointer; text-decoration: none; }
 .panel .acts a { background: #2B1B11; color: #fff; }
 .panel .acts button { background: #F1EEEC; color: #2B1B11; }
-.panel .close { position: absolute; top: clamp(70px, 8vh, 90px); right: var(--gut); font: inherit; font-size: 14px; background: #F1EEEC; border: 0; border-radius: 8px; padding: 8px 14px; cursor: pointer; }
+.panel .close { position: absolute; top: clamp(70px, 8vh, 90px); right: var(--gut); font: inherit; font-size: 14px; background: #fff; border: 0; border-radius: 8px; padding: 8px 14px; cursor: pointer; }
+.panel .hintback { position: absolute; left: 50%; bottom: 14px; transform: translateX(-50%); font-size: 12px; color: #8C827B; pointer-events: none; }
 @media (max-width: 760px) {
   .panel { grid-template-columns: 1fr; align-content: start; overflow-y: auto; }
-  .panel .media { max-height: 50svh; }
+  .panel .media { max-height: 52svh; height: 52svh; }
 }
+.piece .many { position: absolute; top: 6px; right: 6px; min-width: 20px; padding: 2px 6px; border-radius: 10px; background: rgba(255,255,255,.9); font-size: 11px; color: #2B1B11; text-align: center; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
 </style>
 </head>
@@ -70,17 +79,19 @@ body.space > nav.topbar { position: fixed !important; top: 0; left: 0; right: 0;
 
 <div class="panel" id="panel" role="dialog" aria-modal="true" aria-labelledby="ptitle">
   <button class="close" id="pclose">Close</button>
-  <div class="media" id="pmedia"></div>
+  <div class="media" id="pmedia"><div class="shot" id="pshot"></div><div class="dots" id="pdots"></div></div>
   <div class="words">
     <p class="kind" id="pkind"></p>
     <h2 id="ptitle"></h2>
     <p id="ptext"></p>
+    <p class="sub" id="psub"></p>
     <div class="acts"><a id="popen" href="#">Open</a><button id="pnext">Somewhere else &rarr;</button></div>
   </div>
+  <p class="hintback">Click anywhere outside to go back</p>
 </div>
 
-<script src="space-data.js?v=1793037297"></script>
-<script src="site.js?v=1793037297"></script>
+<script src="space-data.js?v=1793037898"></script>
+<script src="site.js?v=1793037898"></script>
 <script>
 (function () {
   const esc = s => String(s || '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -176,15 +187,39 @@ body.space > nav.topbar { position: fixed !important; top: 0; left: 0; right: 0;
   setTimeout(() => { const h = document.getElementById('hint'); if (h) h.style.transition = 'opacity 1s', h.style.opacity = '.0'; }, 9000);
 
   // the open piece
-  const panel = document.getElementById('panel'), pmedia = document.getElementById('pmedia');
+  const panel = document.getElementById('panel');
   let current = -1, lastFocus = null;
+  // Every picture of a piece, plus the pictures of any other piece from the same project,
+  // become one set of slides with dots.
+  const slidesFor = it => {
+    const own = (it.images || [it.image || null]).map(s => typeof s === 'string' || s === null ? { src: s } : s)
+      .map(s => ({ src: s.src, video: s.src === it.image || !s.src ? it.video : null, text: s.text || '' }));
+    if (!own[0].src && !own[0].video) own[0] = { note: it.text };
+    if (it.href && !/^https?:/.test(it.href)) items.forEach(o => {
+      if (o === it || o.href !== it.href) return;
+      (o.images || [o.image]).forEach(s => { if (s || o.video) own.push({ src: typeof s === 'string' ? s : s && s.src, video: o.video && (!s || s === o.image) ? o.video : null, text: o.title + '. ' + (o.text || '') }); });
+    });
+    return own;
+  };
+  const shot = document.getElementById('pshot'), dots = document.getElementById('pdots'), sub = document.getElementById('psub');
+  let slides = [], at = 0;
+  function show(k) {
+    at = (k + slides.length) % slides.length;
+    const s = slides[at];
+    shot.innerHTML = (s.note ? '<div class="note">' + esc(s.note) + '</div>'
+      : s.video ? '<video src="' + esc(s.video) + '"' + (s.src ? ' poster="' + esc(s.src) + '"' : '') + ' autoplay muted loop playsinline></video>'
+      : '<img src="' + esc(s.src) + '" alt="' + esc(items[current].title) + ', ' + (at + 1) + ' of ' + slides.length + '">')
+      + (slides.length > 1 ? '<button class="arrow l" aria-label="Previous">&larr;</button><button class="arrow r" aria-label="Next">&rarr;</button>' : '');
+    dots.querySelectorAll('button').forEach((b, n) => b.setAttribute('aria-current', String(n === at)));
+    sub.textContent = at > 0 ? s.text : '';
+  }
+  shot.addEventListener('click', e => { if (e.target.closest('.arrow')) { e.stopPropagation(); show(at + (e.target.closest('.l') ? -1 : 1)); } });
+  dots.addEventListener('click', e => { const b = e.target.closest('button'); if (b) show(+b.dataset.n); });
   function open(i) {
     const it = items[i]; current = i; lastFocus = document.activeElement;
-    pmedia.innerHTML = it.images && it.images.length > 1
-      ? '<div class="strip">' + it.images.map((src, k) => '<img src="' + esc(src) + '" alt="' + esc(it.title) + ', ' + (k + 1) + ' of ' + it.images.length + '">').join('') + '</div>'
-      : it.video ? '<video src="' + esc(it.video) + '"' + (it.image ? ' poster="' + esc(it.image) + '"' : '') + ' autoplay muted loop playsinline controls></video>'
-      : it.image ? '<img src="' + esc(it.image) + '" alt="' + esc(it.title) + '">'
-      : '<div class="note">' + esc(it.text) + '</div>';
+    slides = slidesFor(it);
+    dots.innerHTML = slides.length > 1 ? slides.map((_, n) => '<button data-n="' + n + '" aria-label="Picture ' + (n + 1) + '"></button>').join('') : '';
+    show(0);
     document.getElementById('pkind').textContent = it.kind || '';
     document.getElementById('ptitle').textContent = it.title;
     document.getElementById('ptext').textContent = it.text || '';
@@ -192,15 +227,19 @@ body.space > nav.topbar { position: fixed !important; top: 0; left: 0; right: 0;
     if (it.href) { a.hidden = false; a.href = it.href; const ext = /^https?:/.test(it.href); a.target = ext ? '_blank' : ''; a.rel = ext ? 'noopener' : ''; a.textContent = ext ? 'Open ↗' : 'See the project →'; }
     else a.hidden = true;
     panel.classList.add('on');
-    document.getElementById('pclose').focus();
   }
-  pmedia.addEventListener('wheel', e => {
-    const st = pmedia.querySelector('.strip'); if (!st) return;
-    if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) { e.preventDefault(); st.scrollLeft += e.deltaY; }
-  }, { passive: false });
-  function close() { panel.classList.remove('on'); pmedia.innerHTML = ''; if (lastFocus) lastFocus.focus(); }
+  addEventListener('keydown', e => {
+    if (!panel.classList.contains('on') || slides.length < 2) return;
+    if (e.key === 'ArrowRight') show(at + 1); if (e.key === 'ArrowLeft') show(at - 1);
+  });
+  // swipe between pictures on touch screens
+  let sx = null;
+  shot.addEventListener('touchstart', e => { sx = e.touches[0].clientX; }, { passive: true });
+  shot.addEventListener('touchend', e => { if (sx === null) return; const dx = e.changedTouches[0].clientX - sx; if (Math.abs(dx) > 40) show(at + (dx < 0 ? 1 : -1)); sx = null; });
+  function close() { panel.classList.remove('on'); shot.innerHTML = ''; if (lastFocus && lastFocus.blur) lastFocus.blur(); }
   document.getElementById('pclose').addEventListener('click', close);
-  panel.addEventListener('click', e => { if (e.target === panel) close(); });
+  // clicking the background (anything that isn't the picture, the dots or the card) goes back to the space
+  panel.addEventListener('click', e => { if (!e.target.closest('img, video, .note, .dots, .words, .arrow')) close(); });
   document.getElementById('pnext').addEventListener('click', () => {
     let n; do { n = Math.floor(Math.random() * items.length); } while (items.length > 1 && n === current);
     open(n);
