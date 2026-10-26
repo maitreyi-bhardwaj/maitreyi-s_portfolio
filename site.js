@@ -30,10 +30,10 @@
       '</nav>';
   }
 
-  // Case studies: in every section, put the text on one side and its small
-  // blocks (cards, numbers, charts, lists) on the other, swapping sides each
-  // time. Photographs and screenshots stay full width below.
+  // (Retired: text and blocks used to sit side by side. Sections now use the
+  // question-and-explanation grid in site.css.)
   (function () {
+    return;
     const isText = el => el.matches('h2, h3, p:not(.big-cap):not(.bars-note), ul:not(.status):not(.asks), ol:not(.asks), .res, .solved, .links');
     const hasImage = el => el.matches('.big, .two-up, .shots') || el.querySelector('img');
     let n = 0;
