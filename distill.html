@@ -3,223 +3,151 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Distill , Maitreyi Bhardwaj</title>
+<title>Distill, Maitreyi Bhardwaj</title>
+<meta name="description" content="Distill is a Chrome extension that translates live audio from any tab into several languages at once, with an ASL accessibility mode. Microsoft Track winner at HackAZona.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css?v=1792994316">
+<link rel="stylesheet" href="id.css?v=1792994316">
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-:root {
-  --bg: #EFEEEA; --card: #ffffff; --panel: #F5F4F0; --black: #1a1a1a; --gray: #4b4b48; --soft: #8b8b86;
-  --border: #dddcd6;
-  --f: 'Inter', -apple-system, sans-serif;
-  --fd: 'Red Hat Display', 'Inter', sans-serif;
-  --pad: clamp(20px, 4vw, 64px);
-}
-body { font-family: var(--f); background: var(--bg); color: var(--black); -webkit-font-smoothing: antialiased; overflow-x: clip; }
-img { max-width: 100%; display: block; }
-h1,h2,h3,h4 { font-family: var(--fd); text-wrap: balance; }
-p { text-wrap: pretty; }
-
-.mini-nav { display: flex; justify-content: space-between; align-items: center; padding: 28px var(--pad); font-size: 15px; flex-wrap: wrap; gap: 14px; }
-.mini-nav a { color: var(--black); text-decoration: none; transition: opacity .15s; }
-.mini-nav a:hover { opacity: .55; }
-
-.case-hero { padding: 8px var(--pad) 0; }
-.case-hero img { width: 100%; max-height: 84vh; object-fit: cover; border-radius: 28px; opacity: 0; transform: scale(.94); animation: heroIn 1.3s cubic-bezier(.16,1,.3,1) .15s forwards; }
-@keyframes heroIn { 0% { opacity: 0; transform: scale(.94); } 45% { opacity: 1; } 100% { opacity: 1; transform: scale(1); } }
-@media (prefers-reduced-motion: reduce) { .case-hero img { animation: none; opacity: 1; transform: none; } }
-
-.split { display: grid; grid-template-columns: minmax(280px, 1fr) 1.35fr; gap: clamp(32px, 5vw, 100px); padding: clamp(80px, 11vw, 180px) var(--pad); align-items: start; }
-.split > div { min-width: 0; }
-.split h1 { font-size: clamp(38px, 4.2vw, 68px); font-weight: 700; letter-spacing: -.02em; line-height: 1.06; }
-.plabel { font-size: 17px; font-weight: 600; margin-bottom: 18px; }
-.split p, .prob p { font-size: 17px; line-height: 1.8; color: var(--gray); max-width: 720px; }
-.split p + p { margin-top: 18px; }
-.meta-rule { border: none; border-top: 1px solid var(--border); margin: 44px 0; }
-.meta4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
-.meta4 .ml { font-size: 14px; color: var(--soft); margin-bottom: 8px; }
-.meta4 .mv { font-size: 16px; font-weight: 500; }
-
-.prob { padding: 0 var(--pad) clamp(90px, 12vw, 190px); max-width: 1200px; }
-.prob .plabel { margin-bottom: 24px; }
-.prob h2 { font-size: clamp(32px, 3.6vw, 58px); font-weight: 700; letter-spacing: -.018em; line-height: 1.1; margin-bottom: 28px; }
-
-/* NUMBERED STEPS */
-.step { padding: clamp(70px, 9vw, 140px) var(--pad); }
-.step-in { max-width: 1200px; margin: 0 auto; }
-.stepnum { font-family: var(--fd); font-size: 15px; font-weight: 600; color: var(--soft); margin-bottom: 20px; }
-.step h2 { font-size: clamp(28px, 3.2vw, 46px); font-weight: 700; letter-spacing: -.016em; line-height: 1.16; max-width: 820px; margin-bottom: 22px; }
-.step p { font-size: 17px; line-height: 1.8; color: var(--gray); max-width: 680px; }
-.step p + p { margin-top: 14px; }
-.step:nth-child(even) { background: var(--panel); }
-
-.trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 44px; max-width: 900px; }
-.tcard { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px 22px; }
-.tcard h4 { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
-.tcard p { font-size: 14px; line-height: 1.6; color: var(--gray); }
-
-.nums { display: grid; grid-template-columns: repeat(var(--n, 3), 1fr); gap: 28px; margin-top: 52px; max-width: 860px; }
-.num .n { font-family: var(--fd); font-size: clamp(38px, 4vw, 60px); font-weight: 700; line-height: 1; color: var(--black); }
-.num .c { margin-top: 12px; font-size: 14.5px; line-height: 1.5; color: var(--gray); }
-
-.big { margin-top: 48px; border-radius: 20px; overflow: hidden; background: var(--panel); }
-.big img { width: 100%; display: block; }
-.big-cap { margin-top: 14px; font-size: 14px; color: var(--soft); }
-
-/* what I solved + per-step result */
-.solved { margin-top: 36px; padding: 24px 28px; background: var(--card); border: 1px solid var(--border); border-radius: 16px; max-width: 760px; }
-.solved .sl { font-size: 12.5px; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--soft); margin-bottom: 10px; }
-.prob .solved p, .solved p { font-size: 18px; line-height: 1.6; color: var(--black); font-weight: 500; max-width: none; margin: 0; }
-.res { margin-top: 34px; padding-left: 20px; border-left: 2px solid var(--black); max-width: 700px; }
-.res .rl { font-size: 12.5px; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--soft); margin-bottom: 7px; }
-.step .res p, .res p { font-size: 16.5px; line-height: 1.7; color: var(--black); max-width: none; margin: 0; }
-.two-up { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 44px; }
-.two-up img { width: 100%; border-radius: 16px; display: block; }
-.video-big { margin-top: 44px; border-radius: 20px; overflow: hidden; aspect-ratio: 16/9; max-width: 100%; }
-.video-big iframe { width: 100%; height: 100%; display: block; border: none; }
-
-.outcome { padding: clamp(90px, 12vw, 180px) var(--pad) clamp(60px, 7vw, 100px); }
-.outcome h2 { font-size: clamp(32px, 3.6vw, 58px); font-weight: 700; letter-spacing: -.018em; max-width: 950px; }
-.outcome p { margin-top: 26px; font-size: 17px; line-height: 1.8; color: var(--gray); max-width: 740px; }
-.case-next { display: inline-block; margin-top: 40px; font-size: 16px; font-weight: 500; color: var(--black); text-decoration: none; border-bottom: 1px solid var(--black); padding-bottom: 3px; }
-.case-next:hover { opacity: .6; }
-
-footer { display: flex; justify-content: space-between; padding: 30px var(--pad) 44px; font-size: 13px; color: var(--soft); }
-
-@media(max-width: 860px){
-  .mini-nav { font-size: 14px; }
-  .case-hero img { border-radius: 18px; }
-  .split { grid-template-columns: 1fr; }
-  .meta4 { grid-template-columns: 1fr 1fr; }
-  .nums { grid-template-columns: 1fr; gap: 26px; }
-  .trio, .two-up { grid-template-columns: 1fr; }
-}
-
-html.dark { --bg:#0f0f0f; --card:#171717; --panel:#1c1c1c; --black:#f0f0ee; --gray:#b5b5b0; --soft:#7d7d78; --border:#2a2a2a; }
-html.dark body { background: var(--bg); }
-html.dark #dm-toggle { background:#171717; border-color:#2a2a2a; color:#f0f0ee; }
+/* a comparison table, drawn in the page's own type */
+.k-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.k-table th, .k-table td { padding: 14px 10px; text-align: center; border-bottom: 1px solid #ECE8E4; }
+.k-table th { font-weight: 400; font-size: 12px; color: var(--grey); }
+.k-table th:first-child, .k-table td:first-child { text-align: left; }
+.k-table tr.us td { background: var(--tint); font-weight: 500; }
+.k-table .y { color: var(--acc); font-weight: 600; }
+.k-table .n { color: #C9C2BC; }
+/* the pipeline, as a row of steps */
+.k-flow { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 14px; }
+.k-flow span { padding: 12px 16px; border-radius: 6px; background: var(--tint); }
+.k-flow span.on { background: var(--acc); color: #fff; }
+.k-flow i { font-style: normal; color: var(--grey); }
+@media (max-width: 860px) { .k-table { font-size: 12px; } .k-table th, .k-table td { padding: 10px 4px; } }
 </style>
-<link rel="stylesheet" href="site.css?v=1792993290">
 </head>
-<body>
+<body class="idk" style="--acc:#3B7DF0;--tint:#EEF3FD;--tint2:#E2EBFB">
 
 <div data-topbar></div>
 
-<div class="case-hero"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781041541/distill_01_hero_m9wn4n.png" alt="Distill hero"></div>
+<div class="case-hero"><img src="media/distill/title.jpg" alt="The Distill logo over the word distill written in many languages"></div>
 
-<section class="split">
+<header class="k k-title">
   <h1>Distill</h1>
-  <div>
-    <p>Distill is a Chrome extension that listens to your active tab, <b>translates the audio into 16 languages at once, and streams live ASL visual cards on top of any site</b>. Built in 36 hours at HackAZona, <b>it won the Microsoft Track</b>.</p>
-    <hr class="meta-rule">
-    <div class="meta4">
-      <div><div class="ml">Company</div><div class="mv">HackAZona (Microsoft Track)</div></div>
-      <div><div class="ml">Tools</div><div class="mv">Figma, Azure AI, Chrome</div></div>
-      <div><div class="ml">Role</div><div class="mv">UI Designer</div></div>
-      <div><div class="ml">Year</div><div class="mv">2026</div></div>
-    </div>
-    <hr class="meta-rule">
-    <p><b>I designed the whole interface in the 36-hour window</b>: the extension panel, the language tokens, the toggles, the floating captions, and the ASL card system, then tested it live on real lectures while my three teammates built the Azure pipeline.</p>
-  </div>
-</section>
+  <p class="k-sub">Every voice, heard. Every language, understood.</p>
+  <p class="k-lede">A Chrome extension that captures audio from any tab or microphone and translates it live into <em>several languages at once</em>, with an ASL accessibility mode and a dashboard that keeps every session.</p>
+  <dl class="k-meta">
+    <div><div><dt>Event</dt><dd>HackAZona, 36 hours</dd></div><div><dt>Year</dt><dd>2026</dd></div></div>
+    <div><dt>Role</dt><dd>UI designer, team of four</dd></div>
+    <div><dt>Recognition</dt><dd>Microsoft Track winner</dd></div>
+  </dl>
+</header>
 
-<section class="prob">
-  <h2>Live audio locks people out.</h2>
-  <p>Lectures, meetings, and videos happen in real time. If you are deaf, hard of hearing, or still learning the language, you are behind from the first sentence. <b>Captions, when they exist at all, come in one language and never in ASL.</b></p>
-  <p>Accessibility tools only matter if they keep pace with real speech. Most live-caption extensions treat the interface as an afterthought: they clutter the screen, cover the video, and break the page underneath. <b>For Distill, the layout is the product.</b></p>
+<section class="k k-head k--gap">
+  <h2><small>01</small>The world speaks many languages. Our tools don't.</h2>
+  <div class="k-txt">
+    <p>Lectures, meetings and videos happen in real time. <b>If you are deaf, hard of hearing or still learning the language, you are behind from the first sentence.</b></p>
+    <p>Captions, when they exist at all, come in one language and never in ASL.</p>
+  </div>
 </section>
+<div class="k"><div class="k-stats" style="--n:3">
+  <div><b>$26B</b><span>lost by businesses every year to language barriers</span></div>
+  <div><b>1.5B</b><span>people learning English, watching content they only partly understand</span></div>
+  <div><b>466M</b><span>deaf people, treated as an afterthought by most communication tools</span></div>
+</div></div>
+<div class="k"><figure><img src="media/distill/voices.jpg" alt="Someone on a video call with four people, captioned: Every voice, heard. Every language, understood." loading="lazy"></figure></div>
 
-<!-- STEP 1 -->
-<section class="step">
-  <div class="step-in">
-    <h2>I started with the hardest constraint: this thing lives on someone else's page</h2>
-    <p>A Chrome extension does not get its own screen. <b>It sits on top of a page somebody else designed.</b> One wrong layout decision and it covers the video, hides the controls, or pushes the whole page sideways.</p>
-    <p>So before drawing a single screen, I mapped the four places people actually watch and meet, and worked out where the panel could sit on each one without getting in the way.</p>
-    <div class="trio">
-      <div class="tcard"><h4>YouTube</h4><p>Anchors below the player so it never covers the video or the controls</p></div>
-      <div class="tcard"><h4>Google Meet</h4><p>Sits beside the video frame and respects the multi-tile grid</p></div>
-      <div class="tcard"><h4>Microsoft Teams</h4><p>Keeps clear of participant tiles so no speaker gets hidden</p></div>
-      <div class="tcard"><h4>Zoom Web</h4><p>Adapts to both gallery and speaker view with no layout shift</p></div>
-    </div>
+<section class="k k-head k--gap">
+  <h2><small>02</small>What Distill does</h2>
+  <div class="k-txt">
+    <p><b>It listens to whatever is playing in the browser and translates it as people speak</b>, into up to three languages at the same time, so everyone in the conversation gets what they need.</p>
   </div>
 </section>
+<div class="k"><figure><img src="media/distill/features.jpg" alt="Three features: realtime translation, cross-platform dashboard, ASL accessibility" loading="lazy"></figure></div>
 
-<!-- STEP 2 -->
-<section class="step">
-  <div class="step-in">
-    <h2>I designed a panel with almost no room to spare</h2>
-    <p>With the space settled, every component had to earn its place. Input language is one clear button group. Outputs are multi-select tokens, color-coded per language, each with a quick remove. Speaker diarization and floating captions are plain on/off toggles. <b>One blue button starts everything.</b></p>
-    <p>I set the type size, contrast, and spacing for reading at speed, because people use this while someone is still talking. <b>Panels have fixed heights so the layout never jumps as new text arrives.</b></p>
-    <div class="trio">
-      <div class="tcard"><h4>Language tokens</h4><p>Multi-select outputs, color-coded so you can scan at a glance</p></div>
-      <div class="tcard"><h4>Floating captions</h4><p>Ride on top of any site without breaking its layout</p></div>
-      <div class="tcard"><h4>One blue CTA</h4><p>A single action starts listening, translating, and signing</p></div>
-    </div>
-    <div class="nums" style="--n:3">
-      <div class="num"><div class="n">16</div><div class="c">languages translated simultaneously, with ASL cards</div></div>
-      <div class="num"><div class="n">36</div><div class="c">hours from idea to working product</div></div>
-      <div class="num"><div class="n">$2,000</div><div class="c">Microsoft Track prize at HackAZona</div></div>
-    </div>
-    <div class="big">
-      <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781041541/distill_02_UI_bnkfsj.png" alt="Distill extension UI, final screens" loading="lazy">
-    </div>
-    <p class="big-cap">The final panel, floating over an active tab</p>
-    <div class="two-up">
-      <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781041541/distill_04_mock1_eb3iqp.png" alt="Distill on YouTube, translation active" loading="lazy">
-      <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781041541/distill_04_mock2_ASL_dpfqnp.png" alt="Distill on YouTube, ASL cards active" loading="lazy">
-    </div>
+<section class="k k-head k--gap">
+  <h2><small>03</small>A panel with almost no room to spare</h2>
+  <div class="k-txt">
+    <p>An extension doesn't get its own screen. <b>It sits on top of a page somebody else designed</b>, so one wrong layout decision covers the video or the controls.</p>
+    <p>Every component had to earn its place: one clear input language, output languages as removable tokens, plain toggles for speaker labels and floating captions, and <b>one blue button that starts everything</b>.</p>
   </div>
 </section>
+<div class="k"><div class="k-row k-row--12 k-fill" style="--ar:2.3/1">
+  <figure><img src="media/distill/panel.jpg" alt="The Distill panel: input language, three output languages, toggles and a Start Listening button" loading="lazy"></figure>
+  <figure><img src="media/distill/browser-ready.jpg" alt="The panel open over a YouTube lecture, ready to start" loading="lazy"></figure>
+</div></div>
+<div class="k" style="margin-top:56px"><div class="k-points">
+  <div><span>Tokens</span><h3>Output languages</h3><p>Colour-coded and removable, so you can scan them at a glance.</p></div>
+  <div><span>Captions</span><h3>Floating subtitles</h3><p>Overlay the active tab without breaking the page under them.</p></div>
+  <div><span>Speakers</span><h3>Diarization</h3><p>Distinct voices are labelled and colour-coded.</p></div>
+</div></div>
 
-<!-- STEP 3 -->
-<section class="step">
-  <div class="step-in">
-    <h2>I mapped the path from tab audio to ASL cards</h2>
-    <p><b>Sound goes in one end and signing comes out the other.</b> Four steps, in order, all happening while the speaker keeps talking. A signing user and a translating user can watch the same lecture together, each getting what they need.</p>
-    <div class="trio">
-      <div class="tcard"><h4>1. Tab audio</h4><p>Live sound captured straight from the active browser tab</p></div>
-      <div class="tcard"><h4>2. Azure AI</h4><p>Speech and Translator turn it into text in 16 languages</p></div>
-      <div class="tcard"><h4>3. Supermemory</h4><p>Keeps the conversation history so context stays accurate</p></div>
-      <div class="tcard"><h4>4. Panel update</h4><p>Tokens sync and ASL cards populate in real time</p></div>
-    </div>
-    <p><b>We tested it during the hackathon on a live Chinese lecture</b>, to prove the multilingual output holds up on real speech and not just on a clean demo recording.</p>
-    <div class="big">
-      <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781041541/distill_05_how_it_works_ygndkk.png" alt="How Distill works, pipeline diagram" loading="lazy">
-    </div>
-    <p class="big-cap">Tab audio to ASL cards, the full pipeline</p>
-    <div class="two-up">
-      <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781041541/distill_03_what_does_it_do_c7nwsx.png" alt="What Distill does" loading="lazy">
-      <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781041541/distill_04_mock3_wrxvm2.png" alt="Distill translated output" loading="lazy">
-    </div>
+<section class="k k-head k--gap">
+  <h2><small>04</small>Tested live, on a real lecture</h2>
+  <div class="k-txt">
+    <p>We tested it on a Chinese lecture, not a clean demo recording. <b>The original and the translation sit side by side as the speaker talks</b>, and moments can be flagged for a highlight reel.</p>
+    <p>In ASL mode, an interpreter view replaces the text for signing users.</p>
   </div>
 </section>
+<div class="k"><figure><img src="media/distill/browser-live.jpg" alt="Live translation from Mandarin to English over a YouTube lecture" loading="lazy"><figcaption>Translating, Mandarin to English</figcaption></figure></div>
+<div class="k"><figure><img src="media/distill/browser-asl.jpg" alt="The ASL interpreter view over the same lecture" loading="lazy"><figcaption>ASL mode</figcaption></figure></div>
+<div class="k"><figure><div style="position:relative;aspect-ratio:16/9;border-radius:6px;overflow:hidden;background:#111"><iframe src="https://www.youtube.com/embed/r8c9J0EY8eQ?autoplay=1&amp;mute=1&amp;loop=1&amp;playlist=r8c9J0EY8eQ&amp;playsinline=1&amp;rel=0" title="Distill demo" allow="autoplay; encrypted-media; fullscreen" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;border:0"></iframe></div><figcaption>The demo</figcaption></figure></div>
 
-<!-- STEP 4 -->
-<section class="step">
-  <div class="step-in">
-    <h2>I tested it live in front of the judges</h2>
-    <p>No slides, no recording. We ran the extension on a real lecture in the room, with translation and ASL cards populating as the speaker talked.</p>
-    <div class="video-big">
-      <iframe src="https://www.youtube.com/embed/r8c9J0EY8eQ?autoplay=1&amp;mute=1&amp;loop=1&amp;playlist=r8c9J0EY8eQ&amp;playsinline=1&amp;rel=0" title="Distill demo" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>
-    </div>
+<section class="k k-head k--gap">
+  <h2><small>05</small>How it works</h2>
+  <div class="k-txt">
+    <p>Sound goes in one end and translated speech comes out the other, while the speaker keeps talking.</p>
   </div>
 </section>
+<div class="k"><div class="k-flow">
+  <span>Extension</span><i>&rarr;</i><span>FastAPI</span><i>&rarr;</i><span>Azure Speech Translation or Conversation Transcriber</span><i>&rarr;</i><span>Azure Speech Synthesis</span><i>&rarr;</i><span class="on">Translated audio</span>
+</div></div>
 
-<section class="outcome">
-  <h2>$2,000 Microsoft Track Prize. Built in 36 hours.</h2>
-  <p>A full interface system and a working backend, in one weekend. Every voice heard, every language understood.</p>
-  <div class="big">
-    <img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto/v1781041542/distill_06_end_ntluo5.png" alt="Every voice heard, Distill closing screen" loading="lazy">
+<section class="k k-head k--gap">
+  <h2><small>06</small>Why Distill wins</h2>
+  <div class="k-txt">
+    <p><b>No existing product combines all five capabilities.</b></p>
   </div>
-  <div class="learn">
-    <div><h3>What I learned</h3><ul><li>Accessibility and good design are not in conflict.</li><li>One clear constraint produces sharper work than an open brief.</li></ul></div>
-    <div><h3>How I'll use it next</h3><ul><li>Design for accessibility from the first screen, not as a later pass.</li><li>Set one hard constraint at the start of open projects.</li></ul></div>
-  </div>
-  <a class="case-next" href="frontdoor.html">Next project: Home Passport &rarr;</a>
 </section>
+<div class="k"><table class="k-table">
+  <tr><th></th><th>Cross-platform</th><th>Multi-language output</th><th>ASL accessibility</th><th>Persistent dashboard</th><th>Works on YouTube</th></tr>
+  <tr class="us"><td>Distill</td><td class="y">+</td><td class="y">+</td><td class="y">+</td><td class="y">+</td><td class="y">+</td></tr>
+  <tr><td>Google Translate</td><td class="y">+</td><td class="n">&mdash;</td><td class="n">&mdash;</td><td class="n">&mdash;</td><td class="n">&mdash;</td></tr>
+  <tr><td>Zoom Captions</td><td class="n">&mdash;</td><td class="n">&mdash;</td><td class="n">&mdash;</td><td class="n">&mdash;</td><td class="n">&mdash;</td></tr>
+  <tr><td>Otter.ai</td><td class="y">+</td><td class="n">&mdash;</td><td class="n">&mdash;</td><td class="y">+</td><td class="n">&mdash;</td></tr>
+  <tr><td>DeepL</td><td class="y">+</td><td class="n">&mdash;</td><td class="n">&mdash;</td><td class="n">&mdash;</td><td class="n">&mdash;</td></tr>
+  <tr><td>Krisp</td><td class="y">+</td><td class="n">&mdash;</td><td class="n">&mdash;</td><td class="n">&mdash;</td><td class="n">&mdash;</td></tr>
+</table></div>
+
+<section class="k k-head k--gap">
+  <h2><small>07</small>The business case</h2>
+  <div class="k-txt">
+    <p>We pitched it as a company. <b>Freemium: a free tier that runs out mid-meeting, Pro at $18 a month, and Teams at $45 a seat.</b></p>
+    <p>The plan: community launch first, then teams, then enterprise and an API, toward a $1.5M seed round.</p>
+  </div>
+</section>
+<div class="k"><div class="k-stats" style="--n:3">
+  <div><b>$56B</b><span>global language services market</span></div>
+  <div><b>$8.4B</b><span>real-time digital translation</span></div>
+  <div><b>$48M</b><span>realistic capture in three years</span></div>
+</div></div>
+<div class="k" style="margin-top:56px"><div class="k-points">
+  <div><span>Year 1</span><h3>$500K ARR</h3><p>2,500 Pro subscribers and 10 Teams customers, after a ProductHunt and community launch.</p></div>
+  <div><span>Year 2</span><h3>$2.5M ARR</h3><p>12,000 Pro subscribers, 80 Teams customers and a desktop app.</p></div>
+  <div><span>Year 3</span><h3>$8M ARR</h3><p>35,000 Pro subscribers, enterprise and API live. Assumes 5% free-to-paid conversion.</p></div>
+</div></div>
+
+<footer class="k k-close">
+  <h2>Distill</h2>
+  <p class="k-lede">Accessibility tools only matter if they keep pace with real speech.</p>
+  <div class="k-learn">
+    <div><h3>My part</h3><ul><li>The whole interface: panel, language tokens, toggles, floating captions and the ASL view.</li><li>My three teammates built the Azure pipeline.</li></ul></div>
+    <div><h3>Result</h3><ul><li>Microsoft Track winner at HackAZona.</li></ul></div>
+  </div>
+  <a class="k-next" href="kiosk.html">Next: Pit Boss kiosk &rarr;</a>
+</footer>
 
 <div data-foot></div>
 
-<script src="site.js?v=1792993290"></script>
+<script src="site.js?v=1792994316"></script>
 </body>
 </html>
