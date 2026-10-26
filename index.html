@@ -222,10 +222,10 @@ body:not(.chosen) #work, body:not(.chosen) .page-dots { display: none; }
 .welcome #say { color: #111; text-shadow: none; } .welcome #say .say-pron { color: #8C8C8C; }
 body:has(.welcome) > nav.topbar { position: absolute !important; top: 0; left: 0; right: 0; z-index: 3 !important; }
 </style>
-<link rel="stylesheet" href="site.css?v=1793036356">
+<link rel="stylesheet" href="site.css?v=1793036499">
 </head>
 <body>
-<script src="intro.js?v=1793036356"></script>
+<script src="intro.js?v=1793036499"></script>
 
 <div class="page-dots" aria-hidden="true"><canvas data-lace="page"></canvas></div>
 <div data-topbar></div>
@@ -239,7 +239,7 @@ body:has(.welcome) > nav.topbar { position: absolute !important; top: 0; left: 0
   </div>
 </header>
 
-<nav class="choices" aria-label="Choose the kind of work to see">
+<nav class="choices" id="choose" aria-label="Choose the kind of work to see">
   <a class="choice" href="industrial.html">
     <span class="c-panel"><span class="c-word">Industrial design</span></span>
     <span class="c-pic"><video src="media/video/kith-lit.mp4" poster="media/kith/full-lamp.jpg" autoplay muted loop playsinline aria-label="The Kith pendant lamp, lit"></video></span>
@@ -254,10 +254,10 @@ body:has(.welcome) > nav.topbar { position: absolute !important; top: 0; left: 0
 
 <div data-foot></div>
 
-<script src="projects.js?v=1793036356"></script>
-<script src="lace.js?v=1793036356"></script>
-<script src="figma-lace.js?v=1793036356"></script>
-<script src="site.js?v=1793036356"></script>
+<script src="projects.js?v=1793036499"></script>
+<script src="lace.js?v=1793036499"></script>
+<script src="figma-lace.js?v=1793036499"></script>
+<script src="site.js?v=1793036499"></script>
 <script>
 // The opening line, typed out as if Maitreyi is writing it. The name takes three
 // tries: two spellings people get wrong are typed, crossed out in red and erased,
@@ -381,10 +381,12 @@ body:has(.welcome) > nav.topbar { position: absolute !important; top: 0; left: 0
     const hash = location.hash.slice(1);
     if (hash === 'id') { location.replace('industrial.html'); return; }
     if (hash === 'ux') { location.replace('ui.html'); return; }
-    if (hash === 'work') {
-      document.body.classList.add('chosen');
-      requestAnimationFrame(() => document.getElementById('work').scrollIntoView());
-    }
+    // the top bar's Work link lands on the two choices, not the old timeline
+    if (hash === 'work') requestAnimationFrame(() => document.querySelector('.choices').scrollIntoView());
+    // clicking Work again while already here
+    document.querySelectorAll('a[href="index.html#work"]').forEach(l => l.addEventListener('click', e => {
+      e.preventDefault(); document.querySelector('.choices').scrollIntoView({ behavior: 'smooth' });
+    }));
   })();
 
   // The choice video loads only after the intro, so it doesn't compete with it.
