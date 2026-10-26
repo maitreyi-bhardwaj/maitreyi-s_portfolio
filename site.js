@@ -76,10 +76,10 @@
   });
 
   // Case studies: each heading, paragraph and picture fades up as you scroll to it.
-  if (document.querySelector('.step, .split') && 'IntersectionObserver' in window &&
+  if (document.querySelector('.step, .split, .k') && 'IntersectionObserver' in window &&
       !matchMedia('(prefers-reduced-motion: reduce)').matches) {
     const pieces = document.querySelectorAll(
-      '.case-hero > *, .split > h1, .split > div > *, .prob > *, .step-in > *:not(.duo-row), .duo-row > *, .outcome > *');
+      '.case-hero > *, .k > *, .split > h1, .split > div > *, .prob > *, .step-in > *:not(.duo-row), .duo-row > *, .outcome > *');
     const io = new IntersectionObserver(entries => entries.forEach(e => {
       if (e.isIntersecting) { e.target.classList.add('seen'); io.unobserve(e.target); }
     }), { rootMargin: '0px 0px -18% 0px' });
