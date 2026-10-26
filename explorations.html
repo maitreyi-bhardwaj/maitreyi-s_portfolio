@@ -6,7 +6,7 @@
 <title>Explorations, Maitreyi Bhardwaj</title>
 <meta name="description" content="A space to wander through Maitreyi Bhardwaj's explorations: photography, animation, craft, models and code.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link rel="stylesheet" href="site.css?v=1793036800">
+<link rel="stylesheet" href="site.css?v=1793037297">
 <style>
 /* A white 3D space. Pieces float at different depths; scrolling moves you through them,
    the mouse tilts the view, and clicking a piece opens it with a short description. */
@@ -39,6 +39,9 @@ body.space > nav.topbar { position: fixed !important; top: 0; left: 0; right: 0;
 .panel .media { height: 100%; max-height: calc(100svh - 190px); display: flex; align-items: center; justify-content: center; min-height: 0; }
 .panel .media img { max-width: 100%; max-height: 100%; object-fit: contain; display: block; }
 .panel .media video { width: 100%; height: 100%; object-fit: contain; display: block; background: #F3F1EE; }
+.piece .many { position: absolute; top: 6px; right: 6px; min-width: 20px; padding: 2px 6px; border-radius: 10px; background: rgba(255,255,255,.9); font-size: 11px; color: #2B1B11; text-align: center; }
+.panel .media .strip { display: flex; gap: 12px; height: 100%; width: 100%; overflow-x: auto; scroll-snap-type: x mandatory; align-items: center; scrollbar-width: thin; }
+.panel .media .strip img { flex: 0 0 auto; height: 100%; max-height: 100%; max-width: 92%; width: auto; object-fit: contain; scroll-snap-align: center; }
 .panel .media .note { width: min(100%, 520px); aspect-ratio: 4/3; padding: 32px; background: #F7E6EE; color: #5A2840; font-size: 22px; line-height: 1.3; }
 .panel .words { max-width: 30em; }
 .panel .kind { font-size: 13px; color: #9A8A80; margin: 0 0 10px; }
@@ -76,8 +79,8 @@ body.space > nav.topbar { position: fixed !important; top: 0; left: 0; right: 0;
   </div>
 </div>
 
-<script src="space-data.js?v=1793036800"></script>
-<script src="site.js?v=1793036800"></script>
+<script src="space-data.js?v=1793037297"></script>
+<script src="site.js?v=1793037297"></script>
 <script>
 (function () {
   const esc = s => String(s || '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -96,11 +99,12 @@ body.space > nav.topbar { position: fixed !important; top: 0; left: 0; right: 0;
     b.setAttribute('aria-label', it.title + (it.kind ? ', ' + it.kind : ''));
     const w = Math.round(110 + rnd() * 150);
     b.style.width = w + 'px';
+    if (it.images && !it.image) it.image = it.images[0];
     const media = it.video
       ? '<video data-src="' + esc(it.video) + '" muted loop playsinline preload="none"' + (it.image ? ' poster="' + esc(it.image) + '"' : '') + '></video>'
       : it.image ? '<img src="' + esc(it.image) + '" alt="" loading="lazy" decoding="async">'
       : '<div class="note"><span>' + esc(it.text) + '</span><small>' + esc(it.kind) + '</small></div>';
-    b.innerHTML = media + '<span class="cap">' + esc(it.title) + '<span>' + esc(it.kind) + '</span></span>';
+    b.innerHTML = media + (it.images && it.images.length > 1 ? '<span class="many">' + it.images.length + '</span>' : '') + '<span class="cap">' + esc(it.title) + '<span>' + esc(it.kind) + '</span></span>';
     world.appendChild(b);
     // spread across the view, keeping the very centre a little clearer
     let x, y;
@@ -176,7 +180,9 @@ body.space > nav.topbar { position: fixed !important; top: 0; left: 0; right: 0;
   let current = -1, lastFocus = null;
   function open(i) {
     const it = items[i]; current = i; lastFocus = document.activeElement;
-    pmedia.innerHTML = it.video ? '<video src="' + esc(it.video) + '"' + (it.image ? ' poster="' + esc(it.image) + '"' : '') + ' autoplay muted loop playsinline controls></video>'
+    pmedia.innerHTML = it.images && it.images.length > 1
+      ? '<div class="strip">' + it.images.map((src, k) => '<img src="' + esc(src) + '" alt="' + esc(it.title) + ', ' + (k + 1) + ' of ' + it.images.length + '">').join('') + '</div>'
+      : it.video ? '<video src="' + esc(it.video) + '"' + (it.image ? ' poster="' + esc(it.image) + '"' : '') + ' autoplay muted loop playsinline controls></video>'
       : it.image ? '<img src="' + esc(it.image) + '" alt="' + esc(it.title) + '">'
       : '<div class="note">' + esc(it.text) + '</div>';
     document.getElementById('pkind').textContent = it.kind || '';
@@ -188,6 +194,10 @@ body.space > nav.topbar { position: fixed !important; top: 0; left: 0; right: 0;
     panel.classList.add('on');
     document.getElementById('pclose').focus();
   }
+  pmedia.addEventListener('wheel', e => {
+    const st = pmedia.querySelector('.strip'); if (!st) return;
+    if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) { e.preventDefault(); st.scrollLeft += e.deltaY; }
+  }, { passive: false });
   function close() { panel.classList.remove('on'); pmedia.innerHTML = ''; if (lastFocus) lastFocus.focus(); }
   document.getElementById('pclose').addEventListener('click', close);
   panel.addEventListener('click', e => { if (e.target === panel) close(); });
