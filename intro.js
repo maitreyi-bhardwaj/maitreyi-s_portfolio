@@ -19,7 +19,7 @@
   const bloom = (sx, sy) => 'ellipse(' + (603.5 * sx) + 'px ' + (497 * sy) + 'px at 603.5px 497px)';
   const css = `
 body > .mbi { position: fixed !important; inset: 0; z-index: 9999 !important; overflow: hidden; background: #0A080A; cursor: pointer;
-  animation: mbi-bg ${D} linear forwards; transition: opacity .8s ease; }
+  animation: mbi-bg ${D} linear forwards; transition: opacity .5s ease; }
 body > .mbi.out { opacity: 0; pointer-events: none; }
 body > .mbi:not(.go), body > .mbi:not(.go) * { animation-play-state: paused !important; }
 .mbi-stage { position: absolute; left: 0; top: 0; width: 1280px; height: 832px; transform-origin: 0 0; }
@@ -93,7 +93,7 @@ body > .mbi:not(.go), body > .mbi:not(.go) * { animation-play-state: paused !imp
     wrap.classList.add('out');
     document.documentElement.style.overflow = '';
     done();
-    setTimeout(() => { wrap.remove(); removeEventListener('resize', fit); }, 900);
+    setTimeout(() => { wrap.remove(); removeEventListener('resize', fit); }, 550);
   };
   // Start only once the page has been parsed and the shapes are decoded, two frames later,
   // so a first visit (nothing cached, the page still loading) plays as smoothly as a repeat one.
@@ -102,7 +102,7 @@ body > .mbi:not(.go), body > .mbi:not(.go) * { animation-play-state: paused !imp
     if (started || ended) return; started = true;
     requestAnimationFrame(() => requestAnimationFrame(() => {
       wrap.classList.add('go');
-      timer = setTimeout(finish, 3381 + 500);
+      timer = setTimeout(finish, 3381 + 100);   // a short hold on the finished logo, then a 0.5 s fade
     }));
   };
   const ready = Promise.all(Object.values(SHAPES).map(u => { const im = new Image(); im.src = u; return im.decode ? im.decode().catch(() => {}) : null; }));

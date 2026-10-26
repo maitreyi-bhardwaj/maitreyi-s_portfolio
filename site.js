@@ -86,6 +86,11 @@
     pieces.forEach(el => { el.classList.add('rv'); io.observe(el); });
   }
 
+  // the pink pixel-flower cursor trail, on every page
+  const trail = document.createElement('script');
+  trail.src = 'trail.js?v=' + ((document.querySelector('script[src*="site.js"]').src.split('v=')[1]) || '1');
+  document.body.appendChild(trail);
+
   const foot = document.querySelector('[data-foot]');
   if (!foot) return;
   foot.outerHTML =
