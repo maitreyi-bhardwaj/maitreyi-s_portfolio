@@ -4,7 +4,7 @@
    the question in the first column, the explanation from the second. */
 body.idk { --acc: #9A6A4F; --tint: #F4EFEA; --tint2: #ECE6E0; --grey: #8C827B; background: #fff; }
 body.idk .case-hero { margin: 20px var(--gut) 0; }
-body.idk .case-hero img, body.idk .case-hero video { display: block; width: 100%; height: min(86vh, 56vw); object-fit: cover; border-radius: 6px; }
+body.idk .case-hero img, body.idk .case-hero video { display: block; width: 100%; height: auto; border-radius: 6px; }
 
 .k { margin: 0 var(--gut); display: grid; grid-template-columns: 2fr 1fr 1fr; column-gap: 6px; }
 .k > * { grid-column: 1 / -1; min-width: 0; }
@@ -104,3 +104,10 @@ body.idk .case-hero img, body.idk .case-hero video { display: block; width: 100%
 .k-phones.dark { background: #15131A; }
 .k-phones img { border-radius: clamp(14px, 1.8vw, 28px); background: transparent; box-shadow: 0 24px 60px -30px rgba(0,0,0,.35); }
 @media (max-width: 860px) { .k-phones { grid-template-columns: repeat(2, 1fr); } }
+
+/* No picture is ever cropped. In a row, each picture's column is as wide as its own shape,
+   so they all come out the same height (widths are set from each picture's ratio by site.js). */
+.k-row { display: flex !important; gap: 12px; align-items: flex-start; }
+.k-row > figure { flex: var(--r, 1) 1 0; min-width: 0; }
+.k img, .k video { width: 100%; height: auto !important; object-fit: contain !important; aspect-ratio: auto !important; }
+@media (max-width: 860px) { .k-row { flex-wrap: wrap; } .k-row > figure { flex-basis: 100%; } }

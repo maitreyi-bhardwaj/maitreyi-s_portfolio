@@ -91,6 +91,19 @@
   trail.src = 'trail.js?v=' + ((document.querySelector('script[src*="site.js"]').src.split('v=')[1]) || '1');
   document.body.appendChild(trail);
 
+  // picture rows: give each picture a share of the row equal to its width-to-height ratio,
+  // so every picture in the row is the same height and none is cropped
+  document.querySelectorAll('.k-row').forEach(row => {
+    const set = () => row.querySelectorAll(':scope > figure').forEach(f => {
+      const m = f.querySelector('img, video'); if (!m) return;
+      const w = m.naturalWidth || m.videoWidth, h = m.naturalHeight || m.videoHeight;
+      if (w && h) f.style.setProperty('--r', (w / h).toFixed(4));
+    });
+    row.querySelectorAll('img').forEach(i => i.complete ? set() : i.addEventListener('load', set));
+    row.querySelectorAll('video').forEach(v => v.addEventListener('loadedmetadata', set));
+    set();
+  });
+
   const foot = document.querySelector('[data-foot]');
   if (!foot) return;
   foot.outerHTML =

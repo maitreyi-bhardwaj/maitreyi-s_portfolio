@@ -778,3 +778,8 @@ html body .outcome > .learn { grid-column: 2 / -1 !important; grid-template-colu
 
 /* footer: a wide white gap above it, so it doesn't crowd the page */
 footer.foot { margin-top: clamp(160px, 18vw, 300px) !important; }
+
+/* Project pages never crop a picture: every case-study image shows whole */
+body .case-hero img, body .case-hero video, body .big img, body .big.shot img, body .shots img, body .two-up img, body .trio img,
+body .zoom img, body .duo-vis img { height: auto !important; max-height: none !important; object-fit: contain !important; aspect-ratio: auto !important; }
+body .step-in > .big.shot, body .shots a, body .duo-vis .zoom--crop { aspect-ratio: auto !important; height: auto !important; }
