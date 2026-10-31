@@ -188,7 +188,7 @@ body:has(.opening) > .topbar a[aria-current="page"], body:has(.opening) > .topba
 .opening.is-light .fields button[aria-pressed="true"], .opening.is-light .fields button:hover { background: #2B1B11; color: #fff; }
 
 /* ---------- welcome screen (after the intro): white, name on the right, two big choices below ---------- */
-.welcome { min-height: 100svh; display: grid; grid-template-columns: 1fr 1fr; column-gap: 6px;
+.welcome { min-height: 74svh; display: grid; grid-template-columns: 1fr 1fr; column-gap: 6px;
   padding: clamp(120px, 16vh, 200px) var(--gut) clamp(40px, 7vh, 80px); background: #fff; color: #111; }
 .w-hello { grid-column: 1; align-self: end; font-size: 14px; color: #111; }
 .w-title { grid-column: 2; display: flex; flex-direction: column; min-height: 100%; }
@@ -203,29 +203,30 @@ body:has(.opening) > .topbar a[aria-current="page"], body:has(.opening) > .topba
 .w-blurb .caret::after { content: ''; position: absolute; left: .04em; top: .12em; bottom: .1em; width: .08em; background: #CF6B9B; animation: blink 1s steps(1) infinite; }
 .w-blurb .say-brown { display: inline; margin: 0; color: inherit; }
 /* the two choices: a coloured panel beside a picture, each half the width; colours shift as you scroll */
-.choices { display: grid; gap: 6px; margin: 0 var(--gut); }   /* same side margin as every project page */
-.choice { border-radius: 6px; overflow: hidden; }
-.choice { --bg: #000; --fg: #fff; display: grid; grid-template-columns: 1fr 1fr; min-height: min(78vh, 760px); color: inherit; text-decoration: none; }
-.choice--flip .c-panel { order: 2; }
-.c-panel { background: var(--bg); color: var(--fg); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding: 40px; text-align: center; }
-.c-word { font-size: clamp(22px, 2vw, 32px); font-weight: 600; letter-spacing: -.02em; }
-.c-sub { font-size: 13px; opacity: .65; }
-.c-pic { position: relative; overflow: hidden; background: #E9E9EC; }
+/* the two choices: tall, narrow video cards, one at each side; the name shows on hover */
+.choices { display: flex; justify-content: space-between; gap: 6px; margin: 0 var(--gut); }
+.choice { --bg: #000; --fg: #fff; position: relative; display: block; width: min(30vw, 440px); aspect-ratio: 3 / 4.4; border-radius: 6px; overflow: hidden; color: inherit; text-decoration: none; background: #0B0E15; }
+.c-pic { position: absolute; inset: 0; }
 .c-pic img, .c-pic video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s cubic-bezier(.2,.7,.2,1); }
+.c-pic video.fit { object-fit: contain; }
+.c-panel { position: absolute; inset: 0; z-index: 1; display: flex; align-items: center; justify-content: center; padding: 24px; text-align: center;
+  background: color-mix(in srgb, var(--bg) 72%, transparent); color: var(--fg); opacity: 0; transition: opacity .35s ease; }
+.choice:hover .c-panel, .choice:focus-visible .c-panel { opacity: 1; }
 .choice:hover .c-pic img, .choice:hover .c-pic video { transform: scale(1.04); }
+.c-word { font-size: clamp(22px, 2vw, 32px); font-weight: 600; letter-spacing: -.02em; }
+@media (hover: none) { .c-panel { opacity: 1; background: linear-gradient(transparent 55%, color-mix(in srgb, var(--bg) 80%, transparent)); align-items: flex-end; } }
 @media (max-width: 760px) {
   .welcome { grid-template-columns: 1fr; } .w-title { grid-column: 1; grid-row: 1; } .w-hello { grid-row: 2; margin-top: 40px; }
-  .choice { grid-template-columns: 1fr; min-height: 0; } .choice--flip .c-panel { order: 0; }
-  .c-panel { min-height: 42vh; } .c-pic { min-height: 56vh; }
+  .choice { width: calc(50% - 3px); }
 }
 body:not(.chosen) #work, body:not(.chosen) .page-dots { display: none; }
 .welcome #say { color: #111; text-shadow: none; } .welcome #say .say-pron { color: #8C8C8C; }
 body:has(.welcome) > nav.topbar { position: absolute !important; top: 0; left: 0; right: 0; z-index: 3 !important; }
 </style>
-<link rel="stylesheet" href="site.css?v=1793456710">
+<link rel="stylesheet" href="site.css?v=1793471475">
 </head>
 <body>
-<script src="intro.js?v=1793456710"></script>
+<script src="intro.js?v=1793471475"></script>
 
 <div class="page-dots" aria-hidden="true"><canvas data-lace="page"></canvas></div>
 <div data-topbar></div>
@@ -242,11 +243,11 @@ body:has(.welcome) > nav.topbar { position: absolute !important; top: 0; left: 0
 <nav class="choices" id="choose" aria-label="Choose the kind of work to see">
   <a class="choice" href="industrial.html">
     <span class="c-panel"><span class="c-word">Industrial design</span></span>
-    <span class="c-pic"><video src="media/video/kith-lit.mp4?v=1793456710" poster="media/kith/full-lamp.jpg" autoplay muted loop playsinline aria-label="The Kith pendant lamp, lit"></video></span>
+    <span class="c-pic"><video src="media/video/kith-lit.mp4?v=1793471475" poster="media/kith/full-lamp.jpg" autoplay muted loop playsinline aria-label="The Kith pendant lamp, lit"></video></span>
   </a>
   <a class="choice choice--flip" href="ui.html">
-    <span class="c-panel"><span class="c-word">Digital design</span></span>
-    <span class="c-pic"><video data-src="media/video/pastiche.mp4" muted loop playsinline preload="none" aria-label="Pastiche, a Figma plugin, running"></video></span>
+    <span class="c-panel"><span class="c-word">UI/UX design</span></span>
+    <span class="c-pic"><video class="fit" data-src="media/video/ripe-learn.mp4" muted loop playsinline preload="none" aria-label="Ripe, an app prototype: learning a tool"></video></span>
   </a>
 </nav>
 
@@ -254,10 +255,10 @@ body:has(.welcome) > nav.topbar { position: absolute !important; top: 0; left: 0
 
 <div data-foot></div>
 
-<script src="projects.js?v=1793456710"></script>
-<script src="lace.js?v=1793456710"></script>
-<script src="figma-lace.js?v=1793456710"></script>
-<script src="site.js?v=1793456710"></script>
+<script src="projects.js?v=1793471475"></script>
+<script src="lace.js?v=1793471475"></script>
+<script src="figma-lace.js?v=1793471475"></script>
+<script src="site.js?v=1793471475"></script>
 <script>
 // The opening line, typed out as if Maitreyi is writing it. The name takes three
 // tries: two spellings people get wrong are typed, crossed out in red and erased,

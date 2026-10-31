@@ -6,7 +6,7 @@
 <title>UI/UX, Maitreyi Bhardwaj</title>
 <meta name="description" content="UI/UX and product design projects by Maitreyi Bhardwaj: apps, design systems, plugins and data tools.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link rel="stylesheet" href="site.css?v=1793456710">
+<link rel="stylesheet" href="site.css?v=1793471475">
 <style>
 /* a white index: a short intro row, a quiet gap, then square tiles in a grid of three */
 body { background: #fff; -webkit-font-smoothing: antialiased; }
@@ -14,7 +14,7 @@ body { background: #fff; -webkit-font-smoothing: antialiased; }
 .ix-intro h1 { font: inherit; margin: 0; }
 .ix-intro p, .ix-intro ul { margin: 0; color: var(--ink-soft); }
 .ix-intro ul { list-style: none; padding: 0; }
-.ix-grid { column-count: 3; column-gap: clamp(20px, 2.4vw, 36px); padding: clamp(120px, 18vw, 260px) var(--gut) 0; }
+.ix-grid { display: grid; grid-template-columns: repeat(3, 1fr); align-items: start; column-gap: clamp(20px, 2.4vw, 36px); padding: clamp(120px, 18vw, 260px) var(--gut) 0; }
 /* cards in a staggered column layout: each keeps its own shape, so the page reads like a spread, not a grid */
 .ix-tile { display: block; break-inside: avoid; margin: 0 0 clamp(40px, 5vw, 72px); color: inherit; text-decoration: none; }
 .ix-tile .pic { position: relative; overflow: hidden; border-radius: 6px; background: #F2F2F0; }   /* each card takes the shape of its own picture */
@@ -26,8 +26,8 @@ a.ix-tile:hover img { transform: scale(1.03); }
 .ix-tile .name i { display: block; margin-top: 3px; font-style: normal; font-size: 15px; line-height: 1.4; color: #4A4440; }
 .ix-tile video, .ix-tile iframe { display: block; width: 100%; height: auto; border: 0; }
 .ix-tile .pic iframe { pointer-events: none; transform: scale(1.02); }
-@media (max-width: 860px) { .ix-intro { grid-template-columns: 1fr; row-gap: 14px; } .ix-grid { column-count: 2; } }
-@media (max-width: 520px) { .ix-grid { column-count: 1; } }
+@media (max-width: 860px) { .ix-intro { grid-template-columns: 1fr; row-gap: 14px; } .ix-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 520px) { .ix-grid { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -60,7 +60,7 @@ a.ix-tile:hover img { transform: scale(1.03); }
   document.querySelectorAll('.ix-tile video').forEach(v => io.observe(v));
 })();
 </script>
-<script src="figma-lace.js?v=1793456710"></script>
-<script src="site.js?v=1793456710"></script>
+<script src="figma-lace.js?v=1793471475"></script>
+<script src="site.js?v=1793471475"></script>
 </body>
 </html>

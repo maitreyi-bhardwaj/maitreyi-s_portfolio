@@ -111,3 +111,6 @@ body.idk .case-hero img, body.idk .case-hero video { display: block; width: 100%
 .k-row > figure { flex: var(--r, 1) 1 0; min-width: 0; }
 .k img, .k video { width: 100%; height: auto !important; object-fit: contain !important; aspect-ratio: auto !important; }
 @media (max-width: 860px) { .k-row { flex-wrap: wrap; } .k-row > figure { flex-basis: 100%; } }
+
+.k-phones video { width: 100%; height: auto; display: block; border-radius: clamp(14px, 1.8vw, 28px); box-shadow: 0 24px 60px -30px rgba(0,0,0,.35); }
+.k-phones figure { margin: 0; } .k-phones.dark figcaption { color: #B9B2AC; }
