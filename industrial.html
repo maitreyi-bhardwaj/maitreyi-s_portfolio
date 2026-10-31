@@ -6,7 +6,7 @@
 <title>Industrial design, Maitreyi Bhardwaj</title>
 <meta name="description" content="Industrial design projects by Maitreyi Bhardwaj: products, furniture, lighting, wearables and retail.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link rel="stylesheet" href="site.css?v=1793039477">
+<link rel="stylesheet" href="site.css?v=1793455912">
 <style>
 /* a white index: a short intro row, a quiet gap, then square tiles in a grid of three */
 body { background: #fff; -webkit-font-smoothing: antialiased; }
@@ -14,17 +14,19 @@ body { background: #fff; -webkit-font-smoothing: antialiased; }
 .ix-intro h1 { font: inherit; margin: 0; }
 .ix-intro p, .ix-intro ul { margin: 0; color: var(--ink-soft); }
 .ix-intro ul { list-style: none; padding: 0; }
-.ix-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px 12px; padding: clamp(120px, 18vw, 260px) var(--gut) 0; }
-.ix-tile { display: block; color: inherit; text-decoration: none; }
-.ix-tile .pic { aspect-ratio: 1; overflow: hidden; background: #F2F2F0; }
+.ix-grid { column-count: 3; column-gap: clamp(20px, 2.4vw, 36px); padding: clamp(120px, 18vw, 260px) var(--gut) 0; }
+/* cards in a staggered column layout: each keeps its own shape, so the page reads like a spread, not a grid */
+.ix-tile { display: block; break-inside: avoid; margin: 0 0 clamp(40px, 5vw, 72px); color: inherit; text-decoration: none; }
+.ix-tile .pic { position: relative; aspect-ratio: var(--ar, 4 / 3); overflow: hidden; border-radius: 6px; background: #F2F2F0; }
 .ix-tile img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .9s cubic-bezier(.2, .7, .2, 1); }
-a.ix-tile:hover img { transform: scale(1.04); }
-.ix-tile .name { display: flex; justify-content: space-between; gap: 12px; margin-top: 12px; font-size: 14px; }
-.ix-tile .name span:last-child { color: var(--ink-soft); }
+a.ix-tile:hover img { transform: scale(1.03); }
+.ix-tile .name { display: block; margin-top: 14px; }
+.ix-tile .name b { display: block; font-size: 17px; font-weight: 600; line-height: 1.3; letter-spacing: -.005em; color: #111; }
+.ix-tile .name i { display: block; margin-top: 3px; font-style: normal; font-size: 15px; line-height: 1.4; color: #4A4440; }
 .ix-tile video, .ix-tile iframe { display: block; width: 100%; height: 100%; object-fit: cover; border: 0; }
-.ix-tile .pic iframe { width: 178%; height: 100%; margin-left: -39%; pointer-events: none; }   /* fill a square with a 16:9 player */
-@media (max-width: 860px) { .ix-intro { grid-template-columns: 1fr; row-gap: 14px; } .ix-grid { grid-template-columns: 1fr 1fr; } }
-@media (max-width: 520px) { .ix-grid { grid-template-columns: 1fr; } }
+.ix-tile .pic iframe { pointer-events: none; transform: scale(1.02); }
+@media (max-width: 860px) { .ix-intro { grid-template-columns: 1fr; row-gap: 14px; } .ix-grid { column-count: 2; } }
+@media (max-width: 520px) { .ix-grid { column-count: 1; } }
 </style>
 </head>
 <body>
@@ -38,12 +40,12 @@ a.ix-tile:hover img { transform: scale(1.04); }
 </header>
 
 <main class="ix-grid">
-  <a class="ix-tile" href="strata.html"><div class="pic"><img src="media/strata/hero.jpg" alt="Strata, the thinking mat" style="object-position: 70% 50%"></div><div class="name"><span>Strata</span><span>2026</span></div></a>
-  <a class="ix-tile" href="kith.html"><div class="pic"><video src="media/video/kith-lit.mp4?v=1793039477" poster="media/kith/full-lamp.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Kith pendant lamp, lit"></video></div><div class="name"><span>Kith</span><span>2025</span></div></a>
-  <a class="ix-tile" href="pitboss.html"><div class="pic"><img src="media/pitboss/p14.jpg" alt="Pit Boss in-store display render"></div><div class="name"><span>Pit Boss</span><span>2024</span></div></a>
-  <a class="ix-tile" href="epipals.html"><div class="pic"><iframe src="https://www.youtube-nocookie.com/embed/AhrnrndWxrQ?autoplay=1&amp;mute=1&amp;loop=1&amp;playlist=AhrnrndWxrQ&amp;controls=0&amp;modestbranding=1&amp;playsinline=1&amp;rel=0" title="Epi Pals demo video" allow="autoplay; encrypted-media" loading="lazy" tabindex="-1"></iframe></div><div class="name"><span>Epi Pals</span><span>2025</span></div></a>
-  <a class="ix-tile" href="tape.html"><div class="pic"><img src="media/tape/photo-02.jpg" alt="Industrial tape dispenser model"></div><div class="name"><span>Industrial tape dispenser</span><span>2023</span></div></a>
-  <a class="ix-tile" href="materials.html"><div class="pic"><video src="media/video/materials.mp4" poster="media/materials/photo-03.jpg" autoplay muted loop playsinline preload="metadata" aria-label="The coconut mosaic tray turning"></video></div><div class="name"><span>Materials and processes</span><span>2023</span></div></a>
+  <a class="ix-tile" href="strata.html"><div class="pic" style="--ar:4/3"><img src="media/strata/hero.jpg" alt="Strata, the thinking mat" style="object-position: 70% 50%"></div><div class="name"><b>Strata: a mat that reads your body</b><i>Product design · Interaction · 3D</i></div></a>
+  <a class="ix-tile" href="kith.html"><div class="pic" style="--ar:4/5"><video src="media/video/kith-lit.mp4?v=1793455912" poster="media/kith/full-lamp.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Kith pendant lamp, lit"></video></div><div class="name"><b>Kith: a lamp for your chosen family</b><i>Lighting · 3D printing · Making</i></div></a>
+  <a class="ix-tile" href="pitboss.html"><div class="pic" style="--ar:16/10"><img src="media/pitboss/p14.jpg" alt="Pit Boss in-store display render"></div><div class="name"><b>Pit Boss: a display that explains the grill</b><i>Retail display · Spatial design · Research</i></div></a>
+  <a class="ix-tile" href="epipals.html"><div class="pic" style="--ar:16/9"><img src="media/epipals/hero.jpg" alt="A boy on a playground wearing the Epi Pals watch" style="object-position:50% 40%"></div><div class="name"><b>Epi Pals: confidence for kids with epilepsy</b><i>Wearable · Product and service · Research</i></div></a>
+  <a class="ix-tile" href="tape.html"><div class="pic" style="--ar:3/4"><img src="media/tape/photo-02.jpg" alt="Industrial tape dispenser model"></div><div class="name"><b>Industrial tape dispenser</b><i>Model making · Prototyping</i></div></a>
+  <a class="ix-tile" href="materials.html"><div class="pic" style="--ar:1/1"><img src="media/materials/14.jpg" alt="The coconut mosaic tray from above"></div><div class="name"><b>Coconut tray</b><i>Materials · Craft · Joinery</i></div></a>
 </main>
 
 <div data-foot></div>
@@ -55,7 +57,7 @@ a.ix-tile:hover img { transform: scale(1.04); }
   document.querySelectorAll('.ix-tile video').forEach(v => io.observe(v));
 })();
 </script>
-<script src="figma-lace.js?v=1793039477"></script>
-<script src="site.js?v=1793039477"></script>
+<script src="figma-lace.js?v=1793455912"></script>
+<script src="site.js?v=1793455912"></script>
 </body>
 </html>
