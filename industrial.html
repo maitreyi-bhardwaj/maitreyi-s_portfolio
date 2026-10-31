@@ -6,7 +6,7 @@
 <title>Industrial design, Maitreyi Bhardwaj</title>
 <meta name="description" content="Industrial design projects by Maitreyi Bhardwaj: products, furniture, lighting, wearables and retail.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link rel="stylesheet" href="site.css?v=1793455912">
+<link rel="stylesheet" href="site.css?v=1793456568">
 <style>
 /* a white index: a short intro row, a quiet gap, then square tiles in a grid of three */
 body { background: #fff; -webkit-font-smoothing: antialiased; }
@@ -17,13 +17,14 @@ body { background: #fff; -webkit-font-smoothing: antialiased; }
 .ix-grid { column-count: 3; column-gap: clamp(20px, 2.4vw, 36px); padding: clamp(120px, 18vw, 260px) var(--gut) 0; }
 /* cards in a staggered column layout: each keeps its own shape, so the page reads like a spread, not a grid */
 .ix-tile { display: block; break-inside: avoid; margin: 0 0 clamp(40px, 5vw, 72px); color: inherit; text-decoration: none; }
-.ix-tile .pic { position: relative; aspect-ratio: var(--ar, 4 / 3); overflow: hidden; border-radius: 6px; background: #F2F2F0; }
-.ix-tile img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .9s cubic-bezier(.2, .7, .2, 1); }
+.ix-tile .pic { position: relative; overflow: hidden; border-radius: 6px; background: #F2F2F0; }   /* each card takes the shape of its own picture */
+.ix-tile .pic:has(.dotpic) { aspect-ratio: 4 / 3; }
+.ix-tile img { display: block; width: 100%; height: auto; transition: transform .9s cubic-bezier(.2, .7, .2, 1); }
 a.ix-tile:hover img { transform: scale(1.03); }
 .ix-tile .name { display: block; margin-top: 14px; }
 .ix-tile .name b { display: block; font-size: 17px; font-weight: 600; line-height: 1.3; letter-spacing: -.005em; color: #111; }
 .ix-tile .name i { display: block; margin-top: 3px; font-style: normal; font-size: 15px; line-height: 1.4; color: #4A4440; }
-.ix-tile video, .ix-tile iframe { display: block; width: 100%; height: 100%; object-fit: cover; border: 0; }
+.ix-tile video, .ix-tile iframe { display: block; width: 100%; height: auto; border: 0; }
 .ix-tile .pic iframe { pointer-events: none; transform: scale(1.02); }
 @media (max-width: 860px) { .ix-intro { grid-template-columns: 1fr; row-gap: 14px; } .ix-grid { column-count: 2; } }
 @media (max-width: 520px) { .ix-grid { column-count: 1; } }
@@ -40,12 +41,12 @@ a.ix-tile:hover img { transform: scale(1.03); }
 </header>
 
 <main class="ix-grid">
-  <a class="ix-tile" href="strata.html"><div class="pic" style="--ar:4/3"><img src="media/strata/hero.jpg" alt="Strata, the thinking mat" style="object-position: 70% 50%"></div><div class="name"><b>Strata: a mat that reads your body</b><i>Product design · Interaction · 3D</i></div></a>
-  <a class="ix-tile" href="kith.html"><div class="pic" style="--ar:4/5"><video src="media/video/kith-lit.mp4?v=1793455912" poster="media/kith/full-lamp.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Kith pendant lamp, lit"></video></div><div class="name"><b>Kith: a lamp for your chosen family</b><i>Lighting · 3D printing · Making</i></div></a>
-  <a class="ix-tile" href="pitboss.html"><div class="pic" style="--ar:16/10"><img src="media/pitboss/p14.jpg" alt="Pit Boss in-store display render"></div><div class="name"><b>Pit Boss: a display that explains the grill</b><i>Retail display · Spatial design · Research</i></div></a>
-  <a class="ix-tile" href="epipals.html"><div class="pic" style="--ar:16/9"><img src="media/epipals/hero.jpg" alt="A boy on a playground wearing the Epi Pals watch" style="object-position:50% 40%"></div><div class="name"><b>Epi Pals: confidence for kids with epilepsy</b><i>Wearable · Product and service · Research</i></div></a>
-  <a class="ix-tile" href="tape.html"><div class="pic" style="--ar:3/4"><img src="media/tape/photo-02.jpg" alt="Industrial tape dispenser model"></div><div class="name"><b>Industrial tape dispenser</b><i>Model making · Prototyping</i></div></a>
-  <a class="ix-tile" href="materials.html"><div class="pic" style="--ar:1/1"><img src="media/materials/14.jpg" alt="The coconut mosaic tray from above"></div><div class="name"><b>Coconut tray</b><i>Materials · Craft · Joinery</i></div></a>
+  <a class="ix-tile" href="strata.html"><div class="pic"><img src="media/strata/hero.jpg" alt="Strata, the thinking mat"></div><div class="name"><b>Strata: a mat that reads your body</b><i>Product design · Interaction · 3D</i></div></a>
+  <a class="ix-tile" href="kith.html"><div class="pic"><video src="media/video/kith-lit.mp4?v=1793456568" poster="media/kith/full-lamp.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Kith pendant lamp, lit"></video></div><div class="name"><b>Kith: a lamp for your chosen family</b><i>Lighting · 3D printing · Making</i></div></a>
+  <a class="ix-tile" href="pitboss.html"><div class="pic"><img src="media/pitboss/p14.jpg" alt="Pit Boss in-store display render"></div><div class="name"><b>Pit Boss: a display that explains the grill</b><i>Retail display · Spatial design · Research</i></div></a>
+  <a class="ix-tile" href="epipals.html"><div class="pic"><img src="media/epipals/hero.jpg" alt="A boy on a playground wearing the Epi Pals watch"></div><div class="name"><b>Epi Pals: confidence for kids with epilepsy</b><i>Wearable · Product and service · Research</i></div></a>
+  <a class="ix-tile" href="tape.html"><div class="pic"><img src="media/tape/photo-02.jpg" alt="Industrial tape dispenser model"></div><div class="name"><b>Industrial tape dispenser</b><i>Model making · Prototyping</i></div></a>
+  <a class="ix-tile" href="materials.html"><div class="pic"><img src="media/materials/14.jpg" alt="The coconut mosaic tray from above"></div><div class="name"><b>Coconut tray</b><i>Materials · Craft · Joinery</i></div></a>
 </main>
 
 <div data-foot></div>
@@ -57,7 +58,7 @@ a.ix-tile:hover img { transform: scale(1.03); }
   document.querySelectorAll('.ix-tile video').forEach(v => io.observe(v));
 })();
 </script>
-<script src="figma-lace.js?v=1793455912"></script>
-<script src="site.js?v=1793455912"></script>
+<script src="figma-lace.js?v=1793456568"></script>
+<script src="site.js?v=1793456568"></script>
 </body>
 </html>

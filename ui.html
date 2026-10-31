@@ -6,7 +6,7 @@
 <title>UI/UX, Maitreyi Bhardwaj</title>
 <meta name="description" content="UI/UX and product design projects by Maitreyi Bhardwaj: apps, design systems, plugins and data tools.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link rel="stylesheet" href="site.css?v=1793455912">
+<link rel="stylesheet" href="site.css?v=1793456568">
 <style>
 /* a white index: a short intro row, a quiet gap, then square tiles in a grid of three */
 body { background: #fff; -webkit-font-smoothing: antialiased; }
@@ -17,13 +17,14 @@ body { background: #fff; -webkit-font-smoothing: antialiased; }
 .ix-grid { column-count: 3; column-gap: clamp(20px, 2.4vw, 36px); padding: clamp(120px, 18vw, 260px) var(--gut) 0; }
 /* cards in a staggered column layout: each keeps its own shape, so the page reads like a spread, not a grid */
 .ix-tile { display: block; break-inside: avoid; margin: 0 0 clamp(40px, 5vw, 72px); color: inherit; text-decoration: none; }
-.ix-tile .pic { position: relative; aspect-ratio: var(--ar, 4 / 3); overflow: hidden; border-radius: 6px; background: #F2F2F0; }
-.ix-tile img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .9s cubic-bezier(.2, .7, .2, 1); }
+.ix-tile .pic { position: relative; overflow: hidden; border-radius: 6px; background: #F2F2F0; }   /* each card takes the shape of its own picture */
+.ix-tile .pic:has(.dotpic) { aspect-ratio: 4 / 3; }
+.ix-tile img { display: block; width: 100%; height: auto; transition: transform .9s cubic-bezier(.2, .7, .2, 1); }
 a.ix-tile:hover img { transform: scale(1.03); }
 .ix-tile .name { display: block; margin-top: 14px; }
 .ix-tile .name b { display: block; font-size: 17px; font-weight: 600; line-height: 1.3; letter-spacing: -.005em; color: #111; }
 .ix-tile .name i { display: block; margin-top: 3px; font-style: normal; font-size: 15px; line-height: 1.4; color: #4A4440; }
-.ix-tile video, .ix-tile iframe { display: block; width: 100%; height: 100%; object-fit: cover; border: 0; }
+.ix-tile video, .ix-tile iframe { display: block; width: 100%; height: auto; border: 0; }
 .ix-tile .pic iframe { pointer-events: none; transform: scale(1.02); }
 @media (max-width: 860px) { .ix-intro { grid-template-columns: 1fr; row-gap: 14px; } .ix-grid { column-count: 2; } }
 @media (max-width: 520px) { .ix-grid { column-count: 1; } }
@@ -40,14 +41,14 @@ a.ix-tile:hover img { transform: scale(1.03); }
 </header>
 
 <main class="ix-grid">
-  <a class="ix-tile" href="reach.html"><div class="pic" style="--ar:4/3"><div class="dotpic"><b>23 in 100</b><div data-dots="23/100"></div></div></div><div class="name"><b>Reach: where children miss vaccines</b><i>Data analysis · Machine learning · Public health</i></div></a>
-  <a class="ix-tile" href="powerbi.html"><div class="pic" style="--ar:16/10"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto:best/v1791840381/Screenshot_2026-10-12_at_2.25.54_PM_htgbej.png" alt="Capital program dashboard" loading="lazy"></div><div class="name"><b>Capital Program Dashboard</b><i>Data visualisation · Power BI · DAX</i></div></a>
-  <a class="ix-tile" href="ripe.html"><div class="pic" style="--ar:4/5"><img src="media/ripe/k/hand-teal.jpg" alt="Ripe" loading="lazy"></div><div class="name"><b>Ripe: handpicked AI tools, just for me</b><i>App design · Branding</i></div></a>
-  <a class="ix-tile" href="pastiche.html"><div class="pic" style="--ar:16/9"><video src="media/video/pastiche.mp4" poster="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto:best/v1780963087/pastiche_07_plugin_ui_ckstkh.png" autoplay muted loop playsinline preload="metadata" aria-label="Pastiche plugin demo"></video></div><div class="name"><b>Pastiche: a Figma colour plugin</b><i>Plugin design · Design tokens · Code</i></div></a>
-  <a class="ix-tile" href="distill.html"><div class="pic" style="--ar:16/10"><img src="media/distill/browser-live.jpg" alt="Distill" loading="lazy" style="object-position:30% 50%"></div><div class="name"><b>Distill: every voice, heard</b><i>Chrome extension · Accessibility · Hackathon winner</i></div></a>
-  <a class="ix-tile" href="kiosk.html"><div class="pic" style="--ar:4/3"><img src="media/kiosk/home.jpg" alt="Pit Boss kiosk" loading="lazy"></div><div class="name"><b>Pit Boss kiosk: learn, find, grill</b><i>Touchscreen UI · Retail</i></div></a>
-  <a class="ix-tile" href="frontdoor.html"><div class="pic" style="--ar:4/5"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto:best/v1781024360/fd_08_dashboard_yockx3.png" alt="Frontdoor: Home Passport" loading="lazy"></div><div class="name"><b>Frontdoor: Home Passport</b><i>App design · Design system · NFC</i></div></a>
-  <a class="ix-tile" href="vibin.html"><div class="pic" style="--ar:1/1"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto:best/v1781052636/vibin_07_ui_final_hz5v6a.png" alt="Vibin" loading="lazy"></div><div class="name"><b>Vibin: live social discovery</b><i>Mobile app · Branding · Shipped</i></div></a>
+  <a class="ix-tile" href="reach.html"><div class="pic"><div class="dotpic"><b>23 in 100</b><div data-dots="23/100"></div></div></div><div class="name"><b>Reach: where children miss vaccines</b><i>Data analysis · Machine learning · Public health</i></div></a>
+  <a class="ix-tile" href="powerbi.html"><div class="pic"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto:best/v1791840381/Screenshot_2026-10-12_at_2.25.54_PM_htgbej.png" alt="Capital program dashboard" loading="lazy"></div><div class="name"><b>Capital Program Dashboard</b><i>Data visualisation · Power BI · DAX</i></div></a>
+  <a class="ix-tile" href="ripe.html"><div class="pic"><img src="media/ripe/k/hand-teal.jpg" alt="Ripe" loading="lazy"></div><div class="name"><b>Ripe: handpicked AI tools, just for me</b><i>App design · Branding</i></div></a>
+  <a class="ix-tile" href="pastiche.html"><div class="pic"><video src="media/video/pastiche.mp4" poster="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto:best/v1780963087/pastiche_07_plugin_ui_ckstkh.png" autoplay muted loop playsinline preload="metadata" aria-label="Pastiche plugin demo"></video></div><div class="name"><b>Pastiche: a Figma colour plugin</b><i>Plugin design · Design tokens · Code</i></div></a>
+  <a class="ix-tile" href="distill.html"><div class="pic"><img src="media/distill/browser-live.jpg" alt="Distill" loading="lazy"></div><div class="name"><b>Distill: every voice, heard</b><i>Chrome extension · Accessibility · Hackathon winner</i></div></a>
+  <a class="ix-tile" href="kiosk.html"><div class="pic"><img src="media/kiosk/home.jpg" alt="Pit Boss kiosk" loading="lazy"></div><div class="name"><b>Pit Boss kiosk: learn, find, grill</b><i>Touchscreen UI · Retail</i></div></a>
+  <a class="ix-tile" href="frontdoor.html"><div class="pic"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto:best/v1781024360/fd_08_dashboard_yockx3.png" alt="Frontdoor: Home Passport" loading="lazy"></div><div class="name"><b>Frontdoor: Home Passport</b><i>App design · Design system · NFC</i></div></a>
+  <a class="ix-tile" href="vibin.html"><div class="pic"><img src="https://res.cloudinary.com/df0tysd6u/image/upload/f_auto,q_auto:best/v1781052636/vibin_07_ui_final_hz5v6a.png" alt="Vibin" loading="lazy"></div><div class="name"><b>Vibin: live social discovery</b><i>Mobile app · Branding · Shipped</i></div></a>
 </main>
 
 <div data-foot></div>
@@ -59,7 +60,7 @@ a.ix-tile:hover img { transform: scale(1.03); }
   document.querySelectorAll('.ix-tile video').forEach(v => io.observe(v));
 })();
 </script>
-<script src="figma-lace.js?v=1793455912"></script>
-<script src="site.js?v=1793455912"></script>
+<script src="figma-lace.js?v=1793456568"></script>
+<script src="site.js?v=1793456568"></script>
 </body>
 </html>
