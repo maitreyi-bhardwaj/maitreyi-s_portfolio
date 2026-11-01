@@ -6,8 +6,8 @@
 <title>Distill, Maitreyi Bhardwaj</title>
 <meta name="description" content="Distill is a Chrome extension that translates live audio from any tab into several languages at once, with an ASL accessibility mode. Microsoft Track winner at HackAZona.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link rel="stylesheet" href="site.css?v=1793489988">
-<link rel="stylesheet" href="id.css?v=1793489988">
+<link rel="stylesheet" href="site.css?v=1793539414">
+<link rel="stylesheet" href="id.css?v=1793539414">
 <style>
 /* a comparison table, drawn in the page's own type */
 .k-table { width: 100%; border-collapse: collapse; font-size: 14px; }
@@ -57,12 +57,30 @@
 <div class="k"><figure><img src="media/distill/voices.jpg" alt="Someone on a video call with four people, captioned: Every voice, heard. Every language, understood." loading="lazy"></figure></div>
 
 <section class="k k-head k--gap">
-  <h2><small>Product</small>What Distill does</h2>
+  <h2><small>Competition</small>Why Distill wins</h2>
   <div class="k-txt">
-    <p><b>It listens to whatever is playing in the browser and translates it as people speak</b>, into up to three languages at the same time, so everyone in the conversation gets what they need.</p>
+    <p><b>No existing product combines all five capabilities.</b></p>
   </div>
 </section>
-<div class="k"><figure><img src="media/distill/features.jpg" alt="Three features: realtime translation, cross-platform dashboard, ASL accessibility" loading="lazy"></figure></div>
+<div class="k"><table class="k-table">
+  <tr><th></th><th>Cross-platform</th><th>Multi-language output</th><th>ASL accessibility</th><th>Persistent dashboard</th><th>Works on YouTube</th></tr>
+  <tr class="us"><td>Distill</td><td class="y">+</td><td class="y">+</td><td class="y">+</td><td class="y">+</td><td class="y">+</td></tr>
+  <tr><td>Google Translate</td><td class="y">+</td><td class="n">&mdash;</td><td class="n">&mdash;</td><td class="n">&mdash;</td><td class="n">&mdash;</td></tr>
+  <tr><td>Zoom Captions</td><td class="n">&mdash;</td><td class="n">&mdash;</td><td class="n">&mdash;</td><td class="n">&mdash;</td><td class="n">&mdash;</td></tr>
+  <tr><td>Otter.ai</td><td class="y">+</td><td class="n">&mdash;</td><td class="n">&mdash;</td><td class="y">+</td><td class="n">&mdash;</td></tr>
+  <tr><td>DeepL</td><td class="y">+</td><td class="n">&mdash;</td><td class="n">&mdash;</td><td class="n">&mdash;</td><td class="n">&mdash;</td></tr>
+  <tr><td>Krisp</td><td class="y">+</td><td class="n">&mdash;</td><td class="n">&mdash;</td><td class="n">&mdash;</td><td class="n">&mdash;</td></tr>
+</table></div>
+
+<section class="k k-head k--gap">
+  <h2><small>System</small>How it works</h2>
+  <div class="k-txt">
+    <p>Sound goes in one end and translated speech comes out the other, while the speaker keeps talking.</p>
+  </div>
+</section>
+<div class="k"><div class="k-flow">
+  <span>Extension</span><i>&rarr;</i><span>FastAPI</span><i>&rarr;</i><span>Azure Speech Translation or Conversation Transcriber</span><i>&rarr;</i><span>Azure Speech Synthesis</span><i>&rarr;</i><span class="on">Translated audio</span>
+</div></div>
 
 <section class="k k-head k--gap">
   <h2><small>Interface design</small>A panel with almost no room to spare</h2>
@@ -93,30 +111,12 @@
 <div class="k"><figure><div style="position:relative;aspect-ratio:16/9;border-radius:6px;overflow:hidden;background:#111"><iframe src="https://www.youtube.com/embed/r8c9J0EY8eQ?autoplay=1&amp;mute=1&amp;loop=1&amp;playlist=r8c9J0EY8eQ&amp;playsinline=1&amp;rel=0" title="Distill demo" allow="autoplay; encrypted-media; fullscreen" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;border:0"></iframe></div><figcaption>The demo</figcaption></figure></div>
 
 <section class="k k-head k--gap">
-  <h2><small>System</small>How it works</h2>
+  <h2><small>Product</small>What Distill does</h2>
   <div class="k-txt">
-    <p>Sound goes in one end and translated speech comes out the other, while the speaker keeps talking.</p>
+    <p><b>It listens to whatever is playing in the browser and translates it as people speak</b>, into up to three languages at the same time, so everyone in the conversation gets what they need.</p>
   </div>
 </section>
-<div class="k"><div class="k-flow">
-  <span>Extension</span><i>&rarr;</i><span>FastAPI</span><i>&rarr;</i><span>Azure Speech Translation or Conversation Transcriber</span><i>&rarr;</i><span>Azure Speech Synthesis</span><i>&rarr;</i><span class="on">Translated audio</span>
-</div></div>
-
-<section class="k k-head k--gap">
-  <h2><small>Competition</small>Why Distill wins</h2>
-  <div class="k-txt">
-    <p><b>No existing product combines all five capabilities.</b></p>
-  </div>
-</section>
-<div class="k"><table class="k-table">
-  <tr><th></th><th>Cross-platform</th><th>Multi-language output</th><th>ASL accessibility</th><th>Persistent dashboard</th><th>Works on YouTube</th></tr>
-  <tr class="us"><td>Distill</td><td class="y">+</td><td class="y">+</td><td class="y">+</td><td class="y">+</td><td class="y">+</td></tr>
-  <tr><td>Google Translate</td><td class="y">+</td><td class="n">&mdash;</td><td class="n">&mdash;</td><td class="n">&mdash;</td><td class="n">&mdash;</td></tr>
-  <tr><td>Zoom Captions</td><td class="n">&mdash;</td><td class="n">&mdash;</td><td class="n">&mdash;</td><td class="n">&mdash;</td><td class="n">&mdash;</td></tr>
-  <tr><td>Otter.ai</td><td class="y">+</td><td class="n">&mdash;</td><td class="n">&mdash;</td><td class="y">+</td><td class="n">&mdash;</td></tr>
-  <tr><td>DeepL</td><td class="y">+</td><td class="n">&mdash;</td><td class="n">&mdash;</td><td class="n">&mdash;</td><td class="n">&mdash;</td></tr>
-  <tr><td>Krisp</td><td class="y">+</td><td class="n">&mdash;</td><td class="n">&mdash;</td><td class="n">&mdash;</td><td class="n">&mdash;</td></tr>
-</table></div>
+<div class="k"><figure><img src="media/distill/features.jpg" alt="Three features: realtime translation, cross-platform dashboard, ASL accessibility" loading="lazy"></figure></div>
 
 <section class="k k-head k--gap">
   <h2><small>Business model</small>The business case</h2>
@@ -148,6 +148,6 @@
 
 <div data-foot></div>
 
-<script src="site.js?v=1793489988"></script>
+<script src="site.js?v=1793539414"></script>
 </body>
 </html>
