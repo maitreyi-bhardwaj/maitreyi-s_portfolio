@@ -132,3 +132,12 @@ body.idk .case-hero img, body.idk .case-hero video { display: block; width: 100%
 .k-compare th { text-align: left; font-weight: 500; padding: 10px 12px 10px 0; border-bottom: 1px solid #111; }
 .k-compare td { padding: 12px 12px 12px 0; border-bottom: 1px solid #E8E3DF; color: #4A4440; vertical-align: top; }
 .k-compare td:first-child { color: #8C827B; width: 26%; }
+.k-logos { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.k-logos figure { margin: 0; }
+.k-logos .tile { display: flex; align-items: center; justify-content: center; aspect-ratio: 2 / 1; background: #fff; border: 1px solid #E8E3DF; border-radius: 6px; }
+.k-logos .on-blue .tile { background: #0A3DFF; border: 0; }
+.k-logos .tile img { width: auto !important; height: 42% !important; display: block; }
+.k-logos .on-blue .tile img { height: 34% !important; }
+@media (max-width: 520px) { .k-logos { grid-template-columns: 1fr; } }
+.k-phones--narrow { padding-inline: clamp(24px, 18vw, 280px); }
+@media (max-width: 860px) { .k-phones--narrow { padding-inline: clamp(16px, 4vw, 40px); } }
